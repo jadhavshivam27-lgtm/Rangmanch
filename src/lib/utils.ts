@@ -16,8 +16,8 @@ export function formatDate(dateString: string): string {
 
 export function formatRelativeTime(dateString: string): string {
   const date = new Date(dateString);
-  const now = new Date();
-  const diffMs = now.getTime() - date.getTime();
+  const now = typeof window !== "undefined" ? new Date() : new Date("2026-10-20T00:00:00Z");
+  const diffMs = Math.max(0, now.getTime() - date.getTime());
   const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
   const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
   const diffMins = Math.floor(diffMs / (1000 * 60));
@@ -31,9 +31,9 @@ export function formatRelativeTime(dateString: string): string {
 
 export function daysUntil(dateString: string): number {
   const date = new Date(dateString);
-  const now = new Date();
+  const now = typeof window !== "undefined" ? new Date() : new Date("2026-10-20T00:00:00Z");
   const diffMs = date.getTime() - now.getTime();
-  return Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+  return Math.max(1, Math.ceil(diffMs / (1000 * 60 * 60 * 24)));
 }
 
 export function getStatusColor(status: string): string {

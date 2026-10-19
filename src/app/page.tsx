@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -13,7 +14,9 @@ export default function HomePage() {
   return (
     <>
       <Navbar />
-      <HomePageClient />
+      <Suspense fallback={<div className="min-h-screen bg-[var(--charcoal-900)]" />}>
+        <HomePageClient />
+      </Suspense>
       <Footer />
     </>
   );
