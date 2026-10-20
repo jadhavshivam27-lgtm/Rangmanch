@@ -20,9 +20,8 @@ import { getInitials } from "@/lib/utils";
 const publicLinks = [
   { href: "/", label: "Home" },
   { href: "/casting-calls", label: "Casting Calls" },
-  { href: "/discover-talent", label: "Discover Talent" },
-  { href: "/industry-connect", label: "Industry Connect" },
-  { href: "/how-it-works", label: "How It Works" },
+  { href: "/talent", label: "Discover Talent" },
+  { href: "/verification", label: "Govt KYC & Guardian" },
 ];
 
 export default function Navbar() {

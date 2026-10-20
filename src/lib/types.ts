@@ -307,3 +307,39 @@ export interface IndustryProfile {
   claimed: boolean;
   createdAt: string;
 }
+
+// --- M004: DigiLocker & Aadhaar Instant KYC ---
+export interface DigiLockerKYCRecord {
+  verificationId: string;
+  documentType: "aadhaar" | "passport" | "driving_license" | "voter_id";
+  maskedDocNumber: string;
+  verifiedName: string;
+  verifiedDob: string;
+  gender: string;
+  faceMatchScore: number;
+  status: "verified" | "pending" | "failed";
+  verifiedAt: string;
+  certificateHash: string;
+  digiLockerDocUri?: string;
+}
+
+// --- M005: Minor / Child Performer Legal Guardian Co-Signing ---
+export interface GuardianCoSignRecord {
+  recordId: string;
+  minorTalentId: string;
+  minorName: string;
+  minorAge: number;
+  guardianName: string;
+  guardianRelation: "Mother" | "Father" | "Legal Guardian";
+  guardianPhone: string;
+  guardianEmail: string;
+  guardianAadhaarMasked: string;
+  ncpcrComplianceConfirmed: boolean;
+  educationProtectionClauseAgreed: boolean;
+  maxDailyHoursAgreed: boolean;
+  trustFundAccountLinked: boolean;
+  digitalSignatureTimestamp: string;
+  status: "approved" | "pending" | "revoked";
+  approvalCertificateId: string;
+}
+
