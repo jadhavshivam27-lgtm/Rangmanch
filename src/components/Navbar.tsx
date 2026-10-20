@@ -60,16 +60,19 @@ export default function Navbar() {
             >
               <span className="text-xs font-bold" style={{ color: "var(--charcoal-900)" }}>R</span>
             </div>
-            <div>
+            <div className="flex flex-col justify-center">
               <span
-                className="font-display font-bold text-lg leading-none"
+                className="font-display font-bold text-lg leading-tight"
                 style={{ color: "var(--ivory)" }}
               >
                 Rangmanch
               </span>
-              <div className="text-xs leading-none" style={{ color: "var(--gold-400)", letterSpacing: "0.04em" }}>
+              <span
+                className="text-[10px] leading-tight font-medium"
+                style={{ color: "var(--gold-400)", letterSpacing: "0.04em" }}
+              >
                 Where Talent Meets Opportunity
-              </div>
+              </span>
             </div>
           </div>
         </Link>
