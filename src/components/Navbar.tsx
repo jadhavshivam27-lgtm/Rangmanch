@@ -44,19 +44,10 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-glass border-b"
-          : "bg-transparent"
-      }`}
-      style={{
-        borderColor: scrolled ? "var(--border-subtle)" : "transparent",
-        backdropFilter: scrolled ? "blur(20px)" : "none",
-      }}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#121215]/95 backdrop-blur-xl border-b border-[rgba(201,168,76,0.18)] shadow-lg shadow-black/50"
     >
       <div
-        className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between"
-        style={{ height: "var(--header-height)" }}
+        className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-[72px]"
       >
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 shrink-0">

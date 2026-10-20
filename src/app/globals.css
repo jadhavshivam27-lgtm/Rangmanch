@@ -451,6 +451,12 @@ h4, h5, h6 {
 .animate-slideIn { animation: slideIn 0.3s ease forwards; }
 .animate-pulse-gold { animation: pulseGold 2s ease infinite; }
 
+.bg-glass {
+  background-color: rgba(18, 18, 21, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
 /* Responsive nav */
 @media (max-width: 768px) {
   .sidebar-desktop { display: none; }

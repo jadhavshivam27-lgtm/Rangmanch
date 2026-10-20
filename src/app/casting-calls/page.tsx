@@ -63,12 +63,18 @@ export default function CastingCallsPage() {
   // Filtering Logic
   const filteredCalls = useMemo(() => {
     return DEMO_CASTING_CALLS.filter((call) => {
-      // Search
+      // Safe Search
+      const q = searchQuery.toLowerCase().trim();
+      const orgName = (call.organization?.name || "").toLowerCase();
+      const title = (call.title || "").toLowerCase();
+      const desc = (call.description || "").toLowerCase();
+
       const matchesSearch =
-        call.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        call.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        call.organization?.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        call.roles.some((r) => r.roleName.toLowerCase().includes(searchQuery.toLowerCase()));
+        q === "" ||
+        title.includes(q) ||
+        desc.includes(q) ||
+        orgName.includes(q) ||
+        call.roles.some((r) => r.roleName.toLowerCase().includes(q));
 
       // Type
       const matchesType =
@@ -79,9 +85,30 @@ export default function CastingCallsPage() {
         selectedLanguage === "All Languages" ||
         call.roles.some((r) => r.languages.includes(selectedLanguage));
 
-      return matchesSearch && matchesType && matchesLang;
+      // Archetype (matches roles or keywords)
+      const matchesArchetype =
+        selectedArchetype === "all" ||
+        title.toLowerCase().includes(selectedArchetype) ||
+        desc.toLowerCase().includes(selectedArchetype) ||
+        call.roles.some((r) =>
+          r.roleName.toLowerCase().includes(selectedArchetype) ||
+          r.description.toLowerCase().includes(selectedArchetype)
+        );
+
+      // Escrow Protected Filter
+      const matchesEscrow = !onlyEscrow || call.status === "published";
+
+      return matchesSearch && matchesType && matchesLang && matchesArchetype && matchesEscrow;
     });
-  }, [searchQuery, selectedProjectType, selectedLanguage]);
+  }, [searchQuery, selectedProjectType, selectedLanguage, selectedArchetype, onlyEscrow]);
+
+  const handleResetFilters = () => {
+    setSearchQuery("");
+    setSelectedProjectType("all");
+    setSelectedLanguage("All Languages");
+    setSelectedArchetype("all");
+    setOnlyEscrow(false);
+  };
 
   return (
     <>
@@ -222,102 +249,122 @@ export default function CastingCallsPage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredCalls.map((call) => {
-              const daysLeft = daysUntil(call.applicationDeadline || call.auditionDate || "2026-11-30T00:00:00Z");
+          {filteredCalls.length === 0 ? (
+            <div className="text-center py-16 px-4 rounded-2xl bg-black/30 border border-white/5 space-y-4">
+              <div className="w-12 h-12 rounded-full bg-[var(--gold-500)]/10 border border-[var(--gold-500)]/20 mx-auto flex items-center justify-center text-[var(--gold-400)]">
+                <Search className="w-6 h-6" />
+              </div>
+              <h3 className="font-display font-bold text-lg text-[var(--ivory)]">
+                No Casting Calls Match Your Current Filters
+              </h3>
+              <p className="text-xs text-[var(--text-muted)] max-w-md mx-auto">
+                Try clearing your search query, changing the archetype, or resetting format filters to browse all verified auditions.
+              </p>
+              <button
+                onClick={handleResetFilters}
+                className="btn-primary text-xs px-5 py-2.5 mx-auto inline-flex items-center gap-2"
+              >
+                <span>Reset All Filters</span>
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredCalls.map((call) => {
+                const daysLeft = daysUntil(call.applicationDeadline || call.auditionDate || "2026-11-30T00:00:00Z");
 
-              return (
-                <div
-                  key={call.id}
-                  className="group relative rounded-2xl border p-6 flex flex-col justify-between transition-all duration-300 hover:scale-[1.01]"
-                  style={{
-                    background: "var(--charcoal-800)",
-                    borderColor: "rgba(201, 168, 76, 0.2)",
-                    boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
-                  }}
-                >
-                  {/* Top Meta Bar */}
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <span className="badge badge-gold uppercase text-[10px] tracking-wider">
-                        {call.projectType.replace("_", " ")}
-                      </span>
-                      <div className="flex items-center gap-1 text-[11px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
-                        <DollarSign className="w-3 h-3" />
-                        <span>Escrow Guaranteed</span>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h3 className="font-display font-bold text-lg text-[var(--ivory)] group-hover:text-[var(--gold-300)] transition-colors line-clamp-1">
-                        {call.title}
-                      </h3>
-                      <p className="text-xs text-[var(--text-muted)] mt-1 flex items-center gap-1.5">
-                        <span>{call.organization?.name}</span>
-                        {call.organization?.verificationStatus === "verified" && (
-                          <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
-                        )}
-                      </p>
-                    </div>
-
-                    <p className="text-xs text-[var(--text-secondary)] line-clamp-2 leading-relaxed">
-                      {call.description}
-                    </p>
-
-                    {/* Roles Badges */}
-                    <div className="space-y-1.5 pt-2 border-t border-white/5">
-                      <div className="text-[10px] text-[var(--text-muted)] font-mono uppercase tracking-wider">
-                        Open Roles ({call.roles.length}):
-                      </div>
-                      <div className="flex flex-wrap gap-1.5">
-                        {call.roles.map((r) => (
-                          <span
-                            key={r.id}
-                            className="text-[11px] px-2.5 py-1 rounded-lg bg-black/40 border border-white/5 text-[var(--gold-200)]"
-                          >
-                            {r.roleName} • {r.ageMin}-{r.ageMax}y
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Bottom Action & Deadline Bar */}
-                  <div className="pt-6 mt-6 border-t border-white/5 space-y-3">
-                    <div className="flex items-center justify-between text-xs text-[var(--text-muted)]">
-                      <span className="flex items-center gap-1">
-                        <MapPin className="w-3.5 h-3.5 text-[var(--gold-400)]" />
-                        {call.location}, {call.state}
-                      </span>
-                      <span className="flex items-center gap-1 font-mono text-amber-400">
-                        <Clock className="w-3.5 h-3.5" />
-                        {daysLeft > 0 ? `${daysLeft} days left` : "Closing Soon"}
-                      </span>
-                    </div>
-
-                    <div className="flex items-center justify-between gap-3 pt-1">
-                      <div className="flex items-center gap-1.5">
-                        <div className="w-6 h-6 rounded-full bg-[var(--purple-500)]/20 border border-[var(--purple-500)]/40 flex items-center justify-center text-[var(--purple-400)] text-[10px] font-bold">
-                          AI
+                return (
+                  <div
+                    key={call.id}
+                    className="group relative rounded-2xl border p-6 flex flex-col justify-between transition-all duration-300 hover:scale-[1.01]"
+                    style={{
+                      background: "var(--charcoal-800)",
+                      borderColor: "rgba(201, 168, 76, 0.2)",
+                      boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
+                    }}
+                  >
+                    {/* Top Meta Bar */}
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <span className="badge badge-gold uppercase text-[10px] tracking-wider">
+                          {call.projectType.replace("_", " ")}
+                        </span>
+                        <div className="flex items-center gap-1 text-[11px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                          <DollarSign className="w-3 h-3" />
+                          <span>Escrow Guaranteed</span>
                         </div>
-                        <span className="text-[11px] font-semibold text-[var(--purple-300)]">
-                          92% Profile Fit
+                      </div>
+
+                      <div>
+                        <h3 className="font-display font-bold text-lg text-[var(--ivory)] group-hover:text-[var(--gold-300)] transition-colors line-clamp-1">
+                          {call.title}
+                        </h3>
+                        <p className="text-xs text-[var(--text-muted)] mt-1 flex items-center gap-1.5">
+                          <span>{call.organization?.name}</span>
+                          {call.organization?.verificationStatus === "verified" && (
+                            <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
+                          )}
+                        </p>
+                      </div>
+
+                      <p className="text-xs text-[var(--text-secondary)] line-clamp-2 leading-relaxed">
+                        {call.description}
+                      </p>
+
+                      {/* Roles Badges */}
+                      <div className="space-y-1.5 pt-2 border-t border-white/5">
+                        <div className="text-[10px] text-[var(--text-muted)] font-mono uppercase tracking-wider">
+                          Open Roles ({call.roles.length}):
+                        </div>
+                        <div className="flex flex-wrap gap-1.5">
+                          {call.roles.map((r) => (
+                            <span
+                              key={r.id}
+                              className="text-[11px] px-2.5 py-1 rounded-lg bg-black/40 border border-white/5 text-[var(--gold-200)]"
+                            >
+                              {r.roleName} • {r.ageMin}-{r.ageMax}y
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Bottom Action & Deadline Bar */}
+                    <div className="pt-6 mt-6 border-t border-white/5 space-y-3">
+                      <div className="flex items-center justify-between text-xs text-[var(--text-muted)]">
+                        <span className="flex items-center gap-1">
+                          <MapPin className="w-3.5 h-3.5 text-[var(--gold-400)]" />
+                          {call.location}, {call.state}
+                        </span>
+                        <span className="flex items-center gap-1 font-mono text-amber-400">
+                          <Clock className="w-3.5 h-3.5" />
+                          {daysLeft > 0 ? `${daysLeft} days left` : "Closing Soon"}
                         </span>
                       </div>
 
-                      <Link
-                        href={`/casting-calls/${call.id}`}
-                        className="btn-primary text-xs py-2 px-4 flex items-center gap-1.5"
-                      >
-                        <span>View Sides &amp; Audition</span>
-                        <ChevronRight className="w-3.5 h-3.5" />
-                      </Link>
+                      <div className="flex items-center justify-between gap-3 pt-1">
+                        <div className="flex items-center gap-1.5">
+                          <div className="w-6 h-6 rounded-full bg-[var(--purple-500)]/20 border border-[var(--purple-500)]/40 flex items-center justify-center text-[var(--purple-400)] text-[10px] font-bold">
+                            AI
+                          </div>
+                          <span className="text-[11px] font-semibold text-[var(--purple-300)]">
+                            92% Profile Fit
+                          </span>
+                        </div>
+
+                        <Link
+                          href={`/casting-calls/${call.id}`}
+                          className="btn-primary text-xs py-2 px-4 flex items-center gap-1.5"
+                        >
+                          <span>View Sides &amp; Audition</span>
+                          <ChevronRight className="w-3.5 h-3.5" />
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          )}
         </section>
       </main>
       <Footer />

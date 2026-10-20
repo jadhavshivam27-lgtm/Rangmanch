@@ -492,6 +492,8 @@ export const DEMO_CASTING_CALLS: CastingCall[] = [
   {
     id: "cc-5",
     title: "Female Lead — 'Noor' (Regional Hindi Short Film)",
+    organizationId: "org-1",
+    organization: DEMO_ORGANIZATIONS[0],
     castingDirectorId: "user-cd1",
     projectType: "short_film",
     description:
