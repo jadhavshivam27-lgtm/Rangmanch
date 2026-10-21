@@ -230,7 +230,7 @@ export default function SignupPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-[var(--charcoal-900)] text-[var(--ivory)] pt-28 pb-20 flex items-center justify-center px-4 sm:px-6">
+      <main className="min-h-screen bg-[var(--charcoal-900)] text-[var(--ivory)] py-12 flex items-center justify-center px-4 sm:px-6">
         <Suspense fallback={<div className="text-xs text-[var(--text-muted)]">Loading registration...</div>}>
           <SignupForm />
         </Suspense>

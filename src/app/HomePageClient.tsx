@@ -269,118 +269,313 @@ const SKILL_CATEGORIES = [
 
 export default function HomePageClient() {
   return (
-    <main>
-      {/* ── HERO ──────────────────────────────────────────── */}
+    <main className="min-h-screen bg-[var(--charcoal-950)] text-[var(--ivory)]">
+      {/* ── HERO SECTION (BALANCED 2-COLUMN DESKTOP / FLUID MOBILE) ── */}
       <section
-        className="relative min-h-screen flex items-center overflow-hidden spotlight-glow"
+        className="relative overflow-hidden spotlight-glow border-b border-white/5"
         style={{ background: "var(--charcoal-950)" }}
       >
-        {/* Background image */}
-        <div className="absolute inset-0 z-0">
+        {/* Background ambient texture */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
           <img
             src="/hero.jpg"
-            alt="Rangmanch performers on stage"
-            className="w-full h-full object-cover"
-            style={{ opacity: 0.18 }}
+            alt="Rangmanch stage background"
+            className="w-full h-full object-cover opacity-15 filter blur-[1px]"
           />
           <div
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(135deg, rgba(12,12,14,0.95) 0%, rgba(12,12,14,0.7) 50%, rgba(12,12,14,0.9) 100%)",
+                "radial-gradient(ellipse at 50% 15%, rgba(201,168,76,0.12) 0%, rgba(12,12,14,0.92) 60%, rgba(12,12,14,0.98) 100%)",
             }}
           />
         </div>
 
-        {/* Decorative spotlight */}
+        {/* Top radial spotlight */}
         <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full pointer-events-none"
+          className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full pointer-events-none"
           style={{
             background:
-              "radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.1) 0%, transparent 70%)",
+              "radial-gradient(circle, rgba(201,168,76,0.15) 0%, rgba(139,92,246,0.06) 40%, transparent 70%)",
           }}
         />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-28 pb-20">
-          <div className="max-w-3xl">
-            {/* AI chip */}
-            <div className="ai-chip mb-6 inline-flex">
-              <Sparkles size={12} />
-              AI-Assisted Casting & Talent Discovery
-            </div>
-
-            {/* Headline */}
-            <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-              <span className="gradient-hero">Where Talent</span>
-              <br />
-              <span style={{ color: "var(--ivory)" }}>Meets Opportunity.</span>
-            </h1>
-
-            <p className="text-lg sm:text-xl leading-relaxed mb-8 max-w-2xl" style={{ color: "var(--text-secondary)" }}>
-              Discover casting opportunities, showcase your talent, and connect with
-              entertainment professionals across India. Audition from anywhere.
-            </p>
-
-            {/* CTAs */}
-            <div className="flex flex-wrap gap-3 mb-12">
-              <Link href="/casting-calls" className="btn-primary text-base px-6 py-3">
-                Explore Casting Calls <ArrowRight size={18} />
-              </Link>
-              <Link href="/signup?role=talent" className="btn-secondary text-base px-6 py-3">
-                Join as Talent
-              </Link>
-            </div>
-
-            {/* Demo credential hint */}
-            <div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs"
-              style={{
-                background: "rgba(201, 168, 76, 0.07)",
-                border: "1px solid rgba(201, 168, 76, 0.15)",
-                color: "var(--text-secondary)",
-              }}
-            >
-              <Zap size={12} style={{ color: "var(--gold-400)" }} />
-              <span>Demo platform — </span>
-              <Link href="/login" className="font-medium hover:text-[var(--gold-400)] transition-colors" style={{ color: "var(--gold-300)" }}>
-                sign in with demo credentials
-              </Link>
-              <span> to explore all features</span>
-            </div>
-          </div>
-
-          {/* Skill category pills */}
-          <div className="mt-16 flex flex-wrap gap-3">
-            {SKILL_CATEGORIES.map((cat) => (
-              <div
-                key={cat.label}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm"
-                style={{
-                  background: "rgba(255,255,255,0.04)",
-                  border: "1px solid var(--border-subtle)",
-                  color: "var(--text-secondary)",
-                }}
-              >
-                <span style={{ color: "var(--gold-400)" }}>{cat.icon}</span>
-                <span className="font-medium">{cat.count}</span>
-                <span>{cat.label} Artists</span>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 lg:pt-16 pb-16 lg:pb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            
+            {/* ── LEFT COLUMN: VALUE PROPOSITION & ACTIONS (7 cols) ── */}
+            <div className="lg:col-span-7 flex flex-col items-start text-left">
+              {/* Premier Pill */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-[rgba(201,168,76,0.14)] to-[rgba(139,92,246,0.14)] border border-[rgba(201,168,76,0.3)] text-[var(--gold-300)] shadow-sm mb-6">
+                <Sparkles size={13} className="text-[var(--gold-400)] shrink-0" />
+                <span>India&apos;s Premier AI Casting &amp; Audition Platform</span>
               </div>
-            ))}
+
+              {/* Master Headline (Proportional & Cinematic) */}
+              <h1 className="font-display text-4xl sm:text-5xl lg:text-[54px] font-bold leading-[1.14] tracking-tight mb-5">
+                <span className="gradient-hero">Where Talent</span>
+                <br />
+                <span className="text-[var(--ivory)]">Meets Opportunity.</span>
+              </h1>
+
+              {/* Refined Narrative Subtitle */}
+              <p className="text-base sm:text-lg leading-relaxed text-[var(--text-secondary)] max-w-xl mb-7">
+                Connecting actors, dancers, vocalists, and performers directly with verified Bollywood, South Cinema, and OTT casting directors. Audition with AI scene partners from anywhere in India.
+              </p>
+
+              {/* Call-to-Action Buttons */}
+              <div className="w-full sm:w-auto flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-7">
+                <Link
+                  href="/casting-calls"
+                  className="btn-primary min-h-[48px] px-7 text-sm font-semibold rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-[rgba(201,168,76,0.25)] hover:shadow-[rgba(201,168,76,0.4)] transition-all"
+                >
+                  <span>Explore Casting Calls</span>
+                  <ArrowRight size={16} />
+                </Link>
+                <Link
+                  href="/signup?role=talent"
+                  className="btn-secondary min-h-[48px] px-7 text-sm font-semibold rounded-xl flex items-center justify-center gap-2 hover:bg-white/10 transition-all"
+                >
+                  <span>Join as Talent</span>
+                </Link>
+              </div>
+
+              {/* Trust Indicators Row */}
+              <div className="w-full flex flex-wrap items-center gap-y-2 gap-x-5 text-xs text-[var(--text-muted)] pt-4 border-t border-white/10">
+                <div className="flex items-center gap-1.5 text-emerald-400 font-medium">
+                  <CheckCircle size={14} className="text-emerald-400 shrink-0" />
+                  <span>100% CINTAA Fair-Play</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-sky-400 font-medium">
+                  <Shield size={14} className="text-sky-400 shrink-0" />
+                  <span>DigiLocker KYC Verified</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-[var(--gold-300)] font-medium">
+                  <Sparkles size={14} className="text-[var(--gold-400)] shrink-0" />
+                  <span>Escrow Protected Payouts</span>
+                </div>
+              </div>
+
+              {/* Quiet Demo Platform Notice */}
+              <div className="mt-4 flex items-center gap-2 text-xs text-[var(--text-muted)]">
+                <Zap size={13} className="text-[var(--gold-400)] shrink-0" />
+                <span>Evaluating the platform?</span>
+                <Link
+                  href="/login"
+                  className="text-[var(--gold-300)] underline hover:text-[var(--gold-200)] font-medium"
+                >
+                  Sign in with 1-click Demo Profiles
+                </Link>
+              </div>
+            </div>
+
+            {/* ── RIGHT COLUMN: LIVE CASTING SPOTLIGHT CARD (5 cols) ── */}
+            <div className="lg:col-span-5 w-full">
+              <div
+                className="relative rounded-3xl p-6 sm:p-7 border border-[rgba(201,168,76,0.25)] bg-gradient-to-b from-[#1b1b22]/90 to-[#121216]/95 shadow-2xl shadow-black/80 backdrop-blur-xl"
+              >
+                {/* Live Status Header */}
+                <div className="flex items-center justify-between mb-4 pb-3 border-b border-white/10">
+                  <div className="flex items-center gap-2">
+                    <span className="relative flex h-2.5 w-2.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-rose-500"></span>
+                    </span>
+                    <span className="text-[11px] font-bold tracking-wider uppercase text-rose-400 font-mono">
+                      Live Casting Spotlight
+                    </span>
+                  </div>
+                  <span className="text-[11px] font-mono font-medium px-2.5 py-0.5 rounded-full bg-[rgba(201,168,76,0.12)] border border-[rgba(201,168,76,0.3)] text-[var(--gold-300)]">
+                    Verified Production
+                  </span>
+                </div>
+
+                {/* Film Production Visual Banner */}
+                <div className="relative h-44 rounded-2xl overflow-hidden mb-4 border border-white/10 group">
+                  <img
+                    src="/hero.jpg"
+                    alt="Antim Prahar Production Poster"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                  <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
+                    <div>
+                      <span className="text-[10px] font-mono uppercase tracking-widest text-[var(--gold-400)] block mb-0.5">
+                        Feature Film • Pan-India Release
+                      </span>
+                      <h3 className="font-display text-lg sm:text-xl font-bold text-white leading-tight drop-shadow">
+                        Antim Prahar — The Final Strike
+                      </h3>
+                    </div>
+                    <span className="text-xs font-mono font-semibold text-emerald-300 bg-emerald-950/80 px-2.5 py-1 rounded-md border border-emerald-500/30">
+                      ₹4.5L Escrow
+                    </span>
+                  </div>
+                </div>
+
+                {/* Casting Metadata & Requirements */}
+                <div className="space-y-3 mb-5">
+                  <div className="flex items-center justify-between text-xs text-[var(--text-secondary)]">
+                    <span className="flex items-center gap-1.5 truncate">
+                      <Film size={13} className="text-[var(--gold-400)] shrink-0" />
+                      Excel Entertainment &amp; Dharma Ent.
+                    </span>
+                    <span className="flex items-center gap-1 shrink-0">
+                      <MapPin size={12} className="text-rose-400 shrink-0" /> Mumbai / Delhi
+                    </span>
+                  </div>
+
+                  {/* Open Roles Badges */}
+                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 space-y-2">
+                    <div className="flex items-center justify-between text-[11px]">
+                      <span className="text-[var(--text-muted)] font-medium">Open Character Sides:</span>
+                      <span className="text-emerald-400 font-mono font-semibold">Accepting Self-Tapes</span>
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
+                      <span className="text-[11px] px-2.5 py-1 rounded-lg bg-[rgba(201,168,76,0.1)] text-[var(--gold-200)] border border-[rgba(201,168,76,0.2)] font-medium">
+                        Lead Antagonist (28–35 yrs)
+                      </span>
+                      <span className="text-[11px] px-2.5 py-1 rounded-lg bg-purple-500/10 text-purple-200 border border-purple-500/20 font-medium">
+                        Supporting Cop (35–45 yrs)
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* AI Match Feature Pill */}
+                  <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-gradient-to-r from-purple-950/40 to-transparent border border-purple-500/20 text-xs">
+                    <div className="flex items-center gap-2">
+                      <Sparkles size={13} className="text-purple-400 shrink-0" />
+                      <span className="text-purple-200 font-medium">AI Dialect &amp; Archetype Match</span>
+                    </div>
+                    <span className="font-mono font-bold text-purple-300">98% Fit</span>
+                  </div>
+                </div>
+
+                {/* Instant Audition Action */}
+                <Link
+                  href="/casting-calls/cc-001"
+                  className="w-full py-3 px-4 rounded-xl text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 transition-all shadow-md hover:brightness-110"
+                  style={{
+                    background: "linear-gradient(135deg, var(--gold-500), var(--gold-400))",
+                    color: "var(--charcoal-950)",
+                  }}
+                >
+                  <span>View Call &amp; Record Audition</span>
+                  <ArrowRight size={15} />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── DEMO DISCLAIMER ────────────────────────────────── */}
+      {/* ── 4-METRIC PLATFORM STATS BAR (AMAZON / NETFLIX TIER) ── */}
+      <section className="relative z-20 -mt-6 sm:-mt-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+        <div
+          className="rounded-2xl p-6 sm:p-7 border border-[rgba(201,168,76,0.22)] shadow-2xl shadow-black/80 backdrop-blur-xl"
+          style={{ background: "linear-gradient(180deg, rgba(28,28,33,0.95) 0%, rgba(20,20,24,0.98) 100%)" }}
+        >
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 divide-y sm:divide-y-0 sm:divide-x divide-white/10">
+            {/* Stat 1 */}
+            <div className="pt-3 sm:pt-0 sm:px-4 text-center sm:text-left">
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-[var(--gold-300)] mb-1">
+                50,000+
+              </div>
+              <p className="text-xs sm:text-sm text-[var(--ivory)] font-medium">Verified Indian Artists</p>
+              <p className="text-[11px] text-[var(--text-muted)] mt-0.5">Across 18 States &amp; 12 Regional Tongues</p>
+            </div>
+
+            {/* Stat 2 */}
+            <div className="pt-3 sm:pt-0 sm:px-4 text-center sm:text-left">
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-white mb-1">
+                42
+              </div>
+              <p className="text-xs sm:text-sm text-[var(--ivory)] font-medium">Active Casting Calls</p>
+              <p className="text-[11px] text-[var(--text-muted)] mt-0.5">Feature Films, OTT Series &amp; Commercials</p>
+            </div>
+
+            {/* Stat 3 */}
+            <div className="pt-3 sm:pt-0 sm:px-4 text-center sm:text-left">
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-emerald-400 mb-1">
+                ₹1.8 Cr+
+              </div>
+              <p className="text-xs sm:text-sm text-[var(--ivory)] font-medium">Escrow Protected Pay</p>
+              <p className="text-[11px] text-[var(--text-muted)] mt-0.5">Guaranteed Compensation for Performers</p>
+            </div>
+
+            {/* Stat 4 */}
+            <div className="pt-3 sm:pt-0 sm:px-4 text-center sm:text-left">
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-sky-400 mb-1">
+                100%
+              </div>
+              <p className="text-xs sm:text-sm text-[var(--ivory)] font-medium">CINTAA &amp; DPDP 2023</p>
+              <p className="text-[11px] text-[var(--text-muted)] mt-0.5">Fair-Play Guild Compliant Standards</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── ARTIST CATEGORY EXPLORER BAR ── */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-5">
+          <div>
+            <h2 className="text-xs font-mono font-bold tracking-widest uppercase text-[var(--gold-400)]">
+              Talent Directory by Discipline
+            </h2>
+            <p className="text-sm text-[var(--text-secondary)]">
+              Browse top-rated performers by primary creative craft
+            </p>
+          </div>
+          <Link
+            href="/talent"
+            className="text-xs text-[var(--gold-300)] hover:text-[var(--gold-200)] flex items-center gap-1 font-medium"
+          >
+            <span>Explore All Categories</span>
+            <ArrowRight size={13} />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
+          {SKILL_CATEGORIES.map((cat) => (
+            <Link
+              key={cat.label}
+              href="/talent"
+              className="flex items-center gap-3.5 p-4 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.06] hover:border-[rgba(201,168,76,0.3)] transition-all group"
+            >
+              <div
+                className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform"
+                style={{
+                  background: "rgba(201,168,76,0.12)",
+                  color: "var(--gold-400)",
+                  border: "1px solid rgba(201,168,76,0.25)",
+                }}
+              >
+                {cat.icon}
+              </div>
+              <div>
+                <div className="text-sm font-semibold text-[var(--ivory)] group-hover:text-[var(--gold-300)] transition-colors">
+                  {cat.label}
+                </div>
+                <div className="text-xs text-[var(--text-muted)]">
+                  {cat.count} Artists
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* ── DEMONSTRATION PLATFORM NOTICE ── */}
       <div
-        className="py-3 text-center text-xs"
+        className="py-2.5 px-4 text-center text-xs border-y"
         style={{
-          background: "rgba(201, 168, 76, 0.05)",
-          borderBottom: "1px solid rgba(201, 168, 76, 0.1)",
+          background: "rgba(201, 168, 76, 0.04)",
+          borderColor: "rgba(201, 168, 76, 0.12)",
           color: "var(--text-muted)",
         }}
       >
-        <strong style={{ color: "var(--gold-400)" }}>Demonstration Platform</strong>
-        {" "}— The casting calls and talent profiles shown below are fictional sample content for demonstration purposes only.
+        <span className="font-semibold text-[var(--gold-400)]">Demonstration Platform: </span>
+        <span>The casting calls and talent profiles shown below are fictional sample content for demonstration purposes only.</span>
       </div>
 
       {/* ── FEATURED CASTING CALLS ──────────────────────── */}

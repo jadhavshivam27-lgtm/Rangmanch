@@ -44,7 +44,7 @@ export default function Navbar() {
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#121215]/95 backdrop-blur-xl border-b border-[rgba(201,168,76,0.18)] shadow-lg shadow-black/50"
+      className="sticky top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#121215]/95 backdrop-blur-xl border-b border-[rgba(201,168,76,0.18)] shadow-lg shadow-black/50"
     >
       <div
         className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-[72px]"
@@ -68,7 +68,7 @@ export default function Navbar() {
                 Rangmanch
               </span>
               <span
-                className="text-[10px] leading-tight font-medium"
+                className="text-[10px] leading-tight font-medium hidden sm:block"
                 style={{ color: "var(--gold-400)", letterSpacing: "0.04em" }}
               >
                 Where Talent Meets Opportunity

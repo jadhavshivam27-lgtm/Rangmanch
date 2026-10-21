@@ -74,7 +74,7 @@ export default function TalentDirectoryPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-[var(--charcoal-900)] text-[var(--ivory)] pt-28 pb-20">
+      <main className="min-h-screen bg-[var(--charcoal-900)] text-[var(--ivory)] pt-8 pb-20">
         {/* Header Hero Section */}
         <section
           className="relative py-12 px-4 sm:px-6 lg:px-8 border-b"
