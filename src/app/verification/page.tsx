@@ -120,7 +120,7 @@ export default function VerificationGatewayPage() {
                   <div className="p-4 border border-white/10 bg-black/40 text-xs font-mono space-y-2">
                     <div className="flex items-center justify-between text-emerald-400 font-semibold">
                       <span>Co-Sign Status: Active</span>
-                      <span>{guardianRecord.minorPerformerName}</span>
+                      <span>{guardianRecord.minorName}</span>
                     </div>
                   </div>
                 ) : (

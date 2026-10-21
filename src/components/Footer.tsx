@@ -6,10 +6,7 @@ import { usePathname } from "next/navigation";
 export default function Footer() {
   const pathname = usePathname();
 
-  // On homepage, the left-panel and bottom section handle the footer
-  if (pathname === "/") {
-    return null;
-  }
+
 
   return (
     <footer className="border-t border-white/[0.08] bg-[#0a0a0c] text-neutral-400">

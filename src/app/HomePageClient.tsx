@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import {
@@ -10,21 +11,29 @@ import {
   Clock,
   Shield,
   CheckCircle,
-  Menu,
-  X,
-  Lock,
+  Play,
+  Sparkles,
+  Film,
+  Camera,
+  Star,
+  Tv,
+  Award,
+  Video,
+  Flame,
+  Layers,
+  ChevronRight,
+  Radio,
 } from "lucide-react";
 import {
   DEMO_CASTING_CALLS,
   DEMO_TALENT,
   DEMO_FAQ,
 } from "@/lib/data";
-import { getStatusLabel, daysUntil } from "@/lib/utils";
+import { formatSalary, daysUntil } from "@/lib/utils";
 
 export default function HomePageClient() {
   const router = useRouter();
   const [selectedProjectType, setSelectedProjectType] = useState<string>("all");
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
   const filteredCastingCalls = useMemo(() => {
@@ -41,452 +50,429 @@ export default function HomePageClient() {
     }
   };
 
+  const projectCategories = [
+    { id: "all", label: "All Productions", icon: Film },
+    { id: "feature_film", label: "Feature Films", icon: Film },
+    { id: "web_series", label: "OTT Series", icon: Tv },
+    { id: "short_film", label: "Short Films", icon: Camera },
+    { id: "tv_commercial", label: "Commercials", icon: Sparkles },
+    { id: "theatre", label: "Theatre", icon: Flame },
+  ];
+
   return (
-    <main className="min-h-screen bg-[#0a0a0c] text-[#f8f8f6] selection:bg-white selection:text-black">
+    <div className="relative min-h-screen bg-[#040406] text-[#f5f5f7] overflow-x-hidden selection:bg-[#d4af61] selection:text-black">
       
-      {/* ── 1. SPLIT-SCREEN EDITORIAL HERO (INSPIRED BY ICONIQUE) ── */}
-      <section className="relative min-h-screen w-full flex flex-col lg:flex-row border-b border-white/[0.08]">
+      {/* ── 1. CINEMATIC HERO SHOWCASE ────────────────────────────────────────── */}
+      <section className="relative min-h-[92vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 overflow-hidden">
         
-        {/* ── LEFT PANEL (approx 48% width) ── */}
-        <div className="w-full lg:w-[48%] min-h-screen flex flex-col justify-between p-6 sm:p-10 lg:p-14 xl:p-16 border-b lg:border-b-0 lg:border-r border-white/[0.08] bg-[#0a0a0c]">
+        {/* Background Film Backdrop & Warm Golden Stage Lights */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[850px] sm:w-[1200px] h-[650px] bg-gradient-to-b from-[#d4af61]/20 via-[#b89242]/10 to-transparent blur-[140px] rounded-full transform -translate-y-1/3" />
+          <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#e50914]/15 blur-[120px] rounded-full" />
+          <div className="absolute bottom-10 -right-48 w-96 h-96 bg-[#b89242]/15 blur-[130px] rounded-full" />
           
-          {/* Top: Brand & Compact Navigation */}
-          <div>
-            <div className="flex items-center justify-between mb-8 sm:mb-12">
-              <Link href="/" className="inline-block">
-                <span className="font-editorial text-2xl sm:text-3xl font-light tracking-[0.22em] uppercase text-[#f8f8f6] hover:text-white transition-colors">
-                  RANGMANCH
-                </span>
-              </Link>
-
-              {/* Mobile Menu Toggle */}
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2 text-neutral-400 hover:text-white"
-                aria-label="Toggle navigation"
-              >
-                {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-              </button>
-            </div>
-
-            {/* Compact Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-7 text-[11px] font-medium tracking-[0.2em] uppercase text-neutral-400 border-b border-white/[0.06] pb-6">
-              <Link href="/" className="text-white font-semibold hover:text-white transition-colors">
-                HOME
-              </Link>
-              <Link href="/casting-calls" className="hover:text-white transition-colors">
-                CASTING
-              </Link>
-              <Link href="/talent" className="hover:text-white transition-colors">
-                DISCOVER TALENT
-              </Link>
-              <a href="#about" className="hover:text-white transition-colors">
-                ABOUT
-              </a>
-              <span className="text-white/20">|</span>
-              <Link href="/login" className="hover:text-white transition-colors">
-                LOGIN
-              </Link>
-            </nav>
-
-            {/* Mobile Navigation Dropdown */}
-            {mobileMenuOpen && (
-              <div className="lg:hidden py-6 space-y-4 border-b border-white/10 mb-8">
-                <Link href="/" className="block text-xs uppercase tracking-[0.2em] text-white">
-                  HOME
-                </Link>
-                <Link href="/casting-calls" className="block text-xs uppercase tracking-[0.2em] text-neutral-400 hover:text-white">
-                  CASTING
-                </Link>
-                <Link href="/talent" className="block text-xs uppercase tracking-[0.2em] text-neutral-400 hover:text-white">
-                  DISCOVER TALENT
-                </Link>
-                <a href="#about" className="block text-xs uppercase tracking-[0.2em] text-neutral-400 hover:text-white">
-                  ABOUT
-                </a>
-                <Link href="/login" className="block text-xs uppercase tracking-[0.2em] text-neutral-400 hover:text-white pt-2 border-t border-white/10">
-                  LOGIN
-                </Link>
-              </div>
-            )}
-          </div>
-
-          {/* Center: Main Editorial Headline & Tagline (Substantial Negative Space) */}
-          <div className="my-auto py-12 lg:py-16 max-w-xl">
-            <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-[#c5a059] mb-6">
-              ✦ National Casting &amp; Talent Directory
-            </p>
-
-            <h1 className="font-editorial text-4xl sm:text-5xl lg:text-6xl xl:text-[68px] leading-[1.02] tracking-[-0.015em] font-light text-[#f8f8f6] mb-6">
-              RANGMANCH<br />
-              <span className="italic font-normal text-white/90">CASTING &amp; TALENT</span>
-            </h1>
-
-            <p className="text-sm sm:text-base text-neutral-400 font-light leading-relaxed tracking-wide max-w-md mb-10">
-              Connecting extraordinary talent with the stories that matter.
-            </p>
-
-            {/* Two Minimal Outlined Buttons */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-              <Link
-                href="/casting-calls"
-                className="btn-editorial"
-              >
-                EXPLORE CASTING
-              </Link>
-              <Link
-                href="/signup?role=talent"
-                className="btn-editorial-solid"
-              >
-                JOIN RANGMANCH
-              </Link>
-            </div>
-          </div>
-
-          {/* Bottom: Editorial Footer Details */}
-          <div className="pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-[11px] font-mono uppercase tracking-widest text-neutral-500">
-            <div>
-              <span>MUMBAI • DELHI • HYDERABAD • BENGALURU</span>
-            </div>
-            <div>
-              <span>EST. 2024 / CINTAA FAIR-PLAY</span>
-            </div>
-          </div>
+          {/* Subtle Film Grain / Grid */}
+          <div className="absolute inset-0 bg-[radial-gradient(#ffffff08_1px,transparent_1px)] [background-size:24px_24px] opacity-60" />
         </div>
 
-        {/* ── RIGHT PANEL (approx 52% width) — ASYMMETRICAL IMAGE COLLAGE ── */}
-        <div className="w-full lg:w-[52%] min-h-[600px] lg:min-h-screen bg-[#0d0d12] p-4 sm:p-6 lg:p-8 flex items-center justify-center overflow-hidden">
-          <div className="w-full h-full max-w-3xl grid grid-cols-12 gap-3 sm:gap-4 auto-rows-fr">
-            
-            {/* Top Wide Image (Spans 12 cols) */}
-            <div className="col-span-12 row-span-4 relative overflow-hidden bg-neutral-900 border border-white/[0.08] group min-h-[180px] sm:min-h-[220px]">
-              <img
-                src="/hero.jpg"
-                alt="Cinema Production Stage"
-                className="w-full h-full object-cover object-center filter grayscale-[25%] contrast-[1.05] group-hover:scale-105 group-hover:grayscale-0 transition-all duration-700 ease-out"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
-              <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-[10px] font-mono tracking-widest uppercase text-white/80">
-                <span>Featured Production Sides</span>
-                <span>Pan-India</span>
-              </div>
-            </div>
-
-            {/* Middle Left: Large Vertical Portrait (Spans 7 cols) */}
-            <div className="col-span-7 row-span-6 relative overflow-hidden bg-neutral-900 border border-white/[0.08] group min-h-[240px] sm:min-h-[320px]">
-              <img
-                src="/talent1.jpg"
-                alt="Priya Sharma — Actor"
-                className="w-full h-full object-cover object-top filter grayscale-[20%] group-hover:scale-105 group-hover:grayscale-0 transition-all duration-700 ease-out"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
-              <div className="absolute bottom-3.5 left-3.5 right-3.5">
-                <p className="font-editorial text-base sm:text-lg text-white font-normal leading-tight">
-                  Priya Sharma
-                </p>
-                <p className="text-[10px] font-mono uppercase tracking-wider text-[#c5a059]">
-                  Dramatic Lead • FTII
-                </p>
-              </div>
-            </div>
-
-            {/* Middle Right: Tall Vertical Portrait (Spans 5 cols) */}
-            <div className="col-span-5 row-span-6 relative overflow-hidden bg-neutral-900 border border-white/[0.08] group min-h-[240px] sm:min-h-[320px]">
-              <img
-                src="/talent2.jpg"
-                alt="Arjun Mehta — Actor"
-                className="w-full h-full object-cover object-top filter grayscale-[20%] group-hover:scale-105 group-hover:grayscale-0 transition-all duration-700 ease-out"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
-              <div className="absolute bottom-3.5 left-3.5 right-3.5">
-                <p className="font-editorial text-base sm:text-lg text-white font-normal leading-tight">
-                  Arjun Mehta
-                </p>
-                <p className="text-[10px] font-mono uppercase tracking-wider text-neutral-300">
-                  Screen &amp; Theatre
-                </p>
-              </div>
-            </div>
-
-            {/* Bottom Left Supporting Image (Spans 5 cols) */}
-            <div className="col-span-5 row-span-4 relative overflow-hidden bg-neutral-900 border border-white/[0.08] group min-h-[160px] sm:min-h-[200px]">
-              <img
-                src="/talent3.jpg"
-                alt="Rekha Pillai — Character Actor"
-                className="w-full h-full object-cover object-top filter grayscale-[20%] group-hover:scale-105 group-hover:grayscale-0 transition-all duration-700 ease-out"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
-              <div className="absolute bottom-3 left-3 right-3">
-                <p className="font-editorial text-sm sm:text-base text-white">
-                  Rekha Pillai
-                </p>
-                <p className="text-[9px] font-mono uppercase tracking-wider text-neutral-400">
-                  Malayalam / Hindi
-                </p>
-              </div>
-            </div>
-
-            {/* Bottom Right Supporting Image (Spans 7 cols) */}
-            <div className="col-span-7 row-span-4 relative overflow-hidden bg-neutral-900 border border-white/[0.08] group min-h-[160px] sm:min-h-[200px]">
-              <img
-                src="/talent4.jpg"
-                alt="Kabir Nair — Performer"
-                className="w-full h-full object-cover object-top filter grayscale-[20%] group-hover:scale-105 group-hover:grayscale-0 transition-all duration-700 ease-out"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
-              <div className="absolute bottom-3 left-3.5 right-3.5">
-                <p className="font-editorial text-sm sm:text-base text-white">
-                  Kabir Nair
-                </p>
-                <p className="text-[9px] font-mono uppercase tracking-wider text-neutral-400">
-                  Dance &amp; Physical Theatre
-                </p>
-              </div>
-            </div>
-
+        <div className="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center">
+          
+          {/* Live Casting Ticker Pill */}
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.04] border border-[#d4af61]/35 backdrop-blur-md mb-8 animate-fade-in shadow-[0_0_25px_rgba(212,175,97,0.15)]">
+            <span className="flex h-2 w-2 relative">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#e50914] opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#e50914]"></span>
+            </span>
+            <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#d4af61] font-semibold">
+              Live Audition Guild • 140+ Active Roles
+            </span>
           </div>
-        </div>
 
+          {/* Epic Cinematic Headline */}
+          <h1 className="font-cinema text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.08] text-white mb-6">
+            Where Talent <br className="hidden sm:inline" />
+            Takes <span className="text-gradient-gold italic">The Stage</span>
+          </h1>
+
+          {/* Subtitle */}
+          <p className="max-w-2xl text-base sm:text-xl font-light text-neutral-300 leading-relaxed mb-10 text-balance">
+            India&apos;s verified cinema and OTT audition platform. Connect directly with Bollywood directors, premium web series, and theatrical productions — guaranteed escrow &amp; certified guild talent.
+          </p>
+
+          {/* Cinematic Global Search Bar */}
+          <form
+            onSubmit={handleSearch}
+            className="w-full max-w-2xl p-2 rounded-2xl sm:rounded-full bg-white/[0.05] border border-white/15 backdrop-blur-2xl shadow-[0_15px_40px_rgba(0,0,0,0.8)] flex flex-col sm:flex-row items-center gap-2 mb-12 hover:border-[#d4af61]/50 transition-all"
+          >
+            <div className="flex items-center gap-3 w-full px-4 py-2 sm:py-0">
+              <Search className="w-5 h-5 text-[#d4af61] shrink-0" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search character roles, projects (e.g. Antim Prahar, Lead Actor)..."
+                className="w-full bg-transparent text-sm sm:text-base text-white placeholder:text-neutral-500 focus:outline-none"
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full sm:w-auto btn-cinema-gold py-3 px-8 text-xs whitespace-nowrap shadow-none hover:shadow-[0_0_30px_rgba(212,175,97,0.5)]"
+            >
+              Search Roles
+            </button>
+          </form>
+
+          {/* Quick Metrics Bar */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-12 pt-6 border-t border-white/[0.08] w-full max-w-3xl text-center">
+            <div>
+              <div className="text-2xl sm:text-3xl font-black text-white font-cinema">₹4.2 Cr+</div>
+              <div className="text-[11px] font-mono tracking-widest uppercase text-neutral-400 mt-1">Escrow Secured</div>
+            </div>
+            <div>
+              <div className="text-2xl sm:text-3xl font-black text-[#d4af61] font-cinema">100%</div>
+              <div className="text-[11px] font-mono tracking-widest uppercase text-neutral-400 mt-1">KYC Verified</div>
+            </div>
+            <div>
+              <div className="text-2xl sm:text-3xl font-black text-white font-cinema">45+</div>
+              <div className="text-[11px] font-mono tracking-widest uppercase text-neutral-400 mt-1">Feature Films</div>
+            </div>
+            <div>
+              <div className="text-2xl sm:text-3xl font-black text-[#e50914] font-cinema">0%</div>
+              <div className="text-[11px] font-mono tracking-widest uppercase text-neutral-400 mt-1">Artist Fees</div>
+            </div>
+          </div>
+
+        </div>
       </section>
 
-      {/* ── 2. EDITORIAL CASTING OPPORTUNITIES ───────────────────── */}
-      <section className="py-24 sm:py-32 px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto border-b border-white/[0.08]">
+      {/* ── 2. NOW CASTING — WIDESCREEN CINEMA SHELF ──────────────────────────── */}
+      <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/[0.08]">
         
-        {/* Editorial Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-white/[0.08] mb-12">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
-            <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#c5a059] mb-3">
-              ✦ OPEN PRODUCTIONS
-            </p>
-            <h2 className="font-editorial text-3xl sm:text-4xl lg:text-5xl font-light text-white tracking-tight">
-              Current Castings
+            <div className="flex items-center gap-2 mb-3">
+              <span className="w-2 h-2 rounded-full bg-[#e50914] animate-pulse" />
+              <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#d4af61] font-bold">
+                NOW CASTING • NATIONWIDE AUDITIONS
+              </span>
+            </div>
+            <h2 className="font-cinema text-3xl sm:text-5xl font-black text-white tracking-tight">
+              Featured Productions
             </h2>
-            <p className="text-xs sm:text-sm text-neutral-400 font-light mt-2 max-w-xl">
-              Authentic film, television, theatre, and OTT casting calls verified directly with accredited production companies.
-            </p>
           </div>
 
-          {/* Minimal Filter Tabs */}
-          <div className="flex flex-wrap items-center gap-4 text-[11px] font-mono tracking-widest uppercase">
-            {[
-              { id: "all", label: "ALL" },
-              { id: "feature_film", label: "FEATURE FILMS" },
-              { id: "web_series", label: "OTT SERIES" },
-              { id: "theatre", label: "THEATRE" },
-              { id: "commercial", label: "COMMERCIALS" },
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setSelectedProjectType(tab.id)}
-                className={`pb-1 transition-colors ${
-                  selectedProjectType === tab.id
-                    ? "text-white border-b-2 border-[#c5a059] font-semibold"
-                    : "text-neutral-500 hover:text-neutral-300"
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
+          <Link
+            href="/casting-calls"
+            className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#d4af61] hover:text-[#f4e2b8] transition-colors group"
+          >
+            <span>Explore All 140+ Castings</span>
+            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+          </Link>
         </div>
 
-        {/* Casting Opportunities Rows (Clean Hairline Borders, Zero Clunky Cards) */}
-        <div className="divide-y divide-white/[0.08]">
-          {filteredCastingCalls.map((call) => {
-            const days = daysUntil(call.applicationDeadline);
+        {/* Category Pills Filter */}
+        <div className="flex items-center gap-2.5 overflow-x-auto pb-6 scrollbar-none mb-10">
+          {projectCategories.map((cat) => {
+            const Icon = cat.icon;
+            const isSelected = selectedProjectType === cat.id;
             return (
-              <div
-                key={call.id}
-                className="py-8 group flex flex-col md:flex-row md:items-center justify-between gap-6 hover:bg-white/[0.015] px-4 -mx-4 transition-colors"
+              <button
+                key={cat.id}
+                onClick={() => setSelectedProjectType(cat.id)}
+                className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all whitespace-nowrap cursor-pointer ${
+                  isSelected
+                    ? "bg-gradient-to-r from-[#d4af61] to-[#b89242] text-black font-bold shadow-[0_0_20px_rgba(212,175,97,0.4)]"
+                    : "bg-white/[0.04] text-neutral-400 hover:text-white hover:bg-white/[0.08] border border-white/[0.06]"
+                }`}
               >
-                {/* Left: Project Details */}
-                <div className="md:w-3/5 space-y-2">
-                  <div className="flex items-center gap-3 text-[10px] font-mono tracking-widest uppercase text-neutral-400">
-                    <span className="text-[#c5a059]">{getStatusLabel(call.projectType)}</span>
-                    <span>•</span>
-                    <span>{call.location}</span>
-                    <span>•</span>
-                    <span className="text-emerald-400 flex items-center gap-1">
-                      <Lock size={10} /> ESCROW PROTECTED
-                    </span>
-                  </div>
-
-                  <h3 className="font-editorial text-xl sm:text-2xl text-white group-hover:text-[#c5a059] transition-colors font-normal">
-                    {call.title}
-                  </h3>
-
-                  <p className="text-xs text-neutral-400 font-light line-clamp-2 max-w-2xl leading-relaxed">
-                    {call.description}
-                  </p>
-
-                  {/* Character Sides */}
-                  {call.roles && (
-                    <div className="flex flex-wrap gap-2 pt-1 text-[11px] font-mono text-neutral-300">
-                      {call.roles.map((r) => (
-                        <span key={r.id} className="border border-white/10 px-2.5 py-0.5 text-neutral-400">
-                          {r.roleName}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                {/* Right: Meta & Direct Link */}
-                <div className="md:w-2/5 flex flex-row md:flex-col items-start md:items-end justify-between gap-4">
-                  <div className="text-right text-[11px] font-mono text-neutral-400">
-                    <div className="flex items-center gap-1 text-neutral-400 justify-end">
-                      <Clock size={12} />
-                      <span>{days > 0 ? `${days} DAYS REMAINING` : "CLOSING TODAY"}</span>
-                    </div>
-                    {call.organization && (
-                      <p className="text-neutral-500 text-[10px] mt-0.5">{call.organization.name}</p>
-                    )}
-                  </div>
-
-                  <Link
-                    href={`/casting-calls/${call.id}`}
-                    className="btn-editorial py-2 px-5 text-[10px]"
-                  >
-                    <span>VIEW CASTING</span>
-                    <ArrowRight size={12} />
-                  </Link>
-                </div>
-              </div>
+                <Icon size={14} />
+                <span>{cat.label}</span>
+              </button>
             );
           })}
         </div>
 
-        {/* View All Castings */}
-        <div className="mt-14 text-center">
-          <Link
-            href="/casting-calls"
-            className="btn-editorial text-[11px] py-3.5 px-8"
-          >
-            VIEW ALL 42 OPEN CASTINGS
-          </Link>
-        </div>
-      </section>
-
-      {/* ── 3. THE EDITORIAL ROSTER (DISCOVER TALENT) ──────────── */}
-      <section className="py-24 sm:py-32 px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto border-b border-white/[0.08]">
-        
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pb-8 border-b border-white/[0.08] mb-12">
-          <div>
-            <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#c5a059] mb-3">
-              ✦ SCREEN &amp; STAGE
-            </p>
-            <h2 className="font-editorial text-3xl sm:text-4xl lg:text-5xl font-light text-white tracking-tight">
-              The Talent Roster
-            </h2>
-            <p className="text-xs sm:text-sm text-neutral-400 font-light mt-2">
-              Curated portfolios of certified actors, dancers, vocalists, and theatre performers.
-            </p>
-          </div>
-
-          <Link
-            href="/talent"
-            className="text-[11px] font-mono uppercase tracking-widest text-neutral-400 hover:text-white transition-colors"
-          >
-            VIEW FULL ROSTER →
-          </Link>
-        </div>
-
-        {/* Clean Portrait Grid (3:4 Ratio, Consistent Proportions) */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
-          {DEMO_TALENT.slice(0, 6).map((talent) => (
+        {/* 16:9 Cinematic Production Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredCastingCalls.map((call) => (
             <Link
-              key={talent.id}
-              href={`/talent/${talent.id}`}
-              className="group block"
+              key={call.id}
+              href={`/casting-calls/${call.id}`}
+              className="group flex flex-col rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-[#d4af61]/60 transition-all duration-300 overflow-hidden hover:shadow-[0_15px_35px_rgba(0,0,0,0.8),0_0_30px_rgba(212,175,97,0.15)] hover:-translate-y-1"
             >
-              <div className="aspect-[3/4] w-full overflow-hidden bg-neutral-900 border border-white/[0.08] mb-3 relative">
-                {talent.profilePhoto ? (
-                  <img
-                    src={talent.profilePhoto}
-                    alt={talent.displayName}
-                    className="w-full h-full object-cover object-top filter grayscale-[20%] group-hover:scale-105 group-hover:grayscale-0 transition-all duration-700 ease-out"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center font-editorial text-2xl text-neutral-500">
-                    {talent.displayName[0]}
-                  </div>
-                )}
-                <div className="absolute top-2 right-2 px-2 py-0.5 bg-black/70 text-[9px] font-mono uppercase tracking-wider text-neutral-300">
-                  {talent.availability}
+              {/* Poster Banner 16:9 */}
+              <div className="relative aspect-[16/9] w-full overflow-hidden bg-neutral-900">
+                <Image
+                  src={call.organization?.logo || "/talent1.jpg"}
+                  alt={call.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#08080c] via-[#08080c]/40 to-transparent" />
+                
+                {/* Badge Overlay */}
+                <div className="absolute top-3 left-3 flex items-center gap-2">
+                  <span className="px-2.5 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-black/75 backdrop-blur-md text-[#d4af61] border border-[#d4af61]/30 font-semibold">
+                    {call.projectType.replace("_", " ")}
+                  </span>
+                  {call.organization?.verificationStatus === "verified" && (
+                    <span className="p-1 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/40" title="Verified Production">
+                      <Shield size={12} />
+                    </span>
+                  )}
+                </div>
+
+                <div className="absolute bottom-3 right-3 px-2.5 py-1 rounded-md text-[11px] font-mono bg-black/80 backdrop-blur-md text-neutral-300 border border-white/10">
+                  {daysUntil(call.applicationDeadline)}d left
                 </div>
               </div>
 
-              <div>
-                <h3 className="font-editorial text-base text-white group-hover:text-[#c5a059] transition-colors leading-snug">
-                  {talent.displayName}
-                </h3>
-                <p className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 mt-0.5">
-                  {talent.skills.acting || "Performer"} • {talent.city}
-                </p>
+              {/* Card Body */}
+              <div className="p-6 flex flex-col flex-1 justify-between">
+                <div>
+                  <div className="text-[11px] font-mono uppercase tracking-widest text-[#d4af61] mb-1.5 flex items-center gap-1.5">
+                    <span>{call.organization?.name || "Independent Production"}</span>
+                  </div>
+                  
+                  <h3 className="font-cinema text-xl sm:text-2xl font-bold text-white group-hover:text-[#f4e2b8] transition-colors mb-3 leading-tight line-clamp-2">
+                    {call.title}
+                  </h3>
+                  
+                  <p className="text-xs text-neutral-400 font-light line-clamp-2 leading-relaxed mb-6">
+                    {call.description}
+                  </p>
+                </div>
+
+                {/* Card Meta & Action */}
+                <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between">
+                  <div className="flex flex-col">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-500">
+                      Roles &amp; Compensation
+                    </span>
+                    <span className="text-xs font-bold text-white font-mono">
+                      {call.roles[0]?.compensation || "Industry Standard"}
+                    </span>
+                  </div>
+
+                  <div className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-[#d4af61] group-hover:translate-x-1 transition-transform">
+                    <span>Audition</span>
+                    <ChevronRight size={14} />
+                  </div>
+                </div>
+
               </div>
             </Link>
           ))}
         </div>
+
       </section>
 
-      {/* ── 4. THE EDITORIAL MANIFESTO / ABOUT ──────────────────── */}
-      <section id="about" className="py-24 sm:py-32 px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto border-b border-white/[0.08]">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
-          
-          <div className="lg:col-span-5">
-            <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#c5a059] mb-4">
-              ✦ THE STANDARD
-            </p>
-            <h2 className="font-editorial text-3xl sm:text-4xl lg:text-5xl font-light text-white leading-tight">
-              A Refined Paradigm for Indian Casting.
+      {/* ── 3. FEATURED PERFORMERS — CINEMA REPERTOIRE ────────────────────────── */}
+      <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/[0.08]">
+        
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div>
+            <div className="flex items-center gap-2 mb-3">
+              <Sparkles size={14} className="text-[#d4af61]" />
+              <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#d4af61] font-bold">
+                VERIFIED TALENT GUILD
+              </span>
+            </div>
+            <h2 className="font-cinema text-3xl sm:text-5xl font-black text-white tracking-tight">
+              Performers in the Spotlight
             </h2>
           </div>
 
-          <div className="lg:col-span-7 space-y-8 text-neutral-300 font-light text-sm sm:text-base leading-relaxed">
-            <p>
-              For decades, casting in Indian cinema, television, and theatre has been fragmented by middlemen, unauthorized casting calls, and lack of verified credentials. Rangmanch was conceived as a digital standard of trust and artistic elevation.
-            </p>
+          <Link
+            href="/talent"
+            className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#d4af61] hover:text-[#f4e2b8] transition-colors group"
+          >
+            <span>View Full Talent Roster</span>
+            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-white/[0.08] text-xs font-mono">
-              <div>
-                <p className="text-white font-semibold uppercase tracking-wider mb-1">01. VERIFIED IDENTITY</p>
-                <p className="text-neutral-500 leading-normal">
-                  DigiLocker KYC and CINTAA guild credentials eliminate impersonation and fraud.
-                </p>
+        {/* 3:4 Vertical Headshot Portfolio Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+          {DEMO_TALENT.slice(0, 4).map((talent) => (
+            <Link
+              key={talent.id}
+              href={`/talent/${talent.id}`}
+              className="group relative rounded-2xl overflow-hidden aspect-[3/4] bg-neutral-900 border border-white/[0.08] hover:border-[#d4af61]/70 transition-all duration-300 hover:shadow-[0_15px_35px_rgba(0,0,0,0.8),0_0_25px_rgba(212,175,97,0.2)]"
+            >
+              <Image
+                src={talent.profilePhoto || talent.portfolioPhotos[0] || "/talent1.jpg"}
+                alt={talent.displayName}
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#040406] via-transparent to-transparent opacity-90 group-hover:opacity-80 transition-opacity" />
+
+              {/* Badges on top */}
+              <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase tracking-wider bg-black/75 backdrop-blur-md text-emerald-400 border border-emerald-500/30">
+                  <CheckCircle size={10} />
+                  <span>VERIFIED</span>
+                </span>
+                <span className="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase tracking-wider bg-black/75 backdrop-blur-md text-[#d4af61] border border-[#d4af61]/30">
+                  GUILD
+                </span>
               </div>
-              <div>
-                <p className="text-white font-semibold uppercase tracking-wider mb-1">02. ESCROW SECURITY</p>
-                <p className="text-neutral-500 leading-normal">
-                  Production fees are held securely in advance. Guaranteed compensation for every performer.
-                </p>
+
+              {/* Showreel Indicator */}
+              <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white group-hover:bg-[#d4af61] group-hover:text-black transition-colors">
+                <Play size={12} fill="currentColor" />
               </div>
-              <div>
-                <p className="text-white font-semibold uppercase tracking-wider mb-1">03. BROWSER STUDIO</p>
-                <p className="text-neutral-500 leading-normal">
-                  Built-in AI teleprompter reads opposing character cues for broadcast-grade self-tapes.
+
+              {/* Performer Details at bottom */}
+              <div className="absolute bottom-4 left-4 right-4">
+                <p className="text-[10px] font-mono uppercase tracking-widest text-[#d4af61] font-semibold mb-1">
+                  {talent.rolePreferences[0] || "Actor / Performer"}
                 </p>
+                <h3 className="font-cinema text-lg sm:text-xl font-bold text-white leading-tight group-hover:text-[#f4e2b8] transition-colors">
+                  {talent.displayName}
+                </h3>
+                <div className="flex items-center gap-2 text-[11px] text-neutral-400 mt-2 font-mono">
+                  <MapPin size={12} className="text-neutral-500" />
+                  <span>{talent.city}</span>
+                  <span>•</span>
+                  <span>Age {talent.ageMin}-{talent.ageMax}</span>
+                </div>
               </div>
+            </Link>
+          ))}
+        </div>
+
+      </section>
+
+      {/* ── 4. PRODUCTION ECOSYSTEM / BENTO SHOWCASE ────────────────────────── */}
+      <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/[0.08]">
+        
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#d4af61] font-bold mb-3">
+            BUILT FOR INDIAN ENTERTAINMENT
+          </p>
+          <h2 className="font-cinema text-3xl sm:text-5xl font-black text-white tracking-tight mb-4">
+            A New Standard for Cinema Casting
+          </h2>
+          <p className="text-sm sm:text-base text-neutral-400 font-light">
+            Engineered to replace chaotic WhatsApp casting groups, commission cuts, and fake auditions with certified production security.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          {/* Feature 1 */}
+          <div className="p-8 rounded-2xl bg-gradient-to-b from-white/[0.04] to-transparent border border-white/[0.08] hover:border-[#d4af61]/40 transition-colors flex flex-col justify-between">
+            <div>
+              <div className="w-12 h-12 rounded-xl bg-[#d4af61]/10 border border-[#d4af61]/30 flex items-center justify-center text-[#d4af61] mb-6">
+                <Video size={22} />
+              </div>
+              <h3 className="font-cinema text-xl font-bold text-white mb-2">
+                In-Browser Audition Studio
+              </h3>
+              <p className="text-xs sm:text-sm text-neutral-400 font-light leading-relaxed">
+                Audition directly from your browser. Our AI Teleprompter scrolls your script and reads opposing dialogue cues in real-time, delivering broadcast-ready self-tapes.
+              </p>
             </div>
+            <div className="pt-6 mt-6 border-t border-white/[0.06] text-[11px] font-mono text-[#d4af61] uppercase tracking-wider">
+              ✦ Smart AI Script Reader
+            </div>
+          </div>
+
+          {/* Feature 2 */}
+          <div className="p-8 rounded-2xl bg-gradient-to-b from-white/[0.04] to-transparent border border-white/[0.08] hover:border-[#d4af61]/40 transition-colors flex flex-col justify-between">
+            <div>
+              <div className="w-12 h-12 rounded-xl bg-[#e50914]/10 border border-[#e50914]/30 flex items-center justify-center text-[#e50914] mb-6">
+                <Shield size={22} />
+              </div>
+              <h3 className="font-cinema text-xl font-bold text-white mb-2">
+                DigiLocker KYC &amp; CINTAA Guild
+              </h3>
+              <p className="text-xs sm:text-sm text-neutral-400 font-light leading-relaxed">
+                Zero fake profiles, zero impersonation. Identity verified through Government DigiLocker and cross-referenced with CINTAA guild membership numbers.
+              </p>
+            </div>
+            <div className="pt-6 mt-6 border-t border-white/[0.06] text-[11px] font-mono text-emerald-400 uppercase tracking-wider">
+              ✦ 100% Identity Certified
+            </div>
+          </div>
+
+          {/* Feature 3 */}
+          <div className="p-8 rounded-2xl bg-gradient-to-b from-white/[0.04] to-transparent border border-white/[0.08] hover:border-[#d4af61]/40 transition-colors flex flex-col justify-between">
+            <div>
+              <div className="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-6">
+                <Award size={22} />
+              </div>
+              <h3 className="font-cinema text-xl font-bold text-white mb-2">
+                Escrow Protected Compensation
+              </h3>
+              <p className="text-xs sm:text-sm text-neutral-400 font-light leading-relaxed">
+                Production budgets are deposited into bank-grade escrow before casting calls go live. Performers are guaranteed timely payment without unauthorized commission cuts.
+              </p>
+            </div>
+            <div className="pt-6 mt-6 border-t border-white/[0.06] text-[11px] font-mono text-amber-400 uppercase tracking-wider">
+              ✦ DPDP Act &amp; Escrow Backed
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* ── 5. CINEMATIC CALL TO ACTION BILLBOARD ─────────────────────────────── */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="relative rounded-3xl overflow-hidden p-8 sm:p-14 md:p-20 border border-[#d4af61]/40 bg-gradient-to-r from-[#0d0d14] via-[#08080c] to-[#040406] shadow-[0_0_80px_rgba(212,175,97,0.15)] flex flex-col md:flex-row items-center justify-between gap-10">
+          
+          <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-gradient-to-bl from-[#d4af61]/20 via-[#b89242]/10 to-transparent blur-[90px] pointer-events-none" />
+
+          <div className="relative z-10 max-w-xl text-center md:text-left">
+            <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#d4af61] font-bold block mb-3">
+              YOUR NEXT BIG ROLE AWAITS
+            </span>
+            <h2 className="font-cinema text-3xl sm:text-5xl font-black text-white leading-tight mb-4">
+              Step Into The Spotlight
+            </h2>
+            <p className="text-neutral-300 font-light text-sm sm:text-base leading-relaxed">
+              Create your verified cinematic profile, upload high-definition headshots and showreels, and audition for premier films today.
+            </p>
+          </div>
+
+          <div className="relative z-10 flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto">
+            <Link
+              href="/signup"
+              className="w-full sm:w-auto btn-cinema-gold py-4 px-8 text-xs text-center justify-center"
+            >
+              <span>Join as Performer</span>
+              <ArrowRight size={16} />
+            </Link>
+            <Link
+              href="/signup?role=casting_director"
+              className="w-full sm:w-auto btn-cinema-ghost py-4 px-8 text-xs text-center justify-center"
+            >
+              <span>Post a Casting Call</span>
+            </Link>
           </div>
 
         </div>
       </section>
 
-      {/* ── 5. MINIMALIST FAQ ACCORDION ─────────────────────────── */}
-      <section className="py-24 sm:py-32 px-6 sm:px-10 lg:px-16 max-w-4xl mx-auto border-b border-white/[0.08]">
-        <div className="text-center mb-14">
-          <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#c5a059] mb-3">
-            ✦ INFORMATION
+      {/* ── 6. FREQUENTLY ASKED QUESTIONS ─────────────────────────────────────── */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto border-t border-white/[0.08]">
+        <div className="text-center mb-12">
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#d4af61] font-bold mb-2">
+            FREQUENTLY ASKED QUESTIONS
           </p>
-          <h2 className="font-editorial text-3xl sm:text-4xl font-light text-white">
-            Frequently Asked Questions
+          <h2 className="font-cinema text-3xl sm:text-4xl font-bold text-white">
+            Everything You Need To Know
           </h2>
         </div>
 
         <div className="divide-y divide-white/[0.08]">
           {DEMO_FAQ.map((faq) => (
             <div key={faq.q} className="py-6">
-              <h3 className="font-editorial text-lg sm:text-xl text-white mb-2 font-normal">
+              <h3 className="font-cinema text-lg sm:text-xl text-white font-semibold mb-2">
                 {faq.q}
               </h3>
               <p className="text-xs sm:text-sm text-neutral-400 font-light leading-relaxed">
@@ -497,20 +483,6 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      {/* ── 6. MINIMALIST FOOTER ─────────────────────────────────── */}
-      <footer className="py-16 px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto text-xs font-mono text-neutral-500 flex flex-col sm:flex-row items-center justify-between gap-6">
-        <div>
-          <span className="text-white font-editorial tracking-[0.2em] text-sm uppercase mr-3">RANGMANCH</span>
-          <span>© 2024 ALL RIGHTS RESERVED</span>
-        </div>
-        <div className="flex items-center gap-6 uppercase tracking-widest text-[10px]">
-          <Link href="/casting-calls" className="hover:text-white transition-colors">CASTINGS</Link>
-          <Link href="/talent" className="hover:text-white transition-colors">TALENT</Link>
-          <Link href="/verification" className="hover:text-white transition-colors">KYC &amp; GUILD</Link>
-          <Link href="/login" className="hover:text-white transition-colors">LOGIN</Link>
-        </div>
-      </footer>
-
-    </main>
+    </div>
   );
 }

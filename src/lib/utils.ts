@@ -126,3 +126,15 @@ export function pluralize(count: number, singular: string, plural?: string): str
   if (count === 1) return `${count} ${singular}`;
   return `${count} ${plural ?? singular + "s"}`;
 }
+
+export function formatSalary(min: number, max: number, period: string): string {
+  const formatNum = (num: number) => {
+    if (num >= 10000000) return `₹${(num / 10000000).toFixed(1)} Cr`;
+    if (num >= 100000) return `₹${(num / 100000).toFixed(0)} Lakh`;
+    if (num >= 1000) return `₹${(num / 1000).toFixed(0)}k`;
+    return `₹${num.toLocaleString("en-IN")}`;
+  };
+  const periodLabel = period === "per_day" ? "/day" : period === "per_project" ? " total" : `/${period}`;
+  return `${formatNum(min)} - ${formatNum(max)}${periodLabel}`;
+}
+
