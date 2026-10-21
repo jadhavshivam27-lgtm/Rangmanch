@@ -4,24 +4,22 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
-  Search,
-  Bell,
   Menu,
   X,
   ChevronDown,
   LogOut,
   User,
   Settings,
-  Sparkles,
+  Bell,
 } from "lucide-react";
 import { useAuthStore, useUser, getDashboardRoute } from "@/lib/auth";
 import { getInitials } from "@/lib/utils";
 
-const publicLinks = [
-  { href: "/", label: "Home" },
-  { href: "/casting-calls", label: "Casting Calls" },
-  { href: "/talent", label: "Discover Talent" },
-  { href: "/verification", label: "Govt KYC & Guardian" },
+const navLinks = [
+  { href: "/", label: "HOME" },
+  { href: "/casting-calls", label: "CASTING" },
+  { href: "/talent", label: "DISCOVER TALENT" },
+  { href: "/verification", label: "KYC & GUILD" },
 ];
 
 export default function Navbar() {
@@ -30,63 +28,35 @@ export default function Navbar() {
   const logout = useAuthStore((s) => s.logout);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handler);
-    return () => window.removeEventListener("scroll", handler);
-  }, []);
 
   useEffect(() => {
     setMobileOpen(false);
   }, [pathname]);
 
+  // On homepage, the left panel handles the brand and compact navigation directly (ICONIQUE reference)
+  if (pathname === "/") {
+    return null;
+  }
+
   return (
-    <header
-      className="sticky top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#121215]/95 backdrop-blur-xl border-b border-[rgba(201,168,76,0.18)] shadow-lg shadow-black/50"
-    >
-      <div
-        className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-[72px]"
-      >
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5 shrink-0">
-          <div className="flex items-center gap-2">
-            <div
-              className="w-8 h-8 rounded-lg flex items-center justify-center"
-              style={{
-                background: "linear-gradient(135deg, var(--gold-500), var(--gold-400))",
-              }}
-            >
-              <span className="text-xs font-bold" style={{ color: "var(--charcoal-900)" }}>R</span>
-            </div>
-            <div className="flex flex-col justify-center">
-              <span
-                className="font-display font-bold text-lg leading-tight"
-                style={{ color: "var(--ivory)" }}
-              >
-                Rangmanch
-              </span>
-              <span
-                className="text-[10px] leading-tight font-medium hidden sm:block"
-                style={{ color: "var(--gold-400)", letterSpacing: "0.04em" }}
-              >
-                Where Talent Meets Opportunity
-              </span>
-            </div>
-          </div>
+    <header className="sticky top-0 left-0 right-0 z-50 bg-[#0a0a0c]/95 backdrop-blur-md border-b border-white/[0.08]">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20">
+        
+        {/* Brand */}
+        <Link href="/" className="flex items-center gap-3">
+          <span className="font-editorial text-2xl tracking-[0.2em] uppercase font-light text-[#f8f8f6] hover:text-white transition-colors">
+            RANGMANCH
+          </span>
         </Link>
 
-        {/* Desktop Nav Links (Centered) */}
-        <nav className="hidden md:flex items-center gap-1 lg:gap-2">
-          {publicLinks.map((link) => (
+        {/* Desktop Minimal Nav */}
+        <nav className="hidden md:flex items-center gap-8 text-[11px] font-medium tracking-[0.2em] uppercase text-neutral-400">
+          {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={`px-3 py-1.5 rounded-xl text-sm font-medium transition-colors whitespace-nowrap ${
-                pathname === link.href
-                  ? "text-[var(--gold-300)] bg-[rgba(201,168,76,0.12)] border border-[rgba(201,168,76,0.25)] font-semibold"
-                  : "text-[var(--text-secondary)] hover:text-[var(--ivory)] hover:bg-white/5"
+              className={`transition-colors hover:text-white ${
+                pathname === link.href ? "text-white font-semibold" : ""
               }`}
             >
               {link.label}
@@ -94,156 +64,107 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Right side */}
-        <div className="flex items-center gap-2">
+        {/* Right Actions */}
+        <div className="flex items-center gap-4">
           {user ? (
-            <>
-              {/* Dashboard link */}
+            <div className="flex items-center gap-4">
               <Link
                 href={getDashboardRoute(user.role)}
-                className="hidden sm:flex btn-ghost text-sm"
+                className="text-[11px] font-medium tracking-[0.16em] uppercase text-neutral-300 hover:text-white"
               >
                 Dashboard
               </Link>
-
-              {/* Notifications */}
-              <button
-                className="relative w-9 h-9 rounded-lg flex items-center justify-center transition-colors hover:bg-white/5"
-                aria-label="Notifications"
-              >
-                <Bell size={17} style={{ color: "var(--text-secondary)" }} />
-                <span
-                  className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full"
-                  style={{ background: "var(--coral-500)" }}
-                />
-              </button>
-
-              {/* User menu */}
               <div className="relative">
                 <button
                   onClick={() => setUserMenuOpen((p) => !p)}
-                  className="flex items-center gap-2 px-2 py-1.5 rounded-lg transition-colors hover:bg-white/5"
-                  id="user-menu-button"
+                  className="flex items-center gap-2 p-1.5 border border-white/10 hover:border-white/30 text-xs text-white"
                 >
-                  {user.avatar ? (
-                    <img
-                      src={user.avatar}
-                      alt={user.name}
-                      className="w-7 h-7 rounded-full object-cover"
-                      style={{ border: "1.5px solid var(--gold-500)" }}
-                    />
-                  ) : (
-                    <div
-                      className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold"
-                      style={{
-                        background: "var(--gold-500)",
-                        color: "var(--charcoal-900)",
-                      }}
-                    >
-                      {getInitials(user.name)}
-                    </div>
-                  )}
-                  <span className="hidden sm:block text-sm font-medium" style={{ color: "var(--ivory)" }}>
-                    {user.name.split(" ")[0]}
+                  <span className="w-6 h-6 flex items-center justify-center bg-white/10 text-[10px] font-mono">
+                    {getInitials(user.name)}
                   </span>
-                  <ChevronDown size={14} style={{ color: "var(--text-muted)" }} />
+                  <span className="text-[11px] uppercase tracking-wider">{user.name.split(" ")[0]}</span>
+                  <ChevronDown size={12} />
                 </button>
-
                 {userMenuOpen && (
-                  <div
-                    className="absolute right-0 mt-2 w-56 rounded-xl p-1 z-50 shadow-lg animate-fadeIn"
-                    style={{
-                      background: "var(--charcoal-700)",
-                      border: "1px solid var(--border-subtle)",
-                      boxShadow: "var(--shadow-lg)",
-                    }}
-                  >
-                    <div className="px-3 py-2 border-b mb-1" style={{ borderColor: "var(--border-subtle)" }}>
-                      <p className="text-sm font-medium" style={{ color: "var(--ivory)" }}>{user.name}</p>
-                      <p className="text-xs" style={{ color: "var(--text-muted)" }}>{user.email}</p>
-                    </div>
+                  <div className="absolute right-0 mt-2 w-48 bg-[#0e0e12] border border-white/15 p-2 shadow-2xl z-50 text-xs">
                     <Link
                       href={getDashboardRoute(user.role)}
-                      className="btn-ghost w-full justify-start text-sm"
-                      onClick={() => setUserMenuOpen(false)}
+                      className="block px-3 py-2 text-neutral-300 hover:text-white hover:bg-white/5"
                     >
-                      <User size={14} /> Dashboard
+                      Dashboard
                     </Link>
                     <Link
                       href="/settings"
-                      className="btn-ghost w-full justify-start text-sm"
-                      onClick={() => setUserMenuOpen(false)}
+                      className="block px-3 py-2 text-neutral-300 hover:text-white hover:bg-white/5"
                     >
-                      <Settings size={14} /> Settings
+                      Settings
                     </Link>
-                    <div className="border-t mt-1 pt-1" style={{ borderColor: "var(--border-subtle)" }}>
-                      <button
-                        onClick={() => { logout(); setUserMenuOpen(false); }}
-                        className="btn-ghost w-full justify-start text-sm"
-                        style={{ color: "var(--coral-400)" }}
-                      >
-                        <LogOut size={14} /> Sign Out
-                      </button>
-                    </div>
+                    <button
+                      onClick={() => {
+                        logout();
+                        setUserMenuOpen(false);
+                      }}
+                      className="w-full text-left px-3 py-2 text-rose-400 hover:bg-white/5 mt-1 border-t border-white/10"
+                    >
+                      Sign Out
+                    </button>
                   </div>
                 )}
               </div>
-            </>
+            </div>
           ) : (
-            <>
-              <Link href="/login" className="btn-ghost hidden sm:flex text-sm">
-                Log In
+            <div className="hidden sm:flex items-center gap-5">
+              <Link
+                href="/login"
+                className="text-[11px] font-medium tracking-[0.18em] uppercase text-neutral-300 hover:text-white transition-colors"
+              >
+                LOGIN
               </Link>
-              <Link href="/signup" className="btn-primary text-sm px-4 py-2">
-                Join Free
+              <Link
+                href="/signup"
+                className="btn-editorial py-2.5 px-5 text-[10px]"
+              >
+                JOIN RANGMANCH
               </Link>
-            </>
+            </div>
           )}
 
-          {/* Mobile menu toggle */}
+          {/* Mobile hamburger */}
           <button
-            className="md:hidden w-9 h-9 rounded-lg flex items-center justify-center hover:bg-white/5"
             onClick={() => setMobileOpen((p) => !p)}
+            className="md:hidden p-2 text-neutral-300 hover:text-white"
             aria-label="Toggle menu"
           >
-            {mobileOpen ? (
-              <X size={18} style={{ color: "var(--ivory)" }} />
-            ) : (
-              <Menu size={18} style={{ color: "var(--ivory)" }} />
-            )}
+            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile Drawer */}
       {mobileOpen && (
-        <div
-          className="md:hidden border-t"
-          style={{
-            background: "var(--charcoal-800)",
-            borderColor: "var(--border-subtle)",
-          }}
-        >
-          <div className="px-4 py-3 space-y-1">
-            {publicLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`block px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  pathname === link.href
-                    ? "text-[var(--gold-400)] bg-[rgba(201,168,76,0.08)]"
-                    : "text-[var(--text-secondary)]"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-            {!user && (
-              <div className="flex gap-2 pt-2 border-t" style={{ borderColor: "var(--border-subtle)" }}>
-                <Link href="/login" className="btn-secondary flex-1 text-center text-sm">Log In</Link>
-                <Link href="/signup" className="btn-primary flex-1 text-center text-sm">Join Free</Link>
-              </div>
-            )}
+        <div className="md:hidden border-t border-white/10 bg-[#0a0a0c] px-6 py-8 space-y-5">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="block text-xs uppercase tracking-[0.2em] text-neutral-300 hover:text-white"
+            >
+              {link.label}
+            </Link>
+          ))}
+          <div className="pt-4 border-t border-white/10 flex flex-col gap-3">
+            <Link
+              href="/login"
+              className="text-xs uppercase tracking-[0.2em] text-neutral-300 hover:text-white py-2"
+            >
+              LOGIN
+            </Link>
+            <Link
+              href="/signup"
+              className="btn-editorial w-full justify-center text-xs"
+            >
+              JOIN RANGMANCH
+            </Link>
           </div>
         </div>
       )}

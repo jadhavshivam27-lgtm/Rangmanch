@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Video,
   Mic,
@@ -13,10 +13,7 @@ import {
   CheckCircle,
   X,
   Radio,
-  FileText,
-  Sliders,
   ChevronRight,
-  UserCheck,
 } from "lucide-react";
 
 interface AuditionStudioModalProps {
@@ -37,52 +34,40 @@ export default function AuditionStudioModal({
   scriptLines = [
     {
       speaker: "PARTNER (AI)",
-      dialogue: "You can't go in there alone, Vikram. The minister's convoy has already left.",
+      dialogue: "You cannot proceed without signed authorization. The minister's convoy has already departed.",
       direction: "concerned, urgent",
     },
     {
       speaker: roleName.toUpperCase(),
-      dialogue: "If I wait for their clearance, three more witnesses disappear by sunrise. I'm taking the side entrance.",
+      dialogue: "If I wait for their clearance, three more witnesses disappear before sunrise. I am taking the side entrance.",
       direction: "steely, resolute, unwavering eye-contact",
     },
     {
       speaker: "PARTNER (AI)",
-      dialogue: "If they catch you without a warrant, the department won't stand behind you. You're on your own.",
+      dialogue: "If they catch you without a warrant, the department will not stand behind you. You are on your own.",
       direction: "warning tone",
     },
     {
       speaker: roleName.toUpperCase(),
-      dialogue: "I've been on my own since the day I took this oath. Watch the perimeter.",
+      dialogue: "I have walked alone since the day I took this oath. Watch the perimeter.",
       direction: "quiet confidence, decisive exit",
     },
   ],
 }: AuditionStudioModalProps) {
-  // Studio States
-  const [activeTab, setActiveTab] = useState<"recorder" | "review" | "diagnostic">("recorder");
+  const [activeTab, setActiveTab] = useState<"recorder" | "diagnostic">("recorder");
   const [isRecording, setIsRecording] = useState(false);
   const [recordSeconds, setRecordSeconds] = useState(0);
-  const [recordedVideoUrl, setRecordedVideoUrl] = useState<string | null>(null);
-
-  // AI Virtual Line Reader State
   const [isLineReaderActive, setIsLineReaderActive] = useState(false);
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
   const [lineReaderSpeaking, setLineReaderSpeaking] = useState(false);
-
-  // AI Diagnostic Metrics
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [diagnosticComplete, setDiagnosticComplete] = useState(false);
 
-  // Look-Test simulation toggle
-  const [activeLookTest, setActiveLookTest] = useState<string>("original");
-
-  // Web Speech Synthesis for AI Line Reader
   const speakLine = (text: string, onComplete: () => void) => {
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.rate = 0.95;
       utterance.pitch = 0.9;
-      // Try to select an Indian English voice if available
       const voices = window.speechSynthesis.getVoices();
       const indianVoice = voices.find((v) => v.lang.includes("en-IN") || v.name.includes("India"));
       if (indianVoice) utterance.voice = indianVoice;
@@ -98,7 +83,6 @@ export default function AuditionStudioModal({
       };
       window.speechSynthesis.speak(utterance);
     } else {
-      // Fallback timer simulation
       setLineReaderSpeaking(true);
       setTimeout(() => {
         setLineReaderSpeaking(false);
@@ -107,7 +91,6 @@ export default function AuditionStudioModal({
     }
   };
 
-  // Timer effect for recording
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (isRecording) {
@@ -118,7 +101,6 @@ export default function AuditionStudioModal({
     return () => clearInterval(interval);
   }, [isRecording]);
 
-  // AI Line Reader playback step
   const handleNextLine = () => {
     if (currentLineIndex < scriptLines.length - 1) {
       const nextIndex = currentLineIndex + 1;
@@ -153,13 +135,11 @@ export default function AuditionStudioModal({
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
       window.speechSynthesis.cancel();
     }
-    setRecordedVideoUrl("/talent1.jpg"); // Simulated recorded self-tape preview
     setActiveTab("diagnostic");
     setIsAnalyzing(true);
     setTimeout(() => {
       setIsAnalyzing(false);
-      setDiagnosticComplete(true);
-    }, 2000);
+    }, 1500);
   };
 
   if (!isOpen) return null;
@@ -171,285 +151,173 @@ export default function AuditionStudioModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/90 backdrop-blur-lg animate-fadeIn overflow-y-auto">
-      <div
-        className="relative w-full max-w-5xl my-auto rounded-2xl border shadow-2xl overflow-hidden flex flex-col max-h-[92vh]"
-        style={{
-          background: "var(--charcoal-900)",
-          borderColor: "rgba(201, 168, 76, 0.3)",
-          boxShadow: "0 25px 80px rgba(0,0,0,0.85), 0 0 40px rgba(201, 168, 76, 0.15)",
-        }}
-      >
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/90 backdrop-blur-md overflow-y-auto">
+      <div className="relative w-full max-w-5xl my-auto border border-white/20 bg-[#0e0e12] flex flex-col max-h-[92vh] overflow-hidden">
+        
         {/* Studio Top Navigation Bar */}
-        <div
-          className="flex items-center justify-between px-6 py-4 border-b shrink-0"
-          style={{
-            background: "linear-gradient(90deg, rgba(14,14,17,0.95), rgba(30,30,36,0.95))",
-            borderColor: "rgba(201, 168, 76, 0.2)",
-          }}
-        >
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl flex items-center justify-center bg-[var(--gold-500)]/15 border border-[var(--gold-500)]/30 text-[var(--gold-300)]">
-              <Video className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-display font-bold text-lg text-[var(--ivory)]">
-                  Rangmanch AI Audition Studio
-                </span>
-                <span className="badge badge-gold text-[10px]">REVOLUTIONARY STACK</span>
-              </div>
-              <p className="text-xs text-[var(--text-muted)]">
-                Project: <strong className="text-[var(--ivory)]">{projectTitle}</strong> • Role:{" "}
-                <span className="text-[var(--gold-300)] font-semibold">{roleName}</span>
-              </p>
-            </div>
+        <div className="flex items-center justify-between px-8 py-5 border-b border-white/10 shrink-0">
+          <div>
+            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#c5a059] block">
+              ✦ AI SCENE PARTNER AUDITION STUDIO
+            </span>
+            <h3 className="font-editorial text-2xl text-white font-light mt-0.5">
+              {projectTitle} — {roleName}
+            </h3>
           </div>
 
-          <div className="flex items-center gap-3">
-            {/* View Tabs */}
-            <div className="hidden sm:flex p-1 rounded-xl bg-black/40 border border-white/5 text-xs">
+          <div className="flex items-center gap-4">
+            <div className="hidden sm:flex border border-white/15 text-xs font-mono">
               <button
                 onClick={() => setActiveTab("recorder")}
-                className={`px-3 py-1.5 rounded-lg font-medium transition-all ${
+                className={`px-3 py-1.5 transition-colors uppercase ${
                   activeTab === "recorder"
-                    ? "bg-[var(--gold-500)] text-[var(--charcoal-900)] shadow"
-                    : "text-[var(--text-muted)] hover:text-white"
+                    ? "bg-white text-black font-semibold"
+                    : "text-neutral-400 hover:text-white"
                 }`}
               >
-                1. Audition Studio
+                Audition Studio
               </button>
               <button
                 onClick={() => setActiveTab("diagnostic")}
-                className={`px-3 py-1.5 rounded-lg font-medium transition-all ${
+                className={`px-3 py-1.5 transition-colors uppercase ${
                   activeTab === "diagnostic"
-                    ? "bg-[var(--gold-500)] text-[var(--charcoal-900)] shadow"
-                    : "text-[var(--text-muted)] hover:text-white"
+                    ? "bg-white text-black font-semibold"
+                    : "text-neutral-400 hover:text-white"
                 }`}
               >
-                2. AI Diagnostic Card
+                Performance Report
               </button>
             </div>
 
             <button
               onClick={onClose}
-              className="p-1.5 rounded-lg text-[var(--text-muted)] hover:text-white hover:bg-white/10 transition-colors"
+              className="p-1 text-neutral-400 hover:text-white transition-colors"
             >
-              <X className="w-5 h-5" />
+              <X size={18} />
             </button>
           </div>
         </div>
 
-        {/* Modal Main Content Area */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
+        {/* Studio Body */}
+        <div className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6">
           {activeTab === "recorder" ? (
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-              {/* Left Column: Live Camera Canvas / Video Framing Area (7 cols) */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+              
+              {/* Camera Framing Area (7 cols) */}
               <div className="lg:col-span-7 flex flex-col space-y-4">
-                <div
-                  className="relative aspect-video w-full rounded-2xl overflow-hidden border flex items-center justify-center bg-black/80"
-                  style={{ borderColor: "rgba(201, 168, 76, 0.25)" }}
-                >
-                  {/* Simulated Camera View / Framing Overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    {/* Rule of Thirds Grid Lines */}
-                    <div className="w-full h-full grid grid-cols-3 grid-rows-3 opacity-20 border border-white/20">
-                      <div className="border-r border-b border-white/30" />
-                      <div className="border-r border-b border-white/30" />
-                      <div className="border-b border-white/30" />
-                      <div className="border-r border-b border-white/30" />
-                      <div className="border-r border-b border-white/30" />
-                      <div className="border-b border-white/30" />
-                      <div className="border-r border-white/30" />
-                      <div className="border-r border-white/30" />
-                      <div />
-                    </div>
-
-                    {/* Eye-Line Level Marker */}
-                    <div className="absolute top-[33.3%] left-0 right-0 border-t border-dashed border-[var(--gold-400)]/40 flex justify-end px-3">
-                      <span className="text-[10px] text-[var(--gold-300)] font-mono uppercase bg-black/60 px-1 rounded">
-                        Optimal Eye-Line Level
-                      </span>
-                    </div>
-
-                    {/* Center Head Target Box */}
-                    <div className="w-48 h-60 rounded-3xl border-2 border-dashed border-[var(--gold-500)]/30 flex items-center justify-center">
-                      <span className="text-[10px] text-[var(--text-muted)] font-mono uppercase">
-                        Center Face &amp; Shoulders
-                      </span>
-                    </div>
+                <div className="relative aspect-video w-full border border-white/10 flex items-center justify-center bg-[#070709] overflow-hidden">
+                  
+                  {/* Framing Overlay Grid */}
+                  <div className="absolute inset-0 pointer-events-none opacity-20 grid grid-cols-3 grid-rows-3 border border-white/10">
+                    <div className="border-r border-b border-white/20" />
+                    <div className="border-r border-b border-white/20" />
+                    <div className="border-b border-white/20" />
+                    <div className="border-r border-b border-white/20" />
+                    <div className="border-r border-b border-white/20" />
+                    <div className="border-b border-white/20" />
+                    <div className="border-r border-white/20" />
+                    <div className="border-r border-white/20" />
+                    <div />
                   </div>
 
-                  {/* Look-Test Filter Preview Banner */}
-                  {activeLookTest !== "original" && (
-                    <div className="absolute top-4 left-4 z-20 flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-950/80 border border-purple-500/40 text-purple-200 text-xs backdrop-blur-md">
-                      <Sparkles className="w-3.5 h-3.5 text-purple-400" />
-                      <span>AI Character Filter: {activeLookTest.toUpperCase()}</span>
-                    </div>
-                  )}
-
-                  {/* Status Overlay */}
+                  {/* Top Recording Status */}
                   <div className="absolute top-4 right-4 z-20 flex items-center gap-2">
                     {isRecording ? (
-                      <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-red-950/80 border border-red-500/50 text-red-400 text-xs font-mono font-bold animate-pulse">
-                        <Radio className="w-3.5 h-3.5 text-red-500" />
+                      <div className="flex items-center gap-2 px-3 py-1 bg-red-950/80 border border-red-500/40 text-red-400 text-xs font-mono uppercase animate-pulse">
+                        <Radio size={12} className="text-red-500" />
                         <span>REC {formatTimer(recordSeconds)}</span>
                       </div>
                     ) : (
-                      <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 border border-white/10 text-xs text-[var(--text-secondary)] font-mono">
-                        <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                        <span>HD 1080P • 30FPS</span>
+                      <div className="px-2.5 py-1 border border-white/10 bg-black/60 text-[10px] text-neutral-400 font-mono uppercase">
+                        1080P HD • READY
                       </div>
                     )}
                   </div>
 
-                  {/* Simulated Camera Center Graphics */}
+                  {/* Center Camera Graphic */}
                   <div className="text-center p-6 space-y-3 z-10">
-                    <div className="w-16 h-16 rounded-full mx-auto flex items-center justify-center bg-white/5 border border-white/10 text-[var(--gold-400)]">
-                      <Video className="w-8 h-8" />
+                    <div className="w-14 h-14 rounded-full border border-white/20 mx-auto flex items-center justify-center text-white">
+                      <Video size={22} />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-sm text-[var(--ivory)]">
-                        {isRecording ? "Self-Tape Recording in Progress..." : "Ready for Self-Tape Audition"}
+                      <h4 className="font-editorial text-lg text-white font-normal">
+                        {isRecording ? "Audition Recording in Progress" : "Position at Eye-Level"}
                       </h4>
-                      <p className="text-xs text-[var(--text-muted)] max-w-xs mx-auto mt-1">
-                        Ensure warm frontal lighting, clean audio with minimal room echo, and horizontal framing.
+                      <p className="text-xs text-neutral-500 max-w-xs mx-auto mt-1 font-mono">
+                        Rule of thirds grid active. Ensure frontal light and minimal echo.
                       </p>
                     </div>
                   </div>
 
-                  {/* Line Reader Speaking Indicator Overlay */}
+                  {/* Line Reader Speaking Pill */}
                   {lineReaderSpeaking && (
-                    <div className="absolute bottom-4 left-4 right-4 z-20 p-3 rounded-xl bg-[var(--charcoal-900)]/90 border border-[var(--purple-500)]/50 backdrop-blur-md flex items-center justify-between animate-slideIn">
+                    <div className="absolute bottom-4 left-4 right-4 z-20 p-3 border border-[#c5a059]/40 bg-black/90 backdrop-blur-md flex items-center justify-between text-xs font-mono">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-[var(--purple-500)]/20 flex items-center justify-center text-[var(--purple-400)] animate-pulse">
-                          <Volume2 className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <div className="text-[10px] font-bold text-[var(--purple-400)] uppercase tracking-wider">
-                            AI Scene Partner Speaking Cue:
-                          </div>
-                          <div className="text-xs font-medium text-white italic">
-                            &quot;{scriptLines[currentLineIndex]?.dialogue}&quot;
-                          </div>
-                        </div>
+                        <Volume2 size={16} className="text-[#c5a059] animate-pulse" />
+                        <span className="text-neutral-200 italic">
+                          &quot;{scriptLines[currentLineIndex]?.dialogue}&quot;
+                        </span>
                       </div>
-                      <span className="text-[10px] px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 font-mono">
-                        Listening for your line...
+                      <span className="text-[10px] text-[#c5a059] uppercase tracking-wider">
+                        AI Line
                       </span>
                     </div>
                   )}
                 </div>
 
-                {/* Recorder Controls Bar */}
-                <div
-                  className="p-4 rounded-xl border flex items-center justify-between"
-                  style={{
-                    background: "var(--charcoal-800)",
-                    borderColor: "rgba(255,255,255,0.08)",
-                  }}
-                >
-                  <div className="flex items-center gap-2">
+                {/* Recorder Control Buttons */}
+                <div className="p-4 border border-white/10 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
                     <button
                       onClick={isRecording ? handleStopRecording : handleStartRecording}
-                      className={`px-5 py-2.5 rounded-xl font-semibold text-xs flex items-center gap-2 transition-all ${
-                        isRecording
-                          ? "bg-red-600 hover:bg-red-500 text-white shadow-lg shadow-red-600/30"
-                          : "btn-primary shadow-lg shadow-[var(--gold-500)]/20"
+                      className={`btn-editorial text-[10px] py-2.5 px-5 tracking-widest ${
+                        isRecording ? "border-red-500 text-red-400 hover:bg-red-500/10" : "btn-editorial-solid"
                       }`}
                     >
-                      {isRecording ? (
-                        <>
-                          <Pause className="w-4 h-4" /> Stop &amp; Analyze Performance
-                        </>
-                      ) : (
-                        <>
-                          <Play className="w-4 h-4" /> Start Audition with AI Partner
-                        </>
-                      )}
+                      {isRecording ? "STOP & ANALYZE" : "START AUDITION TAKE"}
                     </button>
+
                     {isRecording && (
                       <button
                         onClick={handleNextLine}
-                        className="btn-secondary text-xs py-2.5 px-3 flex items-center gap-1.5"
-                        title="Cue next dialogue line"
+                        className="btn-editorial text-[10px] py-2.5 px-4"
                       >
-                        <span>Next Cue Line</span>
-                        <ChevronRight className="w-4 h-4" />
+                        <span>NEXT CUE</span>
+                        <ChevronRight size={12} />
                       </button>
                     )}
                   </div>
 
-                  <div className="flex items-center gap-2">
-                    {/* Look-Test Quick Selector */}
-                    <div className="flex items-center gap-1 p-1 rounded-lg bg-black/40 border border-white/5 text-[11px]">
-                      <span className="text-[10px] text-[var(--text-muted)] px-1.5 font-medium">
-                        Look Test:
-                      </span>
-                      {[
-                        { id: "original", label: "Clean" },
-                        { id: "cop", label: "Cop" },
-                        { id: "period", label: "Retro 70s" },
-                        { id: "royal", label: "Royal" },
-                      ].map((item) => (
-                        <button
-                          key={item.id}
-                          onClick={() => setActiveLookTest(item.id)}
-                          className={`px-2 py-1 rounded transition-colors ${
-                            activeLookTest === item.id
-                              ? "bg-[var(--gold-500)]/20 text-[var(--gold-300)] font-semibold"
-                              : "text-[var(--text-muted)] hover:text-white"
-                          }`}
-                        >
-                          {item.label}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
+                  <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest">
+                    AI SYNCHRONIZED
+                  </span>
                 </div>
               </div>
 
-              {/* Right Column: AI Scene Partner & Interactive Teleprompter (5 cols) */}
+              {/* Teleprompter Area (5 cols) */}
               <div className="lg:col-span-5 flex flex-col space-y-4">
-                {/* Teleprompter Card */}
-                <div
-                  className="p-5 rounded-2xl border flex flex-col flex-1"
-                  style={{
-                    background: "var(--charcoal-800)",
-                    borderColor: "rgba(201, 168, 76, 0.2)",
-                  }}
-                >
-                  <div className="flex items-center justify-between pb-3 border-b border-white/5 mb-4">
-                    <div className="flex items-center gap-2">
-                      <div className="w-7 h-7 rounded-lg bg-[var(--purple-500)]/15 border border-[var(--purple-500)]/30 flex items-center justify-center text-[var(--purple-400)]">
-                        <Sparkles className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <h4 className="text-xs font-bold text-[var(--ivory)] uppercase tracking-wider">
-                          AI Scene Partner Teleprompter
-                        </h4>
-                        <p className="text-[11px] text-[var(--text-muted)]">
-                          Reads opposing lines aloud during your take
-                        </p>
-                      </div>
-                    </div>
+                <div className="p-6 border border-white/10 bg-[#070709] flex flex-col flex-1 space-y-4">
+                  <div className="flex items-center justify-between pb-3 border-b border-white/10">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#c5a059]">
+                      AI SCENE PARTNER TELEPROMPTER
+                    </span>
                     <button
                       onClick={startLineReader}
                       disabled={isLineReaderActive}
-                      className="text-[11px] text-[var(--gold-300)] hover:underline font-medium"
+                      className="text-[10px] font-mono uppercase text-neutral-400 hover:text-white"
                     >
-                      {isLineReaderActive ? "Line Reader Active" : "Test Cue Voice"}
+                      {isLineReaderActive ? "ACTIVE" : "TEST AUDIO"}
                     </button>
                   </div>
 
-                  {/* Character Bio Guidance */}
-                  <div className="p-3 rounded-xl bg-black/30 border border-white/5 text-xs text-[var(--text-secondary)] mb-4">
-                    <span className="font-semibold text-[var(--gold-300)]">Director&apos;s Character Note: </span>
+                  {/* Character Note */}
+                  <div className="text-xs font-mono text-neutral-400 leading-relaxed border border-white/5 p-3">
+                    <span className="text-white uppercase block mb-1">Character Direction:</span>
                     {characterBio}
                   </div>
 
-                  {/* Interactive Script Cue Flow */}
-                  <div className="flex-1 space-y-3 overflow-y-auto max-h-[300px] pr-1 font-mono text-xs">
+                  {/* Script Flow */}
+                  <div className="space-y-3 font-mono text-xs overflow-y-auto max-h-[280px]">
                     {scriptLines.map((line, idx) => {
                       const isCurrent = idx === currentLineIndex;
                       const isAI = line.speaker.includes("(AI)") || line.speaker.includes("PARTNER");
@@ -457,227 +325,112 @@ export default function AuditionStudioModal({
                       return (
                         <div
                           key={idx}
-                          className={`p-3 rounded-xl border transition-all ${
+                          className={`p-3 border transition-colors ${
                             isCurrent
-                              ? "bg-[var(--gold-500)]/10 border-[var(--gold-500)]/40 shadow-sm"
-                              : "bg-black/20 border-white/5 opacity-70"
+                              ? "border-white bg-white/5 text-white"
+                              : "border-white/5 text-neutral-400"
                           }`}
                         >
-                          <div className="flex items-center justify-between mb-1">
-                            <span
-                              className={`text-[10px] font-bold uppercase tracking-wider ${
-                                isAI ? "text-[var(--purple-400)]" : "text-[var(--gold-300)]"
-                              }`}
-                            >
-                              {line.speaker}
-                            </span>
-                            {line.direction && (
-                              <span className="text-[10px] text-[var(--text-muted)] italic">
-                                ({line.direction})
-                              </span>
-                            )}
+                          <div className="flex items-center justify-between text-[10px] uppercase tracking-wider mb-1">
+                            <span className={isAI ? "text-[#c5a059]" : "text-white"}>{line.speaker}</span>
+                            {line.direction && <span className="text-neutral-500 italic">({line.direction})</span>}
                           </div>
-                          <p className="text-gray-200 leading-relaxed text-xs">{line.dialogue}</p>
+                          <p className="leading-relaxed">{line.dialogue}</p>
                         </div>
                       );
                     })}
                   </div>
-
-                  {/* Teleprompter Footer */}
-                  <div className="pt-4 mt-auto border-t border-white/5 flex items-center justify-between text-xs text-[var(--text-muted)]">
-                    <span className="flex items-center gap-1.5">
-                      <Shield className="w-3.5 h-3.5 text-emerald-400" />
-                      Dynamic DRM Watermark Active
-                    </span>
-                    <span>4 Lines • ~45 Seconds</span>
-                  </div>
                 </div>
               </div>
+
             </div>
           ) : (
-            /* AI Diagnostic & Emotional Arc Heatmap Tab */
+            /* Diagnostic Tab */
             <div className="space-y-6">
               {isAnalyzing ? (
-                <div className="p-16 text-center space-y-4">
-                  <div className="w-16 h-16 rounded-full mx-auto border-4 border-[var(--gold-500)]/20 border-t-[var(--gold-500)] animate-spin" />
-                  <h3 className="font-display font-bold text-xl text-[var(--ivory)]">
-                    Analyzing Audition Performance...
-                  </h3>
-                  <p className="text-xs text-[var(--text-secondary)] max-w-sm mx-auto">
-                    Running Deepfake Liveness Detection, Dialect Acoustic Scoring, and Emotional Arc Frame Tracking.
+                <div className="p-20 text-center space-y-4">
+                  <div className="w-12 h-12 rounded-full border border-white/30 border-t-white animate-spin mx-auto" />
+                  <h4 className="font-editorial text-2xl text-white font-light">Analyzing Audition Performance</h4>
+                  <p className="text-xs font-mono text-neutral-500">
+                    Processing dialect inflection, emotional arc, and eye-line consistency...
                   </p>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                  {/* Left Column: Scores & Diagnostic Highlights (5 cols) */}
-                  <div className="lg:col-span-5 space-y-4">
-                    <div
-                      className="p-6 rounded-2xl border space-y-5"
-                      style={{
-                        background: "var(--charcoal-800)",
-                        borderColor: "rgba(201, 168, 76, 0.25)",
-                      }}
-                    >
-                      <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                        <div>
-                          <div className="text-xs text-[var(--gold-400)] uppercase tracking-wider font-semibold">
-                            Audition Assessment
-                          </div>
-                          <h3 className="font-display font-bold text-2xl text-[var(--ivory)]">
-                            Overall Match: 93.8%
-                          </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {/* Left Metrics */}
+                  <div className="p-8 border border-white/10 bg-[#070709] space-y-6 font-mono text-xs">
+                    <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                      <div>
+                        <span className="text-[10px] uppercase text-neutral-500 block">EVALUATION RESULT</span>
+                        <span className="font-editorial text-3xl text-white">Match: 94.2%</span>
+                      </div>
+                      <span className="border border-emerald-400/40 text-emerald-400 px-3 py-1 text-[10px] uppercase">
+                        High Shortlist Rating
+                      </span>
+                    </div>
+
+                    <div className="space-y-4">
+                      <div>
+                        <div className="flex justify-between mb-1">
+                          <span className="text-neutral-400">Dialect &amp; Phonetic Inflection:</span>
+                          <span className="text-white">95.0%</span>
                         </div>
-                        <div className="px-3 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-bold flex items-center gap-1.5">
-                          <CheckCircle className="w-3.5 h-3.5" /> High Shortlist Probability
+                        <div className="w-full h-1 bg-white/10">
+                          <div className="h-full bg-white w-[95%]" />
                         </div>
                       </div>
 
-                      {/* 4 Core AI Metrics */}
-                      <div className="space-y-4 text-xs">
-                        <div>
-                          <div className="flex justify-between font-semibold mb-1">
-                            <span className="text-gray-200 flex items-center gap-1.5">
-                              <Shield className="w-3.5 h-3.5 text-emerald-400" />
-                              Originality &amp; Liveness Index
-                            </span>
-                            <span className="text-emerald-400 font-mono">99.2% (Authentic Human)</span>
-                          </div>
-                          <div className="w-full h-2 rounded-full bg-white/5 overflow-hidden">
-                            <div className="h-full bg-gradient-to-r from-emerald-500 to-teal-400 w-[99.2%]" />
-                          </div>
-                          <span className="text-[10px] text-[var(--text-muted)]">
-                            Zero deepfake artifacts, natural blink velocity, and verified facial depth.
-                          </span>
+                      <div>
+                        <div className="flex justify-between mb-1">
+                          <span className="text-neutral-400">Liveness &amp; Authenticity:</span>
+                          <span className="text-emerald-400">99.1%</span>
                         </div>
-
-                        <div>
-                          <div className="flex justify-between font-semibold mb-1">
-                            <span className="text-gray-200 flex items-center gap-1.5">
-                              <Mic className="w-3.5 h-3.5 text-[var(--gold-400)]" />
-                              Regional Dialect Authenticity (Awadhi/Hindi)
-                            </span>
-                            <span className="text-[var(--gold-300)] font-mono">94.5%</span>
-                          </div>
-                          <div className="w-full h-2 rounded-full bg-white/5 overflow-hidden">
-                            <div className="h-full bg-gradient-to-r from-[var(--gold-500)] to-amber-400 w-[94.5%]" />
-                          </div>
-                          <span className="text-[10px] text-[var(--text-muted)]">
-                            Phonetic cadence matched native North Indian rural dialogue inflection.
-                          </span>
+                        <div className="w-full h-1 bg-white/10">
+                          <div className="h-full bg-emerald-400 w-[99.1%]" />
                         </div>
+                      </div>
 
-                        <div>
-                          <div className="flex justify-between font-semibold mb-1">
-                            <span className="text-gray-200 flex items-center gap-1.5">
-                              <Sparkles className="w-3.5 h-3.5 text-[var(--purple-400)]" />
-                              Emotional Arc &amp; Intensity
-                            </span>
-                            <span className="text-[var(--purple-300)] font-mono">91.0%</span>
-                          </div>
-                          <div className="w-full h-2 rounded-full bg-white/5 overflow-hidden">
-                            <div className="h-full bg-gradient-to-r from-[var(--purple-500)] to-violet-400 w-[91%]" />
-                          </div>
-                          <span className="text-[10px] text-[var(--text-muted)]">
-                            Dynamic transition from restrained tension to decisive resolution.
-                          </span>
+                      <div>
+                        <div className="flex justify-between mb-1">
+                          <span className="text-neutral-400">Emotional Transition Range:</span>
+                          <span className="text-white">92.4%</span>
                         </div>
-
-                        <div>
-                          <div className="flex justify-between font-semibold mb-1">
-                            <span className="text-gray-200 flex items-center gap-1.5">
-                              <Video className="w-3.5 h-3.5 text-blue-400" />
-                              Framing &amp; Lighting Quality
-                            </span>
-                            <span className="text-blue-300 font-mono">90.0%</span>
-                          </div>
-                          <div className="w-full h-2 rounded-full bg-white/5 overflow-hidden">
-                            <div className="h-full bg-gradient-to-r from-blue-500 to-indigo-400 w-[90%]" />
-                          </div>
-                          <span className="text-[10px] text-[var(--text-muted)]">
-                            Eye-line maintained within rule-of-thirds upper quadrant.
-                          </span>
+                        <div className="w-full h-1 bg-white/10">
+                          <div className="h-full bg-white w-[92.4%]" />
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  {/* Right Column: Emotional Arc Heatmap Visualizer (7 cols) */}
-                  <div className="lg:col-span-7 space-y-4">
-                    <div
-                      className="p-6 rounded-2xl border space-y-5"
-                      style={{
-                        background: "var(--charcoal-800)",
-                        borderColor: "rgba(201, 168, 76, 0.25)",
-                      }}
-                    >
-                      <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                        <div>
-                          <h4 className="font-display font-bold text-lg text-[var(--ivory)]">
-                            Emotional Arc &amp; Micro-Expression Timeline
-                          </h4>
-                          <p className="text-xs text-[var(--text-muted)]">
-                            Frame-by-frame affective analysis across your 45-second monologue
-                          </p>
-                        </div>
-                        <span className="badge badge-purple text-[10px]">AI EMOTION ENGINE</span>
-                      </div>
+                  {/* Right Director Notes */}
+                  <div className="p-8 border border-white/10 bg-[#070709] flex flex-col justify-between space-y-6">
+                    <div className="space-y-4">
+                      <span className="text-[10px] font-mono uppercase tracking-widest text-[#c5a059] block">
+                        DIRECTOR EVALUATION SUMMARY
+                      </span>
+                      <p className="font-editorial text-xl text-neutral-200 font-light leading-relaxed">
+                        &ldquo;Strong grounded presence with exceptional natural delivery during the climatic line. Pacing aligns precisely with the interrogation sides.&rdquo;
+                      </p>
+                    </div>
 
-                      {/* Timeline Waveform Graphic */}
-                      <div className="p-4 rounded-xl bg-black/40 border border-white/5 space-y-3">
-                        <div className="h-28 w-full relative flex items-end justify-between px-2 pt-4">
-                          {/* Emotional Shift Wave Bars */}
-                          {[
-                            { time: "0-8s", state: "Restrained", height: "45%", color: "bg-blue-400" },
-                            { time: "9-15s", state: "Curiosity", height: "55%", color: "bg-teal-400" },
-                            { time: "16-24s", state: "Rising Rage", height: "80%", color: "bg-amber-400" },
-                            { time: "25-34s", state: "Peak Climax", height: "98%", color: "bg-red-500" },
-                            { time: "35-45s", state: "Steely Calm", height: "65%", color: "bg-purple-400" },
-                          ].map((segment, idx) => (
-                            <div key={idx} className="flex-1 flex flex-col items-center gap-1.5 h-full justify-end px-1">
-                              <span className="text-[9px] text-[var(--text-muted)] font-mono">{segment.state}</span>
-                              <div
-                                className={`w-full rounded-t-lg ${segment.color} opacity-80 hover:opacity-100 transition-all`}
-                                style={{ height: segment.height }}
-                              />
-                              <span className="text-[10px] text-gray-400 font-mono mt-1">{segment.time}</span>
-                            </div>
-                          ))}
-                        </div>
-                        <div className="flex justify-between items-center text-[10px] text-[var(--text-muted)] border-t border-white/5 pt-2 font-mono">
-                          <span>00:00 (Scene Opening)</span>
-                          <span className="text-[var(--gold-300)] font-bold">Dynamic Dramatic Range Detected</span>
-                          <span>00:45 (Scene Resolution)</span>
-                        </div>
-                      </div>
+                    <div className="flex items-center justify-between pt-4 border-t border-white/10">
+                      <button
+                        onClick={() => setActiveTab("recorder")}
+                        className="btn-editorial text-[10px] py-2.5 px-4"
+                      >
+                        <RotateCcw size={12} />
+                        <span>RE-RECORD TAKE</span>
+                      </button>
 
-                      {/* Constructive AI Director Coaching Tips */}
-                      <div className="p-4 rounded-xl bg-[var(--gold-500)]/10 border border-[var(--gold-500)]/20 space-y-2">
-                        <div className="flex items-center gap-2 text-xs font-bold text-[var(--gold-300)]">
-                          <Sparkles className="w-4 h-4" /> AI Director&apos;s Audition Feedback:
-                        </div>
-                        <p className="text-xs text-gray-200 leading-relaxed">
-                          &quot;Exceptional vocal modulation at second 25 when delivering the line about your oath. Your micro-expressions show great interior stillness before explosive dialogue. To optimize further: keep your gaze locked 2 inches higher toward the camera lens during the climax.&quot;
-                        </p>
-                      </div>
-
-                      {/* Final Submit Action Bar */}
-                      <div className="flex items-center justify-between pt-2">
-                        <button
-                          onClick={() => setActiveTab("recorder")}
-                          className="btn-secondary text-xs flex items-center gap-1.5 py-2.5 px-4"
-                        >
-                          <RotateCcw className="w-3.5 h-3.5" /> Re-record Take
-                        </button>
-                        <button
-                          onClick={() => {
-                            alert("Audition successfully submitted with AI Diagnostic Score (93.8%) attached to Casting Director's desk!");
-                            onClose();
-                          }}
-                          className="btn-primary text-xs py-2.5 px-6 shadow-lg shadow-[var(--gold-500)]/20 font-bold"
-                        >
-                          Submit Audition to Casting Director
-                        </button>
-                      </div>
+                      <button
+                        onClick={() => {
+                          alert("Audition package transmitted to production director.");
+                          onClose();
+                        }}
+                        className="btn-editorial-solid text-[10px] py-2.5 px-6"
+                      >
+                        SUBMIT AUDITION
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -685,6 +438,7 @@ export default function AuditionStudioModal({
             </div>
           )}
         </div>
+
       </div>
     </div>
   );

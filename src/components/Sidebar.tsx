@@ -29,49 +29,22 @@ interface SidebarLink {
 }
 
 const castingLinks: SidebarLink[] = [
-  { href: "/casting/dashboard", label: "Overview", icon: <LayoutDashboard size={17} /> },
-  { href: "/casting/discover", label: "Discover Talent", icon: <Search size={17} /> },
-  { href: "/casting/calls", label: "Casting Calls", icon: <Megaphone size={17} /> },
-  { href: "/casting/applications", label: "Applications", icon: <FileText size={17} />, badge: "12" },
-  { href: "/casting/auditions", label: "Auditions", icon: <Video size={17} /> },
-  { href: "/casting/shortlists", label: "Shortlists", icon: <Users size={17} /> },
-  { href: "/casting/calendar", label: "Calendar", icon: <Calendar size={17} /> },
-  { href: "/casting/messages", label: "Messages", icon: <MessageSquare size={17} /> },
-  { href: "/industry-connect", label: "Industry Connect", icon: <Network size={17} /> },
-  { href: "/casting/ai-studio", label: "AI Audition Studio", icon: <Sparkles size={17} /> },
-  { href: "/settings", label: "Settings", icon: <Settings size={17} /> },
+  { href: "/casting/dashboard", label: "Overview", icon: <LayoutDashboard size={15} /> },
+  { href: "/casting/discover", label: "Discover Talent", icon: <Search size={15} /> },
+  { href: "/casting/calls", label: "Casting Calls", icon: <Megaphone size={15} /> },
+  { href: "/casting/applications", label: "Applications", icon: <FileText size={15} />, badge: "12" },
+  { href: "/casting/auditions", label: "Auditions", icon: <Video size={15} /> },
+  { href: "/casting/shortlists", label: "Shortlists", icon: <Users size={15} /> },
+  { href: "/casting/calendar", label: "Calendar", icon: <Calendar size={15} /> },
+  { href: "/settings", label: "Settings", icon: <Settings size={15} /> },
 ];
 
 const talentLinks: SidebarLink[] = [
-  { href: "/talent/dashboard", label: "Dashboard", icon: <LayoutDashboard size={17} /> },
-  { href: "/talent/profile", label: "My Profile", icon: <Users size={17} /> },
-  { href: "/talent/portfolio", label: "Portfolio", icon: <Video size={17} /> },
-  { href: "/talent/applications", label: "Applications", icon: <FileText size={17} /> },
-  { href: "/casting-calls", label: "Casting Calls", icon: <Megaphone size={17} /> },
-  { href: "/talent/saved", label: "Saved Calls", icon: <Search size={17} /> },
-  { href: "/talent/calendar", label: "Calendar", icon: <Calendar size={17} /> },
-  { href: "/talent/notifications", label: "Notifications", icon: <MessageSquare size={17} />, badge: "3" },
-  { href: "/settings", label: "Settings", icon: <Settings size={17} /> },
-];
-
-const adminLinks: SidebarLink[] = [
-  { href: "/admin/dashboard", label: "Dashboard", icon: <LayoutDashboard size={17} /> },
-  { href: "/admin/users", label: "Users", icon: <Users size={17} /> },
-  { href: "/admin/organizations", label: "Organizations", icon: <Network size={17} /> },
-  { href: "/admin/casting-calls", label: "Casting Calls", icon: <Megaphone size={17} /> },
-  { href: "/admin/moderation", label: "Moderation", icon: <FileText size={17} /> },
-  { href: "/admin/reports", label: "Reports & Safety", icon: <Video size={17} /> },
-  { href: "/admin/activity", label: "Platform Activity", icon: <Calendar size={17} /> },
-  { href: "/settings", label: "Settings", icon: <Settings size={17} /> },
-];
-
-const guardianLinks: SidebarLink[] = [
-  { href: "/guardian/dashboard", label: "Dashboard", icon: <LayoutDashboard size={17} /> },
-  { href: "/guardian/profiles", label: "Managed Profiles", icon: <Users size={17} /> },
-  { href: "/guardian/consent", label: "Consent Management", icon: <FileText size={17} /> },
-  { href: "/guardian/applications", label: "Applications", icon: <Megaphone size={17} /> },
-  { href: "/guardian/safety", label: "Safety & Privacy", icon: <Video size={17} /> },
-  { href: "/settings", label: "Settings", icon: <Settings size={17} /> },
+  { href: "/dashboard/talent", label: "Dashboard", icon: <LayoutDashboard size={15} /> },
+  { href: "/talent", label: "The Roster", icon: <Users size={15} /> },
+  { href: "/casting-calls", label: "Casting Calls", icon: <Megaphone size={15} /> },
+  { href: "/verification", label: "Govt KYC", icon: <FileText size={15} /> },
+  { href: "/settings", label: "Settings", icon: <Settings size={15} /> },
 ];
 
 function getLinksByRole(role: string): SidebarLink[] {
@@ -79,83 +52,51 @@ function getLinksByRole(role: string): SidebarLink[] {
     case "casting_director":
     case "org_admin":
       return castingLinks;
-    case "platform_admin":
-      return adminLinks;
-    case "guardian":
-      return guardianLinks;
     default:
       return talentLinks;
   }
 }
 
-interface SidebarProps {
-  role?: string;
-}
-
-export default function Sidebar({ role }: SidebarProps) {
+export default function Sidebar({ role }: { role?: string }) {
   const pathname = usePathname();
   const user = useUser();
-  const logout = useAuthStore((s) => s.logout);
   const [collapsed, setCollapsed] = useState(false);
 
   const links = getLinksByRole(role ?? user?.role ?? "talent");
 
   return (
     <aside
-      className="hidden md:flex flex-col shrink-0 transition-all duration-300 border-r"
+      className="hidden md:flex flex-col shrink-0 border-r border-white/[0.08] bg-[#0a0a0c] transition-all duration-300 sticky top-0 h-screen overflow-y-auto"
       style={{
-        width: collapsed ? "64px" : "var(--sidebar-width)",
-        background: "var(--charcoal-800)",
-        borderColor: "var(--border-subtle)",
-        minHeight: "100vh",
-        position: "sticky",
-        top: 0,
-        height: "100vh",
-        overflowY: "auto",
+        width: collapsed ? "68px" : "240px",
       }}
     >
-      {/* Logo area */}
-      <div
-        className="flex items-center gap-2 px-3 py-4 border-b"
-        style={{ borderColor: "var(--border-subtle)" }}
-      >
-        <div
-          className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
-          style={{ background: "linear-gradient(135deg, var(--gold-500), var(--gold-400))" }}
-        >
-          <span className="text-xs font-bold" style={{ color: "var(--charcoal-900)" }}>R</span>
-        </div>
-        {!collapsed && (
-          <span className="font-display font-bold text-base" style={{ color: "var(--ivory)" }}>
-            Rangmanch
-          </span>
-        )}
+      {/* Brand area */}
+      <div className="flex items-center gap-3 px-6 h-20 border-b border-white/[0.08] shrink-0">
+        <Link href="/" className="font-editorial text-xl tracking-[0.2em] uppercase text-white hover:text-white truncate">
+          {collapsed ? "R" : "RANGMANCH"}
+        </Link>
       </div>
 
       {/* Nav links */}
-      <nav className="flex-1 py-3 px-2 space-y-0.5 overflow-y-auto">
+      <nav className="flex-1 py-6 px-3 space-y-1 overflow-y-auto text-xs font-mono uppercase tracking-wider">
         {links.map((link) => {
           const isActive = pathname === link.href || pathname.startsWith(link.href + "/");
           return (
             <Link
               key={link.href}
               href={link.href}
-              className={`sidebar-link ${isActive ? "active" : ""} ${collapsed ? "justify-center px-2" : ""}`}
+              className={`flex items-center gap-3 px-3 py-2.5 transition-colors ${
+                isActive
+                  ? "text-white bg-white/10 font-semibold"
+                  : "text-neutral-400 hover:text-white hover:bg-white/5"
+              } ${collapsed ? "justify-center" : ""}`}
               title={collapsed ? link.label : undefined}
             >
               <span className="shrink-0">{link.icon}</span>
-              {!collapsed && (
-                <span className="flex-1">{link.label}</span>
-              )}
+              {!collapsed && <span className="flex-1 truncate">{link.label}</span>}
               {!collapsed && link.badge && (
-                <span
-                  className="text-xs font-bold px-1.5 py-0.5 rounded-full"
-                  style={{
-                    background: "var(--coral-500)",
-                    color: "white",
-                    fontSize: "10px",
-                  }}
-                >
+                <span className="text-[10px] px-1.5 py-0.2 bg-white/20 text-white">
                   {link.badge}
                 </span>
               )}
@@ -166,29 +107,14 @@ export default function Sidebar({ role }: SidebarProps) {
 
       {/* User footer */}
       {user && !collapsed && (
-        <div
-          className="p-3 border-t"
-          style={{ borderColor: "var(--border-subtle)" }}
-        >
-          <div className="flex items-center gap-2 mb-2">
-            {user.avatar ? (
-              <img
-                src={user.avatar}
-                alt={user.name}
-                className="w-8 h-8 rounded-full object-cover shrink-0"
-                style={{ border: "1.5px solid var(--gold-500)" }}
-              />
-            ) : (
-              <div
-                className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
-                style={{ background: "var(--gold-500)", color: "var(--charcoal-900)" }}
-              >
-                {getInitials(user.name)}
-              </div>
-            )}
+        <div className="p-4 border-t border-white/[0.08] text-xs font-mono">
+          <div className="flex items-center gap-2.5">
+            <div className="w-7 h-7 flex items-center justify-center bg-white/10 text-white font-mono text-[10px]">
+              {getInitials(user.name)}
+            </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium truncate" style={{ color: "var(--ivory)" }}>{user.name}</p>
-              <p className="text-xs truncate capitalize" style={{ color: "var(--text-muted)" }}>
+              <p className="text-white truncate font-sans text-xs">{user.name}</p>
+              <p className="text-[10px] text-neutral-500 uppercase truncate">
                 {user.role.replace(/_/g, " ")}
               </p>
             </div>
@@ -198,9 +124,8 @@ export default function Sidebar({ role }: SidebarProps) {
 
       {/* Collapse toggle */}
       <button
-        onClick={() => setCollapsed((p) => !p)}
-        className="hidden lg:flex items-center justify-center w-full h-9 border-t transition-colors hover:bg-white/5"
-        style={{ borderColor: "var(--border-subtle)", color: "var(--text-muted)" }}
+        onClick={() => setCollapsed(!collapsed)}
+        className="hidden lg:flex items-center justify-center w-full h-10 border-t border-white/[0.08] text-neutral-500 hover:text-white transition-colors"
         aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
       >
         {collapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}

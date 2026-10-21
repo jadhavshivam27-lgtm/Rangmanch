@@ -12,12 +12,6 @@ import {
   Lock,
   ArrowRight,
   Fingerprint,
-  BookOpen,
-  Award,
-  Sparkles,
-  AlertCircle,
-  FileText,
-  BadgeCheck,
 } from "lucide-react";
 import type { DigiLockerKYCRecord, GuardianCoSignRecord } from "@/lib/types";
 
@@ -43,239 +37,131 @@ export default function VerificationGatewayPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-[var(--charcoal-900)] text-[var(--ivory)] pt-8 pb-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-          {/* Header Banner */}
-          <div
-            className="p-8 sm:p-10 rounded-3xl border relative overflow-hidden"
-            style={{
-              background: "linear-gradient(135deg, rgba(16,25,22,0.95), rgba(25,35,32,0.9))",
-              borderColor: "rgba(5, 150, 105, 0.3)",
-              boxShadow: "0 20px 60px rgba(0,0,0,0.6)",
-            }}
-          >
-            <div className="max-w-2xl space-y-3">
-              <div className="flex items-center gap-2">
-                <span className="badge badge-green text-xs font-mono">MODULES M004 &amp; M005</span>
-                <span className="badge badge-gold text-xs">GOVT OF INDIA &amp; NCPCR</span>
-              </div>
-              <h1 className="font-display font-bold text-3xl sm:text-4xl text-white">
-                Official Artist Identity &amp; Child Protection Gateway
-              </h1>
-              <p className="text-sm text-gray-300 leading-relaxed">
-                Legally binding digital verification for Indian cinema. Complete instant DigiLocker
-                Aadhaar KYC and authorize Minor Child Performer Work Permits with NCPCR compliance.
-              </p>
-            </div>
+      <main className="min-h-screen bg-[#0a0a0c] text-[#f8f8f6] pt-12 pb-32">
+        <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 space-y-12">
+          
+          {/* Header */}
+          <div className="border-b border-white/[0.08] pb-10 space-y-3">
+            <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#c5a059]">
+              ✦ GUILD STANDARDS &amp; LEGAL VERIFICATION
+            </p>
+            <h1 className="font-editorial text-4xl sm:text-5xl lg:text-6xl font-light text-white tracking-tight">
+              Artist Verification &amp; Child Protection
+            </h1>
+            <p className="text-sm text-neutral-400 font-light max-w-2xl leading-relaxed">
+              Legally binding digital authentication for Indian cinema and theatre professionals. Instant DigiLocker Aadhaar KYC and NCPCR-compliant Minor Performer Authorizations.
+            </p>
           </div>
 
-          {/* Grid of the 2 Dedicated Modules: M004 & M005 */}
+          {/* Verification Modules Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* MODULE M004: DigiLocker & Aadhaar Instant KYC */}
-            <div
-              className="p-6 sm:p-8 rounded-3xl border flex flex-col justify-between space-y-6"
-              style={{
-                background: "var(--charcoal-800)",
-                borderColor: "rgba(5, 150, 105, 0.3)",
-                boxShadow: "0 10px 40px rgba(0,0,0,0.4)",
-              }}
-            >
+            
+            {/* Module 1: DigiLocker & Aadhaar KYC */}
+            <div className="p-8 sm:p-10 border border-white/[0.08] bg-[#0e0e12] flex flex-col justify-between space-y-8">
               <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
-                    <ShieldCheck className="w-7 h-7" />
-                  </div>
-                  <span className="badge badge-green text-xs font-mono font-bold">
-                    MODULE M004 • UIDAI
-                  </span>
+                <div className="flex items-center justify-between text-[10px] font-mono text-neutral-500 uppercase tracking-widest">
+                  <span>MODULE M004</span>
+                  <span className="text-emerald-400">UIDAI INTEGRATION</span>
                 </div>
 
-                <div>
-                  <h2 className="font-display font-bold text-2xl text-white">
-                    DigiLocker &amp; Aadhaar Instant KYC
-                  </h2>
-                  <p className="text-xs text-[var(--text-muted)] mt-1">
-                    National digital identity authentication with 98.4% biometric face match
-                  </p>
-                </div>
+                <h2 className="font-editorial text-2xl sm:text-3xl font-light text-white">
+                  DigiLocker &amp; Government KYC
+                </h2>
 
-                {/* KYC Active Status Box */}
+                <p className="text-xs text-neutral-400 font-light leading-relaxed">
+                  Cryptographically authenticate your identity using official UIDAI DigiLocker credentials. Verified performers receive a verified badge, priority audition review, and protection against stolen comp cards.
+                </p>
+
                 {kycRecord ? (
-                  <div className="p-4 rounded-2xl bg-emerald-950/30 border border-emerald-500/30 space-y-3 font-mono text-xs">
-                    <div className="flex items-center justify-between pb-2 border-b border-emerald-500/20">
-                      <span className="text-emerald-400 font-bold flex items-center gap-1.5">
-                        <CheckCircle2 className="w-4 h-4" /> Identity Verified Active
+                  <div className="p-4 border border-white/10 bg-black/40 text-xs font-mono space-y-2">
+                    <div className="flex items-center justify-between text-emerald-400 font-semibold">
+                      <span className="flex items-center gap-1.5">
+                        <CheckCircle2 size={13} /> Active KYC Certificate
                       </span>
-                      <span className="text-emerald-300 font-bold">{kycRecord.verificationId}</span>
+                      <span>{kycRecord.verificationId}</span>
                     </div>
-
-                    <div className="grid grid-cols-2 gap-2 text-[11px]">
-                      <div>
-                        <span className="text-[var(--text-muted)] block">Aadhaar (Masked):</span>
-                        <span className="text-white font-bold">{kycRecord.maskedDocNumber}</span>
-                      </div>
-                      <div>
-                        <span className="text-[var(--text-muted)] block">Face-Match Score:</span>
-                        <span className="text-emerald-400 font-bold">{kycRecord.faceMatchScore}% Match</span>
-                      </div>
-                      <div>
-                        <span className="text-[var(--text-muted)] block">Govt Verified Name:</span>
-                        <span className="text-white font-bold">{kycRecord.verifiedName}</span>
-                      </div>
-                      <div>
-                        <span className="text-[var(--text-muted)] block">Certified DOB:</span>
-                        <span className="text-white font-bold">{kycRecord.verifiedDob}</span>
-                      </div>
+                    <div className="text-neutral-400 text-[11px] pt-1 border-t border-white/5 flex justify-between">
+                      <span>{kycRecord.verifiedName}</span>
+                      <span>Mask: {kycRecord.maskedDocNumber}</span>
                     </div>
                   </div>
                 ) : (
-                  <div className="p-4 rounded-2xl bg-black/40 border border-white/5 space-y-2 text-xs text-[var(--text-secondary)]">
-                    <div className="font-semibold text-white">Verification Not Yet Completed</div>
-                    <p className="text-[11px] text-[var(--text-muted)]">
-                      Verify with your 12-digit Aadhaar to receive the prestigious Gold Artist Seal
-                      and unlock 3.8x more casting invites.
-                    </p>
+                  <div className="p-4 border border-white/10 text-xs text-neutral-400">
+                    No active verification certificate found. Click below to begin instant KYC.
                   </div>
                 )}
-
-                {/* Highlights List */}
-                <ul className="space-y-2 text-xs text-gray-300">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>Instant 6-digit UIDAI mobile OTP verification</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>AI Biometric Face-Match against official ID photo</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>DPDP Act 2023 compliant (Zero raw Aadhaar storage)</span>
-                  </li>
-                </ul>
               </div>
 
               <button
                 onClick={() => setIsKYCModalOpen(true)}
-                className="btn-primary py-3 px-6 rounded-xl font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20"
+                className="btn-editorial text-[10px] py-3 justify-center w-full"
               >
-                <Fingerprint className="w-4 h-4" />
-                <span>{kycRecord ? "Re-verify or View Certificate" : "Start Instant DigiLocker KYC"}</span>
-                <ArrowRight className="w-4 h-4" />
+                {kycRecord ? "RE-VERIFY IDENTITY" : "LAUNCH DIGILOCKER KYC"}
               </button>
             </div>
 
-            {/* MODULE M005: Minor / Child Performer Legal Guardian Co-Signing */}
-            <div
-              className="p-6 sm:p-8 rounded-3xl border flex flex-col justify-between space-y-6"
-              style={{
-                background: "var(--charcoal-800)",
-                borderColor: "rgba(232, 96, 76, 0.3)",
-                boxShadow: "0 10px 40px rgba(0,0,0,0.4)",
-              }}
-            >
+            {/* Module 2: Child Performer & Guardian Co-Sign */}
+            <div className="p-8 sm:p-10 border border-white/[0.08] bg-[#0e0e12] flex flex-col justify-between space-y-8">
               <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="w-12 h-12 rounded-2xl bg-[var(--coral-500)]/15 border border-[var(--coral-500)]/30 flex items-center justify-center text-[var(--coral-400)]">
-                    <HeartHandshake className="w-7 h-7" />
-                  </div>
-                  <span className="badge badge-coral text-xs font-mono font-bold">
-                    MODULE M005 • NCPCR
-                  </span>
+                <div className="flex items-center justify-between text-[10px] font-mono text-neutral-500 uppercase tracking-widest">
+                  <span>MODULE M005</span>
+                  <span className="text-[#c5a059]">NCPCR COMPLIANCE</span>
                 </div>
 
-                <div>
-                  <h2 className="font-display font-bold text-2xl text-white">
-                    Child Performer Guardian Gateway
-                  </h2>
-                  <p className="text-xs text-[var(--text-muted)] mt-1">
-                    Statutory legal guardian co-signing &amp; child protection riders (Under 18)
-                  </p>
-                </div>
+                <h2 className="font-editorial text-2xl sm:text-3xl font-light text-white">
+                  Minor Performer Work Permit
+                </h2>
 
-                {/* Guardian Work Permit Status Box */}
+                <p className="text-xs text-neutral-400 font-light leading-relaxed">
+                  Child Artists under 18 require legal guardian authorization, schooling schedule protection, and trust-fund escrow routing under the National Commission for Protection of Child Rights guidelines.
+                </p>
+
                 {guardianRecord ? (
-                  <div className="p-4 rounded-2xl bg-rose-950/30 border border-[var(--coral-500)]/30 space-y-3 font-mono text-xs">
-                    <div className="flex items-center justify-between pb-2 border-b border-[var(--coral-500)]/20">
-                      <span className="text-[var(--coral-400)] font-bold flex items-center gap-1.5">
-                        <CheckCircle2 className="w-4 h-4" /> NCPCR Permit Active
-                      </span>
-                      <span className="text-[var(--coral-300)] font-bold">{guardianRecord.approvalCertificateId}</span>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-2 text-[11px]">
-                      <div>
-                        <span className="text-[var(--text-muted)] block">Minor Performer:</span>
-                        <span className="text-white font-bold">{guardianRecord.minorName}</span>
-                      </div>
-                      <div>
-                        <span className="text-[var(--text-muted)] block">Guardian Name:</span>
-                        <span className="text-white font-bold">{guardianRecord.guardianName} ({guardianRecord.guardianRelation})</span>
-                      </div>
-                      <div>
-                        <span className="text-[var(--text-muted)] block">Max Shift Cap:</span>
-                        <span className="text-emerald-400 font-bold">5 Hours / Day</span>
-                      </div>
-                      <div>
-                        <span className="text-[var(--text-muted)] block">Minor Trust Fund:</span>
-                        <span className="text-emerald-400 font-bold">20% Locked</span>
-                      </div>
+                  <div className="p-4 border border-white/10 bg-black/40 text-xs font-mono space-y-2">
+                    <div className="flex items-center justify-between text-emerald-400 font-semibold">
+                      <span>Co-Sign Status: Active</span>
+                      <span>{guardianRecord.minorPerformerName}</span>
                     </div>
                   </div>
                 ) : (
-                  <div className="p-4 rounded-2xl bg-black/40 border border-white/5 space-y-2 text-xs text-[var(--text-secondary)]">
-                    <div className="font-semibold text-white">No Minor Co-Signature on File</div>
-                    <p className="text-[11px] text-[var(--text-muted)]">
-                      Performers under 18 years old require parent or court-appointed guardian
-                      authorization before submitting auditions or signing film agreements.
-                    </p>
+                  <div className="p-4 border border-white/10 text-xs text-neutral-400">
+                    Mandatory for child artists, teen models, and voice actors under 18 years of age.
                   </div>
                 )}
-
-                {/* NCPCR Protection Clauses */}
-                <ul className="space-y-2 text-xs text-gray-300">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[var(--coral-400)] shrink-0" />
-                    <span>Mandatory 5-hour daily shift cap (No night shoots)</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[var(--coral-400)] shrink-0" />
-                    <span>Irrevocable 20% Minor Trust Fund bank account lock</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[var(--coral-400)] shrink-0" />
-                    <span>Guardian Aadhaar OTP e-Sign complying with IT Act 2000</span>
-                  </li>
-                </ul>
               </div>
 
               <button
                 onClick={() => setIsGuardianModalOpen(true)}
-                className="btn-coral py-3 px-6 rounded-xl font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-[var(--coral-500)]/20"
+                className="btn-editorial-solid text-[10px] py-3 justify-center w-full"
               >
-                <HeartHandshake className="w-4 h-4" />
-                <span>{guardianRecord ? "View Child Work Permit" : "Authorize as Legal Guardian"}</span>
-                <ArrowRight className="w-4 h-4" />
+                OPEN GUARDIAN PORTAL
               </button>
             </div>
+
           </div>
+
+          {/* Legal / DPDP Notice */}
+          <div className="p-6 border border-white/[0.06] text-xs font-mono text-neutral-500 space-y-1">
+            <span className="text-white font-semibold uppercase block mb-1">DATA PROTECTION COMPLIANCE (DPDP ACT 2023)</span>
+            <p>
+              Rangmanch adheres strictly to digital identity privacy standards. All verification requests are routed directly to UIDAI sandboxes without caching raw demographic or biometric data on our servers.
+            </p>
+          </div>
+
         </div>
       </main>
 
-      {/* M004 DigiLocker KYC Modal */}
+      {/* Modals */}
       <DigiLockerKYCModal
         isOpen={isKYCModalOpen}
         onClose={() => setIsKYCModalOpen(false)}
-        onSuccess={(record) => setKycRecord(record)}
+        onSuccess={(rec) => setKycRecord(rec)}
       />
 
-      {/* M005 Child Performer Guardian Modal */}
       <ChildPerformerGuardianModal
         isOpen={isGuardianModalOpen}
         onClose={() => setIsGuardianModalOpen(false)}
-        minorName="Aarav Sharma"
-        minorAge={12}
-        onSuccess={(record) => setGuardianRecord(record)}
+        onSuccess={(rec) => setGuardianRecord(rec)}
       />
 
       <Footer />

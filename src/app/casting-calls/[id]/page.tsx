@@ -4,30 +4,23 @@ import { useState, Suspense } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import WatermarkedSides from "@/components/WatermarkedSides";
 import AuditionStudioModal from "@/components/AuditionStudioModal";
 import { DEMO_CASTING_CALLS } from "@/lib/data";
 import {
   ChevronLeft,
-  Shield,
-  Lock,
   Video,
-  Sparkles,
+  Lock,
   MapPin,
   Clock,
-  CheckCircle,
-  FileText,
-  DollarSign,
-  Calendar,
-  AlertCircle,
-  Share2,
+  ArrowRight,
+  ShieldCheck,
 } from "lucide-react";
-import { daysUntil } from "@/lib/utils";
+import { daysUntil, getStatusLabel } from "@/lib/utils";
 
 export default function CastingCallDetailPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[var(--charcoal-900)]" />}>
+    <Suspense fallback={<div className="min-h-screen bg-[#0a0a0c]" />}>
       <CastingCallDetailContent />
     </Suspense>
   );
@@ -37,349 +30,210 @@ function CastingCallDetailContent() {
   const params = useParams();
   const id = params?.id as string;
 
-  // Find casting call or fallback to first
   const call = DEMO_CASTING_CALLS.find((c) => c.id === id) || DEMO_CASTING_CALLS[0];
   const [selectedRoleIndex, setSelectedRoleIndex] = useState(0);
   const selectedRole = call.roles[selectedRoleIndex] || call.roles[0];
 
-  // Modals state
   const [isSidesModalOpen, setIsSidesModalOpen] = useState(false);
   const [isAuditionStudioOpen, setIsAuditionStudioOpen] = useState(false);
 
-  const daysLeft = daysUntil(call.applicationDeadline || call.auditionDate || "2026-11-30T00:00:00Z");
+  const daysLeft = daysUntil(call.applicationDeadline || "2024-11-30T23:59:59Z");
 
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-[var(--charcoal-900)] text-[var(--ivory)] pt-8 pb-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <main className="min-h-screen bg-[#0a0a0c] text-[#f8f8f6] pt-10 pb-32">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 space-y-16">
+          
           {/* Back Navigation Bar */}
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between pb-6 border-b border-white/[0.08]">
             <Link
               href="/casting-calls"
-              className="inline-flex items-center gap-1.5 text-xs text-[var(--text-muted)] hover:text-[var(--gold-300)] transition-colors"
+              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-neutral-400 hover:text-white transition-colors"
             >
-              <ChevronLeft className="w-4 h-4" />
-              <span>Back to Casting Calls Directory</span>
+              <ChevronLeft size={14} />
+              <span>ALL PRODUCTIONS</span>
             </Link>
 
-            <div className="flex items-center gap-2">
-              <span className="badge badge-gold uppercase text-[10px] tracking-wider">
-                {call.projectType.replace("_", " ")}
-              </span>
-              <span className="badge badge-green flex items-center gap-1 text-[10px]">
-                <Shield className="w-3 h-3" /> CINTAA Fair-Play
+            <div className="flex items-center gap-4 text-[10px] font-mono uppercase tracking-widest text-neutral-400">
+              <span className="text-[#c5a059]">{getStatusLabel(call.projectType)}</span>
+              <span>•</span>
+              <span className="text-emerald-400 flex items-center gap-1">
+                <ShieldCheck size={12} /> CINTAA FAIR-PLAY
               </span>
             </div>
           </div>
 
-          {/* Project Hero Banner Card */}
-          <div
-            className="p-8 rounded-3xl border relative overflow-hidden"
-            style={{
-              background: "linear-gradient(135deg, rgba(20,20,24,0.95), rgba(35,35,42,0.9))",
-              borderColor: "rgba(201, 168, 76, 0.25)",
-              boxShadow: "0 20px 60px rgba(0,0,0,0.6)",
-            }}
-          >
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-              <div className="space-y-3 max-w-2xl">
-                <div className="flex items-center gap-2 text-xs text-[var(--gold-400)] font-semibold uppercase tracking-wider">
-                  <span>{call.organization?.name}</span>
-                  {call.organization?.verificationStatus === "verified" && (
-                    <CheckCircle className="w-4 h-4 text-emerald-400" />
-                  )}
-                </div>
-                <h1 className="font-display font-bold text-3xl sm:text-4xl text-[var(--ivory)] leading-tight">
+          {/* Editorial Banner */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            
+            {/* Left: Production Details (8 cols) */}
+            <div className="lg:col-span-8 space-y-8">
+              <div>
+                <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#c5a059] mb-3">
+                  ✦ {call.organization?.name || "STUDIO PRODUCTION"} • REF: {call.id.toUpperCase()}
+                </p>
+                <h1 className="font-editorial text-4xl sm:text-5xl lg:text-6xl font-light text-white tracking-tight leading-tight">
                   {call.title}
                 </h1>
-                <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                  {call.description}
-                </p>
-
-                {/* Key Metrics Pill */}
-                <div className="flex flex-wrap items-center gap-4 pt-2 text-xs text-[var(--text-muted)]">
+                
+                <div className="flex flex-wrap items-center gap-6 mt-4 text-xs font-mono text-neutral-400">
                   <span className="flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-[var(--gold-400)]" />
+                    <MapPin size={12} className="text-[#c5a059]" />
                     {call.location}, {call.state}
                   </span>
-                  <span className="flex items-center gap-1.5 text-amber-400 font-mono">
-                    <Clock className="w-3.5 h-3.5" />
-                    Audition Closes in {daysLeft} Days
+                  <span className="flex items-center gap-1.5 text-neutral-300">
+                    <Clock size={12} />
+                    {daysLeft > 0 ? `${daysLeft} DAYS UNTIL DEADLINE` : "CLOSING TODAY"}
                   </span>
-                  <span className="flex items-center gap-1.5 text-emerald-400 font-mono">
-                    <DollarSign className="w-3.5 h-3.5" />
-                    Escrow Pay Guaranteed
+                  <span className="text-emerald-400 flex items-center gap-1">
+                    <Lock size={11} /> ESCROW SECURED
                   </span>
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0">
-                <button
-                  onClick={() => setIsAuditionStudioOpen(true)}
-                  className="btn-primary py-3.5 px-6 rounded-xl font-bold text-sm shadow-xl shadow-[var(--gold-500)]/20 flex items-center justify-center gap-2"
-                >
-                  <Video className="w-4 h-4" />
-                  <span>Launch AI Audition Studio</span>
-                </button>
-                <button
-                  onClick={() => setIsSidesModalOpen(true)}
-                  className="btn-secondary py-3 px-6 rounded-xl text-xs flex items-center justify-center gap-2"
-                >
-                  <Lock className="w-4 h-4 text-[var(--gold-400)]" />
-                  <span>View DRM Script Sides</span>
-                </button>
+              {/* Synopsis */}
+              <div className="space-y-3 pt-4 border-t border-white/[0.08]">
+                <p className="text-[10px] font-mono uppercase tracking-widest text-neutral-500">
+                  PROJECT SYNOPSIS &amp; BACKGROUND
+                </p>
+                <p className="font-editorial text-xl sm:text-2xl text-neutral-200 font-light leading-relaxed">
+                  &ldquo;{call.description}&rdquo;
+                </p>
               </div>
-            </div>
-          </div>
 
-          {/* Main 2-Column Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            {/* Left Column: Character Breakdown & Role Selector (8 cols) */}
-            <div className="lg:col-span-8 space-y-6">
-              {/* Role Selection Tabs */}
-              <div className="space-y-3">
-                <h3 className="font-display font-bold text-xl text-[var(--ivory)] flex items-center gap-2">
-                  <span>Available Character Roles</span>
-                  <span className="text-xs font-mono font-normal text-[var(--gold-400)]">
-                    ({call.roles.length} Roles Open)
-                  </span>
-                </h3>
+              {/* Character Roles Selection Tabs */}
+              <div className="space-y-6 pt-6 border-t border-white/[0.08]">
+                <div className="flex items-center justify-between">
+                  <p className="text-[10px] font-mono uppercase tracking-widest text-neutral-500">
+                    AVAILABLE CHARACTER SIDES ({call.roles.length})
+                  </p>
+                </div>
 
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-3 font-mono text-xs">
                   {call.roles.map((role, idx) => (
                     <button
                       key={role.id}
                       onClick={() => setSelectedRoleIndex(idx)}
-                      className={`px-4 py-2.5 rounded-xl text-xs font-semibold transition-all ${
+                      className={`px-4 py-2 border transition-colors uppercase tracking-wider ${
                         selectedRoleIndex === idx
-                          ? "bg-[var(--gold-500)] text-[var(--charcoal-900)] shadow-lg shadow-[var(--gold-500)]/25"
-                          : "bg-[var(--charcoal-800)] text-[var(--text-secondary)] border border-white/5 hover:border-[var(--gold-500)]/30 hover:text-white"
+                          ? "border-white bg-white/10 text-white font-semibold"
+                          : "border-white/10 text-neutral-500 hover:border-white/20 hover:text-neutral-300"
                       }`}
                     >
                       {role.roleName}
                     </button>
                   ))}
                 </div>
-              </div>
 
-              {/* Selected Role Breakdown Card */}
-              <div
-                className="p-6 rounded-2xl border space-y-6"
-                style={{
-                  background: "var(--charcoal-800)",
-                  borderColor: "rgba(201, 168, 76, 0.2)",
-                }}
-              >
-                <div>
-                  <div className="flex items-center justify-between">
-                    <span className="badge badge-gold uppercase text-[10px]">
-                      {selectedRole.roleType} ROLE
-                    </span>
-                    <span className="text-xs font-mono text-[var(--text-muted)]">
-                      Compensation: {selectedRole.compensation}
-                    </span>
+                {/* Selected Character Breakdown Box */}
+                <div className="p-8 border border-white/[0.08] bg-[#0e0e12] space-y-6">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-white/[0.08]">
+                    <div>
+                      <h2 className="font-editorial text-2xl text-white font-normal">
+                        {selectedRole.roleName}
+                      </h2>
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-[#c5a059]">
+                        {selectedRole.roleType} ROLE • {selectedRole.compensation}
+                      </span>
+                    </div>
+
+                    <div className="text-xs font-mono text-neutral-400">
+                      Screen Age: {selectedRole.ageMin} – {selectedRole.ageMax} Years
+                    </div>
                   </div>
-                  <h2 className="font-display font-bold text-2xl text-[var(--ivory)] mt-2">
-                    {selectedRole.roleName}
-                  </h2>
-                  <p className="text-sm text-[var(--text-secondary)] leading-relaxed mt-2">
+
+                  <p className="text-xs text-neutral-300 font-light leading-relaxed">
                     {selectedRole.description}
                   </p>
-                </div>
 
-                {/* Character Requirements Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4 rounded-xl bg-black/30 border border-white/5 text-xs">
-                  <div>
-                    <div className="text-[var(--text-muted)] text-[11px]">Playable Screen Age</div>
-                    <div className="font-semibold text-[var(--ivory)] mt-0.5">
-                      {selectedRole.ageMin} – {selectedRole.ageMax} Years
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-[var(--text-muted)] text-[11px]">Gender Preference</div>
-                    <div className="font-semibold text-[var(--ivory)] mt-0.5">
-                      {selectedRole.genderPreference || "Open to All"}
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-[var(--text-muted)] text-[11px]">Required Languages</div>
-                    <div className="font-semibold text-[var(--gold-300)] mt-0.5">
-                      {selectedRole.languages.join(", ")}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Director's Vision & Acting Sides Callout */}
-                <div className="p-4 rounded-xl bg-[var(--purple-500)]/10 border border-[var(--purple-500)]/20 space-y-2">
-                  <div className="flex items-center gap-2 text-xs font-bold text-[var(--purple-300)]">
-                    <Sparkles className="w-4 h-4" /> Director&apos;s Acting Note for Audition:
-                  </div>
-                  <p className="text-xs text-gray-200 leading-relaxed">
-                    &quot;We are seeking a performer with natural internal gravity and raw, unvarnished intensity. Avoid melodrama; let the silence carry the weight of the character&apos;s moral dilemma before speaking.&quot;
-                  </p>
-                </div>
-
-                {/* DRM Protected Sides CTA Box */}
-                <div className="p-5 rounded-xl bg-black/40 border border-[var(--gold-500)]/30 flex flex-col sm:flex-row items-center justify-between gap-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-[var(--gold-500)]/15 border border-[var(--gold-500)]/30 flex items-center justify-center text-[var(--gold-300)]">
-                      <Lock className="w-5 h-5" />
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-2 text-xs font-mono">
+                    <div>
+                      <span className="text-neutral-500 text-[10px] uppercase block">GENDER</span>
+                      <span className="text-white">{selectedRole.genderPreference || "Open"}</span>
                     </div>
                     <div>
-                      <div className="font-bold text-sm text-[var(--ivory)]">
-                        Scene Monologue Script Sides (Encrypted)
-                      </div>
-                      <div className="text-xs text-[var(--text-muted)]">
-                        Watermarked dynamically with your name to protect confidentiality
-                      </div>
+                      <span className="text-neutral-500 text-[10px] uppercase block">LANGUAGES</span>
+                      <span className="text-white">{selectedRole.languages.join(", ")}</span>
+                    </div>
+                    <div>
+                      <span className="text-neutral-500 text-[10px] uppercase block">EXPERIENCE</span>
+                      <span className="text-white capitalize">{selectedRole.experience}</span>
                     </div>
                   </div>
-                  <button
-                    onClick={() => setIsSidesModalOpen(true)}
-                    className="btn-secondary text-xs py-2 px-4 whitespace-nowrap"
-                  >
-                    Open Watermarked Script
-                  </button>
+
+                  {/* Acting Note */}
+                  <div className="p-4 border border-white/5 bg-white/[0.02] text-xs font-light text-neutral-300 space-y-1">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#c5a059] block">DIRECTOR SIDES NOTE:</span>
+                    <p>
+                      Deliver natural, unvarnished dramatic pacing. The scene emphasizes internal tension and moral compromise over loud projection.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Right Column: AI Compatibility & Safety Escrow Pillars (4 cols) */}
+            {/* Right: Actions & Production Banner (4 cols) */}
             <div className="lg:col-span-4 space-y-6">
-              {/* Live AI Match Score Card */}
-              <div
-                className="p-6 rounded-2xl border space-y-4"
-                style={{
-                  background: "var(--charcoal-800)",
-                  borderColor: "rgba(139, 92, 246, 0.3)",
-                }}
-              >
-                <div className="flex items-center justify-between">
-                  <span className="badge badge-purple text-[10px]">AI MATCH ENGINE</span>
-                  <span className="text-xs font-mono font-bold text-emerald-400">92% Match</span>
-                </div>
-
-                <div>
-                  <h4 className="font-display font-bold text-lg text-[var(--ivory)]">
-                    Your Profile Compatibility
-                  </h4>
-                  <p className="text-xs text-[var(--text-muted)] mt-0.5">
-                    Evaluated against character requirements
-                  </p>
-                </div>
-
-                <div className="space-y-3 text-xs">
-                  <div>
-                    <div className="flex justify-between mb-1">
-                      <span className="text-[var(--text-secondary)]">Language &amp; Dialect (Hindi)</span>
-                      <span className="text-emerald-400 font-bold">96%</span>
-                    </div>
-                    <div className="w-full h-1.5 rounded-full bg-white/5 overflow-hidden">
-                      <div className="h-full bg-emerald-400 w-[96%]" />
-                    </div>
-                  </div>
-
-                  <div>
-                    <div className="flex justify-between mb-1">
-                      <span className="text-[var(--text-secondary)]">Playable Age Match</span>
-                      <span className="text-[var(--gold-300)] font-bold">100%</span>
-                    </div>
-                    <div className="w-full h-1.5 rounded-full bg-white/5 overflow-hidden">
-                      <div className="h-full bg-[var(--gold-500)] w-[100%]" />
-                    </div>
-                  </div>
-
-                  <div>
-                    <div className="flex justify-between mb-1">
-                      <span className="text-[var(--text-secondary)]">Theatre / Screen Experience</span>
-                      <span className="text-purple-300 font-bold">88%</span>
-                    </div>
-                    <div className="w-full h-1.5 rounded-full bg-white/5 overflow-hidden">
-                      <div className="h-full bg-purple-500 w-[88%]" />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pt-2 border-t border-white/5">
-                  <button
-                    onClick={() => setIsAuditionStudioOpen(true)}
-                    className="btn-primary w-full py-2.5 text-xs font-bold"
-                  >
-                    Start Audition for {selectedRole.roleName}
-                  </button>
-                </div>
+              {/* Production Poster */}
+              <div className="aspect-[16/9] w-full overflow-hidden bg-neutral-900 border border-white/[0.08]">
+                <img
+                  src="/hero.jpg"
+                  alt={call.title}
+                  className="w-full h-full object-cover filter grayscale-[25%] contrast-[1.05]"
+                />
               </div>
 
-              {/* Escrow & Anti-Casting Couch Safety Box */}
-              <div
-                className="p-6 rounded-2xl border space-y-4"
-                style={{
-                  background: "var(--charcoal-800)",
-                  borderColor: "rgba(201, 168, 76, 0.2)",
-                }}
-              >
-                <div className="flex items-center gap-2 text-xs font-bold text-emerald-400">
-                  <Shield className="w-4 h-4" />
-                  <span>Rangmanch Zero-Fraud Shield</span>
-                </div>
+              {/* Action Box */}
+              <div className="p-6 border border-white/[0.08] bg-[#0e0e12] space-y-4">
+                <button
+                  onClick={() => setIsAuditionStudioOpen(true)}
+                  className="w-full btn-editorial-solid py-3.5 justify-center text-xs tracking-widest uppercase"
+                >
+                  <Video size={14} />
+                  <span>RECORD AUDITION (AI STUDIO)</span>
+                </button>
 
-                <ul className="space-y-2 text-xs text-[var(--text-secondary)]">
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                    <span><strong>Zero Fee:</strong> Never pay for auditions or artist cards.</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                    <span><strong>Escrow Protection:</strong> Actor payment deposited before shoot day.</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                    <span><strong>Verified Studio:</strong> Auditions held exclusively at commercial offices.</span>
-                  </li>
-                </ul>
+                <button
+                  onClick={() => setIsSidesModalOpen(true)}
+                  className="w-full btn-editorial py-3 justify-center text-xs tracking-widest uppercase"
+                >
+                  <Lock size={12} />
+                  <span>VIEW DRM SCRIPT SIDES</span>
+                </button>
+
+                <p className="text-[10px] font-mono text-neutral-500 leading-normal text-center pt-2">
+                  Browser-based teleprompter reads opposing cues in real-time. No video software required.
+                </p>
+              </div>
+
+              {/* Studio Info Card */}
+              <div className="p-6 border border-white/[0.08] text-xs font-mono space-y-2">
+                <span className="text-neutral-500 text-[10px] uppercase tracking-wider block">PRODUCTION ENTITY</span>
+                <p className="text-white font-semibold">{call.organization?.name || "Accredited Producer"}</p>
+                <p className="text-neutral-400 text-[11px]">{call.organization?.description}</p>
               </div>
             </div>
+
           </div>
+
         </div>
       </main>
 
-      {/* Watermarked DRM Script Sides Modal */}
+      {/* Modals */}
       <WatermarkedSides
         isOpen={isSidesModalOpen}
         onClose={() => setIsSidesModalOpen(false)}
-        projectTitle={call.title}
         roleName={selectedRole.roleName}
-        scriptLines={[
-          {
-            speaker: selectedRole.roleName.toUpperCase(),
-            dialogue: "You think I wanted to be here at midnight, digging through files? Three families are waiting for answers. I am not leaving until I get them.",
-            direction: "tense, leaning across the wooden table",
-          },
-          {
-            speaker: "SUPERINTENDENT VERMA",
-            dialogue: "The law works on jurisdiction, not your personal crusade. Stand down.",
-            direction: "authoritative, stern",
-          },
-          {
-            speaker: selectedRole.roleName.toUpperCase(),
-            dialogue: "My jurisdiction begins where people's hope ends. Sign the order, Sir.",
-            direction: "unwavering conviction",
-          },
-        ]}
+        projectTitle={call.title}
       />
 
-      {/* AI Audition Studio Modal with Line Reader */}
       <AuditionStudioModal
         isOpen={isAuditionStudioOpen}
         onClose={() => setIsAuditionStudioOpen(false)}
-        projectTitle={call.title}
         roleName={selectedRole.roleName}
-        characterBio={selectedRole.description}
+        projectTitle={call.title}
       />
-
-      <Footer />
     </>
   );
 }
