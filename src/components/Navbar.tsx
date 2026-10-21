@@ -38,67 +38,101 @@ export default function Navbar() {
         </Link>
 
         {/* Navigation Links */}
-        <nav className="hidden md:flex items-center gap-8 text-xs font-semibold uppercase tracking-wider text-neutral-300">
+        <nav className="hidden md:flex items-center gap-9 text-xs font-semibold uppercase tracking-wider text-neutral-300">
           <Link
             href="/"
-            className={`hover:text-[#f4e2b8] transition-colors ${
+            className={`hover:text-[#f4e2b8] transition-colors py-2 relative ${
               pathname === "/" ? "text-[#d4af61] font-bold" : ""
             }`}
           >
-            Home
+            <span>Home</span>
+            {pathname === "/" && (
+              <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#d4af61] rounded-full shadow-[0_0_8px_#d4af61]" />
+            )}
           </Link>
           <Link
             href="/casting-calls"
-            className={`hover:text-[#f4e2b8] transition-colors ${
+            className={`hover:text-[#f4e2b8] transition-colors py-2 relative ${
               pathname.startsWith("/casting-calls") ? "text-[#d4af61] font-bold" : ""
             }`}
           >
-            Casting Calls
+            <span>Casting Calls</span>
+            {pathname.startsWith("/casting-calls") && (
+              <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#d4af61] rounded-full shadow-[0_0_8px_#d4af61]" />
+            )}
           </Link>
           <Link
             href="/talent"
-            className={`hover:text-[#f4e2b8] transition-colors ${
+            className={`hover:text-[#f4e2b8] transition-colors py-2 relative ${
               pathname.startsWith("/talent") ? "text-[#d4af61] font-bold" : ""
             }`}
           >
-            Performers
+            <span>Performers</span>
+            {pathname.startsWith("/talent") && (
+              <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#d4af61] rounded-full shadow-[0_0_8px_#d4af61]" />
+            )}
           </Link>
           <Link
             href="/verification"
-            className={`hover:text-[#f4e2b8] transition-colors ${
+            className={`hover:text-[#f4e2b8] transition-colors py-2 relative ${
               pathname.startsWith("/verification") ? "text-[#d4af61] font-bold" : ""
             }`}
           >
-            Verified Guild
+            <span>Verified Guild</span>
+            {pathname.startsWith("/verification") && (
+              <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#d4af61] rounded-full shadow-[0_0_8px_#d4af61]" />
+            )}
           </Link>
         </nav>
 
         {/* Actions */}
-        <div className="flex items-center gap-4">
-          {user ? (
-            <Link
-              href={getDashboardRoute(user.role)}
-              className="btn-cinema-gold text-xs py-2.5 px-5"
+        <div className="flex items-center gap-5">
+          {/* Search Icon */}
+          <Link
+            href="/casting-calls"
+            className="text-neutral-400 hover:text-white transition-colors p-1.5"
+            aria-label="Search"
+          >
+            <Search size={18} />
+          </Link>
+
+          {/* Notifications Icon with Badge */}
+          <div className="relative cursor-pointer text-neutral-400 hover:text-white transition-colors p-1.5">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="19"
+              height="19"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
-              <User size={14} />
-              <span>Dashboard ({user.name.split(" ")[0]})</span>
-            </Link>
-          ) : (
-            <>
-              <Link
-                href="/login"
-                className="hidden sm:inline-flex text-xs font-semibold tracking-wider uppercase text-neutral-300 hover:text-white px-3 py-2"
-              >
-                Sign In
-              </Link>
-              <Link
-                href="/casting-calls"
-                className="btn-cinema-gold text-xs py-2.5 px-6"
-              >
-                <span>Audition Now</span>
-              </Link>
-            </>
-          )}
+              <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+              <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+            </svg>
+            <span className="absolute top-1 right-0.5 w-3.5 h-3.5 rounded-full bg-[#e50914] text-[9px] font-bold flex items-center justify-center text-white">
+              0
+            </span>
+          </div>
+
+          {/* User Avatar */}
+          <div className="w-8 h-8 rounded-full overflow-hidden border border-[#d4af61]/40 shrink-0">
+            <img
+              src="/talent1.jpg"
+              alt="Performer"
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          {/* Audition Now CTA Button */}
+          <Link
+            href="/casting-calls"
+            className="btn-cinema-gold text-xs py-2.5 px-6 shrink-0"
+          >
+            <span>Audition Now</span>
+          </Link>
 
           {/* Mobile menu button */}
           <button
