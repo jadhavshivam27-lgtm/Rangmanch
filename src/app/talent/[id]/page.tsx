@@ -53,7 +53,7 @@ function TalentProfileDetailContent() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-[var(--charcoal-900)] text-[var(--ivory)] pt-24 pb-20">
+      <main className="min-h-screen bg-[var(--charcoal-900)] text-[var(--ivory)] pt-28 pb-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           {/* Top Nav Back Link & Actions */}
           <div className="flex items-center justify-between">

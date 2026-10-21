@@ -92,60 +92,80 @@ function CastingCallCard({ call }: { call: typeof DEMO_CASTING_CALLS[0] }) {
   const isUrgent = days <= 7 && days > 0;
 
   return (
-    <div className="card-premium p-5">
-      <div className="flex items-start justify-between mb-3">
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-1">
-            <span className={`badge ${getStatusColor(call.projectType)}`}>
-              {getStatusLabel(call.projectType)}
+    <div
+      className="card-premium p-6 rounded-2xl border flex flex-col justify-between h-full transition-all duration-300 hover:scale-[1.01]"
+      style={{
+        background: "var(--charcoal-800)",
+        borderColor: "rgba(201, 168, 76, 0.18)",
+        boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
+      }}
+    >
+      <div>
+        {/* Top Badges */}
+        <div className="flex items-center justify-between gap-2 mb-3">
+          <span className={`badge ${getStatusColor(call.projectType)} capitalize text-[10px]`}>
+            {getStatusLabel(call.projectType)}
+          </span>
+          {isUrgent ? (
+            <span className="badge badge-coral text-[10px] flex items-center gap-1 font-mono">
+              <Clock size={10} /> {days}d left
             </span>
-            {isUrgent && (
-              <span className="badge badge-coral">
-                <Clock size={9} /> {days}d left
+          ) : (
+            <span className="text-[11px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+              Escrow Verified
+            </span>
+          )}
+        </div>
+
+        {/* Title & Organization */}
+        <h3
+          className="font-display font-bold text-base leading-snug mb-1.5 text-[var(--ivory)] hover:text-[var(--gold-300)] transition-colors line-clamp-2"
+        >
+          {call.title}
+        </h3>
+
+        {call.organization && (
+          <div className="flex items-center gap-1.5 text-xs text-[var(--text-muted)] mb-3">
+            <Users size={12} className="text-[var(--gold-400)] shrink-0" />
+            <span className="truncate">{call.organization.name}</span>
+          </div>
+        )}
+
+        <p className="text-xs leading-relaxed text-[var(--text-secondary)] line-clamp-2 mb-4">
+          {call.description}
+        </p>
+
+        {/* Open Roles Pill */}
+        {call.roles && call.roles.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 mb-4">
+            {call.roles.slice(0, 2).map((r) => (
+              <span
+                key={r.id}
+                className="text-[10px] px-2 py-0.5 rounded-md bg-black/40 border border-white/5 text-[var(--gold-200)]"
+              >
+                {r.roleName}
+              </span>
+            ))}
+            {call.roles.length > 2 && (
+              <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-black/30 text-[var(--text-muted)]">
+                +{call.roles.length - 2} more
               </span>
             )}
-          </div>
-          <h3
-            className="font-semibold text-sm leading-snug mb-1"
-            style={{ color: "var(--ivory)" }}
-          >
-            {truncate(call.title, 60)}
-          </h3>
-        </div>
-      </div>
-
-      <p className="text-xs leading-relaxed mb-3" style={{ color: "var(--text-muted)" }}>
-        {truncate(call.description, 120)}
-      </p>
-
-      <div className="flex items-center gap-3 mb-3 flex-wrap">
-        <div className="flex items-center gap-1">
-          <MapPin size={11} style={{ color: "var(--text-muted)" }} />
-          <span className="text-xs" style={{ color: "var(--text-muted)" }}>
-            {call.location}
-          </span>
-        </div>
-        {call.organization && (
-          <div className="flex items-center gap-1">
-            <Users size={11} style={{ color: "var(--text-muted)" }} />
-            <span className="text-xs" style={{ color: "var(--text-muted)" }}>
-              {call.organization.name}
-            </span>
           </div>
         )}
       </div>
 
-      <div className="flex items-center justify-between">
-        <div>
-          <span className="text-xs" style={{ color: "var(--text-muted)" }}>
-            Deadline: {formatDate(call.applicationDeadline)}
-          </span>
+      {/* Bottom Meta & Action */}
+      <div className="pt-4 border-t border-white/10 flex items-center justify-between gap-3">
+        <div className="text-xs text-[var(--text-muted)] flex items-center gap-1 truncate">
+          <MapPin size={12} className="text-[var(--gold-400)] shrink-0" />
+          <span className="truncate">{call.location}</span>
         </div>
         <Link
           href={`/casting-calls/${call.id}`}
-          className="btn-primary text-xs px-3 py-1.5"
+          className="btn-primary text-xs py-2 px-3.5 shrink-0 font-semibold"
         >
-          View Details
+          View &amp; Audition
         </Link>
       </div>
     </div>
@@ -412,7 +432,7 @@ export default function HomePageClient() {
                 Explore sample performer profiles from across India
               </p>
             </div>
-            <Link href="/discover-talent" className="btn-secondary hidden sm:flex text-sm">
+            <Link href="/talent" className="btn-secondary hidden sm:flex text-sm">
               Discover More <ArrowRight size={14} />
             </Link>
           </div>
@@ -424,7 +444,7 @@ export default function HomePageClient() {
           </div>
 
           <div className="mt-8 text-center">
-            <Link href="/discover-talent" className="btn-secondary">
+            <Link href="/talent" className="btn-secondary">
               View All Talent <ArrowRight size={16} />
             </Link>
           </div>
@@ -482,77 +502,89 @@ export default function HomePageClient() {
         className="py-20"
         style={{ background: "var(--charcoal-800)" }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
             {/* For Actors */}
             <div
-              className="rounded-2xl p-8 relative overflow-hidden"
+              className="rounded-3xl p-8 relative overflow-hidden flex flex-col justify-between h-full border transition-all hover:border-[var(--gold-500)]/40"
               style={{
                 background:
-                  "linear-gradient(135deg, rgba(201,168,76,0.06) 0%, rgba(201,168,76,0.02) 100%)",
-                border: "1px solid rgba(201, 168, 76, 0.15)",
+                  "linear-gradient(135deg, rgba(201,168,76,0.08) 0%, rgba(20,20,24,0.95) 100%)",
+                borderColor: "rgba(201, 168, 76, 0.2)",
+                boxShadow: "0 15px 40px rgba(0,0,0,0.4)",
               }}
             >
-              <div
-                className="absolute top-0 right-0 w-48 h-48 rounded-full opacity-5"
-                style={{ background: "var(--gold-500)", transform: "translate(25%, -25%)" }}
-              />
-              <div className="ai-chip mb-4" style={{ background: "rgba(201,168,76,0.08)", borderColor: "rgba(201,168,76,0.2)", color: "var(--gold-300)" }}>
-                <Film size={12} /> For Actors & Performers
+              <div>
+                <div
+                  className="absolute top-0 right-0 w-48 h-48 rounded-full opacity-5 pointer-events-none"
+                  style={{ background: "var(--gold-500)", transform: "translate(25%, -25%)" }}
+                />
+                <div className="ai-chip mb-4 inline-flex" style={{ background: "rgba(201,168,76,0.1)", borderColor: "rgba(201,168,76,0.25)", color: "var(--gold-300)" }}>
+                  <Film size={12} /> For Actors &amp; Performers
+                </div>
+                <h3 className="font-display text-2xl sm:text-3xl font-bold mb-3 text-[var(--ivory)]">
+                  Your Stage Awaits
+                </h3>
+                <p className="text-sm leading-relaxed mb-6 text-[var(--text-secondary)]">
+                  Build a professional portfolio, discover authentic casting opportunities, and submit
+                  auditions from anywhere in India. No more expensive travel for initial selections.
+                </p>
+                <ul className="space-y-3 mb-8">
+                  {FEATURES_TALENT.map((f) => (
+                    <li key={f} className="flex items-center gap-2.5 text-sm text-[var(--text-secondary)]">
+                      <CheckCircle size={15} className="text-[var(--gold-400)] shrink-0" />
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <h3 className="font-display text-2xl font-bold mb-3" style={{ color: "var(--ivory)" }}>
-                Your Stage Awaits
-              </h3>
-              <p className="text-sm leading-relaxed mb-5" style={{ color: "var(--text-secondary)" }}>
-                Build a professional portfolio, discover authentic casting opportunities, and submit
-                auditions from anywhere in India. No more expensive travel for initial selections.
-              </p>
-              <ul className="space-y-2.5 mb-6">
-                {FEATURES_TALENT.map((f) => (
-                  <li key={f} className="flex items-center gap-2 text-sm" style={{ color: "var(--text-secondary)" }}>
-                    <CheckCircle size={14} style={{ color: "var(--gold-400)", flexShrink: 0 }} />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <Link href="/signup?role=talent" className="btn-primary">
-                Join as Talent <ArrowRight size={16} />
+              <Link href="/signup?role=talent" className="btn-primary w-full sm:w-auto self-start flex items-center justify-center gap-2">
+                <span>Join as Talent</span>
+                <ArrowRight size={16} />
               </Link>
             </div>
 
             {/* For Casting Directors */}
             <div
-              className="rounded-2xl p-8 relative overflow-hidden"
+              className="rounded-3xl p-8 relative overflow-hidden flex flex-col justify-between h-full border transition-all hover:border-[var(--purple-500)]/40"
               style={{
                 background:
-                  "linear-gradient(135deg, rgba(139,92,246,0.06) 0%, rgba(139,92,246,0.02) 100%)",
-                border: "1px solid rgba(139, 92, 246, 0.15)",
+                  "linear-gradient(135deg, rgba(139,92,246,0.08) 0%, rgba(20,20,24,0.95) 100%)",
+                borderColor: "rgba(139, 92, 246, 0.2)",
+                boxShadow: "0 15px 40px rgba(0,0,0,0.4)",
               }}
             >
-              <div
-                className="absolute top-0 right-0 w-48 h-48 rounded-full opacity-5"
-                style={{ background: "var(--purple-500)", transform: "translate(25%, -25%)" }}
-              />
-              <div className="ai-chip mb-4">
-                <Sparkles size={12} /> For Casting Directors
+              <div>
+                <div
+                  className="absolute top-0 right-0 w-48 h-48 rounded-full opacity-5 pointer-events-none"
+                  style={{ background: "var(--purple-500)", transform: "translate(25%, -25%)" }}
+                />
+                <div className="ai-chip mb-4 inline-flex">
+                  <Sparkles size={12} /> For Casting Directors &amp; Producers
+                </div>
+                <h3 className="font-display text-2xl sm:text-3xl font-bold mb-3 text-[var(--ivory)]">
+                  Find the Perfect Cast
+                </h3>
+                <p className="text-sm leading-relaxed mb-6 text-[var(--text-secondary)]">
+                  AI-assisted talent discovery, video audition review, shortlisting, and candidate
+                  comparison — everything you need to find the right performers efficiently.
+                </p>
+                <ul className="space-y-3 mb-8">
+                  {FEATURES_CASTING.map((f) => (
+                    <li key={f} className="flex items-center gap-2.5 text-sm text-[var(--text-secondary)]">
+                      <CheckCircle size={15} className="text-[var(--purple-400)] shrink-0" />
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <h3 className="font-display text-2xl font-bold mb-3" style={{ color: "var(--ivory)" }}>
-                Find the Perfect Cast
-              </h3>
-              <p className="text-sm leading-relaxed mb-5" style={{ color: "var(--text-secondary)" }}>
-                AI-assisted talent discovery, video audition review, shortlisting, and candidate
-                comparison — everything you need to find the right performers efficiently.
-              </p>
-              <ul className="space-y-2.5 mb-6">
-                {FEATURES_CASTING.map((f) => (
-                  <li key={f} className="flex items-center gap-2 text-sm" style={{ color: "var(--text-secondary)" }}>
-                    <CheckCircle size={14} style={{ color: "var(--purple-400)", flexShrink: 0 }} />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <Link href="/signup?role=casting_director" className="btn-primary" style={{ background: "linear-gradient(135deg, var(--purple-600), var(--purple-500))", color: "white" }}>
-                Join as Casting Director <ArrowRight size={16} />
+              <Link
+                href="/signup?role=casting_director"
+                className="btn-primary w-full sm:w-auto self-start flex items-center justify-center gap-2"
+                style={{ background: "linear-gradient(135deg, var(--purple-600), var(--purple-500))", color: "white" }}
+              >
+                <span>Join as Casting Director</span>
+                <ArrowRight size={16} />
               </Link>
             </div>
           </div>
@@ -561,50 +593,90 @@ export default function HomePageClient() {
 
       {/* ── AI FEATURE HIGHLIGHT ────────────────────────── */}
       <section
-        className="py-20"
-        style={{ background: "var(--charcoal-900)" }}
+        className="py-24 border-y"
+        style={{
+          background: "linear-gradient(180deg, var(--charcoal-900) 0%, rgba(18,18,24,0.98) 100%)",
+          borderColor: "rgba(139, 92, 246, 0.15)",
+        }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="ai-chip mb-6 inline-flex">
-              <Sparkles size={12} /> AI-Powered Features
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Aligned Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
+            <div className="ai-chip inline-flex">
+              <Sparkles size={13} /> AI-Powered Casting Suite
             </div>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--ivory)]">
               AI-Assisted Talent Discovery
             </h2>
-            <p className="text-base leading-relaxed mb-10 max-w-2xl mx-auto" style={{ color: "var(--text-secondary)" }}>
-              Our AI helps casting professionals search for talent using natural language —{" "}
-              <em style={{ color: "var(--gold-300)" }}>
-                &ldquo;Find performers aged 25–30 who speak Hindi and English, with theatre experience,
-                available in Mumbai&rdquo;
+            <p className="text-sm sm:text-base leading-relaxed text-[var(--text-secondary)]">
+              Search across regional Indian cinema using natural dialect and archetype parameters —{" "}
+              <em className="text-[var(--gold-300)] font-medium">
+                &ldquo;Find performers aged 25–30 who speak Hindi &amp; Awadhi, with theatre training, available in Mumbai&rdquo;
               </em>{" "}
-              — and translates that into a filtered search using real profile data.
+              — instantly resolved into verified profiles.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-              {[
-                { icon: <Search size={20} />, title: "Natural Language Search", desc: "Describe who you're looking for in plain language" },
-                { icon: <Sparkles size={20} />, title: "AI Audition Analysis", desc: "Transcript, summary, and role-requirement comparison" },
-                { icon: <Users size={20} />, title: "Smart Shortlisting", desc: "AI-assisted comparisons based on supplied profile data" },
-              ].map((feat) => (
-                <div
-                  key={feat.title}
-                  className="p-5 rounded-xl text-left"
-                  style={{
-                    background: "rgba(139,92,246,0.06)",
-                    border: "1px solid rgba(139, 92, 246, 0.12)",
-                  }}
-                >
-                  <div className="w-9 h-9 rounded-lg flex items-center justify-center mb-3" style={{ background: "rgba(139,92,246,0.12)", color: "var(--purple-400)" }}>
-                    {feat.icon}
+          </div>
+
+          {/* Full-width 3-Column Desktop Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 items-stretch">
+            {[
+              {
+                icon: <Search size={22} />,
+                title: "Natural Language Search",
+                desc: "Describe characters in conversational cinematic language. AI vectors match emotional range, regional dialects, and physical attributes accurately.",
+                tag: "Semantic Match Engine",
+              },
+              {
+                icon: <Sparkles size={22} />,
+                title: "AI Audition Analysis",
+                desc: "Automated dialogue teleprompter synchronization, acoustic voice analysis, and emotional arc heatmap evaluation to accelerate audition triage.",
+                tag: "Speech & Expression AI",
+              },
+              {
+                icon: <Users size={22} />,
+                title: "Smart Shortlisting",
+                desc: "Side-by-side comparative analytics evaluating character sides compatibility, past repertoire, and verified union standing in 1 click.",
+                tag: "Candidate Comparison",
+              },
+            ].map((feat) => (
+              <div
+                key={feat.title}
+                className="p-7 rounded-3xl text-left flex flex-col justify-between h-full border transition-all hover:scale-[1.01]"
+                style={{
+                  background: "var(--charcoal-800)",
+                  borderColor: "rgba(139, 92, 246, 0.22)",
+                  boxShadow: "0 12px 36px rgba(0,0,0,0.45)",
+                }}
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <div
+                      className="w-11 h-11 rounded-2xl flex items-center justify-center"
+                      style={{ background: "rgba(139,92,246,0.15)", color: "var(--purple-400)", border: "1px solid rgba(139,92,246,0.3)" }}
+                    >
+                      {feat.icon}
+                    </div>
+                    <span className="text-[10px] font-mono font-semibold px-2.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300">
+                      {feat.tag}
+                    </span>
                   </div>
-                  <h4 className="font-semibold text-sm mb-1" style={{ color: "var(--ivory)" }}>{feat.title}</h4>
-                  <p className="text-xs leading-relaxed" style={{ color: "var(--text-muted)" }}>{feat.desc}</p>
+                  <h4 className="font-display font-bold text-lg mb-2 text-[var(--ivory)]">{feat.title}</h4>
+                  <p className="text-xs leading-relaxed text-[var(--text-secondary)]">{feat.desc}</p>
                 </div>
-              ))}
-            </div>
-            <p className="text-xs" style={{ color: "var(--text-muted)" }}>
-              AI suggestions are aids to human decision-making. All casting decisions require human review.
-              We do not perform facial analysis, personality inference, or unsupported scoring.
+
+                <div className="mt-6 pt-4 border-t border-white/5 flex items-center gap-1.5 text-xs text-[var(--purple-400)] font-medium">
+                  <Sparkles size={12} />
+                  <span>Integrated in Audition Studio</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Responsible AI Disclaimer */}
+          <div className="p-4 rounded-2xl bg-black/40 border border-white/10 text-center max-w-3xl mx-auto">
+            <p className="text-xs text-[var(--text-muted)] leading-relaxed">
+              <strong className="text-[var(--ivory)] font-semibold">Responsible AI Pledge: </strong>
+              AI suggestions are assistive tools for directors. Final casting decisions always require human discretion. We strictly adhere to DPDP Act 2023 principles and never conduct unauthorized biometrics or discriminatory scoring.
             </p>
           </div>
         </div>

@@ -47,6 +47,7 @@ export default function DigiLockerKYCModal({
   const [verifiedRecord, setVerifiedRecord] = useState<DigiLockerKYCRecord | null>(null);
 
   // OTP Timer countdown
+  // OTP Timer countdown
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (otpSent && resendTimer > 0) {
@@ -54,6 +55,17 @@ export default function DigiLockerKYCModal({
     }
     return () => clearInterval(timer);
   }, [otpSent, resendTimer]);
+
+  // Keyboard Escape listener
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    if (isOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -101,9 +113,9 @@ export default function DigiLockerKYCModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto animate-fadeIn">
       <div
-        className="relative w-full max-w-2xl rounded-3xl border shadow-2xl overflow-hidden flex flex-col max-h-[92vh]"
+        className="relative w-full max-w-3xl rounded-3xl border shadow-2xl overflow-hidden flex flex-col max-h-[90vh] my-auto mx-auto"
         style={{
           background: "var(--charcoal-900)",
           borderColor: "rgba(5, 150, 105, 0.4)",
@@ -119,11 +131,11 @@ export default function DigiLockerKYCModal({
           }}
         >
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+            <div className="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
               <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-wrap">
                 <span className="font-display font-bold text-lg text-[var(--ivory)]">
                   DigiLocker &amp; Aadhaar Instant KYC
                 </span>
@@ -136,38 +148,43 @@ export default function DigiLockerKYCModal({
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-[var(--text-muted)] hover:text-white hover:bg-white/10 transition-colors"
+            className="p-2 rounded-xl text-[var(--text-muted)] hover:text-white hover:bg-white/10 transition-colors"
+            aria-label="Close modal"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Stepper Progress Bar */}
-        <div className="px-6 py-3 bg-black/30 border-b border-white/5 flex items-center justify-between text-xs">
-          {[
-            { num: 1, label: "Document Select" },
-            { num: 2, label: "UIDAI OTP" },
-            { num: 3, label: "Biometric Face Match" },
-            { num: 4, label: "Artist Verified Seal" },
-          ].map((st) => (
-            <div
-              key={st.num}
-              className={`flex items-center gap-1.5 font-medium ${
-                step >= st.num ? "text-emerald-400" : "text-[var(--text-muted)]"
-              }`}
-            >
-              <span
-                className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-mono font-bold ${
+        <div className="px-6 py-3.5 bg-black/40 border-b border-white/5">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 text-xs">
+            {[
+              { num: 1, label: "Document Select" },
+              { num: 2, label: "UIDAI OTP" },
+              { num: 3, label: "Face Match" },
+              { num: 4, label: "Verified Seal" },
+            ].map((st) => (
+              <div
+                key={st.num}
+                className={`flex items-center gap-2 font-medium px-2.5 py-1.5 rounded-xl border transition-all ${
                   step >= st.num
-                    ? "bg-emerald-500 text-black font-bold"
-                    : "bg-white/10 text-[var(--text-muted)]"
+                    ? "text-emerald-400 bg-emerald-500/10 border-emerald-500/30 font-semibold"
+                    : "text-[var(--text-muted)] bg-white/5 border-transparent"
                 }`}
               >
-                {st.num}
-              </span>
-              <span className="hidden sm:inline text-[11px]">{st.label}</span>
-            </div>
-          ))}
+                <span
+                  className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-mono font-bold shrink-0 ${
+                    step >= st.num
+                      ? "bg-emerald-500 text-black font-bold"
+                      : "bg-white/10 text-[var(--text-muted)]"
+                  }`}
+                >
+                  {st.num}
+                </span>
+                <span className="text-[11px] truncate">{st.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Modal Dynamic Body */}

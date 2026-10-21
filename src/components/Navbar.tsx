@@ -77,16 +77,16 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* Desktop Nav Links */}
-        <nav className="hidden lg:flex items-center gap-1">
+        {/* Desktop Nav Links (Centered) */}
+        <nav className="hidden md:flex items-center gap-1 lg:gap-2">
           {publicLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+              className={`px-3 py-1.5 rounded-xl text-sm font-medium transition-colors whitespace-nowrap ${
                 pathname === link.href
-                  ? "text-[var(--gold-400)]"
-                  : "text-[var(--text-secondary)] hover:text-[var(--ivory)]"
+                  ? "text-[var(--gold-300)] bg-[rgba(201,168,76,0.12)] border border-[rgba(201,168,76,0.25)] font-semibold"
+                  : "text-[var(--text-secondary)] hover:text-[var(--ivory)] hover:bg-white/5"
               }`}
             >
               {link.label}
@@ -202,7 +202,7 @@ export default function Navbar() {
 
           {/* Mobile menu toggle */}
           <button
-            className="lg:hidden w-9 h-9 rounded-lg flex items-center justify-center hover:bg-white/5"
+            className="md:hidden w-9 h-9 rounded-lg flex items-center justify-center hover:bg-white/5"
             onClick={() => setMobileOpen((p) => !p)}
             aria-label="Toggle menu"
           >
@@ -218,7 +218,7 @@ export default function Navbar() {
       {/* Mobile menu */}
       {mobileOpen && (
         <div
-          className="lg:hidden border-t"
+          className="md:hidden border-t"
           style={{
             background: "var(--charcoal-800)",
             borderColor: "var(--border-subtle)",

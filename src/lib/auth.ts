@@ -72,6 +72,7 @@ interface AuthState {
   isLoading: boolean;
   error: string | null;
   login: (email: string, password: string) => Promise<boolean>;
+  signup: (data: { name: string; email: string; password: string; role: UserRole }) => Promise<boolean>;
   logout: () => void;
   updateUser: (updates: Partial<User>) => void;
   clearError: () => void;
@@ -88,7 +89,7 @@ export const useAuthStore = create<AuthState>()(
         set({ isLoading: true, error: null });
 
         // Simulate network delay
-        await new Promise((resolve) => setTimeout(resolve, 800));
+        await new Promise((resolve) => setTimeout(resolve, 600));
 
         const account = DEMO_ACCOUNTS.find(
           (a) =>
@@ -97,14 +98,40 @@ export const useAuthStore = create<AuthState>()(
         );
 
         if (!account) {
+          // If not in pre-defined demo accounts, check if a newly registered user matches
           set({
             isLoading: false,
-            error: "Invalid email or password. Use the demo credentials shown below.",
+            error: "Invalid email or password. You can use any demo credential listed below.",
           });
           return false;
         }
 
         set({ user: account.user, isLoading: false, error: null });
+        return true;
+      },
+
+      signup: async ({ name, email, password, role }) => {
+        set({ isLoading: true, error: null });
+        await new Promise((resolve) => setTimeout(resolve, 700));
+
+        const newUser: User = {
+          id: `user-${Date.now().toString().slice(-6)}`,
+          email: email.trim().toLowerCase(),
+          role,
+          name: name.trim(),
+          verified: false,
+          createdAt: new Date().toISOString(),
+        };
+
+        // Add to demo accounts for session
+        DEMO_ACCOUNTS.push({
+          email: newUser.email,
+          password,
+          description: `${role} Account — ${name}`,
+          user: newUser,
+        });
+
+        set({ user: newUser, isLoading: false, error: null });
         return true;
       },
 
@@ -144,14 +171,14 @@ export function useIsAuthenticated(): boolean {
 export function getDashboardRoute(role: UserRole): string {
   switch (role) {
     case "talent":
-      return "/talent/dashboard";
+      return "/dashboard/talent";
     case "casting_director":
     case "org_admin":
-      return "/casting/dashboard";
+      return "/dashboard/talent"; // fallback until casting dashboard page
     case "platform_admin":
-      return "/admin/dashboard";
+      return "/dashboard/talent";
     case "guardian":
-      return "/guardian/dashboard";
+      return "/verification";
     default:
       return "/";
   }
