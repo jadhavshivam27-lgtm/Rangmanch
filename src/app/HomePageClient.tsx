@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   ArrowRight,
   Play,
@@ -268,6 +269,18 @@ const SKILL_CATEGORIES = [
 ];
 
 export default function HomePageClient() {
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/casting-calls?q=${encodeURIComponent(searchQuery.trim())}`);
+    } else {
+      router.push("/casting-calls");
+    }
+  };
+
   return (
     <main className="min-h-screen bg-[var(--charcoal-950)] text-[var(--ivory)]">
       {/* ── HERO SECTION (BALANCED 2-COLUMN DESKTOP / FLUID MOBILE) ── */}
@@ -308,20 +321,61 @@ export default function HomePageClient() {
               {/* Premier Pill */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-[rgba(201,168,76,0.14)] to-[rgba(139,92,246,0.14)] border border-[rgba(201,168,76,0.3)] text-[var(--gold-300)] shadow-sm mb-6">
                 <Sparkles size={13} className="text-[var(--gold-400)] shrink-0" />
-                <span>India&apos;s Premier AI Casting &amp; Audition Platform</span>
+                <span className="tracking-wide uppercase text-[11px] font-mono">✦ The National Casting Network of Indian Cinema</span>
               </div>
 
               {/* Master Headline (Proportional & Cinematic) */}
               <h1 className="font-display text-4xl sm:text-5xl lg:text-[54px] font-bold leading-[1.14] tracking-tight mb-5">
                 <span className="gradient-hero">Where Talent</span>
                 <br />
-                <span className="text-[var(--ivory)]">Meets Opportunity.</span>
+                <span className="text-[var(--ivory)]">Meets the Spotlight.</span>
               </h1>
 
               {/* Refined Narrative Subtitle */}
-              <p className="text-base sm:text-lg leading-relaxed text-[var(--text-secondary)] max-w-xl mb-7">
-                Connecting actors, dancers, vocalists, and performers directly with verified Bollywood, South Cinema, and OTT casting directors. Audition with AI scene partners from anywhere in India.
+              <p className="text-base sm:text-lg leading-relaxed text-[var(--text-secondary)] max-w-xl mb-6">
+                Connecting actors, dancers, vocalists, and performers directly with verified Bollywood, South Cinema, and OTT casting directors. Rehearse with AI scene partners, verify with DigiLocker, and audition safely with Escrow-protected compensation.
               </p>
+
+              {/* Interactive Live Cinema Search Console */}
+              <form onSubmit={handleSearch} className="w-full max-w-xl mb-3.5">
+                <div className="relative flex items-center p-1.5 rounded-2xl bg-[#1b1b22]/90 border border-[rgba(201,168,76,0.25)] shadow-xl backdrop-blur-xl focus-within:border-[var(--gold-400)] transition-all">
+                  <Search size={18} className="text-[var(--gold-400)] ml-3.5 mr-2 shrink-0" />
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search character roles, dialects (Hindi, Marathi...), or studios..."
+                    className="w-full bg-transparent text-xs sm:text-sm text-[var(--ivory)] placeholder:text-[var(--text-muted)] outline-none py-2"
+                  />
+                  <button
+                    type="submit"
+                    className="btn-primary shrink-0 py-2 sm:py-2.5 px-4 sm:px-5 text-xs font-semibold rounded-xl flex items-center gap-1.5 shadow-md"
+                  >
+                    <span>Search Roles</span>
+                    <ArrowRight size={13} />
+                  </button>
+                </div>
+              </form>
+
+              {/* Quick Trending Tags */}
+              <div className="flex flex-wrap items-center gap-1.5 mb-7 text-xs text-[var(--text-muted)]">
+                <span className="text-[var(--gold-400)] font-semibold flex items-center gap-1 text-[11px]">
+                  <Zap size={11} /> Trending:
+                </span>
+                {["Antim Prahar", "Crime Thriller Lead (28-35)", "Classical Kathak", "Voice Over (Awadhi)"].map((tag) => (
+                  <button
+                    key={tag}
+                    type="button"
+                    onClick={() => {
+                      setSearchQuery(tag);
+                      router.push(`/casting-calls?q=${encodeURIComponent(tag)}`);
+                    }}
+                    className="px-2.5 py-0.5 rounded-md bg-white/[0.04] hover:bg-white/[0.08] border border-white/5 text-[var(--text-secondary)] hover:text-[var(--gold-300)] transition-colors text-[10px] font-medium"
+                  >
+                    {tag}
+                  </button>
+                ))}
+              </div>
 
               {/* Call-to-Action Buttons */}
               <div className="w-full sm:w-auto flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-7">
@@ -329,7 +383,7 @@ export default function HomePageClient() {
                   href="/casting-calls"
                   className="btn-primary min-h-[48px] px-7 text-sm font-semibold rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-[rgba(201,168,76,0.25)] hover:shadow-[rgba(201,168,76,0.4)] transition-all"
                 >
-                  <span>Explore Casting Calls</span>
+                  <span>Explore 42+ Casting Calls</span>
                   <ArrowRight size={16} />
                 </Link>
                 <Link
@@ -586,15 +640,18 @@ export default function HomePageClient() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between mb-10">
             <div>
+              <div className="text-[11px] font-mono font-bold uppercase tracking-widest text-[var(--gold-400)] mb-1">
+                ✦ Live Production Sides
+              </div>
               <h2 className="font-display text-3xl sm:text-4xl font-bold mb-2">
                 Featured Casting Calls
               </h2>
               <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-                Sample opportunities across India&apos;s entertainment industry
+                Verified opportunities across Indian cinema, OTT platforms, and commercial productions
               </p>
             </div>
             <Link href="/casting-calls" className="btn-secondary hidden sm:flex text-sm">
-              View All <ArrowRight size={14} />
+              View All (42) <ArrowRight size={14} />
             </Link>
           </div>
 
@@ -620,15 +677,18 @@ export default function HomePageClient() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between mb-10">
             <div>
+              <div className="text-[11px] font-mono font-bold uppercase tracking-widest text-[var(--gold-400)] mb-1">
+                ✦ Screen &amp; Stage Repertoire
+              </div>
               <h2 className="font-display text-3xl sm:text-4xl font-bold mb-2">
-                Discover Amazing Talent
+                Discover Verified Performers
               </h2>
               <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-                Explore sample performer profiles from across India
+                Explore certified actor portfolios, demo reels, and comp cards from across Indian cinema
               </p>
             </div>
             <Link href="/talent" className="btn-secondary hidden sm:flex text-sm">
-              Discover More <ArrowRight size={14} />
+              Discover All <ArrowRight size={14} />
             </Link>
           </div>
 
