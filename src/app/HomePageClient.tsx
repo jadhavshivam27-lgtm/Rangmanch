@@ -146,13 +146,13 @@ export default function HomePageClient() {
       </section>
 
       {/* ── 2. NOW CASTING — WIDESCREEN CINEMA SHELF ──────────────────────────── */}
-      <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/[0.08]">
+      <section className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/[0.08]">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <span className="w-2 h-2 rounded-full bg-[#e50914] animate-pulse" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#e50914] animate-pulse" />
               <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#d4af61] font-bold">
                 NOW CASTING • NATIONWIDE AUDITIONS
               </span>
@@ -164,7 +164,7 @@ export default function HomePageClient() {
 
           <Link
             href="/casting-calls"
-            className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#d4af61] hover:text-[#f4e2b8] transition-colors group"
+            className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#d4af61] hover:text-[#f4e2b8] transition-colors group pb-1"
           >
             <span>Explore All 140+ Castings</span>
             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
@@ -172,7 +172,7 @@ export default function HomePageClient() {
         </div>
 
         {/* Category Pills Filter */}
-        <div className="flex items-center gap-2.5 overflow-x-auto pb-6 scrollbar-none mb-10">
+        <div className="flex items-center gap-3 overflow-x-auto pb-4 scrollbar-none mb-12 pt-2">
           {projectCategories.map((cat) => {
             const Icon = cat.icon;
             const isSelected = selectedProjectType === cat.id;
@@ -183,7 +183,7 @@ export default function HomePageClient() {
                 className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all whitespace-nowrap cursor-pointer ${
                   isSelected
                     ? "bg-gradient-to-r from-[#d4af61] to-[#b89242] text-black font-bold shadow-[0_0_20px_rgba(212,175,97,0.4)]"
-                    : "bg-white/[0.04] text-neutral-400 hover:text-white hover:bg-white/[0.08] border border-white/[0.06]"
+                    : "bg-white/[0.04] text-neutral-400 hover:text-white hover:bg-white/[0.08] border border-white/[0.08]"
                 }`}
               >
                 <Icon size={14} />
@@ -194,26 +194,26 @@ export default function HomePageClient() {
         </div>
 
         {/* 16:9 Cinematic Production Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
           {filteredCastingCalls.map((call) => (
             <Link
               key={call.id}
               href={`/casting-calls/${call.id}`}
-              className="group flex flex-col rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-[#d4af61]/60 transition-all duration-300 overflow-hidden hover:shadow-[0_15px_35px_rgba(0,0,0,0.8),0_0_30px_rgba(212,175,97,0.15)] hover:-translate-y-1"
+              className="group flex flex-col rounded-2xl bg-[#08080c] border border-white/[0.08] hover:border-[#d4af61]/60 transition-all duration-300 overflow-hidden hover:shadow-[0_20px_45px_rgba(0,0,0,0.85),0_0_30px_rgba(212,175,97,0.18)] hover:-translate-y-1.5"
             >
               {/* Poster Banner 16:9 */}
-              <div className="relative aspect-[16/9] w-full overflow-hidden bg-neutral-900">
+              <div className="relative aspect-[16/9] w-full overflow-hidden bg-neutral-900 shrink-0">
                 <Image
                   src={call.organization?.logo || "/talent1.jpg"}
                   alt={call.title}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#08080c] via-[#08080c]/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#08080c] via-[#08080c]/30 to-transparent" />
                 
                 {/* Badge Overlay */}
-                <div className="absolute top-3 left-3 flex items-center gap-2">
-                  <span className="px-2.5 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-black/75 backdrop-blur-md text-[#d4af61] border border-[#d4af61]/30 font-semibold">
+                <div className="absolute top-3.5 left-3.5 flex items-center gap-2">
+                  <span className="px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-black/80 backdrop-blur-md text-[#d4af61] border border-[#d4af61]/30 font-semibold shadow-sm">
                     {call.projectType.replace("_", " ")}
                   </span>
                   {call.organization?.verificationStatus === "verified" && (
@@ -223,41 +223,41 @@ export default function HomePageClient() {
                   )}
                 </div>
 
-                <div className="absolute bottom-3 right-3 px-2.5 py-1 rounded-md text-[11px] font-mono bg-black/80 backdrop-blur-md text-neutral-300 border border-white/10">
+                <div className="absolute bottom-3.5 right-3.5 px-3 py-1 rounded-md text-[11px] font-mono bg-black/85 backdrop-blur-md text-neutral-300 border border-white/10 shadow-sm">
                   {daysUntil(call.applicationDeadline)}d left
                 </div>
               </div>
 
               {/* Card Body */}
-              <div className="p-6 flex flex-col flex-1 justify-between">
+              <div className="p-7 flex flex-col flex-1 justify-between gap-6">
                 <div>
-                  <div className="text-[11px] font-mono uppercase tracking-widest text-[#d4af61] mb-1.5 flex items-center gap-1.5">
+                  <div className="text-[11px] font-mono uppercase tracking-widest text-[#d4af61] mb-2 flex items-center gap-1.5 font-semibold">
                     <span>{call.organization?.name || "Independent Production"}</span>
                   </div>
                   
-                  <h3 className="font-cinema text-xl sm:text-2xl font-bold text-white group-hover:text-[#f4e2b8] transition-colors mb-3 leading-tight line-clamp-2">
+                  <h3 className="font-cinema text-xl sm:text-2xl font-bold text-white group-hover:text-[#f4e2b8] transition-colors mb-3 leading-snug line-clamp-2">
                     {call.title}
                   </h3>
                   
-                  <p className="text-xs text-neutral-400 font-light line-clamp-2 leading-relaxed mb-6">
+                  <p className="text-xs text-neutral-400 font-light line-clamp-2 leading-relaxed">
                     {call.description}
                   </p>
                 </div>
 
-                {/* Card Meta & Action */}
-                <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between">
-                  <div className="flex flex-col">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-500">
+                {/* Card Meta & Action with proper spacing */}
+                <div className="pt-5 border-t border-white/[0.08] flex items-center justify-between gap-4 mt-auto">
+                  <div className="flex flex-col min-w-0">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-500 block mb-1">
                       Roles &amp; Compensation
                     </span>
-                    <span className="text-xs font-bold text-white font-mono">
+                    <span className="text-xs font-bold text-white font-mono truncate block">
                       {call.roles[0]?.compensation || "Industry Standard"}
                     </span>
                   </div>
 
-                  <div className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-[#d4af61] group-hover:translate-x-1 transition-transform">
+                  <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#d4af61] group-hover:text-[#f4e2b8] group-hover:translate-x-1 transition-all shrink-0">
                     <span>Audition</span>
-                    <ChevronRight size={14} />
+                    <ChevronRight size={15} />
                   </div>
                 </div>
 
