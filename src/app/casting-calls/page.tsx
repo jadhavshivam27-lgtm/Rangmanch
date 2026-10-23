@@ -3,279 +3,867 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-import { DEMO_CASTING_CALLS } from "@/lib/data";
 import {
   Search,
   MapPin,
   Clock,
-  Lock,
-  ArrowRight,
   Shield,
+  ArrowRight,
+  Star,
+  Film,
+  Tv,
+  Music,
+  Megaphone,
+  Trophy,
+  ChevronDown,
+  BadgeCheck,
 } from "lucide-react";
-import { daysUntil, getStatusLabel } from "@/lib/utils";
+
+// ─── Self-contained casting data ─────────────────────────────
+const CASTINGS = [
+  {
+    id: "cc-1",
+    title: "Antim Prahar",
+    subtitle: "Epic Historical Feature Film",
+    type: "feature_film",
+    typeLabel: "Feature Film",
+    studio: "Starlight Casting Co.",
+    director: "Imtiaz Ali",
+    location: "Mumbai, Maharashtra",
+    language: "Hindi",
+    budget: "₹85 Lakh – ₹1.2 Cr",
+    deadline: "Nov 14, 2024",
+    daysLeft: 21,
+    escrow: true,
+    verified: true,
+    image: "/hero.jpg",
+    synopsis:
+      "A sweeping period drama set in 1857, following a troupe of performers who secretly aid the independence movement through their art.",
+    roles: [
+      { name: "Neha Sinha — Female Lead", age: "22–28", gender: "Female" },
+      { name: "Vikram Rao — Antagonist", age: "35–45", gender: "Male" },
+      { name: "Pratibha — Supporting", age: "18–24", gender: "Female" },
+    ],
+    tags: ["Period Drama", "Action", "Hindustani Classical", "CINTAA"],
+    color: "#d4af61",
+  },
+  {
+    id: "cc-2",
+    title: "Hollow Nights — Season 2",
+    subtitle: "OTT Psychological Thriller Web Series",
+    type: "web_series",
+    typeLabel: "OTT Series",
+    studio: "Spectrum Productions",
+    director: "Zoya Akhtar",
+    location: "Delhi NCR",
+    language: "Hindi / English",
+    budget: "₹18–25 Lakh / Episode",
+    deadline: "Nov 08, 2024",
+    daysLeft: 15,
+    escrow: true,
+    verified: true,
+    image: "/auth-cinema.jpg",
+    synopsis:
+      "A forensic psychologist is pulled into a labyrinthine murder conspiracy within Delhi's underground art scene. 8-episode streaming series for Prime Video.",
+    roles: [
+      { name: "Rohan — Cyber Forensics Lead", age: "28–36", gender: "Male" },
+      { name: "Ayesha — Journalist", age: "24–32", gender: "Female" },
+    ],
+    tags: ["Psychological Thriller", "OTT", "Prime Video", "English Fluency"],
+    color: "#818cf8",
+  },
+  {
+    id: "cc-3",
+    title: "Tata Motors – 'Ahead'",
+    subtitle: "National TV Commercial (60 sec + Digital Cut)",
+    type: "commercial",
+    typeLabel: "Commercial",
+    studio: "NovaCast India × Ogilvy",
+    director: "Shakun Batra",
+    location: "Mumbai + Lonavala Shoot",
+    language: "Hindi",
+    budget: "₹3.5–6 Lakh (Usage: 1 Year)",
+    deadline: "Oct 30, 2024",
+    daysLeft: 6,
+    escrow: true,
+    verified: true,
+    image: "/hero.jpg",
+    synopsis:
+      "A modern narrative about an evolving Indian family embracing tomorrow's mobility. Seeking genuine chemistry between lead couple — no prior ad experience required.",
+    roles: [
+      { name: "Modern Father", age: "30–40", gender: "Male" },
+      { name: "Working Mother", age: "28–38", gender: "Female" },
+    ],
+    tags: ["Corporate TVC", "Lifestyle", "Escrow Protected", "National Broadcast"],
+    color: "#34d399",
+  },
+  {
+    id: "cc-4",
+    title: "Khwaab Ki Zanjeer",
+    subtitle: "Marathi & Hindi Stage Musical Production",
+    type: "theatre",
+    typeLabel: "Theatre",
+    studio: "Resonance Theatre Group",
+    director: "Atul Kumar",
+    location: "NCPA Mumbai / Prithvi Theatre",
+    language: "Hindi / Marathi",
+    budget: "₹45,000–₹80,000 / Month",
+    deadline: "Nov 22, 2024",
+    daysLeft: 29,
+    escrow: false,
+    verified: true,
+    image: "/auth-cinema.jpg",
+    synopsis:
+      "An original musical exploring themes of partition, love, and displacement across three generations. Requires trained vocalists and movement artists.",
+    roles: [
+      { name: "Razia — Protagonist (Singer)", age: "20–30", gender: "Female" },
+      { name: "Hakim — Patriarch", age: "45–60", gender: "Male" },
+      { name: "Ensemble (5 Roles)", age: "18–35", gender: "Any" },
+    ],
+    tags: ["Musical Theatre", "Classical Singing", "Hindustani Vocals", "NCPA"],
+    color: "#f472b6",
+  },
+  {
+    id: "cc-5",
+    title: "Neel — Telugu Feature",
+    subtitle: "Telugu Pan-India Action Drama",
+    type: "feature_film",
+    typeLabel: "Feature Film",
+    studio: "Mythri Movie Makers",
+    director: "Trivikram Srinivas",
+    location: "Hyderabad / International Shoot",
+    language: "Telugu / Tamil / Hindi",
+    budget: "₹1.5–3 Cr (Lead Role)",
+    deadline: "Dec 05, 2024",
+    daysLeft: 42,
+    escrow: true,
+    verified: true,
+    image: "/hero.jpg",
+    synopsis:
+      "High-octane action drama starring a street-level police officer uncovering a political conspiracy. Seeking a commanding female lead with action training.",
+    roles: [
+      { name: "IPS Officer Kavya", age: "25–33", gender: "Female" },
+      { name: "Villain Sidekick", age: "28–40", gender: "Male" },
+    ],
+    tags: ["Pan-India", "Action", "Telugu", "Stunt Training Required"],
+    color: "#fb923c",
+  },
+  {
+    id: "cc-6",
+    title: "Meera — Biographical Drama",
+    subtitle: "National Award Submission Feature Film",
+    type: "feature_film",
+    typeLabel: "Feature Film",
+    studio: "NFDC × Cinestaan Film Company",
+    director: "Shonali Bose",
+    location: "Rajasthan / Vrindavan",
+    language: "Hindi / Braj Bhasha",
+    budget: "₹50–90 Lakh (Lead)",
+    deadline: "Nov 28, 2024",
+    daysLeft: 35,
+    escrow: true,
+    verified: true,
+    image: "/auth-cinema.jpg",
+    synopsis:
+      "A sweeping biographical retelling of the life of poet-saint Mirabai told through a contemporary lens. Requires trained Bharatanatyam and Kuchipudi dancers.",
+    roles: [
+      { name: "Meera (Young)", age: "18–24", gender: "Female" },
+      { name: "Meera (Adult)", age: "28–38", gender: "Female" },
+    ],
+    tags: ["NFDC", "Classical Dance", "National Award", "Art House"],
+    color: "#c084fc",
+  },
+];
+
+const TYPES = [
+  { id: "all", label: "All Formats", icon: Film },
+  { id: "feature_film", label: "Feature Films", icon: Film },
+  { id: "web_series", label: "OTT Series", icon: Tv },
+  { id: "theatre", label: "Theatre", icon: Music },
+  { id: "commercial", label: "Commercials", icon: Megaphone },
+];
 
 export default function CastingCallsPage() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedProjectType, setSelectedProjectType] = useState<string>("all");
-  const [selectedLanguage, setSelectedLanguage] = useState<string>("all");
-  const [onlyEscrow, setOnlyEscrow] = useState<boolean>(false);
+  const [search, setSearch] = useState("");
+  const [type, setType] = useState("all");
+  const [onlyEscrow, setOnlyEscrow] = useState(false);
+  const [language, setLanguage] = useState("All Languages");
 
-  // Filter options
-  const projectTypes = [
-    { id: "all", label: "ALL FORMATS" },
-    { id: "feature_film", label: "FEATURE FILMS" },
-    { id: "web_series", label: "OTT SERIES" },
-    { id: "theatre", label: "THEATRE" },
-    { id: "commercial", label: "COMMERCIALS" },
-  ];
-
-  const languages = [
-    "All Languages",
-    "Hindi",
-    "Tamil",
-    "Telugu",
-    "Kannada",
-    "Malayalam",
-    "Marathi",
-    "Bengali",
-  ];
-
-  // Filtering Logic
-  const filteredCalls = useMemo(() => {
-    return DEMO_CASTING_CALLS.filter((call) => {
-      const q = searchQuery.toLowerCase().trim();
-      const orgName = (call.organization?.name || "").toLowerCase();
-      const title = (call.title || "").toLowerCase();
-      const desc = (call.description || "").toLowerCase();
-
-      const matchesSearch =
-        q === "" ||
-        title.includes(q) ||
-        desc.includes(q) ||
-        orgName.includes(q) ||
-        call.roles.some((r) => r.roleName.toLowerCase().includes(q));
-
-      const matchesType =
-        selectedProjectType === "all" || call.projectType === selectedProjectType;
-
-      const matchesLang =
-        selectedLanguage === "All Languages" ||
-        call.roles.some((r) => r.languages.includes(selectedLanguage));
-
-      const matchesEscrow = !onlyEscrow || call.status === "published";
-
-      return matchesSearch && matchesType && matchesLang && matchesEscrow;
+  const filtered = useMemo(() => {
+    return CASTINGS.filter((c) => {
+      const q = search.toLowerCase();
+      const matchSearch =
+        !q ||
+        c.title.toLowerCase().includes(q) ||
+        c.synopsis.toLowerCase().includes(q) ||
+        c.studio.toLowerCase().includes(q) ||
+        c.roles.some((r) => r.name.toLowerCase().includes(q));
+      const matchType = type === "all" || c.type === type;
+      const matchEscrow = !onlyEscrow || c.escrow;
+      const matchLang =
+        language === "All Languages" || c.language.includes(language);
+      return matchSearch && matchType && matchEscrow && matchLang;
     });
-  }, [searchQuery, selectedProjectType, selectedLanguage, onlyEscrow]);
-
-  const handleResetFilters = () => {
-    setSearchQuery("");
-    setSelectedProjectType("all");
-    setSelectedLanguage("All Languages");
-    setOnlyEscrow(false);
-  };
+  }, [search, type, onlyEscrow, language]);
 
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-[#0a0a0c] text-[#f8f8f6] pt-12 pb-32">
-        
-        {/* Editorial Page Header with Generous Negative Space */}
-        <section className="cinema-container" style={{paddingBottom:'48px',borderBottom:'1px solid rgba(255,255,255,0.08)'}}>
-          <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#c5a059] mb-4">
-            ✦ NATIONAL CASTING DIRECTORY
+      <main
+        style={{
+          minHeight: "100vh",
+          backgroundColor: "#040406",
+          color: "#f8f8f6",
+          paddingTop: "80px",
+          paddingBottom: "80px",
+        }}
+      >
+        {/* ── HERO HEADER ── */}
+        <section
+          style={{
+            maxWidth: "1280px",
+            margin: "0 auto",
+            padding: "48px 32px 40px",
+            borderBottom: "1px solid rgba(255,255,255,0.07)",
+          }}
+        >
+          {/* Eyebrow */}
+          <p
+            style={{
+              fontSize: "10px",
+              fontFamily: "monospace",
+              textTransform: "uppercase",
+              letterSpacing: "0.28em",
+              color: "#d4af61",
+              fontWeight: 700,
+              marginBottom: "16px",
+            }}
+          >
+            ✦ NATIONAL CASTING DIRECTORY • VERIFIED PRODUCTIONS ONLY
           </p>
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+
+          {/* Title row */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "flex-end",
+              justifyContent: "space-between",
+              gap: "32px",
+              flexWrap: "wrap",
+              marginBottom: "32px",
+            }}
+          >
             <div>
-              <h1 className="font-editorial text-4xl sm:text-5xl lg:text-6xl font-light text-white tracking-tight">
-                Current Castings &amp; Productions
+              <h1
+                className="font-cinema"
+                style={{
+                  fontSize: "clamp(32px, 5vw, 58px)",
+                  fontWeight: 700,
+                  color: "#ffffff",
+                  lineHeight: 1.05,
+                  margin: "0 0 12px 0",
+                }}
+              >
+                Current Castings &amp;<br />
+                <span style={{ color: "#d4af61" }}>Open Productions</span>
               </h1>
-              <p className="text-sm text-neutral-400 font-light mt-3 max-w-2xl leading-relaxed">
-                Direct audition submissions for accredited Indian feature films, OTT original series, and stage productions. All engagements operate under CINTAA fair-play standards and escrow-protected compensation.
+              <p
+                style={{
+                  fontSize: "14px",
+                  color: "#9a9aa8",
+                  maxWidth: "560px",
+                  lineHeight: 1.7,
+                  margin: 0,
+                }}
+              >
+                Direct audition submissions for accredited Indian feature films, OTT originals, theatre, and commercials. All engagements under{" "}
+                <span style={{ color: "#d4af61" }}>CINTAA fair-play standards</span> and escrow-protected compensation.
               </p>
             </div>
 
-            <div className="flex items-center gap-6 text-xs font-mono text-neutral-400">
-              <div>
-                <span className="text-white text-lg font-editorial block">42</span>
-                <span className="text-[10px] uppercase tracking-wider text-neutral-500">Active Sides</span>
-              </div>
-              <div className="w-[1px] h-8 bg-white/10" />
-              <div>
-                <span className="text-[#c5a059] text-lg font-editorial block">₹1.80 Cr</span>
-                <span className="text-[10px] uppercase tracking-wider text-neutral-500">Escrow Secured</span>
-              </div>
+            {/* Stats */}
+            <div style={{ display: "flex", gap: "32px", flexShrink: 0 }}>
+              {[
+                { value: "42", label: "Active Sides" },
+                { value: "₹1.8 Cr", label: "Escrow Secured", gold: true },
+                { value: "18", label: "Studios Live" },
+              ].map((s) => (
+                <div key={s.label} style={{ textAlign: "center" }}>
+                  <div
+                    className="font-cinema"
+                    style={{
+                      fontSize: "28px",
+                      fontWeight: 700,
+                      color: s.gold ? "#d4af61" : "#ffffff",
+                      lineHeight: 1,
+                    }}
+                  >
+                    {s.value}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "10px",
+                      fontFamily: "monospace",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.1em",
+                      color: "#606070",
+                      marginTop: "4px",
+                    }}
+                  >
+                    {s.label}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Clean Editorial Search Bar */}
-          <div className="mt-10">
-            <div className="relative flex items-center border border-white/[0.15] focus-within:border-white transition-colors bg-white/[0.01]">
-              <Search className="ml-5 w-4 h-4 text-neutral-400 shrink-0" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search character roles, titles, dialects, or production studios..."
-                className="w-full bg-transparent px-4 py-4 text-sm text-white placeholder:text-neutral-500 outline-none font-sans"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery("")}
-                  className="mr-5 text-xs font-mono text-neutral-400 hover:text-white uppercase"
-                >
-                  Clear
-                </button>
-              )}
-            </div>
+          {/* Search Bar */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "12px",
+              padding: "0 16px",
+              height: "52px",
+              borderRadius: "14px",
+              border: "1px solid rgba(255,255,255,0.14)",
+              backgroundColor: "#08080e",
+              marginBottom: "28px",
+              transition: "border-color 0.2s",
+            }}
+          >
+            <Search size={16} color="#606070" />
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search roles, production studios, dialects, genres..."
+              style={{
+                flex: 1,
+                background: "none",
+                border: "none",
+                outline: "none",
+                color: "#ffffff",
+                fontSize: "14px",
+              }}
+            />
+            {search && (
+              <button
+                onClick={() => setSearch("")}
+                style={{
+                  fontSize: "11px",
+                  fontFamily: "monospace",
+                  color: "#606070",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  textTransform: "uppercase",
+                }}
+              >
+                CLEAR
+              </button>
+            )}
           </div>
 
-          {/* Minimal Filter Controls Row */}
-          <div className="mt-8 flex flex-wrap items-center justify-between gap-6 text-[11px] font-mono tracking-widest uppercase">
-            {/* Format filters */}
-            <div className="flex flex-wrap items-center gap-5">
-              {projectTypes.map((type) => (
+          {/* Filter Row */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+            }}
+          >
+            {/* Type chips */}
+            <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+              {TYPES.map((t) => (
                 <button
-                  key={type.id}
-                  onClick={() => setSelectedProjectType(type.id)}
-                  className={`pb-1 transition-colors ${
-                    selectedProjectType === type.id
-                      ? "text-white border-b-2 border-[#c5a059] font-semibold"
-                      : "text-neutral-500 hover:text-neutral-300"
-                  }`}
+                  key={t.id}
+                  onClick={() => setType(t.id)}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    padding: "8px 16px",
+                    borderRadius: "100px",
+                    border:
+                      type === t.id
+                        ? "1px solid #d4af61"
+                        : "1px solid rgba(255,255,255,0.1)",
+                    backgroundColor:
+                      type === t.id
+                        ? "rgba(212,175,97,0.12)"
+                        : "transparent",
+                    color: type === t.id ? "#d4af61" : "#8a8a9a",
+                    fontSize: "11px",
+                    fontFamily: "monospace",
+                    fontWeight: type === t.id ? 700 : 500,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.06em",
+                    cursor: "pointer",
+                    transition: "all 0.2s ease",
+                  }}
                 >
-                  {type.label}
+                  <t.icon size={12} />
+                  {t.label}
                 </button>
               ))}
             </div>
 
-            {/* Language & Escrow */}
-            <div className="flex items-center gap-5">
+            {/* Right controls */}
+            <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
               <select
-                value={selectedLanguage}
-                onChange={(e) => setSelectedLanguage(e.target.value)}
-                className="bg-transparent border border-white/15 px-3 py-1.5 text-[11px] text-neutral-300 focus:outline-none focus:border-white cursor-pointer uppercase font-mono"
+                value={language}
+                onChange={(e) => setLanguage(e.target.value)}
+                style={{
+                  background: "#08080e",
+                  border: "1px solid rgba(255,255,255,0.12)",
+                  borderRadius: "8px",
+                  padding: "8px 12px",
+                  color: "#c0c0d0",
+                  fontSize: "11px",
+                  fontFamily: "monospace",
+                  outline: "none",
+                  cursor: "pointer",
+                }}
               >
-                {languages.map((l) => (
-                  <option key={l} value={l} className="bg-[#0a0a0c] text-white">
+                {["All Languages", "Hindi", "Telugu", "Tamil", "Marathi", "Bengali", "English"].map((l) => (
+                  <option key={l} value={l} style={{ background: "#0a0a10" }}>
                     {l}
                   </option>
                 ))}
               </select>
 
-              <label className="flex items-center gap-2 text-neutral-400 hover:text-neutral-200 cursor-pointer select-none">
+              <label
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  fontSize: "11px",
+                  fontFamily: "monospace",
+                  color: onlyEscrow ? "#34d399" : "#8a8a9a",
+                  cursor: "pointer",
+                  userSelect: "none",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.06em",
+                }}
+              >
                 <input
                   type="checkbox"
                   checked={onlyEscrow}
                   onChange={(e) => setOnlyEscrow(e.target.checked)}
-                  className="accent-[#c5a059]"
+                  style={{ accentColor: "#34d399", cursor: "pointer" }}
                 />
-                <span className="text-[10px] tracking-wider">Escrow Protected Only</span>
+                <Shield size={12} />
+                Escrow Only
               </label>
             </div>
           </div>
         </section>
 
-        {/* Results Grid (Whitespace Separation, Consistent 16:9 Production Imagery) */}
-        <section className="cinema-container" style={{paddingTop:'48px'}}>
-          
-          <div className="flex items-center justify-between text-xs font-mono text-neutral-500 pb-6 mb-8 border-b border-white/[0.04]">
-            <span>SHOWING {filteredCalls.length} VERIFIED PRODUCTION SIDES</span>
-            <span>DIRECT SELF-TAPE ENABLED</span>
+        {/* ── RESULTS ── */}
+        <section
+          style={{
+            maxWidth: "1280px",
+            margin: "0 auto",
+            padding: "40px 32px",
+          }}
+        >
+          {/* Result count row */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: "32px",
+              paddingBottom: "16px",
+              borderBottom: "1px solid rgba(255,255,255,0.05)",
+              fontSize: "11px",
+              fontFamily: "monospace",
+              textTransform: "uppercase",
+              letterSpacing: "0.12em",
+              color: "#606070",
+            }}
+          >
+            <span>
+              Showing{" "}
+              <span style={{ color: "#d4af61", fontWeight: 700 }}>
+                {filtered.length}
+              </span>{" "}
+              verified production sides
+            </span>
+            <span>Direct self-tape submissions enabled</span>
           </div>
 
-          {filteredCalls.length === 0 ? (
-            <div className="py-24 text-center space-y-4">
-              <p className="font-editorial text-2xl text-neutral-300">
-                No casting opportunities match your selected criteria.
+          {filtered.length === 0 ? (
+            <div
+              style={{
+                textAlign: "center",
+                padding: "80px 20px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "16px",
+              }}
+            >
+              <div
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  borderRadius: "16px",
+                  backgroundColor: "rgba(212,175,97,0.1)",
+                  border: "1px solid rgba(212,175,97,0.2)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#d4af61",
+                }}
+              >
+                <Search size={24} />
+              </div>
+              <p className="font-cinema" style={{ fontSize: "22px", color: "#c0c0d0" }}>
+                No castings match your filters
               </p>
               <button
-                onClick={handleResetFilters}
-                className="btn-editorial text-[10px] py-2 px-6"
+                onClick={() => {
+                  setSearch("");
+                  setType("all");
+                  setOnlyEscrow(false);
+                  setLanguage("All Languages");
+                }}
+                className="btn-cinema-gold"
+                style={{ height: "40px", padding: "0 24px", fontSize: "11px" }}
               >
-                RESET FILTERS
+                RESET ALL FILTERS
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {filteredCalls.map((call) => {
-                const daysLeft = daysUntil(call.applicationDeadline || "2024-11-30T23:59:59Z");
-
-                return (
-                  <div
-                    key={call.id}
-                    className="group flex flex-col justify-between border-b border-white/[0.08] pb-8"
-                  >
-                    <div>
-                      {/* 16:9 Cinematic Production Image */}
-                      <div className="aspect-[16/9] w-full overflow-hidden bg-neutral-900 border border-white/[0.08] mb-5 relative">
-                        <img
-                          src="/hero.jpg"
-                          alt={call.title}
-                          className="w-full h-full object-cover object-center filter grayscale-[25%] contrast-[1.05] group-hover:scale-105 group-hover:grayscale-0 transition-all duration-700 ease-out"
-                        />
-                        <div className="absolute top-3 left-3 px-2 py-0.5 bg-black/70 text-[9px] font-mono uppercase tracking-widest text-neutral-300">
-                          {getStatusLabel(call.projectType)}
-                        </div>
-                        <div className="absolute top-3 right-3 px-2 py-0.5 bg-black/70 text-[9px] font-mono uppercase tracking-widest text-emerald-400 flex items-center gap-1">
-                          <Lock size={9} /> Escrow
-                        </div>
-                      </div>
-
-                      {/* Studio & Location */}
-                      <div className="flex items-center justify-between text-[10px] font-mono tracking-widest uppercase text-neutral-400 mb-2">
-                        <span>{call.organization?.name || "Production"}</span>
-                        <span>{call.location}</span>
-                      </div>
-
-                      {/* Title */}
-                      <h2 className="font-editorial text-xl sm:text-2xl text-white group-hover:text-[#c5a059] transition-colors leading-snug mb-2 font-normal">
-                        {call.title}
-                      </h2>
-
-                      {/* Synopsis */}
-                      <p className="text-xs text-neutral-400 font-light line-clamp-2 leading-relaxed mb-4">
-                        {call.description}
-                      </p>
-
-                      {/* Character Sides List */}
-                      {call.roles && (
-                        <div className="flex flex-wrap gap-1.5 mb-6 text-[11px] font-mono">
-                          {call.roles.map((r) => (
-                            <span
-                              key={r.id}
-                              className="border border-white/10 px-2 py-0.5 text-neutral-400"
-                            >
-                              {r.roleName}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Bottom Meta & Action */}
-                    <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between">
-                      <div className="flex items-center gap-1 text-[10px] font-mono text-neutral-400 uppercase">
-                        <Clock size={11} />
-                        <span>{daysLeft > 0 ? `${daysLeft}d remaining` : "Closing soon"}</span>
-                      </div>
-
-                      <Link
-                        href={`/casting-calls/${call.id}`}
-                        className="btn-editorial text-[10px] py-2 px-4"
-                      >
-                        <span>VIEW SIDES</span>
-                        <ArrowRight size={11} />
-                      </Link>
-                    </div>
-                  </div>
-                );
-              })}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fill, minmax(360px, 1fr))",
+                gap: "24px",
+              }}
+            >
+              {filtered.map((call) => (
+                <CastingCard key={call.id} call={call} />
+              ))}
             </div>
           )}
         </section>
-
       </main>
     </>
+  );
+}
+
+function CastingCard({ call }: { call: typeof CASTINGS[0] }) {
+  return (
+    <div
+      style={{
+        borderRadius: "20px",
+        backgroundColor: "#07070b",
+        border: "1px solid rgba(255,255,255,0.08)",
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        transition: "transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = "translateY(-4px)";
+        e.currentTarget.style.borderColor = `${call.color}55`;
+        e.currentTarget.style.boxShadow = `0 16px 40px rgba(0,0,0,0.6), 0 0 0 1px ${call.color}22`;
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = "translateY(0)";
+        e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+        e.currentTarget.style.boxShadow = "none";
+      }}
+    >
+      {/* Thumbnail */}
+      <div style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden", backgroundColor: "#030305" }}>
+        <img
+          src={call.image}
+          alt={call.title}
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            filter: "brightness(0.75) contrast(1.1)",
+            transition: "transform 0.5s ease, filter 0.3s ease",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "scale(1.06)";
+            e.currentTarget.style.filter = "brightness(0.85) contrast(1.05)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "scale(1)";
+            e.currentTarget.style.filter = "brightness(0.75) contrast(1.1)";
+          }}
+        />
+
+        {/* Gradient overlay */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "linear-gradient(to top, rgba(7,7,11,0.9) 0%, transparent 55%)",
+          }}
+        />
+
+        {/* Top badges */}
+        <div
+          style={{
+            position: "absolute",
+            top: "12px",
+            left: "12px",
+            right: "12px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+          }}
+        >
+          <span
+            style={{
+              padding: "4px 10px",
+              borderRadius: "6px",
+              backgroundColor: "rgba(0,0,0,0.7)",
+              backdropFilter: "blur(8px)",
+              fontSize: "9px",
+              fontFamily: "monospace",
+              fontWeight: 700,
+              textTransform: "uppercase",
+              letterSpacing: "0.1em",
+              color: call.color,
+              border: `1px solid ${call.color}55`,
+            }}
+          >
+            {call.typeLabel}
+          </span>
+
+          {call.escrow && (
+            <span
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "4px",
+                padding: "4px 10px",
+                borderRadius: "6px",
+                backgroundColor: "rgba(52,211,153,0.15)",
+                backdropFilter: "blur(8px)",
+                fontSize: "9px",
+                fontFamily: "monospace",
+                fontWeight: 700,
+                textTransform: "uppercase",
+                letterSpacing: "0.08em",
+                color: "#34d399",
+                border: "1px solid rgba(52,211,153,0.3)",
+              }}
+            >
+              <Shield size={9} />
+              ESCROW
+            </span>
+          )}
+        </div>
+
+        {/* Deadline badge — bottom left */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: "12px",
+            left: "12px",
+            display: "flex",
+            alignItems: "center",
+            gap: "5px",
+            fontSize: "10px",
+            fontFamily: "monospace",
+            color: call.daysLeft <= 7 ? "#f87171" : "#e0e0f0",
+            fontWeight: 600,
+          }}
+        >
+          <Clock size={11} />
+          {call.daysLeft <= 7
+            ? `⚠ ${call.daysLeft} days left`
+            : `${call.daysLeft} days • ${call.deadline}`}
+        </div>
+      </div>
+
+      {/* Card body */}
+      <div style={{ padding: "20px", flex: 1, display: "flex", flexDirection: "column", gap: "14px" }}>
+        {/* Studio + location */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            fontSize: "10px",
+            fontFamily: "monospace",
+            textTransform: "uppercase",
+            letterSpacing: "0.1em",
+            color: "#606070",
+          }}
+        >
+          <span style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+            {call.verified && <BadgeCheck size={11} color="#d4af61" />}
+            {call.studio}
+          </span>
+          <span style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+            <MapPin size={9} />
+            {call.location.split(",")[0]}
+          </span>
+        </div>
+
+        {/* Title */}
+        <div>
+          <h2
+            className="font-cinema"
+            style={{
+              fontSize: "22px",
+              fontWeight: 700,
+              color: "#ffffff",
+              margin: "0 0 4px 0",
+              lineHeight: 1.2,
+            }}
+          >
+            {call.title}
+          </h2>
+          <p style={{ fontSize: "11px", color: call.color, margin: 0, fontWeight: 600 }}>
+            {call.subtitle}
+          </p>
+        </div>
+
+        {/* Synopsis */}
+        <p
+          style={{
+            fontSize: "12px",
+            color: "#9a9aa8",
+            lineHeight: 1.65,
+            margin: 0,
+            display: "-webkit-box",
+            WebkitLineClamp: 3,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+          }}
+        >
+          {call.synopsis}
+        </p>
+
+        {/* Roles */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+          <p
+            style={{
+              fontSize: "9px",
+              fontFamily: "monospace",
+              textTransform: "uppercase",
+              letterSpacing: "0.15em",
+              color: "#606070",
+              margin: 0,
+            }}
+          >
+            Open Roles
+          </p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+            {call.roles.map((r) => (
+              <span
+                key={r.name}
+                style={{
+                  padding: "4px 10px",
+                  borderRadius: "6px",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  fontSize: "11px",
+                  color: "#c0c0d0",
+                  fontFamily: "monospace",
+                }}
+              >
+                {r.name}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Tags */}
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+          {call.tags.map((tag) => (
+            <span
+              key={tag}
+              style={{
+                padding: "3px 8px",
+                borderRadius: "4px",
+                backgroundColor: `${call.color}12`,
+                border: `1px solid ${call.color}30`,
+                fontSize: "9px",
+                fontFamily: "monospace",
+                fontWeight: 600,
+                color: call.color,
+                textTransform: "uppercase",
+                letterSpacing: "0.06em",
+              }}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        {/* Footer */}
+        <div
+          style={{
+            marginTop: "auto",
+            paddingTop: "14px",
+            borderTop: "1px solid rgba(255,255,255,0.06)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <div>
+            <div
+              style={{
+                fontSize: "9px",
+                fontFamily: "monospace",
+                textTransform: "uppercase",
+                color: "#606070",
+                letterSpacing: "0.1em",
+              }}
+            >
+              Budget / Fee
+            </div>
+            <div
+              style={{
+                fontSize: "13px",
+                fontWeight: 700,
+                color: "#d4af61",
+                fontFamily: "monospace",
+              }}
+            >
+              {call.budget}
+            </div>
+          </div>
+
+          <Link
+            href={`/casting-calls/${call.id}`}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "6px",
+              padding: "10px 20px",
+              borderRadius: "10px",
+              backgroundColor: call.color,
+              color: "#040406",
+              fontSize: "11px",
+              fontFamily: "monospace",
+              fontWeight: 800,
+              textTransform: "uppercase",
+              letterSpacing: "0.08em",
+              textDecoration: "none",
+              transition: "opacity 0.2s ease",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+          >
+            VIEW SIDES <ArrowRight size={12} />
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 }
