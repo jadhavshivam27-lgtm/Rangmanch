@@ -39,7 +39,13 @@ function TalentProfileDetailContent() {
   const params = useParams();
   const id = params?.id as string;
 
-  const initialTalent = DEMO_TALENT.find((t) => t.id === id) || DEMO_TALENT[0];
+  const initialTalent =
+    DEMO_TALENT.find(
+      (t) =>
+        t.id === id ||
+        t.id === `talent-${id?.replace(/^t-/, "")}` ||
+        `t-${t.id.replace(/^talent-/, "")}` === id
+    ) || DEMO_TALENT[0];
   const [talent, setTalent] = useState(initialTalent);
   const [activePhoto, setActivePhoto] = useState(talent.profilePhoto || "/talent1.jpg");
   const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
