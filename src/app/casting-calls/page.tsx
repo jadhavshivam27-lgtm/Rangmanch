@@ -81,7 +81,7 @@ export default function CastingCallsPage() {
       <main className="min-h-screen bg-[#0a0a0c] text-[#f8f8f6] pt-12 pb-32">
         
         {/* Editorial Page Header with Generous Negative Space */}
-        <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pb-12 border-b border-white/[0.08]">
+        <section className="cinema-container" style={{paddingBottom:'48px',borderBottom:'1px solid rgba(255,255,255,0.08)'}}>
           <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#c5a059] mb-4">
             ✦ NATIONAL CASTING DIRECTORY
           </p>
@@ -177,7 +177,7 @@ export default function CastingCallsPage() {
         </section>
 
         {/* Results Grid (Whitespace Separation, Consistent 16:9 Production Imagery) */}
-        <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pt-12">
+        <section className="cinema-container" style={{paddingTop:'48px'}}>
           
           <div className="flex items-center justify-between text-xs font-mono text-neutral-500 pb-6 mb-8 border-b border-white/[0.04]">
             <span>SHOWING {filteredCalls.length} VERIFIED PRODUCTION SIDES</span>

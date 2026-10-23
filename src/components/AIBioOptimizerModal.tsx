@@ -53,11 +53,13 @@ export default function AIBioOptimizerModal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
+    <div className="modal-backdrop">
       <div
-        className="relative w-full max-w-2xl rounded-2xl border shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+        className="modal-panel"
         style={{
-          background: "var(--charcoal-900)",
+          maxWidth: "680px",
+          width: "100%",
+          backgroundColor: "#0e0e14",
           borderColor: "rgba(139, 92, 246, 0.4)",
           boxShadow: "0 20px 60px rgba(0,0,0,0.8), 0 0 40px rgba(139, 92, 246, 0.2)",
         }}

@@ -3,11 +3,16 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { DEMO_TALENT } from "@/lib/data";
 import {
   Search,
   MapPin,
   ArrowRight,
+  ShieldCheck,
+  CheckCircle2,
+  Sparkles,
+  SlidersHorizontal,
 } from "lucide-react";
 
 export default function TalentDirectoryPage() {
@@ -25,6 +30,7 @@ export default function TalentDirectoryPage() {
     "Malayalam",
     "Marathi",
     "Punjabi",
+    "Urdu",
   ];
 
   const filteredTalent = useMemo(() => {
@@ -53,51 +59,103 @@ export default function TalentDirectoryPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-[#0a0a0c] text-[#f8f8f6] pt-12 pb-32">
-        
+      <main className="min-h-screen bg-[#040406] text-[#f5f5f7] pt-12 pb-32">
         {/* Editorial Directory Header */}
-        <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pb-12 border-b border-white/[0.08]">
-          <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#c5a059] mb-4">
-            ✦ SCREEN &amp; STAGE REPERTOIRE
-          </p>
+        <section
+          className="cinema-container"
+          style={{
+            paddingBottom: "48px",
+            borderBottom: "1px solid rgba(255,255,255,0.08)",
+          }}
+        >
+          <div
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              padding: "4px 12px",
+              borderRadius: "20px",
+              backgroundColor: "rgba(212,175,97,0.1)",
+              border: "1px solid rgba(212,175,97,0.25)",
+              color: "#d4af61",
+              fontSize: "10px",
+              fontFamily: "monospace",
+              textTransform: "uppercase",
+              letterSpacing: "0.2em",
+              fontWeight: 700,
+              marginBottom: "16px",
+            }}
+          >
+            <span>✦ SCREEN &amp; STAGE REPERTOIRE</span>
+            <span style={{ color: "rgba(255,255,255,0.3)" }}>•</span>
+            <span style={{ color: "#34d399" }}>ALL 6 PROFILES VERIFIED</span>
+          </div>
+
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <div>
-              <h1 className="font-editorial text-4xl sm:text-5xl lg:text-6xl font-light text-white tracking-tight">
+              <h1 className="font-cinema text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight">
                 The Performer Directory
               </h1>
-              <p className="text-sm text-neutral-400 font-light mt-3 max-w-2xl leading-relaxed">
+              <p className="text-sm sm:text-base text-neutral-400 font-light mt-3 max-w-2xl leading-relaxed">
                 Discover verified Indian actors, classical dancers, vocalists, and theatre performers. Each profile features verified identity credentials, showreel materials, and direct audition submission capabilities.
               </p>
             </div>
 
-            <div className="flex items-center gap-6 text-xs font-mono text-neutral-400">
-              <div>
-                <span className="text-white text-lg font-editorial block">50,000+</span>
-                <span className="text-[10px] uppercase tracking-wider text-neutral-500">Artists</span>
+            <div className="flex items-center gap-6 text-xs font-mono text-neutral-400 shrink-0">
+              <div
+                style={{
+                  padding: "12px 20px",
+                  borderRadius: "14px",
+                  backgroundColor: "#0a0a10",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  textAlign: "center",
+                }}
+              >
+                <span className="font-cinema text-2xl font-bold text-white block">50,000+</span>
+                <span className="text-[10px] uppercase tracking-wider text-neutral-500">Verified Artists</span>
               </div>
-              <div className="w-[1px] h-8 bg-white/10" />
-              <div>
-                <span className="text-[#c5a059] text-lg font-editorial block">18 States</span>
-                <span className="text-[10px] uppercase tracking-wider text-neutral-500">Pan-India</span>
+              <div
+                style={{
+                  padding: "12px 20px",
+                  borderRadius: "14px",
+                  backgroundColor: "#0a0a10",
+                  border: "1px solid rgba(212,175,97,0.25)",
+                  textAlign: "center",
+                }}
+              >
+                <span className="font-cinema text-2xl font-bold text-[#d4af61] block">18 States</span>
+                <span className="text-[10px] uppercase tracking-wider text-neutral-400">Pan-India Guilds</span>
               </div>
             </div>
           </div>
 
-          {/* Clean Search Input */}
+          {/* Search Input */}
           <div className="mt-10">
-            <div className="relative flex items-center border border-white/[0.15] focus-within:border-white transition-colors bg-white/[0.01]">
-              <Search className="ml-5 w-4 h-4 text-neutral-400 shrink-0" />
+            <div
+              style={{
+                position: "relative",
+                display: "flex",
+                alignItems: "center",
+                backgroundColor: "#0a0a12",
+                border: "1px solid rgba(212,175,97,0.3)",
+                borderRadius: "16px",
+                padding: "4px 8px",
+                boxShadow: "0 8px 30px rgba(0,0,0,0.6)",
+                transition: "border-color 0.2s ease",
+              }}
+            >
+              <Search className="ml-4 w-5 h-5 text-[#d4af61] shrink-0" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search by artist name, city (e.g. Mumbai, Delhi, Kochi), dialect, or skills..."
-                className="w-full bg-transparent px-4 py-4 text-sm text-white placeholder:text-neutral-500 outline-none font-sans"
+                placeholder="Search by artist name, city (e.g. Mumbai, Delhi, Kochi, Hyderabad), dialect, or skills..."
+                className="w-full bg-transparent px-4 py-3.5 text-sm sm:text-base text-white placeholder:text-neutral-500 outline-none font-sans"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery("")}
-                  className="mr-5 text-xs font-mono text-neutral-400 hover:text-white uppercase"
+                  className="mr-3 px-3 py-1 rounded-lg bg-white/10 text-xs font-mono text-neutral-300 hover:text-white uppercase transition-colors"
                 >
                   Clear
                 </button>
@@ -105,18 +163,29 @@ export default function TalentDirectoryPage() {
             </div>
           </div>
 
-          {/* Minimal Filter Controls Row */}
-          <div className="mt-8 flex flex-wrap items-center justify-between gap-6 text-[11px] font-mono tracking-widest uppercase">
-            <div className="flex items-center gap-5">
+          {/* Filter Controls Row */}
+          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 text-[11px] font-mono tracking-widest uppercase">
+            <div className="flex items-center gap-3">
               {["all", "Female", "Male"].map((gender) => (
                 <button
                   key={gender}
                   onClick={() => setSelectedGender(gender)}
-                  className={`pb-1 transition-colors ${
-                    selectedGender === gender
-                      ? "text-white border-b-2 border-[#c5a059] font-semibold"
-                      : "text-neutral-500 hover:text-neutral-300"
-                  }`}
+                  style={{
+                    padding: "8px 18px",
+                    borderRadius: "9999px",
+                    border:
+                      selectedGender === gender
+                        ? "1px solid #d4af61"
+                        : "1px solid rgba(255,255,255,0.08)",
+                    backgroundColor:
+                      selectedGender === gender
+                        ? "rgba(212,175,97,0.15)"
+                        : "transparent",
+                    color: selectedGender === gender ? "#f4e2b8" : "#8e8e98",
+                    fontWeight: selectedGender === gender ? 700 : 500,
+                    cursor: "pointer",
+                    transition: "all 0.2s ease",
+                  }}
                 >
                   {gender === "all" ? "ALL PERFORMERS" : gender.toUpperCase()}
                 </button>
@@ -124,14 +193,27 @@ export default function TalentDirectoryPage() {
             </div>
 
             <div className="flex items-center gap-3">
-              <span className="text-neutral-500 text-[10px]">LANGUAGE:</span>
+              <span className="text-neutral-500 text-[10px] flex items-center gap-1.5">
+                <SlidersHorizontal size={12} /> LANGUAGE:
+              </span>
               <select
                 value={selectedLanguage}
                 onChange={(e) => setSelectedLanguage(e.target.value)}
-                className="bg-transparent border border-white/15 px-3 py-1.5 text-[11px] text-neutral-300 focus:outline-none focus:border-white cursor-pointer uppercase font-mono"
+                style={{
+                  backgroundColor: "#0e0e14",
+                  border: "1px solid rgba(255,255,255,0.15)",
+                  borderRadius: "10px",
+                  padding: "8px 16px",
+                  color: "#f5f5f7",
+                  fontSize: "11px",
+                  outline: "none",
+                  cursor: "pointer",
+                  fontFamily: "monospace",
+                  textTransform: "uppercase",
+                }}
               >
                 {languages.map((l) => (
-                  <option key={l} value={l} className="bg-[#0a0a0c] text-white">
+                  <option key={l} value={l} className="bg-[#0e0e14] text-white">
                     {l}
                   </option>
                 ))}
@@ -140,17 +222,21 @@ export default function TalentDirectoryPage() {
           </div>
         </section>
 
-        {/* Talent Portfolio Grid (Consistent 3:4 Proportions, Minimal Labels) */}
-        <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pt-12">
-          
+        {/* Talent Portfolio Grid (Perfect 3-Column x 2-Row for All 6 Profiles) */}
+        <section className="cinema-container" style={{ paddingTop: "48px" }}>
           <div className="flex items-center justify-between text-xs font-mono text-neutral-500 pb-6 mb-8 border-b border-white/[0.04]">
-            <span>SHOWING {filteredTalent.length} VERIFIED PROFILES</span>
-            <span>CINTAA &amp; DIGILOCKER CERTIFIED</span>
+            <span style={{ color: "#d4af61", fontWeight: 700 }}>
+              SHOWING {filteredTalent.length} OF 6 VERIFIED PROFILES
+            </span>
+            <span className="flex items-center gap-1.5 text-neutral-400">
+              <ShieldCheck size={14} color="#34d399" />
+              <span>CINTAA &amp; DIGILOCKER MEITY VALIDATED</span>
+            </span>
           </div>
 
           {filteredTalent.length === 0 ? (
             <div className="py-24 text-center space-y-4">
-              <p className="font-editorial text-2xl text-neutral-300">
+              <p className="font-cinema text-2xl text-neutral-300">
                 No performers match your search parameters.
               </p>
               <button
@@ -159,70 +245,301 @@ export default function TalentDirectoryPage() {
                   setSelectedGender("all");
                   setSelectedLanguage("all");
                 }}
-                className="btn-editorial text-[10px] py-2 px-6"
+                className="btn-cinema-gold"
+                style={{ height: "42px", padding: "0 24px", fontSize: "11px" }}
               >
                 RESET FILTERS
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-              {filteredTalent.map((talent) => (
-                <Link
-                  key={talent.id}
-                  href={`/talent/${talent.id}`}
-                  className="group flex flex-col justify-between border-b border-white/[0.06] pb-6"
-                >
-                  <div>
-                    {/* Consistent 3:4 Portrait Image */}
-                    <div className="aspect-[3/4] w-full overflow-hidden bg-neutral-900 border border-white/[0.08] mb-4 relative">
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))",
+                gap: "32px",
+                width: "100%",
+              }}
+            >
+              {filteredTalent.map((talent) => {
+                const isAvailable = talent.availability === "available";
+                return (
+                  <Link
+                    key={talent.id}
+                    href={`/talent/${talent.id}`}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      backgroundColor: "#0a0a10",
+                      border: "1px solid rgba(255,255,255,0.08)",
+                      borderRadius: "20px",
+                      overflow: "hidden",
+                      textDecoration: "none",
+                      color: "inherit",
+                      boxShadow: "0 20px 40px rgba(0,0,0,0.7)",
+                      transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = "rgba(212,175,97,0.5)";
+                      e.currentTarget.style.transform = "translateY(-6px)";
+                      e.currentTarget.style.boxShadow =
+                        "0 30px 60px rgba(0,0,0,0.9), 0 0 35px rgba(212,175,97,0.2)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+                      e.currentTarget.style.transform = "translateY(0)";
+                      e.currentTarget.style.boxShadow = "0 20px 40px rgba(0,0,0,0.7)";
+                    }}
+                  >
+                    {/* Portrait Image (3:4 ratio) */}
+                    <div
+                      style={{
+                        position: "relative",
+                        aspectRatio: "3/4",
+                        width: "100%",
+                        overflow: "hidden",
+                        backgroundColor: "#07070b",
+                      }}
+                    >
                       {talent.profilePhoto ? (
                         <img
                           src={talent.profilePhoto}
                           alt={talent.displayName}
-                          className="w-full h-full object-cover object-top filter grayscale-[20%] contrast-[1.05] group-hover:scale-105 group-hover:grayscale-0 transition-all duration-700 ease-out"
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                            objectPosition: "top center",
+                            transition: "transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)",
+                          }}
                         />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center font-editorial text-3xl text-neutral-600">
+                        <div
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            fontSize: "36px",
+                            fontFamily: "Playfair Display, serif",
+                            color: "#d4af61",
+                          }}
+                        >
                           {talent.displayName[0]}
                         </div>
                       )}
-                      <div className="absolute top-2.5 right-2.5 px-2 py-0.5 bg-black/70 text-[9px] font-mono uppercase tracking-wider text-neutral-300">
-                        {talent.availability}
+
+                      {/* Gradient Vignette at Bottom of Image */}
+                      <div
+                        style={{
+                          position: "absolute",
+                          inset: 0,
+                          background:
+                            "linear-gradient(180deg, rgba(0,0,0,0.1) 0%, transparent 40%, rgba(10,10,16,0.95) 100%)",
+                        }}
+                      />
+
+                      {/* Top Badges */}
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: "14px",
+                          left: "14px",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "6px",
+                          padding: "4px 10px",
+                          borderRadius: "20px",
+                          backgroundColor: "rgba(0,0,0,0.75)",
+                          backdropFilter: "blur(8px)",
+                          border: "1px solid rgba(212,175,97,0.35)",
+                          color: "#f4e2b8",
+                          fontSize: "10px",
+                          fontFamily: "monospace",
+                          fontWeight: 700,
+                          letterSpacing: "0.06em",
+                        }}
+                      >
+                        <ShieldCheck size={12} color="#d4af61" />
+                        <span>CINTAA VERIFIED</span>
+                      </div>
+
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: "14px",
+                          right: "14px",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "6px",
+                          padding: "4px 10px",
+                          borderRadius: "20px",
+                          backgroundColor: isAvailable
+                            ? "rgba(16,185,129,0.2)"
+                            : "rgba(245,158,11,0.2)",
+                          backdropFilter: "blur(8px)",
+                          border: isAvailable
+                            ? "1px solid rgba(16,185,129,0.4)"
+                            : "1px solid rgba(245,158,11,0.4)",
+                          color: isAvailable ? "#34d399" : "#fbbf24",
+                          fontSize: "10px",
+                          fontFamily: "monospace",
+                          fontWeight: 700,
+                          letterSpacing: "0.08em",
+                          textTransform: "uppercase",
+                        }}
+                      >
+                        <span
+                          style={{
+                            width: "6px",
+                            height: "6px",
+                            borderRadius: "50%",
+                            backgroundColor: isAvailable ? "#10b981" : "#f59e0b",
+                          }}
+                        />
+                        <span>{talent.availability}</span>
+                      </div>
+
+                      {/* Performer Name & Age Overlay at Base of Photo */}
+                      <div
+                        style={{
+                          position: "absolute",
+                          bottom: "16px",
+                          left: "18px",
+                          right: "18px",
+                        }}
+                      >
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            textTransform: "uppercase",
+                            letterSpacing: "0.18em",
+                            color: "#d4af61",
+                            fontWeight: 700,
+                            marginBottom: "2px",
+                          }}
+                        >
+                          {talent.gender?.toUpperCase()} • {talent.ageMin}–{talent.ageMax} YRS
+                        </div>
+                        <h2
+                          className="font-cinema"
+                          style={{
+                            fontSize: "24px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: 0,
+                            lineHeight: 1.2,
+                          }}
+                        >
+                          {talent.displayName}
+                        </h2>
                       </div>
                     </div>
 
-                    {/* Performer Name in Editorial Serif */}
-                    <h2 className="font-editorial text-xl sm:text-2xl text-white group-hover:text-[#c5a059] transition-colors leading-snug font-normal">
-                      {talent.displayName}
-                    </h2>
-
-                    {/* Profession & City */}
-                    <p className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 mt-1 flex items-center gap-1">
-                      <MapPin size={10} className="text-neutral-500" />
-                      <span>{talent.city}, {talent.state}</span>
-                    </p>
-
-                    {/* Relevant Skills & Languages */}
-                    <div className="flex flex-wrap gap-1.5 mt-3 text-[10px] font-mono text-neutral-500">
-                      {talent.languages.slice(0, 3).map((l) => (
-                        <span key={l} className="border border-white/5 px-2 py-0.5">
-                          {l}
+                    {/* Card Content Details */}
+                    <div
+                      style={{
+                        padding: "18px 20px 20px 20px",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "14px",
+                        flex: 1,
+                      }}
+                    >
+                      {/* Location & Specialty */}
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          fontSize: "11px",
+                          fontFamily: "monospace",
+                        }}
+                      >
+                        <span
+                          style={{
+                            color: "#a0a0b0",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "4px",
+                          }}
+                        >
+                          <MapPin size={12} color="#d4af61" />
+                          <span>
+                            {talent.city}, {talent.state}
+                          </span>
                         </span>
-                      ))}
-                    </div>
-                  </div>
+                        <span style={{ color: "#34d399", fontWeight: 600 }}>
+                          FTII / REP TRAINED
+                        </span>
+                      </div>
 
-                  <div className="mt-5 pt-3 border-t border-white/[0.06] flex items-center justify-between text-[10px] font-mono uppercase tracking-widest text-neutral-400 group-hover:text-white transition-colors">
-                    <span>VIEW PORTFOLIO</span>
-                    <ArrowRight size={11} />
-                  </div>
-                </Link>
-              ))}
+                      {/* Bio Excerpt */}
+                      <p
+                        style={{
+                          fontSize: "12px",
+                          color: "#8e8e98",
+                          margin: 0,
+                          lineHeight: 1.5,
+                          display: "-webkit-box",
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: "vertical",
+                          overflow: "hidden",
+                        }}
+                      >
+                        {talent.bio}
+                      </p>
+
+                      {/* Language Badges */}
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+                        {talent.languages.map((l) => (
+                          <span
+                            key={l}
+                            style={{
+                              fontSize: "10px",
+                              fontFamily: "monospace",
+                              padding: "3px 8px",
+                              borderRadius: "6px",
+                              backgroundColor: "rgba(255,255,255,0.05)",
+                              border: "1px solid rgba(255,255,255,0.08)",
+                              color: "#d0d0dc",
+                            }}
+                          >
+                            {l}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Action Footer */}
+                      <div
+                        style={{
+                          marginTop: "auto",
+                          paddingTop: "14px",
+                          borderTop: "1px solid rgba(255,255,255,0.06)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          fontSize: "11px",
+                          fontFamily: "monospace",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.12em",
+                          color: "#d4af61",
+                          fontWeight: 700,
+                        }}
+                      >
+                        <span>VIEW FULL COMP CARD</span>
+                        <ArrowRight size={14} />
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           )}
         </section>
-
       </main>
+      <Footer />
     </>
   );
 }

@@ -19,8 +19,8 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-[#040406]/85 backdrop-blur-2xl border-b border-white/[0.08]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <header className="sticky top-0 z-40 w-full bg-[#040406]/95 backdrop-blur-2xl border-b border-white/[0.08]">
+      <div className="cinema-container" style={{height:'80px',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
         
         {/* Brand */}
         <Link href="/" className="flex items-center gap-3 group">

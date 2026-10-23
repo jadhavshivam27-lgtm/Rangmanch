@@ -4,6 +4,7 @@ import { useState, Suspense } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { DEMO_TALENT } from "@/lib/data";
 import {
   ChevronLeft,
@@ -12,14 +13,23 @@ import {
   Film,
   Share2,
   Play,
-  CheckCircle,
+  CheckCircle2,
   MapPin,
   Lock,
+  ShieldCheck,
+  Award,
+  Sparkles,
+  Calendar,
+  Send,
+  X,
+  FileText,
+  Clock,
+  ArrowRight,
 } from "lucide-react";
 
 export default function TalentProfileDetailPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#0a0a0c]" />}>
+    <Suspense fallback={<div className="min-h-screen bg-[#040406]" />}>
       <TalentProfileDetailContent />
     </Suspense>
   );
@@ -34,226 +44,564 @@ function TalentProfileDetailContent() {
   const [activePhoto, setActivePhoto] = useState(talent.profilePhoto || "/talent1.jpg");
   const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
   const [isPlayingReel, setIsPlayingReel] = useState(false);
+  const [selectedProduction, setSelectedProduction] = useState("Antim Prahar — Feature Film");
+  const [directorNote, setDirectorNote] = useState("");
+  const [inviteSent, setInviteSent] = useState(false);
 
+  // Gallery of photos for this talent
   const gallery = [
     talent.profilePhoto || "/talent1.jpg",
-    "/talent2.jpg",
-    "/talent3.jpg",
-    "/talent4.jpg",
+    talent.profilePhoto || "/talent1.jpg",
+    talent.profilePhoto || "/talent1.jpg",
+    talent.profilePhoto || "/talent1.jpg",
   ];
+
+  const handleSendInvite = () => {
+    setInviteSent(true);
+    setTimeout(() => {
+      setInviteSent(false);
+      setIsInviteModalOpen(false);
+      alert(`Official casting invitation transmitted to ${talent.displayName} for ${selectedProduction}.`);
+    }, 900);
+  };
 
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-[#0a0a0c] text-[#f8f8f6] pt-10 pb-32">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 space-y-16">
+      <main className="min-h-screen bg-[#040406] text-[#f5f5f7] pt-10 pb-32">
+        <div className="cinema-container" style={{ display: "flex", flexDirection: "column", gap: "56px" }}>
           
           {/* Top Breadcrumb & Share Actions */}
-          <div className="flex items-center justify-between pb-6 border-b border-white/[0.08]">
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              paddingBottom: "24px",
+              borderBottom: "1px solid rgba(255,255,255,0.08)",
+            }}
+          >
             <Link
               href="/talent"
-              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-neutral-400 hover:text-white transition-colors"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                fontSize: "12px",
+                fontFamily: "monospace",
+                textTransform: "uppercase",
+                letterSpacing: "0.15em",
+                color: "#a0a0b0",
+                textDecoration: "none",
+                transition: "color 0.2s ease",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#d4af61")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "#a0a0b0")}
             >
-              <ChevronLeft size={14} />
-              <span>THE ROSTER</span>
+              <ChevronLeft size={16} />
+              <span>THE PERFORMER ROSTER</span>
             </Link>
 
-            <div className="flex items-center gap-4">
+            <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
               <button
                 onClick={() => {
                   navigator.clipboard.writeText(window.location.href);
                   alert("Portfolio URL copied to clipboard.");
                 }}
-                className="btn-editorial py-2 px-4 text-[10px]"
+                className="btn-cinema-ghost"
+                style={{ height: "42px", padding: "0 20px", fontSize: "11px" }}
               >
-                <Share2 size={12} />
-                <span>SHARE</span>
+                <Share2 size={13} />
+                <span>SHARE COMP CARD</span>
               </button>
 
               <button
                 onClick={() => setIsInviteModalOpen(true)}
-                className="btn-editorial-solid py-2 px-5 text-[10px]"
+                className="btn-cinema-gold"
+                style={{ height: "42px", padding: "0 24px", fontSize: "11px" }}
               >
-                INVITE TO AUDITION
+                <Send size={13} />
+                <span>INVITE TO AUDITION</span>
               </button>
             </div>
           </div>
 
           {/* ── 1. EDITORIAL PORTFOLIO HERO ── */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-            
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr",
+              gap: "48px",
+            }}
+            className="lg:grid-cols-12"
+          >
             {/* Left: Prominent Portrait Gallery (5 cols) */}
-            <div className="lg:col-span-5 space-y-4">
-              <div className="aspect-[3/4] w-full overflow-hidden bg-neutral-900 border border-white/[0.08] relative group">
+            <div className="lg:col-span-5" style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+              <div
+                style={{
+                  position: "relative",
+                  aspectRatio: "3/4",
+                  width: "100%",
+                  overflow: "hidden",
+                  borderRadius: "20px",
+                  backgroundColor: "#07070b",
+                  border: "1px solid rgba(212,175,97,0.35)",
+                  boxShadow: "0 25px 60px rgba(0,0,0,0.85), 0 0 35px rgba(212,175,97,0.15)",
+                }}
+              >
                 <img
                   src={activePhoto}
                   alt={talent.displayName}
-                  className="w-full h-full object-cover object-top filter grayscale-[15%] group-hover:scale-102 transition-all duration-700 ease-out"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "top center",
+                    transition: "transform 0.5s ease",
+                  }}
                 />
-                <div className="absolute top-3 right-3 px-2 py-0.5 bg-black/70 text-[9px] font-mono uppercase tracking-wider text-emerald-400 border border-emerald-500/20">
-                  {talent.availability}
+                
+                {/* Status Badges */}
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "16px",
+                    left: "16px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    padding: "4px 12px",
+                    borderRadius: "20px",
+                    backgroundColor: "rgba(0,0,0,0.8)",
+                    backdropFilter: "blur(8px)",
+                    border: "1px solid rgba(212,175,97,0.4)",
+                    color: "#f4e2b8",
+                    fontSize: "10px",
+                    fontFamily: "monospace",
+                    fontWeight: 700,
+                  }}
+                >
+                  <ShieldCheck size={13} color="#d4af61" />
+                  <span>CINTAA VERIFIED</span>
+                </div>
+
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "16px",
+                    right: "16px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    padding: "4px 12px",
+                    borderRadius: "20px",
+                    backgroundColor: talent.availability === "available" ? "rgba(16,185,129,0.25)" : "rgba(245,158,11,0.25)",
+                    backdropFilter: "blur(8px)",
+                    border: talent.availability === "available" ? "1px solid rgba(16,185,129,0.5)" : "1px solid rgba(245,158,11,0.5)",
+                    color: talent.availability === "available" ? "#34d399" : "#fbbf24",
+                    fontSize: "10px",
+                    fontFamily: "monospace",
+                    fontWeight: 700,
+                    textTransform: "uppercase",
+                  }}
+                >
+                  <span
+                    style={{
+                      width: "6px",
+                      height: "6px",
+                      borderRadius: "50%",
+                      backgroundColor: talent.availability === "available" ? "#10b981" : "#f59e0b",
+                    }}
+                  />
+                  <span>{talent.availability}</span>
                 </div>
               </div>
 
               {/* Angle thumbnails */}
-              <div className="grid grid-cols-4 gap-2">
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "10px" }}>
                 {gallery.map((imgSrc, i) => (
                   <button
                     key={i}
                     onClick={() => setActivePhoto(imgSrc)}
-                    className={`aspect-[3/4] overflow-hidden border transition-all ${
-                      activePhoto === imgSrc
-                        ? "border-[#c5a059] opacity-100"
-                        : "border-white/10 opacity-50 hover:opacity-100"
-                    }`}
+                    style={{
+                      aspectRatio: "3/4",
+                      overflow: "hidden",
+                      borderRadius: "10px",
+                      border: activePhoto === imgSrc ? "2px solid #d4af61" : "1px solid rgba(255,255,255,0.12)",
+                      backgroundColor: "#07070b",
+                      cursor: "pointer",
+                      padding: 0,
+                      opacity: activePhoto === imgSrc ? 1 : 0.6,
+                      transition: "all 0.2s ease",
+                    }}
                   >
-                    <img src={imgSrc} alt="" className="w-full h-full object-cover object-top" />
+                    <img src={imgSrc} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                   </button>
                 ))}
               </div>
             </div>
 
             {/* Right: Editorial Bio, Specs & Typography (7 cols) */}
-            <div className="lg:col-span-7 space-y-8">
+            <div className="lg:col-span-7" style={{ display: "flex", flexDirection: "column", gap: "28px" }}>
               <div>
-                <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#c5a059] mb-3">
-                  ✦ VERIFIED PERFORMER • ID: {talent.id.toUpperCase()}
-                </p>
-                <h1 className="font-editorial text-4xl sm:text-6xl font-light text-white tracking-tight leading-tight">
+                <div
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    fontSize: "11px",
+                    fontFamily: "monospace",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.22em",
+                    color: "#d4af61",
+                    fontWeight: 700,
+                    marginBottom: "8px",
+                  }}
+                >
+                  <span>✦ VERIFIED ARTIST</span>
+                  <span style={{ color: "rgba(255,255,255,0.3)" }}>•</span>
+                  <span>ID: {talent.id.toUpperCase()}</span>
+                </div>
+
+                <h1
+                  className="font-cinema"
+                  style={{
+                    fontSize: "44px",
+                    fontWeight: 700,
+                    color: "#ffffff",
+                    letterSpacing: "-0.01em",
+                    lineHeight: 1.15,
+                    margin: 0,
+                  }}
+                >
                   {talent.displayName}
                 </h1>
-                <p className="text-sm font-mono uppercase tracking-widest text-neutral-400 mt-2 flex items-center gap-2">
+
+                <p
+                  style={{
+                    fontSize: "13px",
+                    fontFamily: "monospace",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.15em",
+                    color: "#a0a0b0",
+                    marginTop: "8px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                  }}
+                >
                   <span>{talent.skills.acting || "Actor & Screen Performer"}</span>
-                  <span>•</span>
-                  <span className="flex items-center gap-1">
-                    <MapPin size={11} className="text-[#c5a059]" />
+                  <span style={{ color: "#d4af61" }}>•</span>
+                  <span style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+                    <MapPin size={13} color="#d4af61" />
                     {talent.city}, {talent.state}
                   </span>
                 </p>
               </div>
 
               {/* Physical Specifications & Languages Table */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 py-6 border-y border-white/[0.08] text-xs font-mono">
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(4, 1fr)",
+                  gap: "16px",
+                  padding: "20px 24px",
+                  borderRadius: "16px",
+                  backgroundColor: "#0a0a10",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  fontFamily: "monospace",
+                  fontSize: "12px",
+                }}
+              >
                 <div>
-                  <span className="text-neutral-500 text-[10px] uppercase block mb-1">HEIGHT</span>
-                  <span className="text-white">5&apos;10&quot; (178 cm)</span>
+                  <span style={{ fontSize: "10px", color: "#606070", textTransform: "uppercase", display: "block", marginBottom: "4px" }}>
+                    HEIGHT
+                  </span>
+                  <span style={{ color: "#ffffff", fontWeight: 700 }}>5&apos;10&quot; (178 cm)</span>
                 </div>
                 <div>
-                  <span className="text-neutral-500 text-[10px] uppercase block mb-1">SCREEN AGE</span>
-                  <span className="text-white">{talent.ageMin} – {talent.ageMax} Years</span>
+                  <span style={{ fontSize: "10px", color: "#606070", textTransform: "uppercase", display: "block", marginBottom: "4px" }}>
+                    SCREEN AGE
+                  </span>
+                  <span style={{ color: "#ffffff", fontWeight: 700 }}>
+                    {talent.ageMin} – {talent.ageMax} Years
+                  </span>
                 </div>
                 <div>
-                  <span className="text-neutral-500 text-[10px] uppercase block mb-1">GUILD</span>
-                  <span className="text-emerald-400">CINTAA Verified</span>
+                  <span style={{ fontSize: "10px", color: "#606070", textTransform: "uppercase", display: "block", marginBottom: "4px" }}>
+                    GUILD RECOGNITION
+                  </span>
+                  <span style={{ color: "#34d399", fontWeight: 700 }}>CINTAA Verified</span>
                 </div>
                 <div>
-                  <span className="text-neutral-500 text-[10px] uppercase block mb-1">STATUS</span>
-                  <span className="text-white capitalize">{talent.availability}</span>
+                  <span style={{ fontSize: "10px", color: "#606070", textTransform: "uppercase", display: "block", marginBottom: "4px" }}>
+                    CURRENT STATUS
+                  </span>
+                  <span style={{ color: talent.availability === "available" ? "#34d399" : "#fbbf24", fontWeight: 700, textTransform: "capitalize" }}>
+                    {talent.availability}
+                  </span>
                 </div>
               </div>
 
               {/* Biography in Editorial Prose */}
-              <div className="space-y-4">
-                <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-500">
-                  REPRESENTATION &amp; ARTISTIC BACKGROUND
-                </p>
-                <p className="font-editorial text-xl sm:text-2xl text-neutral-200 font-light leading-relaxed">
+              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                <span style={{ fontSize: "11px", fontFamily: "monospace", textTransform: "uppercase", letterSpacing: "0.18em", color: "#d4af61", fontWeight: 700 }}>
+                  ARTISTIC BACKGROUND &amp; REPRESENTATION
+                </span>
+                <p
+                  className="font-cinema"
+                  style={{
+                    fontSize: "20px",
+                    color: "#f5f5f7",
+                    fontStyle: "italic",
+                    lineHeight: 1.6,
+                    margin: 0,
+                  }}
+                >
                   &ldquo;{talent.bio}&rdquo;
                 </p>
               </div>
 
               {/* Spoken Dialects */}
-              <div className="space-y-2 pt-4">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-500 block">
+              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                <span style={{ fontSize: "11px", fontFamily: "monospace", textTransform: "uppercase", letterSpacing: "0.15em", color: "#8a8a9a", fontWeight: 600 }}>
                   LANGUAGES &amp; DIALECT PROFICIENCY:
                 </span>
-                <div className="flex flex-wrap gap-2 text-xs font-mono">
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
                   {talent.languages.map((l) => (
-                    <span key={l} className="border border-white/15 px-3 py-1 text-white">
+                    <span
+                      key={l}
+                      style={{
+                        padding: "6px 14px",
+                        borderRadius: "8px",
+                        backgroundColor: "#0d0d14",
+                        border: "1px solid rgba(212,175,97,0.3)",
+                        color: "#f4e2b8",
+                        fontSize: "12px",
+                        fontFamily: "monospace",
+                        fontWeight: 600,
+                      }}
+                    >
                       {l} — Native / Fluent
                     </span>
                   ))}
                 </div>
               </div>
 
-              {/* Education */}
+              {/* Education & Training */}
               {talent.education && (
-                <div className="pt-2 text-xs font-mono text-neutral-400">
-                  <span className="text-neutral-500 uppercase">Training: </span>
-                  <span className="text-white">{talent.education}</span>
+                <div
+                  style={{
+                    padding: "16px 20px",
+                    borderRadius: "12px",
+                    backgroundColor: "rgba(255,255,255,0.03)",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                    fontSize: "12px",
+                    fontFamily: "monospace",
+                  }}
+                >
+                  <span style={{ color: "#d4af61", fontWeight: 700, textTransform: "uppercase" }}>TRAINING &amp; CONSERVATORY: </span>
+                  <span style={{ color: "#ffffff" }}>{talent.education}</span>
                 </div>
               )}
             </div>
-
           </div>
 
           {/* ── 2. PROMINENT AUDITION SHOWREEL ── */}
-          <div className="pt-12 border-t border-white/[0.08] space-y-6">
-            <div className="flex items-center justify-between">
+          <div
+            style={{
+              paddingTop: "40px",
+              borderTop: "1px solid rgba(255,255,255,0.08)",
+              display: "flex",
+              flexDirection: "column",
+              gap: "20px",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
               <div>
-                <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#c5a059] mb-1">
-                  ✦ MEDIA VAULT
+                <p style={{ fontSize: "10px", fontFamily: "monospace", textTransform: "uppercase", letterSpacing: "0.22em", color: "#d4af61", fontWeight: 700, margin: 0 }}>
+                  ✦ DIGITAL MEDIA VAULT
                 </p>
-                <h2 className="font-editorial text-2xl sm:text-3xl font-light text-white">
-                  Audition Showreel &amp; Monologue
+                <h2 className="font-cinema" style={{ fontSize: "26px", fontWeight: 700, color: "#ffffff", margin: "4px 0 0 0" }}>
+                  Audition Showreel &amp; Dramatic Monologue
                 </h2>
               </div>
-              <span className="text-xs font-mono text-neutral-500 uppercase">1080P HD • 2M 14S</span>
+              <span style={{ fontSize: "11px", fontFamily: "monospace", color: "#8a8a9a", textTransform: "uppercase" }}>
+                1080P HD • 2M 14S
+              </span>
             </div>
 
-            <div className="relative aspect-video w-full max-w-4xl bg-neutral-900 border border-white/[0.08] overflow-hidden group flex items-center justify-center">
+            <div
+              style={{
+                position: "relative",
+                aspectRatio: "16/9",
+                width: "100%",
+                maxWidth: "880px",
+                borderRadius: "20px",
+                overflow: "hidden",
+                backgroundColor: "#07070b",
+                border: "1px solid rgba(212,175,97,0.3)",
+                boxShadow: "0 25px 60px rgba(0,0,0,0.85)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
               <img
                 src="/hero.jpg"
                 alt="Showreel Preview"
-                className="w-full h-full object-cover opacity-40 filter grayscale"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  opacity: 0.45,
+                  filter: "contrast(1.1)",
+                }}
               />
               <button
                 onClick={() => setIsPlayingReel(!isPlayingReel)}
-                className="absolute w-20 h-20 rounded-full border border-white/40 bg-black/60 backdrop-blur-md flex items-center justify-center text-white hover:scale-105 hover:border-white transition-all"
+                style={{
+                  position: "absolute",
+                  width: "72px",
+                  height: "72px",
+                  borderRadius: "50%",
+                  background: "linear-gradient(135deg, rgba(212,175,97,0.9) 0%, rgba(184,146,66,0.9) 100%)",
+                  border: "2px solid #ffffff",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#040406",
+                  cursor: "pointer",
+                  boxShadow: "0 0 35px rgba(212,175,97,0.6)",
+                  transition: "transform 0.2s ease",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.08)")}
+                onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
                 aria-label="Play showreel"
               >
-                <Play size={24} className="ml-1 fill-current" />
+                <Play size={26} className="ml-1 fill-current" />
               </button>
-              <div className="absolute bottom-4 left-6 text-xs font-mono text-neutral-300">
-                {talent.displayName} — Dramatic Monologue &amp; Interrogation Scene Cuts (2024)
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: "16px",
+                  left: "20px",
+                  fontSize: "12px",
+                  fontFamily: "monospace",
+                  color: "#ffffff",
+                  backgroundColor: "rgba(0,0,0,0.7)",
+                  backdropFilter: "blur(8px)",
+                  padding: "4px 12px",
+                  borderRadius: "6px",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                }}
+              >
+                {talent.displayName} — Dramatic Monologue &amp; Intensity Reel (2024)
               </div>
             </div>
           </div>
 
-          {/* ── 3. VERIFIED CREDITS & EXPERIENCE ── */}
-          <div className="pt-12 border-t border-white/[0.08] space-y-6">
-            <h2 className="font-editorial text-2xl sm:text-3xl font-light text-white">
-              Verified Filmography &amp; Stage
+          {/* ── 3. VERIFIED CREDITS & FILMOGRAPHY ── */}
+          <div
+            style={{
+              paddingTop: "40px",
+              borderTop: "1px solid rgba(255,255,255,0.08)",
+              display: "flex",
+              flexDirection: "column",
+              gap: "20px",
+            }}
+          >
+            <h2 className="font-cinema" style={{ fontSize: "26px", fontWeight: 700, color: "#ffffff", margin: 0 }}>
+              Verified Filmography &amp; Stage Credentials
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 divide-y md:divide-y-0 md:divide-x divide-white/[0.08] text-xs font-mono">
-              <div className="space-y-4">
-                <p className="text-neutral-500 uppercase tracking-widest text-[10px]">SCREEN CREDITS</p>
-                <div className="space-y-3">
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: "32px",
+                fontFamily: "monospace",
+                fontSize: "12px",
+              }}
+            >
+              {/* Screen credits */}
+              <div
+                style={{
+                  padding: "24px",
+                  borderRadius: "16px",
+                  backgroundColor: "#0a0a10",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "14px",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "8px", color: "#d4af61", fontWeight: 700, fontSize: "11px", letterSpacing: "0.15em" }}>
+                  <Film size={15} />
+                  <span>SCREEN &amp; OTT CREDITS</span>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
                   {(talent.experience?.film || []).map((f, idx) => (
-                    <div key={idx} className="pb-3 border-b border-white/[0.04] text-neutral-200">
+                    <div
+                      key={idx}
+                      style={{
+                        paddingBottom: "10px",
+                        borderBottom: "1px solid rgba(255,255,255,0.05)",
+                        color: "#e0e0ea",
+                      }}
+                    >
                       {f}
                     </div>
                   ))}
                   {(talent.experience?.webSeries || []).map((w, idx) => (
-                    <div key={idx} className="pb-3 border-b border-white/[0.04] text-neutral-200">
+                    <div
+                      key={idx}
+                      style={{
+                        paddingBottom: "10px",
+                        borderBottom: "1px solid rgba(255,255,255,0.05)",
+                        color: "#e0e0ea",
+                      }}
+                    >
                       {w}
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="md:pl-8 pt-6 md:pt-0 space-y-4">
-                <p className="text-neutral-500 uppercase tracking-widest text-[10px]">THEATRE &amp; STAGE WORKS</p>
-                <div className="space-y-3">
+              {/* Theatre works */}
+              <div
+                style={{
+                  padding: "24px",
+                  borderRadius: "16px",
+                  backgroundColor: "#0a0a10",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "14px",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "8px", color: "#d4af61", fontWeight: 700, fontSize: "11px", letterSpacing: "0.15em" }}>
+                  <Award size={15} />
+                  <span>THEATRE &amp; LIVE STAGE</span>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
                   {(talent.experience?.theatre || []).length > 0 ? (
                     talent.experience.theatre.map((t, idx) => (
-                      <div key={idx} className="pb-3 border-b border-white/[0.04] text-neutral-200">
+                      <div
+                        key={idx}
+                        style={{
+                          paddingBottom: "10px",
+                          borderBottom: "1px solid rgba(255,255,255,0.05)",
+                          color: "#e0e0ea",
+                        }}
+                      >
                         {t}
                       </div>
                     ))
                   ) : (
-                    <div className="text-neutral-400">Prithvi Theatre Circuit &amp; National School of Drama repertory productions.</div>
+                    <div style={{ color: "#a0a0b0" }}>
+                      Prithvi Theatre Circuit &amp; National School of Drama repertory productions.
+                    </div>
                   )}
                 </div>
               </div>
@@ -263,51 +611,237 @@ function TalentProfileDetailContent() {
         </div>
       </main>
 
-      {/* Invite Modal */}
+      {/* ─── Audition Invitation Modal (Cinema Gold Redesign) ─── */}
       {isInviteModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md">
-          <div className="w-full max-w-md p-8 border border-white/20 bg-[#0a0a0c] space-y-6">
-            <div className="flex items-center justify-between pb-3 border-b border-white/10">
-              <h3 className="font-editorial text-2xl text-white">Audition Invitation</h3>
-              <button onClick={() => setIsInviteModalOpen(false)} className="text-neutral-400 hover:text-white">✕</button>
-            </div>
-            <p className="text-xs text-neutral-400 font-light leading-relaxed">
-              Send an official casting invitation to <span className="text-white font-medium">{talent.displayName}</span> for an upcoming production.
-            </p>
-            <div className="space-y-4 text-xs font-mono">
-              <div>
-                <label className="text-neutral-500 uppercase block mb-1">Production</label>
-                <select className="w-full p-3 bg-transparent border border-white/15 text-white">
-                  <option className="bg-[#0a0a0c]">Antim Prahar — Feature Film</option>
-                  <option className="bg-[#0a0a0c]">Dhoop Ki Deewar — OTT Series</option>
-                </select>
+        <div className="modal-backdrop">
+          <div
+            className="modal-panel"
+            style={{
+              maxWidth: "540px",
+              width: "100%",
+              background: "linear-gradient(180deg, #101018 0%, #0a0a0f 100%)",
+              border: "1px solid rgba(212, 175, 97, 0.35)",
+              borderRadius: "24px",
+              boxShadow: "0 25px 80px rgba(0,0,0,0.95), 0 0 50px rgba(212,175,97,0.15)",
+              overflow: "hidden",
+            }}
+          >
+            {/* Top Gold Trim */}
+            <div
+              style={{
+                height: "3px",
+                width: "100%",
+                background: "linear-gradient(90deg, transparent, #d4af61 25%, #f4e2b8 50%, #d4af61 75%, transparent)",
+              }}
+            />
+
+            {/* Header */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "24px 28px 18px 28px",
+                borderBottom: "1px solid rgba(255,255,255,0.08)",
+                backgroundColor: "#0d0d14",
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                <div
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "12px",
+                    background: "linear-gradient(135deg, rgba(212,175,97,0.2) 0%, rgba(212,175,97,0.05) 100%)",
+                    border: "1px solid rgba(212,175,97,0.4)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "#d4af61",
+                  }}
+                >
+                  <Send size={20} />
+                </div>
+                <div>
+                  <div
+                    style={{
+                      fontSize: "10px",
+                      fontFamily: "monospace",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.2em",
+                      color: "#d4af61",
+                      fontWeight: 700,
+                    }}
+                  >
+                    ✦ OFFICIAL CASTING MEMO
+                  </div>
+                  <h3
+                    className="font-cinema"
+                    style={{
+                      fontSize: "20px",
+                      fontWeight: 700,
+                      color: "#ffffff",
+                      margin: "2px 0 0 0",
+                    }}
+                  >
+                    Audition Invitation
+                  </h3>
+                </div>
               </div>
-              <div>
-                <label className="text-neutral-500 uppercase block mb-1">Director Note</label>
-                <textarea
-                  rows={3}
-                  placeholder="Include scene notes or sides instructions..."
-                  className="w-full p-3 bg-transparent border border-white/15 text-white"
-                />
+
+              <button
+                onClick={() => setIsInviteModalOpen(false)}
+                style={{
+                  width: "36px",
+                  height: "36px",
+                  borderRadius: "10px",
+                  backgroundColor: "rgba(255,255,255,0.05)",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#9a9aa8",
+                  cursor: "pointer",
+                }}
+              >
+                <X size={16} />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div style={{ padding: "24px 28px", display: "flex", flexDirection: "column", gap: "18px" }}>
+              <p style={{ margin: 0, fontSize: "12px", color: "#a0a0b0", lineHeight: 1.5 }}>
+                Send an official casting audition memo to{" "}
+                <span style={{ color: "#ffffff", fontWeight: 700 }}>{talent.displayName}</span>. The talent will receive a confidential notification and scripted sides.
+              </p>
+
+              {/* Form Fields */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                  <label
+                    style={{
+                      fontSize: "10px",
+                      fontFamily: "monospace",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.15em",
+                      color: "#8a8a9a",
+                      fontWeight: 600,
+                    }}
+                  >
+                    Select Production Call
+                  </label>
+                  <select
+                    value={selectedProduction}
+                    onChange={(e) => setSelectedProduction(e.target.value)}
+                    style={{
+                      width: "100%",
+                      padding: "12px 14px",
+                      backgroundColor: "#050508",
+                      border: "1px solid rgba(212,175,97,0.3)",
+                      borderRadius: "12px",
+                      color: "#ffffff",
+                      fontSize: "13px",
+                      outline: "none",
+                      cursor: "pointer",
+                      fontFamily: "inherit",
+                    }}
+                  >
+                    <option className="bg-[#0e0e14]">Antim Prahar — Feature Film (Main Lead)</option>
+                    <option className="bg-[#0e0e14]">Dhoop Ki Deewar — OTT Series (Season 2)</option>
+                    <option className="bg-[#0e0e14]">Kailash Hills — Period Drama (Parallel Lead)</option>
+                  </select>
+                </div>
+
+                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                  <label
+                    style={{
+                      fontSize: "10px",
+                      fontFamily: "monospace",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.15em",
+                      color: "#8a8a9a",
+                      fontWeight: 600,
+                    }}
+                  >
+                    Director&apos;s Audition Note / Sides Context
+                  </label>
+                  <textarea
+                    rows={3}
+                    value={directorNote}
+                    onChange={(e) => setDirectorNote(e.target.value)}
+                    placeholder="Include scene notes, character mood, dialect references, or sides instructions..."
+                    style={{
+                      width: "100%",
+                      padding: "12px 14px",
+                      backgroundColor: "#050508",
+                      border: "1px solid rgba(255,255,255,0.12)",
+                      borderRadius: "12px",
+                      color: "#ffffff",
+                      fontSize: "13px",
+                      outline: "none",
+                      resize: "none",
+                      fontFamily: "inherit",
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* Escrow Guarantee Pill */}
+              <div
+                style={{
+                  padding: "12px 16px",
+                  borderRadius: "12px",
+                  backgroundColor: "rgba(212,175,97,0.06)",
+                  border: "1px solid rgba(212,175,97,0.25)",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  fontSize: "11px",
+                  fontFamily: "monospace",
+                  color: "#d4af61",
+                }}
+              >
+                <Lock size={14} style={{ flexShrink: 0 }} />
+                <span>Escrow-Protected: Audition honorariums &amp; callbacks are guaranteed under CINTAA terms.</span>
               </div>
             </div>
-            <div className="flex justify-end gap-3 pt-2">
-              <button onClick={() => setIsInviteModalOpen(false)} className="btn-editorial py-2 px-4 text-[10px]">
+
+            {/* Footer */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "flex-end",
+                gap: "12px",
+                padding: "18px 28px",
+                backgroundColor: "#0d0d14",
+                borderTop: "1px solid rgba(255,255,255,0.08)",
+              }}
+            >
+              <button
+                type="button"
+                onClick={() => setIsInviteModalOpen(false)}
+                className="btn-cinema-ghost"
+                style={{ height: "42px", padding: "0 20px", fontSize: "11px" }}
+              >
                 CANCEL
               </button>
               <button
-                onClick={() => {
-                  alert(`Audition invitation transmitted to ${talent.displayName}.`);
-                  setIsInviteModalOpen(false);
-                }}
-                className="btn-editorial-solid py-2 px-5 text-[10px]"
+                type="button"
+                onClick={handleSendInvite}
+                disabled={inviteSent}
+                className="btn-cinema-gold"
+                style={{ height: "42px", padding: "0 24px", fontSize: "11px" }}
               >
-                SEND INVITATION
+                {inviteSent ? "TRANSMITTING..." : "SEND INVITATION"}
+                <ArrowRight size={13} />
               </button>
             </div>
           </div>
         </div>
       )}
+
+      <Footer />
     </>
   );
 }

@@ -343,3 +343,144 @@ export interface GuardianCoSignRecord {
   approvalCertificateId: string;
 }
 
+
+// --- M011: PAN Card Verification for TDS Compliance ---
+export interface PANVerificationRecord {
+  recordId: string;
+  panNumber: string;
+  verifiedName: string;
+  panStatus: "active" | "inactive" | "invalid";
+  tdsCategory: "individual" | "huf" | "company";
+  tdsRate: number;
+  form15AB: boolean;
+  verifiedAt: string;
+  status: "verified" | "pending" | "failed";
+}
+
+// --- M012: Passport & Overseas Shoot Clearance ---
+export interface PassportOverseasRecord {
+  recordId: string;
+  passportNumber: string;
+  countryOfIssue: string;
+  expiryDate: string;
+  visaType: "work" | "business" | "tourist";
+  destinationCountry: string;
+  shootStartDate: string;
+  shootEndDate: string;
+  mhaClearance: boolean;
+  insurancePolicyRef: string;
+  status: "approved" | "pending" | "flagged";
+}
+
+// --- M013: CINTAA / Casting Guild Credentials ---
+export interface GuildCredentialsRecord {
+  recordId: string;
+  guildName: "CINTAA" | "FWICE" | "AIFEC" | "BCAS" | "Other";
+  membershipId: string;
+  membershipExpiry: string;
+  membershipTier: "associate" | "full" | "life";
+  unionClearance: boolean;
+  blacklistCheck: boolean;
+  verifiedAt: string;
+  status: "verified" | "pending" | "expired";
+}
+
+// --- M014: Bank Account & Escrow Linkage ---
+export interface EscrowBankRecord {
+  recordId: string;
+  accountHolderName: string;
+  bankName: string;
+  maskedAccountNumber: string;
+  ifscCode: string;
+  escrowProvider: "Razorpay" | "Cashfree" | "HDFC Escrow" | "Custom";
+  escrowAccountRef: string;
+  pennyDropVerified: boolean;
+  linkedAt: string;
+  status: "active" | "pending" | "failed";
+}
+
+// --- M015: Studio / Location Shoot Permit ---
+export interface LocationPermitRecord {
+  recordId: string;
+  locationName: string;
+  city: string;
+  state: string;
+  permitType: "government" | "private" | "forest" | "heritage" | "public";
+  permitNumber: string;
+  validFrom: string;
+  validTo: string;
+  issuedBy: string;
+  liabilityInsuranceRef: string;
+  status: "approved" | "pending" | "expired";
+}
+
+// --- M016: Talent Agency Contract & Exclusivity ---
+export interface AgencyContractRecord {
+  recordId: string;
+  agencyName: string;
+  agencyRegNumber: string;
+  contractType: "exclusive" | "non_exclusive" | "project_specific";
+  commissionRate: number;
+  contractStart: string;
+  contractEnd: string;
+  digitalSignatureHash: string;
+  arbitrationClause: boolean;
+  status: "active" | "expired" | "terminated";
+}
+
+// --- M017: DRM Script Sides Access Control ---
+export interface DRMSidesAccessRecord {
+  recordId: string;
+  castingCallId: string;
+  roleId: string;
+  talentId: string;
+  accessLevel: "read_only" | "self_tape" | "full";
+  watermarkId: string;
+  accessGrantedAt: string;
+  expiresAt: string;
+  deviceFingerprint: string;
+  status: "active" | "revoked" | "expired";
+}
+
+// --- M018: Brand Safety Check for Commercial Shoots ---
+export interface BrandSafetyRecord {
+  recordId: string;
+  brandName: string;
+  productCategory: string;
+  conflictBrands: string[];
+  socialMediaAuditScore: number;
+  controversyFlags: string[];
+  ndaRequired: boolean;
+  ndaSignedAt?: string;
+  clearanceGrantedAt: string;
+  status: "cleared" | "flagged" | "under_review";
+}
+
+// --- M019: Screen Test / Callback Booking ---
+export interface ScreenTestRecord {
+  recordId: string;
+  castingCallId: string;
+  roleId: string;
+  talentId: string;
+  scheduledAt: string;
+  duration: number;
+  venue: string;
+  directorName: string;
+  callSheetIssued: boolean;
+  travelReimbursement: boolean;
+  travelAmount?: number;
+  status: "scheduled" | "completed" | "cancelled" | "no_show";
+}
+
+// --- M020: Stunt & Special Skills Safety Certification ---
+export interface StuntSafetyCertRecord {
+  recordId: string;
+  certifyingBody: "Indian Stunt Association" | "ACII" | "SCA India" | "Custom";
+  certificationId: string;
+  skillCategory: "stunts" | "horse_riding" | "martial_arts" | "aerial" | "underwater" | "pyrotechnics";
+  proficiencyLevel: "basic" | "intermediate" | "advanced" | "professional";
+  medicalClearance: boolean;
+  insuranceCoverage: number;
+  validUntil: string;
+  status: "valid" | "expired" | "revoked";
+}

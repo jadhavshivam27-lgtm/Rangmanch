@@ -43,7 +43,7 @@ function CastingCallDetailContent() {
     <>
       <Navbar />
       <main className="min-h-screen bg-[#0a0a0c] text-[#f8f8f6] pt-10 pb-32">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 space-y-16">
+        <div className="cinema-container" style={{display:'flex',flexDirection:'column',gap:'64px'}}>
           
           {/* Back Navigation Bar */}
           <div className="flex items-center justify-between pb-6 border-b border-white/[0.08]">

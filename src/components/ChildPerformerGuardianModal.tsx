@@ -4,7 +4,7 @@ import { useState } from "react";
 import {
   ShieldAlert,
   UserCheck,
-  CheckCircle,
+  CheckCircle2,
   X,
   FileText,
   Clock,
@@ -15,6 +15,11 @@ import {
   Download,
   AlertCircle,
   HeartHandshake,
+  ArrowLeft,
+  Check,
+  Sparkles,
+  Smartphone,
+  Fingerprint,
 } from "lucide-react";
 import type { GuardianCoSignRecord } from "@/lib/types";
 
@@ -47,10 +52,9 @@ export default function ChildPerformerGuardianModal({
   const [clauseSchooling, setClauseSchooling] = useState(true);
   const [clauseMaxHours, setClauseMaxHours] = useState(true);
   const [clauseTrustFund, setClauseTrustFund] = useState(true);
-  const [clauseChaperone, setClauseChaperone] = useState(true);
 
   // OTP e-Sign State
-  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const [otp, setOtp] = useState(["5", "1", "8", "2", "9", "4"]);
   const [isSigning, setIsSigning] = useState(false);
   const [permitRecord, setPermitRecord] = useState<GuardianCoSignRecord | null>(null);
 
@@ -81,119 +85,368 @@ export default function ChildPerformerGuardianModal({
       setPermitRecord(record);
       if (onSuccess) onSuccess(record);
       setStep(4);
-    }, 1500);
+    }, 1000);
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
+    <div className="modal-backdrop">
       <div
-        className="relative w-full max-w-2xl rounded-3xl border shadow-2xl overflow-hidden flex flex-col max-h-[92vh]"
+        className="modal-panel"
         style={{
-          background: "var(--charcoal-900)",
-          borderColor: "rgba(232, 96, 76, 0.4)",
-          boxShadow: "0 25px 70px rgba(0,0,0,0.85), 0 0 40px rgba(232, 96, 76, 0.15)",
+          maxWidth: "680px",
+          width: "100%",
+          background: "linear-gradient(180deg, #101018 0%, #0a0a0f 100%)",
+          border: "1px solid rgba(212, 175, 97, 0.35)",
+          borderRadius: "24px",
+          boxShadow: "0 25px 80px rgba(0,0,0,0.95), 0 0 50px rgba(212,175,97,0.12)",
+          overflow: "hidden",
         }}
       >
-        {/* Header */}
+        {/* Top Gold Gradient Trim */}
         <div
-          className="flex items-center justify-between px-6 py-4 border-b shrink-0"
           style={{
-            background: "linear-gradient(90deg, rgba(30,18,18,0.95), rgba(40,22,22,0.95))",
-            borderColor: "rgba(232, 96, 76, 0.25)",
+            height: "3px",
+            width: "100%",
+            background: "linear-gradient(90deg, transparent, #d4af61 25%, #f4e2b8 50%, #d4af61 75%, transparent)",
+          }}
+        />
+
+        {/* Modal Header */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "24px 32px 20px 32px",
+            borderBottom: "1px solid rgba(255,255,255,0.08)",
+            backgroundColor: "#0d0d14",
           }}
         >
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[var(--coral-500)]/15 border border-[var(--coral-500)]/30 flex items-center justify-center text-[var(--coral-400)]">
-              <HeartHandshake className="w-6 h-6" />
+          <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+            <div
+              style={{
+                width: "48px",
+                height: "48px",
+                borderRadius: "14px",
+                background: "linear-gradient(135deg, rgba(212,175,97,0.2) 0%, rgba(212,175,97,0.05) 100%)",
+                border: "1px solid rgba(212,175,97,0.4)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#d4af61",
+                boxShadow: "0 0 20px rgba(212,175,97,0.15)",
+                flexShrink: 0,
+              }}
+            >
+              <HeartHandshake size={24} />
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <span className="font-display font-bold text-lg text-[var(--ivory)]">
-                  Minor / Child Performer Guardian Gateway
-                </span>
-                <span className="badge badge-coral text-[10px] font-mono">M005 • NCPCR RIDER</span>
+              <div
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  fontSize: "10px",
+                  fontFamily: "monospace",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.22em",
+                  color: "#d4af61",
+                  fontWeight: 700,
+                  marginBottom: "4px",
+                }}
+              >
+                <span>✦ MODULE M005</span>
+                <span style={{ color: "rgba(255,255,255,0.3)" }}>•</span>
+                <span style={{ color: "#34d399" }}>NCPCR STATUTORY RIDER</span>
               </div>
-              <p className="text-xs text-[var(--text-muted)]">
-                Statutory Legal Guardian Consent &amp; Child Protection Gateway (Under 18)
-              </p>
+              <h2
+                className="font-cinema"
+                style={{
+                  fontSize: "22px",
+                  fontWeight: 700,
+                  color: "#ffffff",
+                  letterSpacing: "-0.01em",
+                  margin: 0,
+                  lineHeight: 1.2,
+                }}
+              >
+                Minor Performer Guardian Gateway
+              </h2>
             </div>
           </div>
+
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-[var(--text-muted)] hover:text-white hover:bg-white/10 transition-colors"
+            style={{
+              width: "36px",
+              height: "36px",
+              borderRadius: "10px",
+              backgroundColor: "rgba(255,255,255,0.05)",
+              border: "1px solid rgba(255,255,255,0.1)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              color: "#9a9aa8",
+              transition: "all 0.2s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.12)";
+              e.currentTarget.style.color = "#ffffff";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.05)";
+              e.currentTarget.style.color = "#9a9aa8";
+            }}
+            aria-label="Close"
           >
-            <X className="w-5 h-5" />
+            <X size={18} />
           </button>
         </div>
 
-        {/* Stepper Progress Bar */}
-        <div className="px-6 py-3 bg-black/30 border-b border-white/5 flex items-center justify-between text-xs">
-          {[
-            { num: 1, label: "Guardian Identity" },
-            { num: 2, label: "NCPCR Safety Riders" },
-            { num: 3, label: "Guardian e-Sign" },
-            { num: 4, label: "Approved Work Permit" },
-          ].map((st) => (
-            <div
-              key={st.num}
-              className={`flex items-center gap-1.5 font-medium ${
-                step >= st.num ? "text-[var(--coral-400)]" : "text-[var(--text-muted)]"
-              }`}
-            >
-              <span
-                className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-mono font-bold ${
-                  step >= st.num
-                    ? "bg-[var(--coral-500)] text-white"
-                    : "bg-white/10 text-[var(--text-muted)]"
-                }`}
-              >
-                {st.num}
-              </span>
-              <span className="hidden sm:inline text-[11px]">{st.label}</span>
-            </div>
-          ))}
+        {/* 4-Step Interactive Visual Stepper */}
+        <div
+          style={{
+            padding: "16px 32px",
+            backgroundColor: "#07070c",
+            borderBottom: "1px solid rgba(255,255,255,0.06)",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", position: "relative" }}>
+            {[
+              { n: 1, label: "Guardian ID", sub: "Legal Parent" },
+              { n: 2, label: "NCPCR Riders", sub: "Safety Clauses" },
+              { n: 3, label: "Digital e-Sign", sub: "UIDAI OTP" },
+              { n: 4, label: "Work Permit", sub: "Issued Permit" },
+            ].map((s, idx, arr) => {
+              const isCurrent = step === s.n;
+              const isDone = step > s.n;
+              return (
+                <div
+                  key={s.n}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10px",
+                    flex: idx === arr.length - 1 ? "0 0 auto" : 1,
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                    <div
+                      style={{
+                        width: "30px",
+                        height: "30px",
+                        borderRadius: "50%",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: "11px",
+                        fontWeight: 700,
+                        fontFamily: "monospace",
+                        backgroundColor: isDone
+                          ? "#059669"
+                          : isCurrent
+                          ? "rgba(212,175,97,0.2)"
+                          : "#14141e",
+                        border: isDone
+                          ? "2px solid #10b981"
+                          : isCurrent
+                          ? "2px solid #d4af61"
+                          : "1px solid rgba(255,255,255,0.12)",
+                        color: isDone ? "#ffffff" : isCurrent ? "#f4e2b8" : "#606070",
+                        boxShadow: isCurrent ? "0 0 15px rgba(212,175,97,0.4)" : "none",
+                        transition: "all 0.3s ease",
+                        flexShrink: 0,
+                      }}
+                    >
+                      {isDone ? <Check size={14} /> : s.n}
+                    </div>
+                    <div>
+                      <div
+                        style={{
+                          fontSize: "12px",
+                          fontWeight: isCurrent ? 700 : 500,
+                          color: isDone ? "#34d399" : isCurrent ? "#ffffff" : "#606070",
+                          lineHeight: 1.2,
+                        }}
+                      >
+                        {s.label}
+                      </div>
+                      <div
+                        style={{
+                          fontSize: "10px",
+                          color: isCurrent ? "#d4af61" : "#4a4a58",
+                          fontFamily: "monospace",
+                        }}
+                      >
+                        {s.sub}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Connecting Line */}
+                  {idx < arr.length - 1 && (
+                    <div
+                      style={{
+                        flex: 1,
+                        height: "2px",
+                        margin: "0 14px",
+                        backgroundColor: isDone ? "#10b981" : "rgba(255,255,255,0.08)",
+                        transition: "background-color 0.3s ease",
+                      }}
+                    />
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </div>
 
-        {/* Body Content */}
-        <div className="p-6 overflow-y-auto space-y-6 flex-1">
+        {/* Modal Body */}
+        <div
+          className="modal-body"
+          style={{
+            padding: "28px 32px",
+            maxHeight: "60vh",
+            overflowY: "auto",
+            backgroundColor: "#0d0d14",
+          }}
+        >
           {/* STEP 1: Guardian Information */}
           {step === 1 && (
-            <div className="space-y-6 animate-fadeIn">
+            <div style={{ display: "flex", flexDirection: "column", gap: "22px" }}>
               {/* Minor Performer Banner */}
-              <div className="p-4 rounded-2xl bg-[var(--coral-500)]/10 border border-[var(--coral-500)]/20 flex items-center justify-between text-xs">
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  padding: "16px 20px",
+                  borderRadius: "16px",
+                  background: "linear-gradient(135deg, rgba(212,175,97,0.12) 0%, rgba(212,175,97,0.03) 100%)",
+                  border: "1px solid rgba(212,175,97,0.3)",
+                }}
+              >
                 <div>
-                  <div className="text-[11px] text-[var(--coral-300)] font-bold uppercase tracking-wider">
-                    Child Performer Detected:
+                  <div
+                    style={{
+                      fontSize: "10px",
+                      fontFamily: "monospace",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.18em",
+                      color: "#d4af61",
+                      fontWeight: 700,
+                      marginBottom: "2px",
+                    }}
+                  >
+                    CHILD PERFORMER DETECTED (UNDER 18)
                   </div>
-                  <div className="text-sm font-bold text-white mt-0.5">
-                    {minorName} ({minorAge} Years Old)
+                  <div
+                    className="font-cinema"
+                    style={{
+                      fontSize: "17px",
+                      fontWeight: 700,
+                      color: "#ffffff",
+                    }}
+                  >
+                    {minorName}{" "}
+                    <span style={{ fontSize: "14px", color: "#a0a0b0", fontFamily: "sans-serif", fontWeight: 400 }}>
+                      ({minorAge} Years Old)
+                    </span>
                   </div>
                 </div>
-                <span className="badge badge-coral text-[10px]">MANDATORY GUARDIAN CO-SIGN</span>
+
+                <span
+                  style={{
+                    fontSize: "10px",
+                    fontFamily: "monospace",
+                    padding: "4px 10px",
+                    borderRadius: "20px",
+                    backgroundColor: "rgba(212,175,97,0.15)",
+                    border: "1px solid rgba(212,175,97,0.35)",
+                    color: "#f4e2b8",
+                    fontWeight: 700,
+                    letterSpacing: "0.08em",
+                  }}
+                >
+                  MANDATORY CO-SIGN
+                </span>
               </div>
 
-              {/* Form Inputs */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                <div>
-                  <label className="text-[var(--text-muted)] block mb-1 font-semibold">
-                    Legal Guardian Full Name (as per Govt ID):
+              {/* Form Inputs Grid */}
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+                {/* Field 1: Guardian Full Name */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                  <label
+                    style={{
+                      fontSize: "10px",
+                      fontFamily: "monospace",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.15em",
+                      color: "#8a8a9a",
+                      fontWeight: 600,
+                    }}
+                  >
+                    Legal Guardian Full Name (Govt ID)
                   </label>
-                  <input
-                    type="text"
-                    value={guardianName}
-                    onChange={(e) => setGuardianName(e.target.value)}
-                    className="w-full p-3 rounded-xl bg-black/40 border border-white/10 text-[var(--ivory)] focus:outline-none focus:border-[var(--coral-500)]"
-                  />
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      backgroundColor: "#050508",
+                      border: "1px solid rgba(255,255,255,0.12)",
+                      borderRadius: "12px",
+                      padding: "2px 14px",
+                    }}
+                  >
+                    <UserCheck size={16} color="#d4af61" style={{ marginRight: "10px", flexShrink: 0 }} />
+                    <input
+                      type="text"
+                      value={guardianName}
+                      onChange={(e) => setGuardianName(e.target.value)}
+                      style={{
+                        width: "100%",
+                        padding: "10px 0",
+                        backgroundColor: "transparent",
+                        border: "none",
+                        outline: "none",
+                        color: "#ffffff",
+                        fontSize: "13px",
+                      }}
+                      placeholder="e.g. Sunita Sharma"
+                    />
+                  </div>
                 </div>
 
-                <div>
-                  <label className="text-[var(--text-muted)] block mb-1 font-semibold">
-                    Relationship to Performer:
+                {/* Field 2: Relationship */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                  <label
+                    style={{
+                      fontSize: "10px",
+                      fontFamily: "monospace",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.15em",
+                      color: "#8a8a9a",
+                      fontWeight: 600,
+                    }}
+                  >
+                    Relationship to Performer
                   </label>
                   <select
                     value={relation}
                     onChange={(e) => setRelation(e.target.value as any)}
-                    className="w-full p-3 rounded-xl bg-black/40 border border-white/10 text-[var(--ivory)] focus:outline-none focus:border-[var(--coral-500)] cursor-pointer"
+                    style={{
+                      width: "100%",
+                      padding: "10px 14px",
+                      backgroundColor: "#050508",
+                      border: "1px solid rgba(255,255,255,0.12)",
+                      borderRadius: "12px",
+                      color: "#ffffff",
+                      fontSize: "13px",
+                      outline: "none",
+                      cursor: "pointer",
+                      height: "44px",
+                    }}
                   >
                     <option value="Mother">Mother</option>
                     <option value="Father">Father</option>
@@ -201,152 +454,407 @@ export default function ChildPerformerGuardianModal({
                   </select>
                 </div>
 
-                <div>
-                  <label className="text-[var(--text-muted)] block mb-1 font-semibold">
-                    Guardian Mobile Number (Aadhaar linked):
+                {/* Field 3: Guardian Mobile */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                  <label
+                    style={{
+                      fontSize: "10px",
+                      fontFamily: "monospace",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.15em",
+                      color: "#8a8a9a",
+                      fontWeight: 600,
+                    }}
+                  >
+                    Guardian Mobile Number (Aadhaar linked)
                   </label>
-                  <input
-                    type="text"
-                    value={guardianPhone}
-                    onChange={(e) => setGuardianPhone(e.target.value)}
-                    className="w-full p-3 rounded-xl bg-black/40 border border-white/10 text-[var(--ivory)] focus:outline-none focus:border-[var(--coral-500)]"
-                  />
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      backgroundColor: "#050508",
+                      border: "1px solid rgba(255,255,255,0.12)",
+                      borderRadius: "12px",
+                      padding: "2px 14px",
+                    }}
+                  >
+                    <Smartphone size={16} color="#d4af61" style={{ marginRight: "10px", flexShrink: 0 }} />
+                    <input
+                      type="text"
+                      value={guardianPhone}
+                      onChange={(e) => setGuardianPhone(e.target.value)}
+                      style={{
+                        width: "100%",
+                        padding: "10px 0",
+                        backgroundColor: "transparent",
+                        border: "none",
+                        outline: "none",
+                        color: "#ffffff",
+                        fontSize: "13px",
+                        fontFamily: "monospace",
+                      }}
+                      placeholder="+91 98201 49281"
+                    />
+                  </div>
                 </div>
 
-                <div>
-                  <label className="text-[var(--text-muted)] block mb-1 font-semibold">
-                    Guardian Aadhaar ID:
+                {/* Field 4: Guardian Aadhaar ID */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                  <label
+                    style={{
+                      fontSize: "10px",
+                      fontFamily: "monospace",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.15em",
+                      color: "#8a8a9a",
+                      fontWeight: 600,
+                    }}
+                  >
+                    Guardian 12-Digit Aadhaar ID
                   </label>
-                  <input
-                    type="text"
-                    value={guardianAadhaar}
-                    onChange={(e) => setGuardianAadhaar(e.target.value)}
-                    className="w-full p-3 rounded-xl bg-black/40 border border-white/10 text-[var(--ivory)] font-mono tracking-wider focus:outline-none focus:border-[var(--coral-500)]"
-                  />
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      backgroundColor: "#050508",
+                      border: "1px solid rgba(255,255,255,0.12)",
+                      borderRadius: "12px",
+                      padding: "2px 14px",
+                    }}
+                  >
+                    <Fingerprint size={16} color="#d4af61" style={{ marginRight: "10px", flexShrink: 0 }} />
+                    <input
+                      type="text"
+                      value={guardianAadhaar}
+                      onChange={(e) => setGuardianAadhaar(e.target.value)}
+                      style={{
+                        width: "100%",
+                        padding: "10px 0",
+                        backgroundColor: "transparent",
+                        border: "none",
+                        outline: "none",
+                        color: "#ffffff",
+                        fontSize: "13px",
+                        fontFamily: "monospace",
+                        letterSpacing: "0.12em",
+                      }}
+                      placeholder="6829 4910 8219"
+                    />
+                  </div>
                 </div>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-black/40 border border-white/5 text-[11px] text-[var(--text-muted)] leading-relaxed">
-                Under the Indian Child Labour (Prohibition &amp; Regulation) Act, no minor may submit
-                auditions, sign talent representation memos, or appear on set without legal guardian
-                verified digital consent.
+              {/* Statutory Legal Notice Card */}
+              <div
+                style={{
+                  padding: "16px 20px",
+                  borderRadius: "14px",
+                  background: "linear-gradient(135deg, rgba(212,175,97,0.06) 0%, rgba(14,14,20,0.6) 100%)",
+                  border: "1px solid rgba(212,175,97,0.22)",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "8px",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                      color: "#d4af61",
+                      fontWeight: 700,
+                      fontSize: "12px",
+                    }}
+                  >
+                    <Lock size={14} />
+                    <span>Statutory Legal Compliance (NCPCR 2022)</span>
+                  </div>
+                  <span
+                    style={{
+                      fontSize: "9px",
+                      fontFamily: "monospace",
+                      padding: "3px 8px",
+                      borderRadius: "4px",
+                      backgroundColor: "rgba(212,175,97,0.15)",
+                      color: "#f4e2b8",
+                      border: "1px solid rgba(212,175,97,0.3)",
+                      letterSpacing: "0.1em",
+                    }}
+                  >
+                    CHILD LABOUR PROHIBITION ACT
+                  </span>
+                </div>
+                <p style={{ margin: 0, fontSize: "11px", color: "#8e8e98", lineHeight: 1.6 }}>
+                  Under the Indian Child Labour (Prohibition &amp; Regulation) Act, no minor may submit auditions, sign talent representation memos, or appear on set without legal guardian verified digital consent.
+                </p>
               </div>
             </div>
           )}
 
           {/* STEP 2: NCPCR Statutory Protection Riders */}
           {step === 2 && (
-            <div className="space-y-5 animate-fadeIn">
-              <div className="space-y-1">
-                <h3 className="font-display font-bold text-xl text-[var(--ivory)]">
+            <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+              <div>
+                <h3
+                  className="font-cinema"
+                  style={{
+                    fontSize: "22px",
+                    fontWeight: 700,
+                    color: "#ffffff",
+                    marginBottom: "6px",
+                  }}
+                >
                   National Child Protection Riders
                 </h3>
-                <p className="text-xs text-[var(--text-muted)]">
-                  Statutory safety conditions required for all entertainment productions in India
+                <p style={{ fontSize: "12px", color: "#8e8e98", margin: 0, lineHeight: 1.5 }}>
+                  Statutory safety conditions required for all entertainment productions in India to protect under-18 talent.
                 </p>
               </div>
 
-              <div className="space-y-3">
+              <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
                 {/* Clause 1: Education */}
-                <label className="p-4 rounded-2xl bg-black/30 border border-white/5 flex items-start gap-3 cursor-pointer hover:border-white/15 transition-all">
-                  <input
-                    type="checkbox"
-                    checked={clauseSchooling}
-                    onChange={(e) => setClauseSchooling(e.target.checked)}
-                    className="accent-[var(--coral-500)] rounded mt-1 shrink-0"
-                  />
-                  <div className="text-xs space-y-1">
-                    <span className="font-bold text-white flex items-center gap-1.5">
-                      <BookOpen className="w-3.5 h-3.5 text-blue-400" />
-                      1. Mandatory Schooling &amp; Examination Clause
-                    </span>
-                    <p className="text-[var(--text-muted)] leading-relaxed">
-                      Shooting schedules shall not interfere with school education or examinations.
-                      Production must provide a dedicated quiet study area and a private tutor for
-                      shoots exceeding 3 days.
+                <div
+                  onClick={() => setClauseSchooling(!clauseSchooling)}
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: "14px",
+                    padding: "16px 18px",
+                    borderRadius: "14px",
+                    border: clauseSchooling ? "1px solid rgba(212,175,97,0.4)" : "1px solid rgba(255,255,255,0.08)",
+                    background: clauseSchooling
+                      ? "linear-gradient(145deg, rgba(212,175,97,0.1) 0%, rgba(212,175,97,0.02) 100%)"
+                      : "#08080d",
+                    cursor: "pointer",
+                    transition: "all 0.25s ease",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "22px",
+                      height: "22px",
+                      borderRadius: "6px",
+                      backgroundColor: clauseSchooling ? "#d4af61" : "rgba(255,255,255,0.1)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#040406",
+                      marginTop: "2px",
+                      flexShrink: 0,
+                    }}
+                  >
+                    {clauseSchooling && <Check size={14} strokeWidth={3} />}
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                      <BookOpen size={15} color="#60a5fa" />
+                      <span style={{ fontSize: "13px", fontWeight: 700, color: "#ffffff" }}>
+                        1. Mandatory Schooling &amp; Examination Clause
+                      </span>
+                    </div>
+                    <p style={{ margin: 0, fontSize: "11px", color: "#8e8e98", lineHeight: 1.6 }}>
+                      Shooting schedules shall not interfere with school education or examinations. Production must provide a dedicated quiet study area and a private tutor for shoots exceeding 3 days.
                     </p>
                   </div>
-                </label>
+                </div>
 
-                {/* Clause 2: Max 5 Hours On Set */}
-                <label className="p-4 rounded-2xl bg-black/30 border border-white/5 flex items-start gap-3 cursor-pointer hover:border-white/15 transition-all">
-                  <input
-                    type="checkbox"
-                    checked={clauseMaxHours}
-                    onChange={(e) => setClauseMaxHours(e.target.checked)}
-                    className="accent-[var(--coral-500)] rounded mt-1 shrink-0"
-                  />
-                  <div className="text-xs space-y-1">
-                    <span className="font-bold text-white flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5 text-amber-400" />
-                      2. Strict 5-Hour Daily Shift Cap (No Night Shoots)
-                    </span>
-                    <p className="text-[var(--text-muted)] leading-relaxed">
-                      A minor shall not be made to work for more than 5 hours in a day, including rest
-                      intervals. No child shall work between 7:00 PM and 8:00 AM under any circumstances.
+                {/* Clause 2: Strict 5-Hour Daily Shift Cap */}
+                <div
+                  onClick={() => setClauseMaxHours(!clauseMaxHours)}
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: "14px",
+                    padding: "16px 18px",
+                    borderRadius: "14px",
+                    border: clauseMaxHours ? "1px solid rgba(212,175,97,0.4)" : "1px solid rgba(255,255,255,0.08)",
+                    background: clauseMaxHours
+                      ? "linear-gradient(145deg, rgba(212,175,97,0.1) 0%, rgba(212,175,97,0.02) 100%)"
+                      : "#08080d",
+                    cursor: "pointer",
+                    transition: "all 0.25s ease",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "22px",
+                      height: "22px",
+                      borderRadius: "6px",
+                      backgroundColor: clauseMaxHours ? "#d4af61" : "rgba(255,255,255,0.1)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#040406",
+                      marginTop: "2px",
+                      flexShrink: 0,
+                    }}
+                  >
+                    {clauseMaxHours && <Check size={14} strokeWidth={3} />}
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                      <Clock size={15} color="#fbbf24" />
+                      <span style={{ fontSize: "13px", fontWeight: 700, color: "#ffffff" }}>
+                        2. Strict 5-Hour Daily Shift Cap (No Night Shoots)
+                      </span>
+                    </div>
+                    <p style={{ margin: 0, fontSize: "11px", color: "#8e8e98", lineHeight: 1.6 }}>
+                      A minor shall not be made to work for more than 5 hours in a day, including rest intervals. No child shall work between 7:00 PM and 8:00 AM under any circumstances.
                     </p>
                   </div>
-                </label>
+                </div>
 
-                {/* Clause 3: 20% Minor Trust Fund Lock */}
-                <label className="p-4 rounded-2xl bg-black/30 border border-white/5 flex items-start gap-3 cursor-pointer hover:border-white/15 transition-all">
-                  <input
-                    type="checkbox"
-                    checked={clauseTrustFund}
-                    onChange={(e) => setClauseTrustFund(e.target.checked)}
-                    className="accent-[var(--coral-500)] rounded mt-1 shrink-0"
-                  />
-                  <div className="text-xs space-y-1">
-                    <span className="font-bold text-white flex items-center gap-1.5">
-                      <DollarSign className="w-3.5 h-3.5 text-emerald-400" />
-                      3. Irrevocable 20% Minor Trust Fund Allocation
-                    </span>
-                    <p className="text-[var(--text-muted)] leading-relaxed">
-                      A minimum of 20% of the child performer&apos;s total earnings must be deposited directly
-                      into an irrevocable fixed deposit / minor bank trust fund maturing at age 18.
+                {/* Clause 3: 20% Minor Trust Fund Allocation */}
+                <div
+                  onClick={() => setClauseTrustFund(!clauseTrustFund)}
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: "14px",
+                    padding: "16px 18px",
+                    borderRadius: "14px",
+                    border: clauseTrustFund ? "1px solid rgba(212,175,97,0.4)" : "1px solid rgba(255,255,255,0.08)",
+                    background: clauseTrustFund
+                      ? "linear-gradient(145deg, rgba(212,175,97,0.1) 0%, rgba(212,175,97,0.02) 100%)"
+                      : "#08080d",
+                    cursor: "pointer",
+                    transition: "all 0.25s ease",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "22px",
+                      height: "22px",
+                      borderRadius: "6px",
+                      backgroundColor: clauseTrustFund ? "#d4af61" : "rgba(255,255,255,0.1)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#040406",
+                      marginTop: "2px",
+                      flexShrink: 0,
+                    }}
+                  >
+                    {clauseTrustFund && <Check size={14} strokeWidth={3} />}
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                      <DollarSign size={15} color="#34d399" />
+                      <span style={{ fontSize: "13px", fontWeight: 700, color: "#ffffff" }}>
+                        3. Irrevocable 20% Minor Trust Fund Allocation
+                      </span>
+                    </div>
+                    <p style={{ margin: 0, fontSize: "11px", color: "#8e8e98", lineHeight: 1.6 }}>
+                      A minimum of 20% of the child performer&apos;s total earnings must be deposited directly into an irrevocable fixed deposit / minor bank trust fund maturing at age 18.
                     </p>
                   </div>
-                </label>
+                </div>
               </div>
             </div>
           )}
 
           {/* STEP 3: Guardian Aadhaar OTP e-Sign */}
           {step === 3 && (
-            <div className="space-y-6 animate-fadeIn text-center py-2">
-              <div className="w-16 h-16 rounded-full mx-auto bg-[var(--coral-500)]/15 border border-[var(--coral-500)]/30 flex items-center justify-center text-[var(--coral-400)]">
-                <Lock className="w-8 h-8" />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                textAlign: "center",
+                gap: "22px",
+                padding: "12px 0",
+              }}
+            >
+              <div
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  borderRadius: "50%",
+                  background: "linear-gradient(135deg, rgba(212,175,97,0.25) 0%, rgba(212,175,97,0.05) 100%)",
+                  border: "1px solid rgba(212,175,97,0.4)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#d4af61",
+                  boxShadow: "0 0 25px rgba(212,175,97,0.2)",
+                }}
+              >
+                <Lock size={28} />
               </div>
 
-              <div className="space-y-1 max-w-sm mx-auto">
-                <h3 className="font-display font-bold text-xl text-[var(--ivory)]">
+              <div>
+                <h3
+                  className="font-cinema"
+                  style={{
+                    fontSize: "22px",
+                    fontWeight: 700,
+                    color: "#ffffff",
+                    marginBottom: "8px",
+                  }}
+                >
                   Legal Guardian Digital Signature
                 </h3>
-                <p className="text-xs text-[var(--text-muted)]">
+                <p style={{ fontSize: "12px", color: "#8e8e98", margin: 0, maxWidth: "420px", lineHeight: 1.5 }}>
                   Enter UIDAI OTP sent to Guardian ({guardianName}) at{" "}
-                  <strong className="text-white font-mono">{guardianPhone}</strong>
+                  <span style={{ color: "#d4af61", fontFamily: "monospace", fontWeight: 700 }}>
+                    {guardianPhone}
+                  </span>
                 </p>
               </div>
 
-              {/* 6 Digit OTP */}
-              <div className="flex justify-center gap-2.5 max-w-xs mx-auto">
+              {/* 6 OTP Input Boxes */}
+              <div style={{ display: "flex", gap: "10px", justifyContent: "center", padding: "8px 0" }}>
                 {otp.map((digit, idx) => (
                   <input
                     key={idx}
                     type="text"
                     maxLength={1}
-                    value={digit || (idx === 0 ? "5" : idx === 1 ? "1" : idx === 2 ? "8" : idx === 3 ? "2" : idx === 4 ? "9" : "4")}
+                    value={digit}
                     onChange={(e) => {
                       const newOtp = [...otp];
                       newOtp[idx] = e.target.value;
                       setOtp(newOtp);
                     }}
-                    className="w-10 h-12 rounded-xl bg-black/40 border border-white/20 text-center font-mono font-bold text-lg text-[var(--coral-400)] focus:outline-none focus:border-[var(--coral-500)]"
+                    style={{
+                      width: "48px",
+                      height: "56px",
+                      borderRadius: "12px",
+                      backgroundColor: "#050508",
+                      border: digit ? "1px solid #d4af61" : "1px solid rgba(255,255,255,0.15)",
+                      color: "#ffffff",
+                      fontSize: "22px",
+                      fontFamily: "monospace",
+                      fontWeight: 700,
+                      textAlign: "center",
+                      outline: "none",
+                      boxShadow: digit ? "0 0 15px rgba(212,175,97,0.25)" : "none",
+                      transition: "all 0.2s ease",
+                    }}
                   />
                 ))}
               </div>
 
-              <div className="text-xs text-[var(--text-muted)]">
+              {/* Sandbox Helper Pill */}
+              <div
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  padding: "6px 14px",
+                  borderRadius: "20px",
+                  backgroundColor: "rgba(16,185,129,0.1)",
+                  border: "1px solid rgba(16,185,129,0.3)",
+                  fontSize: "11px",
+                  color: "#34d399",
+                  fontFamily: "monospace",
+                }}
+              >
+                <span>● DEMO SANDBOX:</span>
+                <span>Code 518294 pre-filled for rapid testing</span>
+              </div>
+
+              <div style={{ fontSize: "11px", color: "#707080", fontFamily: "monospace" }}>
                 Cryptographic Aadhaar e-Sign complies with Indian IT Act 2000 Section 3A.
               </div>
             </div>
@@ -354,116 +862,249 @@ export default function ChildPerformerGuardianModal({
 
           {/* STEP 4: Approved Work Permit Issued */}
           {step === 4 && permitRecord && (
-            <div className="space-y-6 animate-fadeIn">
+            <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+              {/* Success Hero Banner */}
               <div
-                className="p-6 rounded-2xl border text-center space-y-3 relative overflow-hidden"
                 style={{
-                  background: "linear-gradient(135deg, rgba(35,18,18,0.95), rgba(45,22,22,0.9))",
-                  borderColor: "rgba(232, 96, 76, 0.4)",
-                  boxShadow: "0 10px 40px rgba(232, 96, 76, 0.2)",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  textAlign: "center",
+                  padding: "24px",
+                  borderRadius: "18px",
+                  background: "linear-gradient(145deg, rgba(16,185,129,0.12) 0%, rgba(212,175,97,0.08) 100%)",
+                  border: "1px solid rgba(16,185,129,0.35)",
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.5), 0 0 30px rgba(16,185,129,0.15)",
+                  gap: "10px",
                 }}
               >
-                <div className="w-16 h-16 rounded-full mx-auto bg-[var(--coral-500)]/20 border border-[var(--coral-500)]/40 flex items-center justify-center text-[var(--coral-400)]">
-                  <CheckCircle className="w-10 h-10" />
+                <div
+                  style={{
+                    width: "56px",
+                    height: "56px",
+                    borderRadius: "50%",
+                    backgroundColor: "rgba(16,185,129,0.2)",
+                    border: "2px solid #10b981",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "#34d399",
+                    boxShadow: "0 0 20px rgba(16,185,129,0.4)",
+                  }}
+                >
+                  <CheckCircle2 size={32} />
                 </div>
                 <div>
-                  <span className="badge badge-coral text-xs font-bold uppercase tracking-wider mb-2">
-                    NCPCR CHILD ENTERTAINMENT WORK PERMIT ISSUED
-                  </span>
-                  <h3 className="font-display font-bold text-2xl text-white">
-                    Guardian Co-Signing Verified!
+                  <h3
+                    className="font-cinema"
+                    style={{
+                      fontSize: "22px",
+                      fontWeight: 700,
+                      color: "#ffffff",
+                      margin: 0,
+                    }}
+                  >
+                    Child Work Permit Officially Issued
                   </h3>
-                  <p className="text-xs text-rose-200 mt-1 max-w-md mx-auto">
-                    {minorName} is officially authorized to submit audition tapes and accept casting roles
-                    with legal guardian representation.
+                  <p style={{ margin: "4px 0 0 0", fontSize: "12px", color: "#a0a0b0" }}>
+                    {minorName} is authorized to submit audition tapes and accept escrow-backed contracts.
                   </p>
                 </div>
               </div>
 
-              {/* Permit Certificate Details */}
-              <div className="p-5 rounded-2xl bg-black/40 border border-white/10 space-y-4 font-mono text-xs">
-                <div className="flex justify-between items-center pb-3 border-b border-white/10">
-                  <span className="text-[var(--text-muted)]">Work Permit Number:</span>
-                  <span className="text-[var(--coral-300)] font-bold">{permitRecord.approvalCertificateId}</span>
+              {/* Permit Certificate Details Card */}
+              <div
+                style={{
+                  padding: "18px 20px",
+                  borderRadius: "14px",
+                  backgroundColor: "#07070b",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "12px",
+                  fontSize: "12px",
+                  fontFamily: "monospace",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    paddingBottom: "10px",
+                    borderBottom: "1px solid rgba(255,255,255,0.06)",
+                  }}
+                >
+                  <span style={{ color: "#707080" }}>Permit Number:</span>
+                  <span style={{ color: "#d4af61", fontWeight: 700 }}>{permitRecord.approvalCertificateId}</span>
                 </div>
-
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <span className="text-[var(--text-muted)] block text-[11px]">Minor Performer:</span>
-                    <span className="text-white font-bold">{permitRecord.minorName} (Age {permitRecord.minorAge})</span>
-                  </div>
-                  <div>
-                    <span className="text-[var(--text-muted)] block text-[11px]">Authorized Guardian:</span>
-                    <span className="text-white font-bold">{permitRecord.guardianName} ({permitRecord.guardianRelation})</span>
-                  </div>
-                  <div>
-                    <span className="text-[var(--text-muted)] block text-[11px]">Guardian Aadhaar:</span>
-                    <span className="text-white font-bold">{permitRecord.guardianAadhaarMasked}</span>
-                  </div>
-                  <div>
-                    <span className="text-[var(--text-muted)] block text-[11px]">Trust Fund Status:</span>
-                    <span className="text-emerald-400 font-bold">20% Mandatory Lock Active</span>
-                  </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    paddingBottom: "10px",
+                    borderBottom: "1px solid rgba(255,255,255,0.06)",
+                  }}
+                >
+                  <span style={{ color: "#707080" }}>Minor Performer:</span>
+                  <span style={{ color: "#ffffff", fontWeight: 600 }}>
+                    {permitRecord.minorName} (Age {permitRecord.minorAge})
+                  </span>
                 </div>
-
-                <div className="pt-2 border-t border-white/5 text-[10px] text-[var(--text-muted)] flex justify-between">
-                  <span>Signed: {permitRecord.digitalSignatureTimestamp.slice(0, 10)}</span>
-                  <span className="text-emerald-400">Status: Legally Valid in All Indian States</span>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    paddingBottom: "10px",
+                    borderBottom: "1px solid rgba(255,255,255,0.06)",
+                  }}
+                >
+                  <span style={{ color: "#707080" }}>Authorized Guardian:</span>
+                  <span style={{ color: "#ffffff" }}>
+                    {permitRecord.guardianName} ({permitRecord.guardianRelation})
+                  </span>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    paddingBottom: "10px",
+                    borderBottom: "1px solid rgba(255,255,255,0.06)",
+                  }}
+                >
+                  <span style={{ color: "#707080" }}>Guardian Aadhaar:</span>
+                  <span style={{ color: "#ffffff" }}>{permitRecord.guardianAadhaarMasked}</span>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <span style={{ color: "#707080" }}>Trust Fund Status:</span>
+                  <span style={{ color: "#34d399", fontWeight: 700 }}>20% Mandatory Lock Active</span>
                 </div>
               </div>
             </div>
           )}
         </div>
 
-        {/* Footer Actions */}
+        {/* Modal Footer */}
         <div
-          className="flex items-center justify-between px-6 py-4 border-t bg-[var(--charcoal-900)] shrink-0"
-          style={{ borderColor: "rgba(255,255,255,0.08)" }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "18px 32px",
+            backgroundColor: "#0d0d14",
+            borderTop: "1px solid rgba(255,255,255,0.08)",
+          }}
         >
-          <span className="text-xs text-[var(--text-muted)]">
-            National Commission for Protection of Child Rights Guidelines
-          </span>
+          {/* Regulatory Reference */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              color: "#707080",
+              fontSize: "11px",
+              fontFamily: "monospace",
+              textTransform: "uppercase",
+              letterSpacing: "0.15em",
+            }}
+          >
+            <ShieldAlert size={14} color="#d4af61" />
+            <span>NCPCR 2022 COMPLIANT</span>
+          </div>
 
-          <div className="flex items-center gap-3">
+          {/* Action Buttons */}
+          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+            {step > 1 && step < 4 && (
+              <button
+                type="button"
+                onClick={() => setStep((s) => (s - 1) as any)}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  padding: "10px 18px",
+                  backgroundColor: "rgba(255,255,255,0.05)",
+                  border: "1px solid rgba(255,255,255,0.12)",
+                  borderRadius: "9999px",
+                  color: "#d0d0dc",
+                  fontSize: "12px",
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                }}
+              >
+                <ArrowLeft size={14} /> Back
+              </button>
+            )}
+
             {step === 1 && (
               <button
+                type="button"
                 onClick={() => setStep(2)}
-                className="btn-primary text-xs py-2.5 px-6 font-bold flex items-center gap-2"
+                className="btn-cinema-gold"
+                style={{
+                  height: "44px",
+                  padding: "0 28px",
+                  fontSize: "12px",
+                }}
               >
-                <span>Proceed to Child Protection Riders</span>
-                <ArrowRight className="w-4 h-4" />
+                PROCEED TO SAFETY RIDERS
+                <ArrowRight size={14} />
               </button>
             )}
 
             {step === 2 && (
               <button
+                type="button"
                 onClick={() => setStep(3)}
                 disabled={!clauseSchooling || !clauseMaxHours || !clauseTrustFund}
-                className="btn-primary text-xs py-2.5 px-6 font-bold flex items-center gap-2 disabled:opacity-50"
+                className="btn-cinema-gold"
+                style={{
+                  height: "44px",
+                  padding: "0 28px",
+                  fontSize: "12px",
+                  opacity: !clauseSchooling || !clauseMaxHours || !clauseTrustFund ? 0.5 : 1,
+                }}
               >
-                <span>Proceed to Guardian Aadhaar e-Sign</span>
-                <ArrowRight className="w-4 h-4" />
+                PROCEED TO AADHAAR E-SIGN
+                <ArrowRight size={14} />
               </button>
             )}
 
             {step === 3 && (
               <button
+                type="button"
                 onClick={handleVerifyGuardianSign}
                 disabled={isSigning}
-                className="btn-primary text-xs py-2.5 px-6 font-bold flex items-center gap-2"
+                className="btn-cinema-gold"
+                style={{
+                  height: "44px",
+                  padding: "0 28px",
+                  fontSize: "12px",
+                }}
               >
-                <span>{isSigning ? "Registering e-Signature..." : "Authorize & Issue Permit"}</span>
-                <ArrowRight className="w-4 h-4" />
+                {isSigning ? "ISSUING PERMIT..." : "AUTHORIZE & ISSUE PERMIT"}
+                <ArrowRight size={14} />
               </button>
             )}
 
             {step === 4 && (
               <button
+                type="button"
                 onClick={onClose}
-                className="btn-primary text-xs py-2.5 px-6 font-bold flex items-center gap-2"
+                className="btn-cinema-gold"
+                style={{
+                  height: "44px",
+                  padding: "0 28px",
+                  fontSize: "12px",
+                }}
               >
-                <CheckCircle className="w-4 h-4" />
-                <span>Return to Portal with Child Work Permit</span>
+                COMPLETE &amp; RETURN
+                <CheckCircle2 size={14} />
               </button>
             )}
           </div>

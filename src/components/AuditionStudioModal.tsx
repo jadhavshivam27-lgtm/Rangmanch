@@ -151,8 +151,8 @@ export default function AuditionStudioModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/90 backdrop-blur-md overflow-y-auto">
-      <div className="relative w-full max-w-5xl my-auto border border-white/20 bg-[#0e0e12] flex flex-col max-h-[92vh] overflow-hidden">
+    <div className="modal-backdrop">
+      <div className="modal-panel" style={{ maxWidth: "960px", width: "100%", borderRadius: "20px", backgroundColor: "#0e0e14", border: "1px solid rgba(212,175,97,0.3)" }}>
         
         {/* Studio Top Navigation Bar */}
         <div className="flex items-center justify-between px-8 py-5 border-b border-white/10 shrink-0">

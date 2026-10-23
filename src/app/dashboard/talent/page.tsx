@@ -4,16 +4,30 @@ import { useState } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
+import MediaVaultModal from "@/components/MediaVaultModal";
 import {
   Sparkles,
   CheckCircle,
-  Clock,
   TrendingUp,
-  Lock,
+  Upload,
+  Camera,
+  Film,
+  Music,
+  FileText,
+  ChevronRight,
+  ShieldCheck,
+  Mic,
 } from "lucide-react";
 
 export default function TalentDashboardPage() {
   const [activeTab, setActiveTab] = useState<"applications" | "recommended" | "calendar">("applications");
+  const [isVaultOpen, setIsVaultOpen] = useState(false);
+  const [vaultStartTab, setVaultStartTab] = useState<"photos" | "videos" | "singing" | "bio">("photos");
+
+  const openVault = (tab: "photos" | "videos" | "singing" | "bio" = "photos") => {
+    setVaultStartTab(tab);
+    setIsVaultOpen(true);
+  };
 
   const submissions = [
     {
@@ -56,116 +70,758 @@ export default function TalentDashboardPage() {
   return (
     <>
       <Navbar />
-      <div className="flex min-h-screen bg-[#0a0a0c] text-[#f8f8f6]">
+      <div className="flex min-h-screen bg-[#040406] text-[#f8f8f6]">
         <Sidebar />
 
-        <main className="flex-1 p-6 sm:p-10 lg:p-12 space-y-10 max-w-7xl">
-          
+        <main className="flex-1 p-6 sm:p-10 lg:p-12 space-y-10" style={{ maxWidth: "1200px" }}>
+
           {/* Welcome Header */}
-          <div className="p-8 sm:p-10 border border-white/[0.08] bg-[#0e0e12] flex flex-col md:flex-row md:items-center justify-between gap-6">
-            <div className="space-y-2">
-              <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#c5a059]">
-                ✦ ARTIST WORKSPACE • ID: RM-8849-IN
-              </p>
-              <h1 className="font-editorial text-3xl sm:text-4xl text-white font-light">
-                Welcome back, Priya Sharma
-              </h1>
-              <p className="text-xs text-neutral-400 font-light">
-                You have <span className="text-white font-medium">1 Virtual Callback</span> scheduled and <span className="text-white font-medium">2 Active Audition Submissions</span> under review.
-              </p>
+          <div
+            style={{
+              padding: "32px 40px",
+              borderRadius: "20px",
+              border: "1px solid rgba(255,255,255,0.08)",
+              backgroundColor: "#0a0a10",
+              display: "flex",
+              flexDirection: "column",
+              gap: "16px",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "16px",
+              }}
+              className="md:flex-row md:items-center md:justify-between"
+            >
+              <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                <p
+                  style={{
+                    fontSize: "10px",
+                    fontFamily: "monospace",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.25em",
+                    color: "#d4af61",
+                    fontWeight: 700,
+                    margin: 0,
+                  }}
+                >
+                  ✦ ARTIST WORKSPACE • ID: RM-8849-IN
+                </p>
+                <h1
+                  className="font-cinema"
+                  style={{ fontSize: "32px", color: "#ffffff", fontWeight: 700, margin: 0 }}
+                >
+                  Welcome back, Priya Sharma
+                </h1>
+                <p style={{ fontSize: "13px", color: "#9a9aa8", margin: 0 }}>
+                  You have{" "}
+                  <strong style={{ color: "#ffffff" }}>1 Virtual Callback</strong> scheduled and{" "}
+                  <strong style={{ color: "#ffffff" }}>2 Active Audition Submissions</strong> under review.
+                </p>
+              </div>
+
+              {/* Profile Readiness Indicator */}
+              <div
+                style={{
+                  padding: "16px 20px",
+                  borderRadius: "14px",
+                  border: "1px solid rgba(52,211,153,0.3)",
+                  backgroundColor: "rgba(52,211,153,0.06)",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "14px",
+                  flexShrink: 0,
+                }}
+              >
+                <div
+                  style={{
+                    width: "52px",
+                    height: "52px",
+                    borderRadius: "14px",
+                    border: "2px solid #34d399",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: "14px",
+                    fontFamily: "monospace",
+                    fontWeight: 800,
+                    color: "#34d399",
+                  }}
+                >
+                  92%
+                </div>
+                <div>
+                  <div
+                    style={{
+                      fontSize: "12px",
+                      fontFamily: "monospace",
+                      fontWeight: 700,
+                      color: "#ffffff",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.08em",
+                    }}
+                  >
+                    Profile Readiness
+                  </div>
+                  <div style={{ fontSize: "11px", color: "#9a9aa8", marginTop: "2px" }}>
+                    Add 1 voice/singing sample for 100%
+                  </div>
+                  <button
+                    onClick={() => openVault("singing")}
+                    style={{
+                      marginTop: "6px",
+                      fontSize: "10px",
+                      fontFamily: "monospace",
+                      color: "#d4af61",
+                      textTransform: "uppercase",
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      padding: 0,
+                      letterSpacing: "0.08em",
+                    }}
+                  >
+                    UPLOAD NOW →
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ── MEDIA VAULT SECTION ── */}
+          <div
+            style={{
+              borderRadius: "20px",
+              border: "1px solid rgba(212,175,97,0.35)",
+              backgroundColor: "#08080c",
+              overflow: "hidden",
+            }}
+          >
+            {/* Section Header */}
+            <div
+              style={{
+                padding: "24px 32px",
+                borderBottom: "1px solid rgba(255,255,255,0.06)",
+                background:
+                  "linear-gradient(135deg, rgba(212,175,97,0.08) 0%, rgba(8,8,12,0) 60%)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <div>
+                <p
+                  style={{
+                    fontSize: "10px",
+                    fontFamily: "monospace",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.25em",
+                    color: "#d4af61",
+                    fontWeight: 700,
+                    margin: "0 0 4px 0",
+                  }}
+                >
+                  ✦ PERFORMER MEDIA VAULT
+                </p>
+                <h2
+                  className="font-cinema"
+                  style={{ fontSize: "22px", fontWeight: 700, color: "#ffffff", margin: 0 }}
+                >
+                  Upload Your Portfolio &amp; Audition Assets
+                </h2>
+                <p style={{ fontSize: "12px", color: "#9a9aa8", margin: "4px 0 0 0" }}>
+                  Profile photos, photoshoot lookbook, showreels, singing reels, and vocal samples — all
+                  CINTAA DRM-protected and director-ready.
+                </p>
+              </div>
+
+              <button
+                onClick={() => openVault("photos")}
+                className="btn-cinema-gold"
+                style={{ height: "44px", padding: "0 24px", fontSize: "12px" }}
+              >
+                <Upload size={15} />
+                <span>OPEN MEDIA VAULT</span>
+              </button>
             </div>
 
-            <div className="p-4 border border-white/10 flex items-center gap-4 shrink-0 font-mono text-xs">
-              <div className="w-12 h-12 border border-emerald-400/50 flex items-center justify-center font-bold text-emerald-400">
-                92%
+            {/* 4 Quick-Access Upload Cards */}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+                gap: "1px",
+                backgroundColor: "rgba(255,255,255,0.06)",
+              }}
+            >
+              {/* Card 1: Photos */}
+              <button
+                onClick={() => openVault("photos")}
+                style={{
+                  padding: "24px",
+                  backgroundColor: "#07070b",
+                  border: "none",
+                  textAlign: "left",
+                  cursor: "pointer",
+                  transition: "background-color 0.2s ease",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "12px",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.backgroundColor = "rgba(212,175,97,0.06)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.backgroundColor = "#07070b")
+                }
+              >
+                <div
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "12px",
+                    backgroundColor: "rgba(212,175,97,0.12)",
+                    border: "1px solid rgba(212,175,97,0.25)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "#d4af61",
+                  }}
+                >
+                  <Camera size={20} />
+                </div>
+                <div>
+                  <div
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: 700,
+                      color: "#ffffff",
+                      marginBottom: "4px",
+                    }}
+                  >
+                    Profile &amp; Photoshoot
+                  </div>
+                  <div style={{ fontSize: "11px", color: "#9a9aa8" }}>
+                    Headshots, lookbook stills, 0°–180° angles, editorial portraits
+                  </div>
+                </div>
+                <div
+                  style={{
+                    fontSize: "10px",
+                    fontFamily: "monospace",
+                    color: "#d4af61",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "4px",
+                  }}
+                >
+                  <span>4 PHOTOS UPLOADED</span>
+                  <ChevronRight size={12} />
+                </div>
+              </button>
+
+              {/* Card 2: Videos */}
+              <button
+                onClick={() => openVault("videos")}
+                style={{
+                  padding: "24px",
+                  backgroundColor: "#07070b",
+                  border: "none",
+                  textAlign: "left",
+                  cursor: "pointer",
+                  transition: "background-color 0.2s ease",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "12px",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.backgroundColor = "rgba(212,175,97,0.06)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.backgroundColor = "#07070b")
+                }
+              >
+                <div
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "12px",
+                    backgroundColor: "rgba(99,102,241,0.12)",
+                    border: "1px solid rgba(99,102,241,0.25)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "#818cf8",
+                  }}
+                >
+                  <Film size={20} />
+                </div>
+                <div>
+                  <div
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: 700,
+                      color: "#ffffff",
+                      marginBottom: "4px",
+                    }}
+                  >
+                    Showreels &amp; Videos
+                  </div>
+                  <div style={{ fontSize: "11px", color: "#9a9aa8" }}>
+                    Dramatic monologues, action reels, comedy self-tapes, OTT scenes
+                  </div>
+                </div>
+                <div
+                  style={{
+                    fontSize: "10px",
+                    fontFamily: "monospace",
+                    color: "#818cf8",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "4px",
+                  }}
+                >
+                  <span>2 REELS UPLOADED</span>
+                  <ChevronRight size={12} />
+                </div>
+              </button>
+
+              {/* Card 3: Singing */}
+              <button
+                onClick={() => openVault("singing")}
+                style={{
+                  padding: "24px",
+                  backgroundColor: "#07070b",
+                  border: "none",
+                  textAlign: "left",
+                  cursor: "pointer",
+                  transition: "background-color 0.2s ease",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "12px",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.backgroundColor = "rgba(52,211,153,0.06)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.backgroundColor = "#07070b")
+                }
+              >
+                <div
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "12px",
+                    backgroundColor: "rgba(52,211,153,0.12)",
+                    border: "1px solid rgba(52,211,153,0.25)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "#34d399",
+                  }}
+                >
+                  <Music size={20} />
+                </div>
+                <div>
+                  <div
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: 700,
+                      color: "#ffffff",
+                      marginBottom: "4px",
+                    }}
+                  >
+                    Singing &amp; Vocal Reels
+                  </div>
+                  <div style={{ fontSize: "11px", color: "#9a9aa8" }}>
+                    Classical Hindustani, Bollywood playback, ghazal, musical theatre
+                  </div>
+                </div>
+                <div
+                  style={{
+                    fontSize: "10px",
+                    fontFamily: "monospace",
+                    color: "#34d399",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "4px",
+                  }}
+                >
+                  <span>2 VOCALS UPLOADED</span>
+                  <ChevronRight size={12} />
+                </div>
+              </button>
+
+              {/* Card 4: Bio */}
+              <button
+                onClick={() => openVault("bio")}
+                style={{
+                  padding: "24px",
+                  backgroundColor: "#07070b",
+                  border: "none",
+                  textAlign: "left",
+                  cursor: "pointer",
+                  transition: "background-color 0.2s ease",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "12px",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.backgroundColor = "rgba(139,92,246,0.06)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.backgroundColor = "#07070b")
+                }
+              >
+                <div
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "12px",
+                    backgroundColor: "rgba(139,92,246,0.12)",
+                    border: "1px solid rgba(139,92,246,0.25)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "#c084fc",
+                  }}
+                >
+                  <Sparkles size={20} />
+                </div>
+                <div>
+                  <div
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: 700,
+                      color: "#ffffff",
+                      marginBottom: "4px",
+                    }}
+                  >
+                    Bio &amp; AI Pitch
+                  </div>
+                  <div style={{ fontSize: "11px", color: "#9a9aa8" }}>
+                    AI-powered casting pitch generator for Bollywood &amp; OTT directors
+                  </div>
+                </div>
+                <div
+                  style={{
+                    fontSize: "10px",
+                    fontFamily: "monospace",
+                    color: "#c084fc",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "4px",
+                  }}
+                >
+                  <span>AI BIO READY</span>
+                  <ChevronRight size={12} />
+                </div>
+              </button>
+            </div>
+
+            {/* DRM Trust Badge Bar */}
+            <div
+              style={{
+                padding: "12px 32px",
+                borderTop: "1px solid rgba(255,255,255,0.04)",
+                backgroundColor: "#050508",
+                display: "flex",
+                alignItems: "center",
+                gap: "20px",
+                flexWrap: "wrap",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  fontSize: "10px",
+                  fontFamily: "monospace",
+                  color: "#8a8a9a",
+                }}
+              >
+                <ShieldCheck size={12} color="#34d399" />
+                <span>All assets DRM watermarked with SHA-256 forensic embedding</span>
               </div>
-              <div>
-                <div className="text-white uppercase tracking-wider font-semibold">Profile Readiness</div>
-                <div className="text-[10px] text-neutral-500 mt-0.5">Add 1 voice sample for 100%</div>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  fontSize: "10px",
+                  fontFamily: "monospace",
+                  color: "#8a8a9a",
+                }}
+              >
+                <ShieldCheck size={12} color="#d4af61" />
+                <span>Only verified casting directors can decrypt &amp; view your vault</span>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  fontSize: "10px",
+                  fontFamily: "monospace",
+                  color: "#8a8a9a",
+                }}
+              >
+                <ShieldCheck size={12} color="#818cf8" />
+                <span>DPDP Act 2023 compliant • Zero third-party data sharing</span>
               </div>
             </div>
           </div>
 
           {/* Metrics */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-mono">
-            <div className="p-5 border border-white/[0.08] bg-white/[0.015] space-y-1">
-              <div className="text-neutral-500 uppercase tracking-widest text-[10px]">SUBMITTED TAPES</div>
-              <div className="text-2xl font-editorial text-white">14</div>
-              <div className="text-[10px] text-emerald-400">+3 this month</div>
-            </div>
-            <div className="p-5 border border-white/[0.08] bg-white/[0.015] space-y-1">
-              <div className="text-neutral-500 uppercase tracking-widest text-[10px]">SHORTLISTS</div>
-              <div className="text-2xl font-editorial text-[#c5a059]">5</div>
-              <div className="text-[10px] text-neutral-500">35% conversion</div>
-            </div>
-            <div className="p-5 border border-white/[0.08] bg-white/[0.015] space-y-1">
-              <div className="text-neutral-500 uppercase tracking-widest text-[10px]">CALLBACKS</div>
-              <div className="text-2xl font-editorial text-white">2</div>
-              <div className="text-[10px] text-neutral-400">Wednesday 3:30 PM</div>
-            </div>
-            <div className="p-5 border border-white/[0.08] bg-white/[0.015] space-y-1">
-              <div className="text-neutral-500 uppercase tracking-widest text-[10px]">ESCROW PROTECTED</div>
-              <div className="text-2xl font-editorial text-emerald-400">₹85,000</div>
-              <div className="text-[10px] text-emerald-400">Guaranteed payout</div>
-            </div>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(4, 1fr)",
+              gap: "16px",
+            }}
+            className="grid-cols-2 sm:grid-cols-4"
+          >
+            {[
+              { label: "Submitted Tapes", value: "14", sub: "+3 this month", color: "#ffffff" },
+              { label: "Shortlists", value: "5", sub: "35% conversion", color: "#d4af61" },
+              { label: "Callbacks", value: "2", sub: "Wednesday 3:30 PM", color: "#ffffff" },
+              { label: "Escrow Protected", value: "₹85K", sub: "Guaranteed payout", color: "#34d399" },
+            ].map((m) => (
+              <div
+                key={m.label}
+                style={{
+                  padding: "20px 24px",
+                  borderRadius: "14px",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  backgroundColor: "#0a0a10",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "6px",
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: "10px",
+                    fontFamily: "monospace",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.12em",
+                    color: "#8a8a9a",
+                  }}
+                >
+                  {m.label}
+                </div>
+                <div
+                  className="font-cinema"
+                  style={{ fontSize: "28px", fontWeight: 700, color: m.color }}
+                >
+                  {m.value}
+                </div>
+                <div style={{ fontSize: "11px", color: "#9a9aa8" }}>{m.sub}</div>
+              </div>
+            ))}
           </div>
 
           {/* Submissions Pipeline */}
-          <div className="p-8 border border-white/[0.08] bg-[#0e0e12] space-y-6">
-            <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
+          <div
+            style={{
+              padding: "28px 32px",
+              borderRadius: "20px",
+              border: "1px solid rgba(255,255,255,0.08)",
+              backgroundColor: "#0a0a10",
+              display: "flex",
+              flexDirection: "column",
+              gap: "24px",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                paddingBottom: "20px",
+                borderBottom: "1px solid rgba(255,255,255,0.06)",
+              }}
+            >
               <div>
-                <h2 className="font-editorial text-2xl text-white font-light">
+                <h2
+                  className="font-cinema"
+                  style={{ fontSize: "22px", fontWeight: 700, color: "#ffffff", margin: 0 }}
+                >
                   Active Auditions &amp; Pipeline
                 </h2>
-                <p className="text-xs text-neutral-400 font-light mt-0.5">
+                <p style={{ fontSize: "12px", color: "#9a9aa8", margin: "4px 0 0 0" }}>
                   Real-time status of your self-tape submissions across casting directors.
                 </p>
               </div>
 
-              <Link href="/casting-calls" className="btn-editorial py-2 px-4 text-[10px]">
-                EXPLORE CASTINGS
+              <Link
+                href="/casting-calls"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  padding: "8px 16px",
+                  borderRadius: "8px",
+                  border: "1px solid rgba(255,255,255,0.12)",
+                  color: "#ffffff",
+                  fontSize: "11px",
+                  fontFamily: "monospace",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.08em",
+                  textDecoration: "none",
+                  transition: "all 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(212,175,97,0.4)";
+                  e.currentTarget.style.color = "#d4af61";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)";
+                  e.currentTarget.style.color = "#ffffff";
+                }}
+              >
+                EXPLORE CASTINGS <ChevronRight size={12} />
               </Link>
             </div>
 
-            <div className="divide-y divide-white/[0.08]">
-              {submissions.map((sub) => (
-                <div key={sub.id} className="py-6 space-y-4">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
+              {submissions.map((sub, idx) => (
+                <div
+                  key={sub.id}
+                  style={{
+                    paddingTop: idx === 0 ? 0 : "24px",
+                    paddingBottom: "24px",
+                    borderBottom:
+                      idx < submissions.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "14px",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      flexWrap: "wrap",
+                    }}
+                  >
                     <div>
-                      <h3 className="font-editorial text-xl text-white font-normal">
+                      <h3
+                        className="font-cinema"
+                        style={{
+                          fontSize: "18px",
+                          fontWeight: 700,
+                          color: "#ffffff",
+                          margin: "0 0 4px 0",
+                        }}
+                      >
                         {sub.projectTitle}
                       </h3>
-                      <p className="text-xs font-mono text-neutral-400 mt-0.5">
+                      <p
+                        style={{
+                          fontSize: "12px",
+                          fontFamily: "monospace",
+                          color: "#9a9aa8",
+                          margin: 0,
+                        }}
+                      >
                         Role: {sub.roleName} • {sub.productionHouse}
                       </p>
                     </div>
 
-                    <div className="flex items-center gap-3 text-xs font-mono">
-                      <span className="text-neutral-500">{sub.dateSubmitted}</span>
-                      <span className="border border-white/20 px-2.5 py-0.5 text-white uppercase text-[10px]">
+                    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                      <span
+                        style={{
+                          fontSize: "10px",
+                          fontFamily: "monospace",
+                          color: "#8a8a9a",
+                        }}
+                      >
+                        {sub.dateSubmitted}
+                      </span>
+                      <span
+                        style={{
+                          padding: "4px 12px",
+                          borderRadius: "6px",
+                          border: "1px solid rgba(212,175,97,0.3)",
+                          color: "#d4af61",
+                          fontSize: "10px",
+                          fontFamily: "monospace",
+                          fontWeight: 700,
+                          textTransform: "uppercase",
+                          letterSpacing: "0.08em",
+                        }}
+                      >
                         {sub.status}
                       </span>
                     </div>
                   </div>
 
                   {/* 5-Stage Tracker */}
-                  <div className="grid grid-cols-5 gap-2 pt-2 text-[10px] font-mono">
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "repeat(5, 1fr)",
+                      gap: "8px",
+                    }}
+                  >
                     {stages.map((st, i) => {
                       const isDone = i + 1 <= sub.stage;
                       return (
-                        <div key={i} className="space-y-1.5">
-                          <div className={`h-1 transition-all ${isDone ? "bg-white" : "bg-white/10"}`} />
-                          <div className={isDone ? "text-white font-semibold" : "text-neutral-600"}>
+                        <div key={i} style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                          <div
+                            style={{
+                              height: "3px",
+                              borderRadius: "2px",
+                              backgroundColor: isDone ? "#d4af61" : "rgba(255,255,255,0.08)",
+                              transition: "background-color 0.2s ease",
+                            }}
+                          />
+                          <span
+                            style={{
+                              fontSize: "10px",
+                              fontFamily: "monospace",
+                              color: isDone ? "#ffffff" : "#606070",
+                              fontWeight: isDone ? 700 : 400,
+                            }}
+                          >
                             {st}
-                          </div>
+                          </span>
                         </div>
                       );
                     })}
                   </div>
 
                   {sub.directorNote && (
-                    <div className="p-3 border border-white/5 bg-white/[0.02] text-xs font-light text-neutral-300">
-                      <span className="text-neutral-500 font-mono text-[10px] uppercase block mb-0.5">Director Feedback:</span>
+                    <div
+                      style={{
+                        padding: "12px 16px",
+                        borderRadius: "10px",
+                        border: "1px solid rgba(255,255,255,0.06)",
+                        backgroundColor: "rgba(255,255,255,0.02)",
+                        fontSize: "12px",
+                        color: "#c0c0d0",
+                        lineHeight: 1.5,
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontSize: "10px",
+                          fontFamily: "monospace",
+                          color: "#8a8a9a",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.1em",
+                          display: "block",
+                          marginBottom: "4px",
+                        }}
+                      >
+                        Director Feedback:
+                      </span>
                       {sub.directorNote}
                     </div>
                   )}
@@ -173,9 +829,14 @@ export default function TalentDashboardPage() {
               ))}
             </div>
           </div>
-
         </main>
       </div>
+
+      {/* Media Vault Modal */}
+      <MediaVaultModal
+        isOpen={isVaultOpen}
+        onClose={() => setIsVaultOpen(false)}
+      />
     </>
   );
 }

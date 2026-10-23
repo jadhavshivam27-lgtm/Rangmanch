@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Shield, Lock, Download, AlertTriangle, X, CheckCircle, Eye } from "lucide-react";
+import { Shield, Lock, Download, AlertTriangle, X, CheckCircle, Eye, Sparkles, FileText, ArrowRight } from "lucide-react";
 import { useAuthStore } from "@/lib/auth";
 
 interface ScriptSidesProps {
@@ -25,7 +25,8 @@ export default function WatermarkedSides({
 
   if (!isOpen) return null;
 
-  const watermarkText = `${user?.name || "RANGMANCH VERIFIED TALENT"} • CONFIDENTIAL SIDES • DO NOT DISTRIBUTE`;
+  const performerName = user?.name || "VERIFIED PERFORMER";
+  const watermarkText = `${performerName.toUpperCase()} • RANGMANCH CONFIDENTIAL SIDES • DO NOT DISTRIBUTE`;
 
   const handleDownload = () => {
     setDownloadSuccess(true);
@@ -33,22 +34,91 @@ export default function WatermarkedSides({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/90 backdrop-blur-md">
-      <div className="relative w-full max-w-3xl max-h-[90vh] flex flex-col border border-white/20 bg-[#0e0e12] overflow-hidden">
-        
-        {/* Header */}
-        <div className="flex items-center justify-between px-8 py-5 border-b border-white/10 shrink-0">
+    <div className="modal-backdrop">
+      <div
+        className="modal-panel"
+        style={{
+          maxWidth: "800px",
+          width: "100%",
+          borderRadius: "24px",
+          backgroundColor: "#0d0d14",
+          border: "1px solid rgba(212,175,97,0.35)",
+          boxShadow: "0 25px 80px rgba(0,0,0,0.95), 0 0 50px rgba(212,175,97,0.12)",
+          overflow: "hidden",
+        }}
+      >
+        {/* Top Gold Trim */}
+        <div
+          style={{
+            height: "3px",
+            width: "100%",
+            background:
+              "linear-gradient(90deg, transparent, #d4af61 25%, #f4e2b8 50%, #d4af61 75%, transparent)",
+          }}
+        />
+
+        {/* Modal Header */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "24px 32px",
+            borderBottom: "1px solid rgba(255,255,255,0.08)",
+            backgroundColor: "#09090e",
+          }}
+        >
           <div>
-            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#c5a059] block">
-              ✦ CONFIDENTIAL PRODUCTION MATERIAL
-            </span>
-            <h3 className="font-editorial text-2xl text-white font-light mt-0.5">
-              {projectTitle} — {roleName}
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "6px",
+                fontSize: "10px",
+                fontFamily: "monospace",
+                textTransform: "uppercase",
+                letterSpacing: "0.2em",
+                color: "#d4af61",
+                fontWeight: 700,
+                marginBottom: "4px",
+              }}
+            >
+              <span>✦ CONFIDENTIAL PRODUCTION MATERIAL</span>
+              <span style={{ color: "rgba(255,255,255,0.3)" }}>•</span>
+              <span style={{ color: "#34d399" }}>SHA-256 DRM</span>
+            </div>
+            <h3
+              className="font-cinema"
+              style={{
+                fontSize: "22px",
+                fontWeight: 700,
+                color: "#ffffff",
+                margin: 0,
+                letterSpacing: "-0.01em",
+              }}
+            >
+              {projectTitle} — <span style={{ color: "#d4af61" }}>{roleName}</span>
             </h3>
           </div>
           <button
             onClick={onClose}
-            className="p-1 text-neutral-400 hover:text-white transition-colors"
+            style={{
+              padding: "8px",
+              borderRadius: "10px",
+              backgroundColor: "rgba(255,255,255,0.05)",
+              border: "1px solid rgba(255,255,255,0.1)",
+              color: "#8a8a9a",
+              cursor: "pointer",
+              transition: "all 0.2s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = "#ffffff";
+              e.currentTarget.style.borderColor = "rgba(212,175,97,0.4)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = "#8a8a9a";
+              e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+            }}
           >
             <X size={18} />
           </button>
@@ -56,107 +126,335 @@ export default function WatermarkedSides({
 
         {/* NDA Guard if not agreed */}
         {!hasAgreedNDA ? (
-          <div className="p-10 text-center flex flex-col items-center justify-center space-y-6 my-auto">
-            <div className="w-14 h-14 rounded-full border border-white/20 flex items-center justify-center text-white">
-              <Lock size={22} />
+          <div
+            style={{
+              padding: "48px 36px",
+              textAlign: "center",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "#0d0d14",
+            }}
+          >
+            <div
+              style={{
+                width: "64px",
+                height: "64px",
+                borderRadius: "20px",
+                backgroundColor: "rgba(212,175,97,0.12)",
+                border: "1px solid rgba(212,175,97,0.35)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#d4af61",
+                marginBottom: "20px",
+                boxShadow: "0 0 30px rgba(212,175,97,0.2)",
+              }}
+            >
+              <Lock size={28} />
             </div>
 
-            <div className="max-w-md space-y-3">
-              <h4 className="font-editorial text-2xl text-white font-normal">
-                Non-Disclosure &amp; DRM Agreement
-              </h4>
-              <p className="text-xs text-neutral-400 leading-relaxed font-light">
-                These character sides are proprietary material protected under Indian Copyright Law. Your identity and IP address are cryptographically embedded across each page.
-              </p>
+            <h4
+              className="font-cinema"
+              style={{
+                fontSize: "26px",
+                fontWeight: 700,
+                color: "#ffffff",
+                margin: "0 0 10px 0",
+              }}
+            >
+              Non-Disclosure &amp; DRM Agreement
+            </h4>
+
+            <p
+              style={{
+                fontSize: "13px",
+                color: "#9a9aa8",
+                lineHeight: 1.6,
+                maxWidth: "520px",
+                margin: "0 0 24px 0",
+              }}
+            >
+              These character sides and scene directions are proprietary production intellectual property protected under the{" "}
+              <strong style={{ color: "#ffffff" }}>Indian Copyright Act 1957</strong> and CINTAA anti-leak protocols.
+            </p>
+
+            {/* Terms Summary Card */}
+            <div
+              style={{
+                width: "100%",
+                maxWidth: "520px",
+                padding: "16px 20px",
+                borderRadius: "14px",
+                backgroundColor: "#07070b",
+                border: "1px solid rgba(255,255,255,0.08)",
+                textAlign: "left",
+                fontSize: "12px",
+                color: "#c0c0d0",
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+                marginBottom: "28px",
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <CheckCircle size={15} color="#34d399" className="shrink-0" />
+                <span>
+                  Dynamic invisible SHA-256 forensic watermark keyed to{" "}
+                  <strong style={{ color: "#d4af61" }}>{performerName}</strong>.
+                </span>
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <CheckCircle size={15} color="#34d399" className="shrink-0" />
+                <span>Screenshots &amp; print exports are logged with IP &amp; timestamp audit trail.</span>
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <CheckCircle size={15} color="#34d399" className="shrink-0" />
+                <span>Zero third-party sharing permitted without written director authorization.</span>
+              </div>
             </div>
 
             <button
               onClick={() => setHasAgreedNDA(true)}
-              className="btn-editorial-solid py-3 px-8 text-xs tracking-widest uppercase"
+              className="btn-cinema-gold"
+              style={{
+                padding: "14px 36px",
+                fontSize: "13px",
+                letterSpacing: "0.1em",
+                borderRadius: "14px",
+              }}
             >
-              ACCEPT &amp; DECRYPT SIDES
+              <span>ACCEPT &amp; DECRYPT CHARACTER SIDES</span>
+              <ArrowRight size={15} />
             </button>
           </div>
         ) : (
           <>
-            {/* Watermarked Script Viewer */}
-            <div className="relative flex-1 overflow-y-auto p-8 space-y-8 select-none bg-[#0a0a0c]">
-              {/* Dynamic Watermark Background */}
-              <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-[0.04] rotate-[-25deg] flex flex-col justify-around text-xs font-mono font-bold text-white">
-                {Array.from({ length: 10 }).map((_, i) => (
-                  <div key={i} className="whitespace-nowrap tracking-widest uppercase">
+            {/* Watermark Security Notice */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "12px 32px",
+                backgroundColor: "#07070b",
+                borderBottom: "1px solid rgba(255,255,255,0.06)",
+                fontSize: "11px",
+                fontFamily: "monospace",
+                color: "#8a8a9a",
+              }}
+            >
+              <span style={{ display: "flex", alignItems: "center", gap: "8px", color: "#ffffff" }}>
+                <Eye size={14} color="#d4af61" />
+                <span>Licensed to: <strong style={{ color: "#d4af61" }}>{performerName}</strong></span>
+              </span>
+              <span
+                style={{
+                  padding: "2px 8px",
+                  borderRadius: "6px",
+                  backgroundColor: "rgba(52,211,153,0.12)",
+                  color: "#34d399",
+                  fontSize: "10px",
+                  fontWeight: 700,
+                  letterSpacing: "0.1em",
+                }}
+              >
+                ● SHA-256 EMBEDDED
+              </span>
+            </div>
+
+            {/* Watermarked Screenplay Viewer */}
+            <div
+              style={{
+                position: "relative",
+                maxHeight: "520px",
+                overflowY: "auto",
+                padding: "36px 40px",
+                backgroundColor: "#050508",
+                userSelect: "none",
+              }}
+            >
+              {/* Dynamic Watermark Pattern */}
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  pointerEvents: "none",
+                  overflow: "hidden",
+                  opacity: 0.05,
+                  transform: "rotate(-25deg)",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-around",
+                  fontSize: "11px",
+                  fontFamily: "monospace",
+                  fontWeight: 800,
+                  color: "#ffffff",
+                  zIndex: 1,
+                }}
+              >
+                {Array.from({ length: 8 }).map((_, i) => (
+                  <div key={i} style={{ whiteSpace: "nowrap", letterSpacing: "0.25em" }}>
                     {watermarkText} • {watermarkText}
                   </div>
                 ))}
               </div>
 
-              {/* Watermark Notice */}
-              <div className="relative z-10 flex items-center justify-between p-3 border border-white/10 text-xs font-mono text-neutral-400">
-                <span className="flex items-center gap-2 text-white">
-                  <Eye size={13} className="text-[#c5a059]" />
-                  <span>Licensed to: {user?.name || "Verified Performer"}</span>
-                </span>
-                <span className="text-[10px] uppercase">SHA-256 DRM EMBEDDED</span>
-              </div>
-
               {/* Scene Heading */}
-              <div className="relative z-10 text-center border-b border-white/[0.08] pb-4">
-                <div className="font-mono text-xs uppercase tracking-widest text-[#c5a059]">
+              <div
+                style={{
+                  position: "relative",
+                  zIndex: 2,
+                  textAlign: "center",
+                  borderBottom: "1px solid rgba(255,255,255,0.1)",
+                  paddingBottom: "20px",
+                  marginBottom: "28px",
+                }}
+              >
+                <div
+                  style={{
+                    fontFamily: "monospace",
+                    fontSize: "12px",
+                    fontWeight: 700,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.2em",
+                    color: "#d4af61",
+                  }}
+                >
                   SCENE 14 — INTERIOR. POLICE HEADQUARTERS — NIGHT
                 </div>
-                <div className="text-xs text-neutral-500 italic mt-1 font-serif">
-                  (Rain lashes against the glass. An interrogator measures their breath.)
+                <div
+                  className="font-cinema"
+                  style={{
+                    fontSize: "13px",
+                    color: "#7e7e8e",
+                    fontStyle: "italic",
+                    marginTop: "6px",
+                  }}
+                >
+                  (Rain lashes against the tinted glass. An interrogator measures their breath in silence.)
                 </div>
               </div>
 
-              {/* Dialogue Script */}
-              <div className="relative z-10 space-y-6 max-w-xl mx-auto font-mono text-xs leading-relaxed text-neutral-300">
+              {/* Screenplay Dialogue Body */}
+              <div
+                style={{
+                  position: "relative",
+                  zIndex: 2,
+                  maxWidth: "600px",
+                  margin: "0 auto",
+                  fontFamily: "'Courier New', Courier, monospace",
+                  fontSize: "13px",
+                  lineHeight: 1.7,
+                  color: "#d8d8e0",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "24px",
+                }}
+              >
                 {scriptLines && scriptLines.length > 0 ? (
                   scriptLines.map((line, idx) => (
-                    <div key={idx} className="space-y-1">
-                      <div className="font-bold text-white uppercase tracking-wider text-[11px]">
+                    <div key={idx} style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                      <div
+                        style={{
+                          fontWeight: 700,
+                          color: "#ffffff",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.15em",
+                          fontSize: "12px",
+                        }}
+                      >
                         {line.speaker}
                       </div>
                       {line.direction && (
-                        <div className="text-neutral-500 italic pl-4 font-serif">
+                        <div
+                          style={{
+                            color: "#8a8a9a",
+                            fontStyle: "italic",
+                            paddingLeft: "20px",
+                            fontFamily: "Georgia, serif",
+                            fontSize: "12px",
+                          }}
+                        >
                           ({line.direction})
                         </div>
                       )}
-                      <div className="pl-4 text-neutral-200">{line.dialogue}</div>
+                      <div style={{ paddingLeft: "20px", color: "#f0f0f5" }}>{line.dialogue}</div>
                     </div>
                   ))
                 ) : (
                   <>
-                    <div className="space-y-1">
-                      <div className="font-bold text-white uppercase tracking-wider text-[11px]">
+                    <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                      <div
+                        style={{
+                          fontWeight: 700,
+                          color: "#d4af61",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.15em",
+                          fontSize: "12px",
+                        }}
+                      >
                         {roleName.toUpperCase()}
                       </div>
-                      <div className="text-neutral-500 italic pl-4 font-serif">
-                        (stepping into the circle of lamplight, Voice quiet, measured)
+                      <div
+                        style={{
+                          color: "#8a8a9a",
+                          fontStyle: "italic",
+                          paddingLeft: "20px",
+                          fontFamily: "Georgia, serif",
+                          fontSize: "12px",
+                        }}
+                      >
+                        (stepping into the circle of lamplight, voice quiet, measured)
                       </div>
-                      <div className="pl-4 text-neutral-200">
-                        &quot;Do not lecture me on institutional protocol, Commissioner. While orders are being drafted in air-conditioned chambers, an entire family is waiting in the dark. If you intend to suspend me, do it before midnight. Otherwise, step out of my way.&quot;
+                      <div style={{ paddingLeft: "20px", color: "#f0f0f5" }}>
+                        &ldquo;Do not lecture me on institutional protocol, Commissioner. While orders are being drafted in air-conditioned chambers, an entire family is waiting in the dark. If you intend to suspend me, do it before midnight. Otherwise, step out of my way.&rdquo;
                       </div>
                     </div>
 
-                    <div className="space-y-1">
-                      <div className="font-bold text-neutral-400 uppercase tracking-wider text-[11px]">
+                    <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                      <div
+                        style={{
+                          fontWeight: 700,
+                          color: "#9a9aa8",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.15em",
+                          fontSize: "12px",
+                        }}
+                      >
                         COMMISSIONER
                       </div>
-                      <div className="text-neutral-500 italic pl-4 font-serif">
-                        (removing glasses, deliberate pause)
+                      <div
+                        style={{
+                          color: "#8a8a9a",
+                          fontStyle: "italic",
+                          paddingLeft: "20px",
+                          fontFamily: "Georgia, serif",
+                          fontSize: "12px",
+                        }}
+                      >
+                        (removing glasses, deliberate theatrical pause)
                       </div>
-                      <div className="pl-4 text-neutral-400">
-                        &quot;Courage will not insulate you from a judicial tribunal, Inspector. You cross that threshold tonight, and you stand without the department.&quot;
+                      <div style={{ paddingLeft: "20px", color: "#a0a0b0" }}>
+                        &ldquo;Courage will not insulate you from a judicial tribunal, Inspector. You cross that threshold tonight, and you stand without the department.&rdquo;
                       </div>
                     </div>
 
-                    <div className="space-y-1">
-                      <div className="font-bold text-white uppercase tracking-wider text-[11px]">
+                    <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                      <div
+                        style={{
+                          fontWeight: 700,
+                          color: "#d4af61",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.15em",
+                          fontSize: "12px",
+                        }}
+                      >
                         {roleName.toUpperCase()}
                       </div>
-                      <div className="pl-4 text-neutral-200">
-                        &quot;I have always walked alone in this city. Tonight will be no different.&quot;
+                      <div style={{ paddingLeft: "20px", color: "#f0f0f5" }}>
+                        &ldquo;I have always walked alone in this city. Tonight will be no different.&rdquo;
                       </div>
                     </div>
                   </>
@@ -164,31 +462,84 @@ export default function WatermarkedSides({
               </div>
             </div>
 
-            {/* Footer */}
-            <div className="flex items-center justify-between px-8 py-4 border-t border-white/10 shrink-0 text-xs font-mono">
-              <span className="text-neutral-500 text-[10px] uppercase tracking-wider">
-                CINTAA CHARTER ANTI-LEAK
-              </span>
+            {/* Modal Footer Controls */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "20px 32px",
+                borderTop: "1px solid rgba(255,255,255,0.08)",
+                backgroundColor: "#09090e",
+                fontSize: "12px",
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                <Shield size={14} color="#d4af61" />
+                <span
+                  style={{
+                    fontSize: "10px",
+                    fontFamily: "monospace",
+                    color: "#8a8a9a",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.1em",
+                  }}
+                >
+                  CINTAA CHARTER ANTI-LEAK DRM
+                </span>
+              </div>
 
-              <div className="flex items-center gap-3">
+              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                 <button
                   onClick={handleDownload}
-                  className="btn-editorial py-2 px-4 text-[10px]"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    padding: "10px 18px",
+                    borderRadius: "10px",
+                    backgroundColor: "rgba(255,255,255,0.05)",
+                    border: "1px solid rgba(255,255,255,0.12)",
+                    color: downloadSuccess ? "#34d399" : "#ffffff",
+                    fontSize: "11px",
+                    fontFamily: "monospace",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.08em",
+                    cursor: "pointer",
+                    transition: "all 0.2s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = "rgba(212,175,97,0.4)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)";
+                  }}
                 >
                   {downloadSuccess ? (
-                    <span className="text-emerald-400">PDF SAVED</span>
+                    <>
+                      <CheckCircle size={14} color="#34d399" />
+                      <span>PDF WATERMARKED</span>
+                    </>
                   ) : (
                     <>
-                      <Download size={12} />
+                      <Download size={14} />
                       <span>DOWNLOAD SIDES</span>
                     </>
                   )}
                 </button>
+
                 <button
                   onClick={onClose}
-                  className="btn-editorial-solid py-2 px-5 text-[10px]"
+                  className="btn-cinema-gold"
+                  style={{
+                    padding: "10px 22px",
+                    fontSize: "11px",
+                    letterSpacing: "0.08em",
+                    borderRadius: "10px",
+                    height: "38px",
+                  }}
                 >
-                  AUDITION STUDIO
+                  CLOSE PREVIEW
                 </button>
               </div>
             </div>
