@@ -266,6 +266,42 @@ export default function HomePageClient() {
             </button>
           </form>
 
+          {/* Quick Primary Actions */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "12px",
+              flexWrap: "wrap",
+              marginBottom: "36px",
+            }}
+          >
+            <Link
+              href="/casting-calls"
+              className="btn-cinema-ghost"
+              style={{ height: "40px", padding: "0 20px", fontSize: "11px", letterSpacing: "0.08em" }}
+            >
+              <Film size={14} color="#d4af61" />
+              <span>Explore Casting Calls</span>
+            </Link>
+
+            <Link
+              href="/dashboard/talent"
+              className="btn-cinema-gold"
+              style={{
+                height: "40px",
+                padding: "0 20px",
+                fontSize: "11px",
+                letterSpacing: "0.08em",
+                boxShadow: "0 0 20px rgba(212,175,97,0.35)",
+              }}
+            >
+              <Sparkles size={14} />
+              <span>Performer Studio: Upload Reels &amp; Photos</span>
+            </Link>
+          </div>
+
           {/* Stats Row */}
           <div
             style={{
@@ -706,22 +742,38 @@ export default function HomePageClient() {
               </h2>
             </div>
 
-            <Link
-              href="/talent"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "6px",
-                fontSize: "11px",
-                fontWeight: 700,
-                textTransform: "uppercase",
-                letterSpacing: "0.15em",
-                color: "#d4af61",
-                textDecoration: "none",
-              }}
-            >
-              View Full Talent Roster <ArrowRight size={14} />
-            </Link>
+            <div style={{ display: "flex", alignItems: "center", gap: "16px", flexWrap: "wrap" }}>
+              <Link
+                href="/dashboard/talent"
+                className="btn-cinema-gold"
+                style={{
+                  height: "36px",
+                  padding: "0 18px",
+                  fontSize: "10px",
+                  letterSpacing: "0.12em",
+                }}
+              >
+                <Sparkles size={13} />
+                <span>UPLOAD YOUR REEL</span>
+              </Link>
+
+              <Link
+                href="/talent"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  fontSize: "11px",
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.15em",
+                  color: "#d4af61",
+                  textDecoration: "none",
+                }}
+              >
+                View Full Talent Roster <ArrowRight size={14} />
+              </Link>
+            </div>
           </div>
 
           {/* Talent Grid — 4 columns */}

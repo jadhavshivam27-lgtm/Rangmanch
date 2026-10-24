@@ -298,6 +298,94 @@ export default function TalentDirectoryPage() {
             </div>
           </div>
 
+          {/* Performer Upload & Media Vault CTA Banner */}
+          <div
+            style={{
+              padding: "22px 28px",
+              borderRadius: "16px",
+              background:
+                "linear-gradient(135deg, rgba(212,175,97,0.14) 0%, rgba(20,20,30,0.85) 60%, rgba(8,8,14,0.95) 100%)",
+              border: "1px solid rgba(212,175,97,0.35)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              flexWrap: "wrap",
+              gap: "20px",
+              marginBottom: "32px",
+              boxShadow: "0 12px 40px rgba(0,0,0,0.5)",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+              <div
+                style={{
+                  width: "50px",
+                  height: "50px",
+                  borderRadius: "14px",
+                  backgroundColor: "rgba(212,175,97,0.16)",
+                  border: "1px solid rgba(212,175,97,0.4)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#d4af61",
+                  flexShrink: 0,
+                }}
+              >
+                <Sparkles size={24} />
+              </div>
+              <div>
+                <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                  <h3
+                    style={{
+                      margin: 0,
+                      fontSize: "17px",
+                      fontWeight: 700,
+                      color: "#ffffff",
+                    }}
+                  >
+                    Are You an Actor, Dancer, or Performer?
+                  </h3>
+                  <span
+                    style={{
+                      fontSize: "10px",
+                      fontFamily: "monospace",
+                      padding: "2px 8px",
+                      borderRadius: "100px",
+                      backgroundColor: "rgba(52,211,153,0.15)",
+                      border: "1px solid rgba(52,211,153,0.3)",
+                      color: "#34d399",
+                      fontWeight: 700,
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    Direct Upload
+                  </span>
+                </div>
+                <p style={{ margin: "4px 0 0", fontSize: "13px", color: "#a0a0b0" }}>
+                  Upload your headshots, 4K monologue showreels, and vocal samples to get your verified comp card listed for directors.
+                </p>
+              </div>
+            </div>
+
+            <Link
+              href="/dashboard/talent"
+              className="btn-cinema-gold"
+              style={{
+                height: "44px",
+                padding: "0 24px",
+                fontSize: "12px",
+                letterSpacing: "0.1em",
+                textDecoration: "none",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "10px",
+                flexShrink: 0,
+              }}
+            >
+              <span>UPLOAD REELS &amp; PHOTOS</span>
+              <ArrowRight size={14} />
+            </Link>
+          </div>
+
           {/* Search Bar */}
           <div
             style={{

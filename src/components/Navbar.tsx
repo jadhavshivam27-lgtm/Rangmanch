@@ -73,6 +73,18 @@ export default function Navbar() {
             )}
           </Link>
           <Link
+            href="/dashboard/talent"
+            className={`hover:text-[#f4e2b8] transition-colors py-2 relative flex items-center gap-1.5 ${
+              pathname.startsWith("/dashboard") ? "text-[#d4af61] font-bold" : ""
+            }`}
+          >
+            <span>Upload Reel &amp; Studio</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#d4af61] animate-pulse" />
+            {pathname.startsWith("/dashboard") && (
+              <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#d4af61] rounded-full shadow-[0_0_8px_#d4af61]" />
+            )}
+          </Link>
+          <Link
             href="/verification"
             className={`hover:text-[#f4e2b8] transition-colors py-2 relative ${
               pathname.startsWith("/verification") ? "text-[#d4af61] font-bold" : ""
@@ -117,14 +129,18 @@ export default function Navbar() {
             </span>
           </div>
 
-          {/* User Avatar */}
-          <div className="w-8 h-8 rounded-full overflow-hidden border border-[#d4af61]/40 shrink-0">
+          {/* User Avatar linking to Performer Dashboard */}
+          <Link
+            href="/dashboard/talent"
+            title="Performer Studio & Media Vault"
+            className="w-8 h-8 rounded-full overflow-hidden border border-[#d4af61]/60 shrink-0 hover:scale-110 hover:border-[#d4af61] transition-all cursor-pointer"
+          >
             <img
               src="/talent1.jpg"
-              alt="Performer"
+              alt="Performer Profile"
               className="w-full h-full object-cover"
             />
-          </div>
+          </Link>
 
           {/* Audition Now CTA Button */}
           <Link
@@ -152,10 +168,11 @@ export default function Navbar() {
           <Link href="/" onClick={() => setMobileOpen(false)} className="block py-2 text-white">Home</Link>
           <Link href="/casting-calls" onClick={() => setMobileOpen(false)} className="block py-2 text-neutral-300 hover:text-white">Casting Calls</Link>
           <Link href="/talent" onClick={() => setMobileOpen(false)} className="block py-2 text-neutral-300 hover:text-white">Performers</Link>
+          <Link href="/dashboard/talent" onClick={() => setMobileOpen(false)} className="block py-2 text-[#d4af61] font-bold">Upload Reel &amp; Studio</Link>
           <Link href="/verification" onClick={() => setMobileOpen(false)} className="block py-2 text-neutral-300 hover:text-white">Verified Guild</Link>
           <div className="pt-4 border-t border-white/10 flex flex-col gap-3">
+            <Link href="/dashboard/talent" onClick={() => setMobileOpen(false)} className="btn-cinema-gold py-3 justify-center">Performer Media Vault</Link>
             <Link href="/login" onClick={() => setMobileOpen(false)} className="btn-cinema-ghost py-3 justify-center">Sign In</Link>
-            <Link href="/signup" onClick={() => setMobileOpen(false)} className="btn-cinema-gold py-3 justify-center">Join Rangmanch</Link>
           </div>
         </div>
       )}
