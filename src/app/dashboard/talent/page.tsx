@@ -113,7 +113,7 @@ export default function TalentDashboardPage() {
                   className="font-cinema"
                   style={{ fontSize: "32px", color: "#ffffff", fontWeight: 700, margin: 0 }}
                 >
-                  Welcome back, Priya Sharma
+                  Welcome back, Shivam Jadhav
                 </h1>
                 <p style={{ fontSize: "13px", color: "#9a9aa8", margin: 0 }}>
                   You have{" "}

@@ -136,8 +136,8 @@ export default function Navbar() {
             className="w-8 h-8 rounded-full overflow-hidden border border-[#d4af61]/60 shrink-0 hover:scale-110 hover:border-[#d4af61] transition-all cursor-pointer"
           >
             <img
-              src="/talent1.jpg"
-              alt="Performer Profile"
+              src="/photos/real_03.jpg"
+              alt="Shivam Jadhav — Performer Profile"
               className="w-full h-full object-cover"
             />
           </Link>

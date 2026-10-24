@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, Suspense } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import Navbar from "@/components/Navbar";
@@ -47,7 +47,19 @@ function TalentProfileDetailContent() {
         `t-${t.id.replace(/^talent-/, "")}` === id
     ) || DEMO_TALENT[0];
   const [talent, setTalent] = useState(initialTalent);
-  const [activePhoto, setActivePhoto] = useState(talent.profilePhoto || "/talent1.jpg");
+  const [activePhoto, setActivePhoto] = useState(talent.profilePhoto || "/photos/real_03.jpg");
+
+  useEffect(() => {
+    const found =
+      DEMO_TALENT.find(
+        (t) =>
+          t.id === id ||
+          t.id === `talent-${id?.replace(/^t-/, "")}` ||
+          `t-${t.id.replace(/^talent-/, "")}` === id
+      ) || DEMO_TALENT[0];
+    setTalent(found);
+    setActivePhoto(found.profilePhoto || "/photos/real_03.jpg");
+  }, [id]);
   const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
   const [isPlayingReel, setIsPlayingReel] = useState(false);
   const [selectedProduction, setSelectedProduction] = useState("Antim Prahar — Feature Film");
@@ -55,12 +67,15 @@ function TalentProfileDetailContent() {
   const [inviteSent, setInviteSent] = useState(false);
 
   // Gallery of photos for this talent
-  const gallery = [
-    talent.profilePhoto || "/talent1.jpg",
-    talent.profilePhoto || "/talent1.jpg",
-    talent.profilePhoto || "/talent1.jpg",
-    talent.profilePhoto || "/talent1.jpg",
-  ];
+  const gallery =
+    talent.portfolioPhotos && talent.portfolioPhotos.length > 1
+      ? talent.portfolioPhotos
+      : [
+          talent.profilePhoto || "/photos/real_03.jpg",
+          "/photos/real_07.jpg",
+          "/photos/real_06.jpg",
+          "/photos/real_04.jpg",
+        ];
 
   const handleSendInvite = () => {
     setInviteSent(true);
