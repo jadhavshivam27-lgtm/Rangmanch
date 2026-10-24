@@ -5,6 +5,7 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import MediaVaultModal from "@/components/MediaVaultModal";
+import FeedbackNoticeModal, { FeedbackNotice } from "@/components/FeedbackNoticeModal";
 import {
   Sparkles,
   CheckCircle,
@@ -17,12 +18,15 @@ import {
   ChevronRight,
   ShieldCheck,
   Mic,
+  Award,
 } from "lucide-react";
 
 export default function TalentDashboardPage() {
   const [activeTab, setActiveTab] = useState<"applications" | "recommended" | "calendar">("applications");
   const [isVaultOpen, setIsVaultOpen] = useState(false);
   const [vaultStartTab, setVaultStartTab] = useState<"photos" | "videos" | "singing" | "bio">("photos");
+  const [isNoticeModalOpen, setIsNoticeModalOpen] = useState(false);
+  const [selectedNotice, setSelectedNotice] = useState<FeedbackNotice | null>(null);
 
   const openVault = (tab: "photos" | "videos" | "singing" | "bio" = "photos") => {
     setVaultStartTab(tab);
@@ -40,6 +44,31 @@ export default function TalentDashboardPage() {
       stage: 3,
       aiScore: 94,
       directorNote: "Exceptional Awadhi dialogue delivery. Callback scheduled for Wednesday.",
+      notice: {
+        id: "fn-1",
+        projectTitle: "Antim Prahar (Feature Film)",
+        roleName: "Neha Sinha — Female Lead",
+        productionHouse: "Starlight Casting Co.",
+        directorName: "Imtiaz Ali",
+        date: "Oct 22, 2024",
+        decisionStatus: "shortlisted" as const,
+        decisionTitle: "Shortlisted for Round 2 Direct Callback",
+        directorFeedback: "Captivating eyes and rare stillness in the monologue delivery. The transition from silence to intense confrontation was seamless. Looking forward to testing physical fight scene chemistry in Mumbai studio next week.",
+        talentPoolStatus: "✦ STAGE 2 CALLBACK CONFIRMED",
+        scorecard: {
+          screenPresence: 4.9,
+          dialogueDelivery: 4.8,
+          characterInterpretation: 4.8,
+          cameraEyeline: 4.7,
+        },
+        keyStrengths: [
+          "Magnetic Eye Contact",
+          "Authentic Awadhi Dialect Cadence",
+          "High Physical Agility",
+          "Subtle Emotional Shifts",
+        ],
+        recommendationNote: "Director's office has authorized full script sides release and hotel travel voucher for physical callback.",
+      },
     },
     {
       id: "sub-2",
@@ -51,6 +80,30 @@ export default function TalentDashboardPage() {
       stage: 2,
       aiScore: 89,
       directorNote: "Tape received. Review in progress by senior casting associate.",
+      notice: {
+        id: "fn-2",
+        projectTitle: "Hollow Nights Season 2 (OTT Web Series)",
+        roleName: "Rohan — Cyber Forensic Specialist",
+        productionHouse: "Spectrum Productions",
+        directorName: "Zoya Akhtar",
+        date: "Oct 23, 2024",
+        decisionStatus: "under_review" as const,
+        decisionTitle: "Executive Review in Progress",
+        directorFeedback: "Self-tape received in high definition. Good pacing on the technical cyber terminology. Assistant director has recommended this tape to Zoya Akhtar's primary review session.",
+        talentPoolStatus: "✦ EXECUTIVE REVIEW IN PROGRESS",
+        scorecard: {
+          screenPresence: 4.5,
+          dialogueDelivery: 4.6,
+          characterInterpretation: 4.4,
+          cameraEyeline: 4.6,
+        },
+        keyStrengths: [
+          "Modern Urban English Fluency",
+          "Restrained Understated Demeanor",
+          "Sharp Facial Angles on Camera",
+        ],
+        recommendationNote: "Final review results will be dispatched within 48 hours directly to your Rangmanch vault.",
+      },
     },
     {
       id: "sub-3",
@@ -62,6 +115,66 @@ export default function TalentDashboardPage() {
       stage: 4,
       aiScore: 96,
       directorNote: "Live Virtual Green Room audition invitation confirmed for 3:30 PM.",
+      notice: {
+        id: "fn-3",
+        projectTitle: "Tata Motors Commercial (Ad Film)",
+        roleName: "Modern Father",
+        productionHouse: "NovaCast India",
+        directorName: "Shakun Batra",
+        date: "Oct 24, 2024",
+        decisionStatus: "callback" as const,
+        decisionTitle: "Live Virtual Green Room Audition Scheduled",
+        directorFeedback: "Warm, natural warmth with the child actor. Unforced smile and authentic fatherly tone that translates instantly for national television.",
+        talentPoolStatus: "✦ GREEN ROOM CALLBACK: 3:30 PM",
+        scorecard: {
+          screenPresence: 4.9,
+          dialogueDelivery: 4.7,
+          characterInterpretation: 4.9,
+          cameraEyeline: 4.8,
+        },
+        keyStrengths: [
+          "Effortless Camera Charm",
+          "Genuine Relatability",
+          "Fast Directorial Improv",
+        ],
+        recommendationNote: "Commercial buyout contract terms already escrow-backed and awaiting final confirmation.",
+      },
+    },
+    {
+      id: "sub-4",
+      projectTitle: "Manto Ki Duniya (Stage Musical)",
+      roleName: "Razia — Protagonist",
+      productionHouse: "Resonance Theatre Group",
+      dateSubmitted: "Oct 08, 2024",
+      status: "Retained in Studio Pool",
+      stage: 3,
+      aiScore: 91,
+      directorNote: "Audition was deeply moving. Director opted for older casting bracket, but profile is pinned for upcoming 2025 theatre season.",
+      notice: {
+        id: "fn-4",
+        projectTitle: "Manto Ki Duniya (Stage Musical)",
+        roleName: "Razia — Protagonist",
+        productionHouse: "Resonance Theatre Group",
+        directorName: "Atul Kumar",
+        date: "Oct 20, 2024",
+        decisionStatus: "archived_with_honor" as const,
+        decisionTitle: "Role Cast — Retained in Respected Guild Roster",
+        directorFeedback: "Shivam's vocal modulation and emotional pauses were among the most evocative we heard during these auditions. The final decision was made strictly on a script requirement for a performer in their late 30s. We have catalogued your tape in our priority repertory list for our monsoon production.",
+        talentPoolStatus: "✦ PRIORITY REPERTORY CANDIDATE (LIFETIME ACCESS)",
+        scorecard: {
+          screenPresence: 4.8,
+          dialogueDelivery: 4.9,
+          characterInterpretation: 4.7,
+          cameraEyeline: 4.5,
+        },
+        keyStrengths: [
+          "Urdu & Hindi Diction Mastery",
+          "Rich Vocal Resonance",
+          "Controlled Stage Poise",
+          "Deep Textual Comprehension",
+        ],
+        recommendationNote: "Resonance Theatre Group has pinned your profile. You will receive priority direct casting invitations without needing preliminary rounds.",
+      },
     },
   ];
 
@@ -825,6 +938,46 @@ export default function TalentDashboardPage() {
                       {sub.directorNote}
                     </div>
                   )}
+
+                  {/* Feature #27 Action: View Official Feedback Notice & Scorecard */}
+                  {sub.notice && (
+                    <div style={{ display: "flex", gap: "10px", marginTop: "4px" }}>
+                      <button
+                        onClick={() => {
+                          setSelectedNotice(sub.notice);
+                          setIsNoticeModalOpen(true);
+                        }}
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "8px",
+                          padding: "8px 16px",
+                          borderRadius: "8px",
+                          backgroundColor: "rgba(212,175,97,0.08)",
+                          border: "1px solid rgba(212,175,97,0.3)",
+                          color: "#d4af61",
+                          fontSize: "11px",
+                          fontFamily: "monospace",
+                          fontWeight: 700,
+                          textTransform: "uppercase",
+                          letterSpacing: "0.08em",
+                          cursor: "pointer",
+                          transition: "all 0.2s ease",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = "rgba(212,175,97,0.18)";
+                          e.currentTarget.style.borderColor = "#d4af61";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = "rgba(212,175,97,0.08)";
+                          e.currentTarget.style.borderColor = "rgba(212,175,97,0.3)";
+                        }}
+                      >
+                        <Award size={13} />
+                        <span>View Official Notice &amp; Evaluation Scorecard</span>
+                      </button>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -836,6 +989,13 @@ export default function TalentDashboardPage() {
       <MediaVaultModal
         isOpen={isVaultOpen}
         onClose={() => setIsVaultOpen(false)}
+      />
+
+      {/* Feature #27: Automated Rejection & Feedback Notice Modal */}
+      <FeedbackNoticeModal
+        notice={selectedNotice}
+        isOpen={isNoticeModalOpen}
+        onClose={() => setIsNoticeModalOpen(false)}
       />
     </>
   );

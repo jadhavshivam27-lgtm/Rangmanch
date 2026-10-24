@@ -17,6 +17,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const user = useUser();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [notifOpen, setNotifOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-40 w-full bg-[#040406]/95 backdrop-blur-2xl border-b border-white/[0.08]">
@@ -108,25 +109,150 @@ export default function Navbar() {
             <Search size={18} />
           </Link>
 
-          {/* Notifications Icon with Badge */}
-          <div className="relative cursor-pointer text-neutral-400 hover:text-white transition-colors p-1.5">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="19"
-              height="19"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+          {/* Notifications Icon with Badge & Popover (Feature #27) */}
+          <div className="relative">
+            <button
+              onClick={() => setNotifOpen(!notifOpen)}
+              className="relative cursor-pointer text-neutral-400 hover:text-white transition-colors p-1.5 bg-transparent border-none flex items-center justify-center"
+              aria-label="View Audition Notices"
             >
-              <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
-              <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-            </svg>
-            <span className="absolute top-1 right-0.5 w-3.5 h-3.5 rounded-full bg-[#e50914] text-[9px] font-bold flex items-center justify-center text-white">
-              0
-            </span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="19"
+                height="19"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+              </svg>
+              <span className="absolute top-1 right-0.5 w-3.5 h-3.5 rounded-full bg-[#d4af61] text-[9px] font-bold flex items-center justify-center text-black">
+                3
+              </span>
+            </button>
+
+            {/* Notification Dropdown Panel */}
+            {notifOpen && (
+              <div
+                style={{
+                  position: "absolute",
+                  top: "42px",
+                  right: "-20px",
+                  width: "360px",
+                  backgroundColor: "#0a0a12",
+                  border: "1px solid rgba(212,175,97,0.3)",
+                  borderRadius: "16px",
+                  boxShadow: "0 20px 40px rgba(0,0,0,0.85), 0 0 25px rgba(212,175,97,0.15)",
+                  padding: "16px",
+                  zIndex: 100,
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "12px",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid rgba(255,255,255,0.08)", paddingBottom: "10px" }}>
+                  <div style={{ fontSize: "11px", fontFamily: "monospace", textTransform: "uppercase", letterSpacing: "0.15em", color: "#d4af61", fontWeight: 700 }}>
+                    Audition Notices &amp; Feedback
+                  </div>
+                  <span style={{ fontSize: "10px", padding: "2px 8px", borderRadius: "9999px", backgroundColor: "rgba(212,175,97,0.15)", color: "#d4af61" }}>
+                    3 New
+                  </span>
+                </div>
+
+                <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                  <Link
+                    href="/dashboard/talent"
+                    onClick={() => setNotifOpen(false)}
+                    style={{
+                      padding: "10px 12px",
+                      borderRadius: "10px",
+                      backgroundColor: "rgba(255,255,255,0.03)",
+                      border: "1px solid rgba(212,175,97,0.2)",
+                      textDecoration: "none",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "3px",
+                    }}
+                  >
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <span style={{ fontSize: "12px", fontWeight: 700, color: "#d4af61" }}>✦ Shortlist: Antim Prahar</span>
+                      <span style={{ fontSize: "9px", color: "#777" }}>2h ago</span>
+                    </div>
+                    <p style={{ fontSize: "11px", color: "#b0b0c0", margin: 0, lineHeight: 1.4 }}>
+                      Starlight Casting Co. confirmed you for Round 2 Callback. View official notice.
+                    </p>
+                  </Link>
+
+                  <Link
+                    href="/dashboard/talent"
+                    onClick={() => setNotifOpen(false)}
+                    style={{
+                      padding: "10px 12px",
+                      borderRadius: "10px",
+                      backgroundColor: "rgba(255,255,255,0.02)",
+                      border: "1px solid rgba(255,255,255,0.06)",
+                      textDecoration: "none",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "3px",
+                    }}
+                  >
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <span style={{ fontSize: "12px", fontWeight: 700, color: "#818cf8" }}>✦ Honorably Retained: Manto</span>
+                      <span style={{ fontSize: "9px", color: "#777" }}>1d ago</span>
+                    </div>
+                    <p style={{ fontSize: "11px", color: "#b0b0c0", margin: 0, lineHeight: 1.4 }}>
+                      Constructive feedback and priority repertory status granted by Atul Kumar.
+                    </p>
+                  </Link>
+
+                  <Link
+                    href="/dashboard/talent"
+                    onClick={() => setNotifOpen(false)}
+                    style={{
+                      padding: "10px 12px",
+                      borderRadius: "10px",
+                      backgroundColor: "rgba(255,255,255,0.02)",
+                      border: "1px solid rgba(255,255,255,0.06)",
+                      textDecoration: "none",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "3px",
+                    }}
+                  >
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <span style={{ fontSize: "12px", fontWeight: 700, color: "#34d399" }}>✦ Live Callback: Tata Motors</span>
+                      <span style={{ fontSize: "9px", color: "#777" }}>3d ago</span>
+                    </div>
+                    <p style={{ fontSize: "11px", color: "#b0b0c0", margin: 0, lineHeight: 1.4 }}>
+                      Virtual Green Room audition confirmed for 3:30 PM with Shakun Batra.
+                    </p>
+                  </Link>
+                </div>
+
+                <Link
+                  href="/dashboard/talent"
+                  onClick={() => setNotifOpen(false)}
+                  style={{
+                    textAlign: "center",
+                    fontSize: "11px",
+                    fontFamily: "monospace",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.1em",
+                    color: "#d4af61",
+                    textDecoration: "none",
+                    paddingTop: "6px",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                  }}
+                >
+                  Open Full Notices Center →
+                </Link>
+              </div>
+            )}
           </div>
 
           {/* User Avatar linking to Performer Dashboard */}
