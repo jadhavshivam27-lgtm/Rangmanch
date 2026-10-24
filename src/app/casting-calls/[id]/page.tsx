@@ -42,7 +42,7 @@ const CASTINGS = [
     daysLeft: 21,
     escrow: true,
     verified: true,
-    image: "/hero.jpg",
+    image: "/photos/real_06.jpg",
     color: "#d4af61",
     synopsis:
       "A sweeping period drama set in 1857, following a troupe of performers who secretly aid the independence movement through their art. Shot across Rajasthan, Lucknow, and Varanasi on a 12-week schedule. Presented in association with NFDC.",
@@ -109,7 +109,7 @@ const CASTINGS = [
     daysLeft: 15,
     escrow: true,
     verified: true,
-    image: "/auth-cinema.jpg",
+    image: "/photos/real_13.jpg",
     color: "#818cf8",
     synopsis:
       "A forensic psychologist is pulled into a labyrinthine murder conspiracy within Delhi's underground art scene. 8-episode streaming series for Prime Video Original, shooting begins January 2025.",
@@ -162,7 +162,7 @@ const CASTINGS = [
     daysLeft: 6,
     escrow: true,
     verified: true,
-    image: "/hero.jpg",
+    image: "/photos/real_15.jpg",
     color: "#34d399",
     synopsis:
       "A modern narrative about an evolving Indian family embracing tomorrow's mobility. Shoot is 2 days — 1 in studio, 1 outdoor at Lonavala. National broadcast + digital rights for 1 year.",
@@ -213,7 +213,7 @@ const CASTINGS = [
     daysLeft: 29,
     escrow: false,
     verified: true,
-    image: "/auth-cinema.jpg",
+    image: "/photos/real_05.jpg",
     color: "#f472b6",
     synopsis:
       "An original musical exploring themes of partition, love, and displacement across three generations. Rehearsals begin December 2024 for a March 2025 premiere at NCPA Experimental Theatre, Mumbai.",
@@ -264,7 +264,7 @@ const CASTINGS = [
     daysLeft: 42,
     escrow: true,
     verified: true,
-    image: "/hero.jpg",
+    image: "/photos/real_08.jpg",
     color: "#fb923c",
     synopsis:
       "High-octane action drama starring a street-level police officer uncovering a political conspiracy. Pan-India release in 5 languages. International schedule includes London and Dubai sequences.",
@@ -315,7 +315,7 @@ const CASTINGS = [
     daysLeft: 35,
     escrow: true,
     verified: true,
-    image: "/auth-cinema.jpg",
+    image: "/photos/real_02.png",
     color: "#c084fc",
     synopsis:
       "A sweeping biographical retelling of the life of poet-saint Mirabai told through a contemporary lens, juxtaposing her medieval journey with a modern woman discovering her poetry. NFDC National Award submission 2025.",

@@ -32,7 +32,12 @@ interface CompCardProps {
 export default function CompCard({
   displayName,
   stageName,
-  headshots = ["/talent1.jpg", "/talent2.jpg", "/talent3.jpg", "/talent4.jpg"],
+  headshots = [
+    "/photos/real_03.jpg",
+    "/photos/real_07.jpg",
+    "/photos/real_06.jpg",
+    "/photos/real_04.jpg",
+  ],
   heightFeet = "5'10\"",
   heightCm = 178,
   screenAgeRange = "22 – 28 Years",
@@ -105,7 +110,7 @@ export default function CompCard({
             {/* Main Headshot Image */}
             <div className="relative w-full h-full">
               <Image
-                src={headshots[activePhotoIndex] || "/talent1.jpg"}
+                src={headshots[activePhotoIndex] || "/photos/real_03.jpg"}
                 alt={displayName}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-105"

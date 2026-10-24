@@ -513,7 +513,7 @@ export default function HomePageClient() {
                   }}
                 >
                   <Image
-                    src={call.organization?.logo || "/talent1.jpg"}
+                    src={call.poster || call.organization?.logo || "/photos/real_06.jpg"}
                     alt={call.title}
                     fill
                     style={{ objectFit: "cover" }}
@@ -798,7 +798,7 @@ export default function HomePageClient() {
                   src={
                     talent.profilePhoto ||
                     talent.portfolioPhotos[0] ||
-                    "/talent1.jpg"
+                    "/photos/real_03.jpg"
                   }
                   alt={talent.displayName}
                   fill

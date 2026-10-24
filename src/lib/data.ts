@@ -567,6 +567,7 @@ export const DEMO_CASTING_CALLS: CastingCall[] = [
   {
     id: "cc-1",
     title: "Lead & Supporting Roles — 'Antim Prahar' (Feature Film)",
+    poster: "/photos/real_06.jpg",
     organizationId: "org-1",
     organization: DEMO_ORGANIZATIONS[0],
     castingDirectorId: "user-cd1",
@@ -621,6 +622,7 @@ export const DEMO_CASTING_CALLS: CastingCall[] = [
   {
     id: "cc-2",
     title: "Ensemble Cast — 'Uncharted Waters' (Web Series, OTT)",
+    poster: "/photos/real_11.jpg",
     organizationId: "org-2",
     organization: DEMO_ORGANIZATIONS[1],
     castingDirectorId: "user-cd2",
@@ -658,6 +660,7 @@ export const DEMO_CASTING_CALLS: CastingCall[] = [
   {
     id: "cc-3",
     title: "Stage Actors — 'Manto Ki Duniya' (Theatre Production)",
+    poster: "/photos/real_05.jpg",
     organizationId: "org-4",
     organization: DEMO_ORGANIZATIONS[3],
     castingDirectorId: "user-cd3",
@@ -712,6 +715,7 @@ export const DEMO_CASTING_CALLS: CastingCall[] = [
   {
     id: "cc-4",
     title: "Voice Artists — Animated Series (OTT)",
+    poster: "/photos/real_14.jpg",
     organizationId: "org-2",
     organization: DEMO_ORGANIZATIONS[1],
     castingDirectorId: "user-cd2",
@@ -749,6 +753,7 @@ export const DEMO_CASTING_CALLS: CastingCall[] = [
   {
     id: "cc-5",
     title: "Female Lead — 'Noor' (Regional Hindi Short Film)",
+    poster: "/photos/real_16.jpg",
     organizationId: "org-1",
     organization: DEMO_ORGANIZATIONS[0],
     castingDirectorId: "user-cd1",
@@ -787,6 +792,7 @@ export const DEMO_CASTING_CALLS: CastingCall[] = [
   {
     id: "cc-6",
     title: "Male Lead — 'Kal Ka Khiladi' (TV Commercial)",
+    poster: "/photos/real_15.jpg",
     organizationId: "org-1",
     organization: DEMO_ORGANIZATIONS[0],
     castingDirectorId: "user-cd1",

@@ -121,6 +121,7 @@ export interface CastingRole {
 export interface CastingCall {
   id: string;
   title: string;
+  poster?: string;
   organizationId?: string;
   organization?: Organization;
   castingDirectorId: string;

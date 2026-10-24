@@ -36,7 +36,7 @@ const CASTINGS = [
     daysLeft: 21,
     escrow: true,
     verified: true,
-    image: "/hero.jpg",
+    image: "/photos/real_06.jpg",
     synopsis:
       "A sweeping period drama set in 1857, following a troupe of performers who secretly aid the independence movement through their art.",
     roles: [
@@ -62,7 +62,7 @@ const CASTINGS = [
     daysLeft: 15,
     escrow: true,
     verified: true,
-    image: "/auth-cinema.jpg",
+    image: "/photos/real_13.jpg",
     synopsis:
       "A forensic psychologist is pulled into a labyrinthine murder conspiracy within Delhi's underground art scene. 8-episode streaming series for Prime Video.",
     roles: [
@@ -87,7 +87,7 @@ const CASTINGS = [
     daysLeft: 6,
     escrow: true,
     verified: true,
-    image: "/hero.jpg",
+    image: "/photos/real_15.jpg",
     synopsis:
       "A modern narrative about an evolving Indian family embracing tomorrow's mobility. Seeking genuine chemistry between lead couple — no prior ad experience required.",
     roles: [
@@ -112,7 +112,7 @@ const CASTINGS = [
     daysLeft: 29,
     escrow: false,
     verified: true,
-    image: "/auth-cinema.jpg",
+    image: "/photos/real_05.jpg",
     synopsis:
       "An original musical exploring themes of partition, love, and displacement across three generations. Requires trained vocalists and movement artists.",
     roles: [
@@ -138,7 +138,7 @@ const CASTINGS = [
     daysLeft: 42,
     escrow: true,
     verified: true,
-    image: "/hero.jpg",
+    image: "/photos/real_08.jpg",
     synopsis:
       "High-octane action drama starring a street-level police officer uncovering a political conspiracy. Seeking a commanding female lead with action training.",
     roles: [
@@ -163,7 +163,7 @@ const CASTINGS = [
     daysLeft: 35,
     escrow: true,
     verified: true,
-    image: "/auth-cinema.jpg",
+    image: "/photos/real_02.png",
     synopsis:
       "A sweeping biographical retelling of the life of poet-saint Mirabai told through a contemporary lens. Requires trained Bharatanatyam and Kuchipudi dancers.",
     roles: [
