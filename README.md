@@ -17,7 +17,7 @@ First, run the development server:
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open https://rangmanch1.vercel.app/ with your browser to see the result.
 
 ## Tech Stack
 - **Framework**: Next.js 16 (App Router) with React 19 & TypeScript
