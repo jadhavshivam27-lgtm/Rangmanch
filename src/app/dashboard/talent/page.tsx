@@ -1003,24 +1003,25 @@ export default function TalentDashboardPage() {
                             width: "38px",
                             height: "38px",
                             borderRadius: "10px",
-                            backgroundColor: "rgba(59, 130, 246, 0.2)",
+                            backgroundColor: "rgba(52, 211, 153, 0.15)",
+                            border: "1px solid rgba(52, 211, 153, 0.3)",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
-                            color: "#60a5fa",
+                            color: "#34d399",
                           }}
                         >
                           <Calendar size={18} />
                         </div>
                         <div>
                           <div style={{ fontSize: "12px", fontWeight: 700, color: "#ffffff", display: "flex", alignItems: "center", gap: "6px" }}>
-                            <span>Round-2 Studio Callback Dispatched</span>
-                            <span style={{ fontSize: "9px", backgroundColor: "rgba(59, 130, 246, 0.25)", color: "#93c5fd", padding: "1px 6px", borderRadius: "4px", fontFamily: "monospace" }}>
-                              FEATURE #29
+                            <span>Round-2 Studio Callback Confirmed</span>
+                            <span style={{ fontSize: "9px", backgroundColor: "rgba(52, 211, 153, 0.2)", color: "#34d399", border: "1px solid rgba(52, 211, 153, 0.35)", padding: "1px 6px", borderRadius: "4px", fontFamily: "monospace" }}>
+                              CONFIRMED SLOT
                             </span>
                           </div>
-                          <div style={{ fontSize: "11px", color: "#93c5fd", marginTop: "2px", fontFamily: "monospace" }}>
-                            📅 Nov 04, 2026 • Slot: 11:00 AM – 11:20 AM • Famous Studios, Studio 4B, Mumbai
+                          <div style={{ fontSize: "11px", color: "#a7f3d0", marginTop: "2px", fontFamily: "monospace" }}>
+                            📅 Nov 04, 2026 • Slot: 11:00 AM – 11:20 AM • Famous Studios, Stage 4B, Mumbai
                           </div>
                         </div>
                       </div>
@@ -1041,9 +1042,9 @@ export default function TalentDashboardPage() {
                           gap: "6px",
                           padding: "8px 14px",
                           borderRadius: "8px",
-                          backgroundColor: "#1e293b",
-                          border: "1px solid rgba(59, 130, 246, 0.4)",
-                          color: "#60a5fa",
+                          backgroundColor: "#06281e",
+                          border: "1px solid rgba(52, 211, 153, 0.4)",
+                          color: "#34d399",
                           fontSize: "11px",
                           fontFamily: "monospace",
                           fontWeight: 700,

@@ -329,134 +329,460 @@ export default function CastingCallsPage() {
             </div>
           </div>
 
-          {/* ── CASTING DIRECTOR COMMAND CENTER (MODULE 3: FEATURES 28, 29, 30) ── */}
-          <div
-            style={{
-              borderRadius: "18px",
-              backgroundColor: "#0d0d16",
-              border: "1px solid rgba(212, 175, 97, 0.35)",
-              boxShadow: "0 0 35px rgba(212, 175, 97, 0.08)",
-              padding: "22px 26px",
-              marginBottom: "32px",
-              display: "flex",
-              flexWrap: "wrap",
-              alignItems: "center",
-              justifyContent: "space-between",
-              gap: "20px",
-            }}
-          >
-            <div>
-              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
-                <span style={{ fontSize: "10px", fontFamily: "monospace", letterSpacing: "0.22em", color: "#d4af61", textTransform: "uppercase", fontWeight: 700 }}>
-                  ✦ CASTING DIRECTOR COMMAND CENTER • MODULE 3
-                </span>
-                <span style={{ fontSize: "10px", backgroundColor: "rgba(16, 185, 129, 0.15)", color: "#34d399", border: "1px solid rgba(16, 185, 129, 0.3)", padding: "1px 8px", borderRadius: "999px", fontFamily: "monospace" }}>
-                  LIVE PRODUCTION SUITE
-                </span>
+          {/* ── CASTING DIRECTOR SUITE • MODULE 3 (FEATURES 28, 29, 30) ── */}
+          <section style={{ marginBottom: "36px" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginBottom: "18px",
+              }}
+            >
+              <div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    marginBottom: "4px",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: "10px",
+                      fontFamily: "monospace",
+                      letterSpacing: "0.22em",
+                      color: "#d4af61",
+                      textTransform: "uppercase",
+                      fontWeight: 700,
+                    }}
+                  >
+                    ✦ MODULE 3 • CASTING DIRECTOR COMMAND CENTER
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "10px",
+                      backgroundColor: "rgba(16, 185, 129, 0.15)",
+                      color: "#34d399",
+                      border: "1px solid rgba(16, 185, 129, 0.3)",
+                      padding: "1px 8px",
+                      borderRadius: "999px",
+                      fontFamily: "monospace",
+                    }}
+                  >
+                    LIVE PRODUCTION SUITE
+                  </span>
+                </div>
+                <h2
+                  className="font-cinema"
+                  style={{ fontSize: "22px", fontWeight: 700, color: "#ffffff", margin: 0 }}
+                >
+                  Executive Pitchbooks, Callback Dispatcher &amp; Studio Archive
+                </h2>
               </div>
-              <h3 className="font-cinema" style={{ fontSize: "20px", fontWeight: 700, color: "#ffffff", margin: 0 }}>
-                Executive Shortlists, Callback Dispatcher &amp; Studio Archive
-              </h3>
-              <p style={{ fontSize: "13px", color: "#9a9aa8", margin: "4px 0 0 0", maxWidth: "600px", lineHeight: 1.5 }}>
-                Generate pitch presentations for Network Producers, batch-schedule Round-2 studio callbacks with calendar holds, and query the private performer archive.
-              </p>
             </div>
 
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
-              {/* Feature #28 Button */}
-              <button
-                onClick={() => {
-                  setSelectedPitchProject("Antim Prahar");
-                  setIsPitchbookOpen(true);
-                }}
-                className="btn-cinema-gold"
+            {/* 3 Dedicated Module Cards (Not merged!) */}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+                gap: "20px",
+              }}
+            >
+              {/* CARD 1: FEATURE 28 */}
+              <div
                 style={{
+                  backgroundColor: "#0d0d16",
+                  border: "1px solid rgba(212, 175, 97, 0.28)",
+                  borderRadius: "18px",
+                  padding: "24px",
                   display: "flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  height: "40px",
-                  padding: "0 18px",
-                  fontSize: "11px",
-                  fontWeight: 700,
-                  letterSpacing: "0.06em",
-                  borderRadius: "10px",
-                  cursor: "pointer",
-                }}
-              >
-                <FileText size={14} />
-                <span>FEATURE 28: PITCHBOOK (PDF)</span>
-              </button>
-
-              {/* Feature #29 Button */}
-              <button
-                onClick={() => {
-                  setSelectedPitchProject("Antim Prahar");
-                  setIsCallbackOpen(true);
-                }}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  height: "40px",
-                  padding: "0 18px",
-                  fontSize: "11px",
-                  fontWeight: 700,
-                  fontFamily: "monospace",
-                  letterSpacing: "0.06em",
-                  backgroundColor: "#161624",
-                  border: "1px solid rgba(255, 255, 255, 0.15)",
-                  color: "#ffffff",
-                  borderRadius: "10px",
-                  cursor: "pointer",
-                  transition: "all 0.2s",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
+                  transition: "all 0.2s ease",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "#202035";
                   e.currentTarget.style.borderColor = "#d4af61";
+                  e.currentTarget.style.transform = "translateY(-2px)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "#161624";
-                  e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.15)";
+                  e.currentTarget.style.borderColor = "rgba(212, 175, 97, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
                 }}
               >
-                <Calendar size={14} color="#d4af61" />
-                <span>FEATURE 29: CALLBACK DISPATCHER</span>
-              </button>
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background:
+                            "linear-gradient(135deg, rgba(212,175,97,0.2) 0%, rgba(212,175,97,0.05) 100%)",
+                          border: "1px solid rgba(212,175,97,0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#d4af61",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <FileText size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#d4af61",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M028
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Shortlist PDF Pitchbook
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(212,175,97,0.15)",
+                        color: "#f4e2b8",
+                        border: "1px solid rgba(212,175,97,0.3)",
+                      }}
+                    >
+                      EXECUTIVE SUITE
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    Auto-generate pitch presentations for Producers &amp; Network Executives (Netflix, Prime, NFDC, Zee) with candidate scorecards, remuneration estimates, and confidential watermarking.
+                  </p>
+                </div>
 
-              {/* Feature #30 Button */}
-              <button
-                onClick={() => setIsArchiveOpen(true)}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    4 Candidates Shortlisted
+                  </span>
+                  <button
+                    onClick={() => {
+                      setSelectedPitchProject("Antim Prahar");
+                      setIsPitchbookOpen(true);
+                    }}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    OPEN PITCHBOOK →
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 2: FEATURE 29 */}
+              <div
                 style={{
+                  backgroundColor: "#0d0d16",
+                  border: "1px solid rgba(52, 211, 153, 0.28)",
+                  borderRadius: "18px",
+                  padding: "24px",
                   display: "flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  height: "40px",
-                  padding: "0 18px",
-                  fontSize: "11px",
-                  fontWeight: 700,
-                  fontFamily: "monospace",
-                  letterSpacing: "0.06em",
-                  backgroundColor: "#161624",
-                  border: "1px solid rgba(255, 255, 255, 0.15)",
-                  color: "#ffffff",
-                  borderRadius: "10px",
-                  cursor: "pointer",
-                  transition: "all 0.2s",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
+                  transition: "all 0.2s ease",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "#202035";
-                  e.currentTarget.style.borderColor = "#d4af61";
+                  e.currentTarget.style.borderColor = "#34d399";
+                  e.currentTarget.style.transform = "translateY(-2px)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "#161624";
-                  e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.15)";
+                  e.currentTarget.style.borderColor = "rgba(52, 211, 153, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
                 }}
               >
-                <Archive size={14} color="#d4af61" />
-                <span>FEATURE 30: TALENT ARCHIVE</span>
-              </button>
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "rgba(52,211,153,0.12)",
+                          border: "1px solid rgba(52,211,153,0.35)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#34d399",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Calendar size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#34d399",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M029
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Audition Callback Dispatcher
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(52,211,153,0.15)",
+                        color: "#34d399",
+                        border: "1px solid rgba(52,211,153,0.3)",
+                      }}
+                    >
+                      AUTO-SCHEDULER
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    Batch-invite actors to Round-2 callbacks at Famous Studios Mumbai or virtual HD rooms. Includes auto-slotted intervals, attached encrypted sides, and .ics calendar sync.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    4 Slots Available • 20m
+                  </span>
+                  <button
+                    onClick={() => {
+                      setSelectedPitchProject("Antim Prahar");
+                      setIsCallbackOpen(true);
+                    }}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    DISPATCH CALLBACKS →
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 3: FEATURE 30 */}
+              <div
+                style={{
+                  backgroundColor: "#0d0d16",
+                  border: "1px solid rgba(167, 139, 250, 0.28)",
+                  borderRadius: "18px",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
+                  transition: "all 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#a78bfa";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(167, 139, 250, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "rgba(167,139,250,0.12)",
+                          border: "1px solid rgba(167,139,250,0.35)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#a78bfa",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Archive size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#a78bfa",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M030
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Archival Talent Database
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(167,139,250,0.15)",
+                        color: "#c4b5fd",
+                        border: "1px solid rgba(167,139,250,0.3)",
+                      }}
+                    >
+                      STUDIO VAULT
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    Search the studio&apos;s private internal archive across past productions (Kaarvan, Dhoop Ki Deewar), filter by director ratings (4.0+), review critique, and fast-track invites.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    4 Verified Records • 4.5+ ★
+                  </span>
+                  <button
+                    onClick={() => setIsArchiveOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    EXPLORE ARCHIVE →
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
+          </section>
 
           {/* Search Bar */}
           <div
@@ -688,18 +1014,7 @@ export default function CastingCallsPage() {
               }}
             >
               {filtered.map((call) => (
-                <CastingCard
-                  key={call.id}
-                  call={call}
-                  onOpenPitchbook={(title) => {
-                    setSelectedPitchProject(title);
-                    setIsPitchbookOpen(true);
-                  }}
-                  onOpenCallback={(title) => {
-                    setSelectedPitchProject(title);
-                    setIsCallbackOpen(true);
-                  }}
-                />
+                <CastingCard key={call.id} call={call} />
               ))}
             </div>
           )}
@@ -729,15 +1044,7 @@ export default function CastingCallsPage() {
   );
 }
 
-function CastingCard({
-  call,
-  onOpenPitchbook,
-  onOpenCallback,
-}: {
-  call: typeof CASTINGS[0];
-  onOpenPitchbook?: (title: string) => void;
-  onOpenCallback?: (title: string) => void;
-}) {
+function CastingCard({ call }: { call: typeof CASTINGS[0] }) {
   return (
     <div
       style={{
@@ -1019,95 +1326,29 @@ function CastingCard({
             </div>
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            {onOpenPitchbook && (
-              <button
-                type="button"
-                onClick={() => onOpenPitchbook(call.title)}
-                title="Feature #28: Generate Executive Pitchbook (PDF)"
-                style={{
-                  width: "36px",
-                  height: "36px",
-                  borderRadius: "9px",
-                  backgroundColor: "#141420",
-                  border: "1px solid rgba(212, 175, 97, 0.3)",
-                  color: "#d4af61",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  cursor: "pointer",
-                  transition: "all 0.2s",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "#d4af61";
-                  e.currentTarget.style.color = "#000000";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "#141420";
-                  e.currentTarget.style.color = "#d4af61";
-                }}
-              >
-                <FileText size={14} />
-              </button>
-            )}
-
-            {onOpenCallback && (
-              <button
-                type="button"
-                onClick={() => onOpenCallback(call.title)}
-                title="Feature #29: Dispatch Round-2 Callbacks"
-                style={{
-                  width: "36px",
-                  height: "36px",
-                  borderRadius: "9px",
-                  backgroundColor: "#141420",
-                  border: "1px solid rgba(255, 255, 255, 0.15)",
-                  color: "#a0a0b2",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  cursor: "pointer",
-                  transition: "all 0.2s",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "#202035";
-                  e.currentTarget.style.color = "#ffffff";
-                  e.currentTarget.style.borderColor = "#d4af61";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "#141420";
-                  e.currentTarget.style.color = "#a0a0b2";
-                  e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.15)";
-                }}
-              >
-                <Calendar size={14} />
-              </button>
-            )}
-
-            <Link
-              href={`/casting-calls/${call.id}`}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "6px",
-                padding: "10px 18px",
-                borderRadius: "10px",
-                backgroundColor: call.color,
-                color: "#040406",
-                fontSize: "11px",
-                fontFamily: "monospace",
-                fontWeight: 800,
-                textTransform: "uppercase",
-                letterSpacing: "0.08em",
-                textDecoration: "none",
-                transition: "opacity 0.2s ease",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
-              onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-            >
-              VIEW SIDES <ArrowRight size={12} />
-            </Link>
-          </div>
+          <Link
+            href={`/casting-calls/${call.id}`}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "6px",
+              padding: "10px 20px",
+              borderRadius: "10px",
+              backgroundColor: call.color,
+              color: "#040406",
+              fontSize: "11px",
+              fontFamily: "monospace",
+              fontWeight: 800,
+              textTransform: "uppercase",
+              letterSpacing: "0.08em",
+              textDecoration: "none",
+              transition: "opacity 0.2s ease",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+          >
+            VIEW SIDES <ArrowRight size={12} />
+          </Link>
         </div>
       </div>
     </div>
