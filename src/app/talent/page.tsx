@@ -125,7 +125,7 @@ const PERFORMERS = [
   {
     id: "t-7",
     name: "Priya Krishnamurthy",
-    photo: "/photos/real_05.jpg",
+    photo: "/photos/female_03_headshot.jpg",
     gender: "Female",
     ageMin: 22,
     ageMax: 28,
