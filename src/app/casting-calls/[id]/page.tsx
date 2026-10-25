@@ -6,6 +6,9 @@ import { useParams } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import WatermarkedSides from "@/components/WatermarkedSides";
 import AuditionStudioModal from "@/components/AuditionStudioModal";
+import PitchbookModal from "@/components/PitchbookModal";
+import CallbackDispatcherModal from "@/components/CallbackDispatcherModal";
+import ArchivalTalentModal from "@/components/ArchivalTalentModal";
 import {
   ChevronLeft,
   Video,
@@ -23,6 +26,8 @@ import {
   Mic,
   ArrowRight,
   Play,
+  FileText,
+  Archive,
 } from "lucide-react";
 
 // ─── Self-contained casting data (matches /casting-calls page) ──────────────
@@ -372,6 +377,11 @@ function CastingCallDetailContent() {
   const [isSidesOpen, setIsSidesOpen] = useState(false);
   const [isStudioOpen, setIsStudioOpen] = useState(false);
 
+  // Module 3 Features (Features #28, #29, #30)
+  const [isPitchbookOpen, setIsPitchbookOpen] = useState(false);
+  const [isCallbackOpen, setIsCallbackOpen] = useState(false);
+  const [isArchiveOpen, setIsArchiveOpen] = useState(false);
+
   return (
     <>
       <Navbar />
@@ -418,7 +428,65 @@ function CastingCallDetailContent() {
             All Productions
           </Link>
 
-          <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>
+            {/* Director Actions for Features 28, 29, 30 */}
+            <button
+              onClick={() => setIsPitchbookOpen(true)}
+              className="btn-cinema-gold"
+              style={{
+                height: "32px",
+                padding: "0 12px",
+                fontSize: "10px",
+                borderRadius: "8px",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "5px",
+                cursor: "pointer",
+              }}
+            >
+              <FileText size={12} /> PITCHBOOK (PDF)
+            </button>
+            <button
+              onClick={() => setIsCallbackOpen(true)}
+              style={{
+                height: "32px",
+                padding: "0 12px",
+                fontSize: "10px",
+                fontFamily: "monospace",
+                fontWeight: 700,
+                borderRadius: "8px",
+                backgroundColor: "#161624",
+                border: "1px solid rgba(255,255,255,0.15)",
+                color: "#ffffff",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "5px",
+                cursor: "pointer",
+              }}
+            >
+              <Calendar size={12} color="#d4af61" /> DISPATCH CALLBACKS
+            </button>
+            <button
+              onClick={() => setIsArchiveOpen(true)}
+              style={{
+                height: "32px",
+                padding: "0 12px",
+                fontSize: "10px",
+                fontFamily: "monospace",
+                fontWeight: 700,
+                borderRadius: "8px",
+                backgroundColor: "#161624",
+                border: "1px solid rgba(255,255,255,0.15)",
+                color: "#ffffff",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "5px",
+                cursor: "pointer",
+              }}
+            >
+              <Archive size={12} color="#d4af61" /> TALENT ARCHIVE
+            </button>
+
             <span
               style={{
                 padding: "4px 12px",
@@ -1190,6 +1258,26 @@ function CastingCallDetailContent() {
         onClose={() => setIsStudioOpen(false)}
         roleName={selectedRole.name}
         projectTitle={call.title}
+      />
+
+      {/* Feature #28: Shortlist PDF Pitchbook Modal */}
+      <PitchbookModal
+        isOpen={isPitchbookOpen}
+        onClose={() => setIsPitchbookOpen(false)}
+        defaultProject={call.title}
+      />
+
+      {/* Feature #29: Audition Callback Dispatcher Modal */}
+      <CallbackDispatcherModal
+        isOpen={isCallbackOpen}
+        onClose={() => setIsCallbackOpen(false)}
+        defaultProject={call.title}
+      />
+
+      {/* Feature #30: Studio Archival Talent Database Modal */}
+      <ArchivalTalentModal
+        isOpen={isArchiveOpen}
+        onClose={() => setIsArchiveOpen(false)}
       />
     </>
   );

@@ -3,6 +3,9 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
+import PitchbookModal from "@/components/PitchbookModal";
+import CallbackDispatcherModal from "@/components/CallbackDispatcherModal";
+import ArchivalTalentModal from "@/components/ArchivalTalentModal";
 import {
   Search,
   MapPin,
@@ -17,6 +20,9 @@ import {
   Trophy,
   ChevronDown,
   BadgeCheck,
+  FileText,
+  Calendar,
+  Archive,
 } from "lucide-react";
 
 // ─── Self-contained casting data ─────────────────────────────
@@ -189,6 +195,12 @@ export default function CastingCallsPage() {
   const [onlyEscrow, setOnlyEscrow] = useState(false);
   const [language, setLanguage] = useState("All Languages");
 
+  // Module 3 Features State (Features #28, #29, #30)
+  const [isPitchbookOpen, setIsPitchbookOpen] = useState(false);
+  const [isCallbackOpen, setIsCallbackOpen] = useState(false);
+  const [isArchiveOpen, setIsArchiveOpen] = useState(false);
+  const [selectedPitchProject, setSelectedPitchProject] = useState("Antim Prahar");
+
   const filtered = useMemo(() => {
     return CASTINGS.filter((c) => {
       const q = search.toLowerCase();
@@ -314,6 +326,135 @@ export default function CastingCallsPage() {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* ── CASTING DIRECTOR COMMAND CENTER (MODULE 3: FEATURES 28, 29, 30) ── */}
+          <div
+            style={{
+              borderRadius: "18px",
+              backgroundColor: "#0d0d16",
+              border: "1px solid rgba(212, 175, 97, 0.35)",
+              boxShadow: "0 0 35px rgba(212, 175, 97, 0.08)",
+              padding: "22px 26px",
+              marginBottom: "32px",
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: "20px",
+            }}
+          >
+            <div>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
+                <span style={{ fontSize: "10px", fontFamily: "monospace", letterSpacing: "0.22em", color: "#d4af61", textTransform: "uppercase", fontWeight: 700 }}>
+                  ✦ CASTING DIRECTOR COMMAND CENTER • MODULE 3
+                </span>
+                <span style={{ fontSize: "10px", backgroundColor: "rgba(16, 185, 129, 0.15)", color: "#34d399", border: "1px solid rgba(16, 185, 129, 0.3)", padding: "1px 8px", borderRadius: "999px", fontFamily: "monospace" }}>
+                  LIVE PRODUCTION SUITE
+                </span>
+              </div>
+              <h3 className="font-cinema" style={{ fontSize: "20px", fontWeight: 700, color: "#ffffff", margin: 0 }}>
+                Executive Shortlists, Callback Dispatcher &amp; Studio Archive
+              </h3>
+              <p style={{ fontSize: "13px", color: "#9a9aa8", margin: "4px 0 0 0", maxWidth: "600px", lineHeight: 1.5 }}>
+                Generate pitch presentations for Network Producers, batch-schedule Round-2 studio callbacks with calendar holds, and query the private performer archive.
+              </p>
+            </div>
+
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+              {/* Feature #28 Button */}
+              <button
+                onClick={() => {
+                  setSelectedPitchProject("Antim Prahar");
+                  setIsPitchbookOpen(true);
+                }}
+                className="btn-cinema-gold"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  height: "40px",
+                  padding: "0 18px",
+                  fontSize: "11px",
+                  fontWeight: 700,
+                  letterSpacing: "0.06em",
+                  borderRadius: "10px",
+                  cursor: "pointer",
+                }}
+              >
+                <FileText size={14} />
+                <span>FEATURE 28: PITCHBOOK (PDF)</span>
+              </button>
+
+              {/* Feature #29 Button */}
+              <button
+                onClick={() => {
+                  setSelectedPitchProject("Antim Prahar");
+                  setIsCallbackOpen(true);
+                }}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  height: "40px",
+                  padding: "0 18px",
+                  fontSize: "11px",
+                  fontWeight: 700,
+                  fontFamily: "monospace",
+                  letterSpacing: "0.06em",
+                  backgroundColor: "#161624",
+                  border: "1px solid rgba(255, 255, 255, 0.15)",
+                  color: "#ffffff",
+                  borderRadius: "10px",
+                  cursor: "pointer",
+                  transition: "all 0.2s",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "#202035";
+                  e.currentTarget.style.borderColor = "#d4af61";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "#161624";
+                  e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.15)";
+                }}
+              >
+                <Calendar size={14} color="#d4af61" />
+                <span>FEATURE 29: CALLBACK DISPATCHER</span>
+              </button>
+
+              {/* Feature #30 Button */}
+              <button
+                onClick={() => setIsArchiveOpen(true)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  height: "40px",
+                  padding: "0 18px",
+                  fontSize: "11px",
+                  fontWeight: 700,
+                  fontFamily: "monospace",
+                  letterSpacing: "0.06em",
+                  backgroundColor: "#161624",
+                  border: "1px solid rgba(255, 255, 255, 0.15)",
+                  color: "#ffffff",
+                  borderRadius: "10px",
+                  cursor: "pointer",
+                  transition: "all 0.2s",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "#202035";
+                  e.currentTarget.style.borderColor = "#d4af61";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "#161624";
+                  e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.15)";
+                }}
+              >
+                <Archive size={14} color="#d4af61" />
+                <span>FEATURE 30: TALENT ARCHIVE</span>
+              </button>
             </div>
           </div>
 
@@ -547,17 +688,56 @@ export default function CastingCallsPage() {
               }}
             >
               {filtered.map((call) => (
-                <CastingCard key={call.id} call={call} />
+                <CastingCard
+                  key={call.id}
+                  call={call}
+                  onOpenPitchbook={(title) => {
+                    setSelectedPitchProject(title);
+                    setIsPitchbookOpen(true);
+                  }}
+                  onOpenCallback={(title) => {
+                    setSelectedPitchProject(title);
+                    setIsCallbackOpen(true);
+                  }}
+                />
               ))}
             </div>
           )}
         </section>
       </main>
+
+      {/* Feature #28: Shortlist PDF Pitchbook Modal */}
+      <PitchbookModal
+        isOpen={isPitchbookOpen}
+        onClose={() => setIsPitchbookOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #29: Audition Callback Dispatcher Modal */}
+      <CallbackDispatcherModal
+        isOpen={isCallbackOpen}
+        onClose={() => setIsCallbackOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #30: Studio Archival Talent Database Modal */}
+      <ArchivalTalentModal
+        isOpen={isArchiveOpen}
+        onClose={() => setIsArchiveOpen(false)}
+      />
     </>
   );
 }
 
-function CastingCard({ call }: { call: typeof CASTINGS[0] }) {
+function CastingCard({
+  call,
+  onOpenPitchbook,
+  onOpenCallback,
+}: {
+  call: typeof CASTINGS[0];
+  onOpenPitchbook?: (title: string) => void;
+  onOpenCallback?: (title: string) => void;
+}) {
   return (
     <div
       style={{
@@ -839,29 +1019,95 @@ function CastingCard({ call }: { call: typeof CASTINGS[0] }) {
             </div>
           </div>
 
-          <Link
-            href={`/casting-calls/${call.id}`}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "6px",
-              padding: "10px 20px",
-              borderRadius: "10px",
-              backgroundColor: call.color,
-              color: "#040406",
-              fontSize: "11px",
-              fontFamily: "monospace",
-              fontWeight: 800,
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-              textDecoration: "none",
-              transition: "opacity 0.2s ease",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-          >
-            VIEW SIDES <ArrowRight size={12} />
-          </Link>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            {onOpenPitchbook && (
+              <button
+                type="button"
+                onClick={() => onOpenPitchbook(call.title)}
+                title="Feature #28: Generate Executive Pitchbook (PDF)"
+                style={{
+                  width: "36px",
+                  height: "36px",
+                  borderRadius: "9px",
+                  backgroundColor: "#141420",
+                  border: "1px solid rgba(212, 175, 97, 0.3)",
+                  color: "#d4af61",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                  transition: "all 0.2s",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "#d4af61";
+                  e.currentTarget.style.color = "#000000";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "#141420";
+                  e.currentTarget.style.color = "#d4af61";
+                }}
+              >
+                <FileText size={14} />
+              </button>
+            )}
+
+            {onOpenCallback && (
+              <button
+                type="button"
+                onClick={() => onOpenCallback(call.title)}
+                title="Feature #29: Dispatch Round-2 Callbacks"
+                style={{
+                  width: "36px",
+                  height: "36px",
+                  borderRadius: "9px",
+                  backgroundColor: "#141420",
+                  border: "1px solid rgba(255, 255, 255, 0.15)",
+                  color: "#a0a0b2",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                  transition: "all 0.2s",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "#202035";
+                  e.currentTarget.style.color = "#ffffff";
+                  e.currentTarget.style.borderColor = "#d4af61";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "#141420";
+                  e.currentTarget.style.color = "#a0a0b2";
+                  e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.15)";
+                }}
+              >
+                <Calendar size={14} />
+              </button>
+            )}
+
+            <Link
+              href={`/casting-calls/${call.id}`}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "6px",
+                padding: "10px 18px",
+                borderRadius: "10px",
+                backgroundColor: call.color,
+                color: "#040406",
+                fontSize: "11px",
+                fontFamily: "monospace",
+                fontWeight: 800,
+                textTransform: "uppercase",
+                letterSpacing: "0.08em",
+                textDecoration: "none",
+                transition: "opacity 0.2s ease",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
+              onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+            >
+              VIEW SIDES <ArrowRight size={12} />
+            </Link>
+          </div>
         </div>
       </div>
     </div>

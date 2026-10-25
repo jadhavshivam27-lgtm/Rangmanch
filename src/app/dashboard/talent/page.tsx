@@ -19,6 +19,8 @@ import {
   ShieldCheck,
   Mic,
   Award,
+  Calendar,
+  Download,
 } from "lucide-react";
 
 export default function TalentDashboardPage() {
@@ -975,6 +977,81 @@ export default function TalentDashboardPage() {
                       >
                         <Award size={13} />
                         <span>View Official Notice &amp; Evaluation Scorecard</span>
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Feature #29 Performer View: Confirmed Round-2 Callback Notice */}
+                  {sub.id === "sub-1" && (
+                    <div
+                      style={{
+                        padding: "16px 20px",
+                        borderRadius: "12px",
+                        backgroundColor: "rgba(59, 130, 246, 0.08)",
+                        border: "1px solid rgba(59, 130, 246, 0.35)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        flexWrap: "wrap",
+                        gap: "12px",
+                        marginTop: "8px",
+                      }}
+                    >
+                      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                        <div
+                          style={{
+                            width: "38px",
+                            height: "38px",
+                            borderRadius: "10px",
+                            backgroundColor: "rgba(59, 130, 246, 0.2)",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            color: "#60a5fa",
+                          }}
+                        >
+                          <Calendar size={18} />
+                        </div>
+                        <div>
+                          <div style={{ fontSize: "12px", fontWeight: 700, color: "#ffffff", display: "flex", alignItems: "center", gap: "6px" }}>
+                            <span>Round-2 Studio Callback Dispatched</span>
+                            <span style={{ fontSize: "9px", backgroundColor: "rgba(59, 130, 246, 0.25)", color: "#93c5fd", padding: "1px 6px", borderRadius: "4px", fontFamily: "monospace" }}>
+                              FEATURE #29
+                            </span>
+                          </div>
+                          <div style={{ fontSize: "11px", color: "#93c5fd", marginTop: "2px", fontFamily: "monospace" }}>
+                            📅 Nov 04, 2026 • Slot: 11:00 AM – 11:20 AM • Famous Studios, Studio 4B, Mumbai
+                          </div>
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={() => {
+                          const icsContent = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Rangmanch Auditions//EN\nBEGIN:VEVENT\nSUMMARY:Round-2 Audition Callback — Antim Prahar\nDESCRIPTION:Official In-Person Callback for Neha Sinha role.\nLOCATION:Famous Studios, Studio 4B, Dr. E Moses Rd, Mahalakshmi, Mumbai\nSTATUS:CONFIRMED\nDTSTART:20261104T053000Z\nDTEND:20261104T055000Z\nEND:VEVENT\nEND:VCALENDAR`;
+                          const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
+                          const url = URL.createObjectURL(blob);
+                          const a = document.createElement("a");
+                          a.href = url;
+                          a.download = "Antim_Prahar_Callback.ics";
+                          a.click();
+                        }}
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "6px",
+                          padding: "8px 14px",
+                          borderRadius: "8px",
+                          backgroundColor: "#1e293b",
+                          border: "1px solid rgba(59, 130, 246, 0.4)",
+                          color: "#60a5fa",
+                          fontSize: "11px",
+                          fontFamily: "monospace",
+                          fontWeight: 700,
+                          cursor: "pointer",
+                        }}
+                      >
+                        <Download size={13} />
+                        <span>SAVE TO CALENDAR (.ICS)</span>
                       </button>
                     </div>
                   )}
