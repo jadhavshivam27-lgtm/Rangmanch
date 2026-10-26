@@ -6,6 +6,11 @@ import Navbar from "@/components/Navbar";
 import PitchbookModal from "@/components/PitchbookModal";
 import CallbackDispatcherModal from "@/components/CallbackDispatcherModal";
 import ArchivalTalentModal from "@/components/ArchivalTalentModal";
+import RoleBreakdownModal from "@/components/RoleBreakdownModal";
+import ProjectCodenameModal from "@/components/ProjectCodenameModal";
+import ScriptSidesEncryptionModal from "@/components/ScriptSidesEncryptionModal";
+import ShootingScheduleModal from "@/components/ShootingScheduleModal";
+import RemunerationEscrowModal from "@/components/RemunerationEscrowModal";
 import {
   Search,
   MapPin,
@@ -23,6 +28,10 @@ import {
   FileText,
   Calendar,
   Archive,
+  Users,
+  Lock,
+  ShieldCheck,
+  CreditCard,
 } from "lucide-react";
 
 // ─── Self-contained casting data ─────────────────────────────
@@ -200,6 +209,13 @@ export default function CastingCallsPage() {
   const [isCallbackOpen, setIsCallbackOpen] = useState(false);
   const [isArchiveOpen, setIsArchiveOpen] = useState(false);
   const [selectedPitchProject, setSelectedPitchProject] = useState("Antim Prahar");
+
+  // Module 4 Features State (Features #31, #32, #33, #34, #35)
+  const [isRoleBreakdownOpen, setIsRoleBreakdownOpen] = useState(false);
+  const [isCodenameOpen, setIsCodenameOpen] = useState(false);
+  const [isScriptEncryptionOpen, setIsScriptEncryptionOpen] = useState(false);
+  const [isScheduleOpen, setIsScheduleOpen] = useState(false);
+  const [isEscrowCalcOpen, setIsEscrowCalcOpen] = useState(false);
 
   const filtered = useMemo(() => {
     return CASTINGS.filter((c) => {
@@ -784,6 +800,712 @@ export default function CastingCallsPage() {
             </div>
           </section>
 
+          {/* ── CASTING CALL & PRODUCTION PUBLISHER • MODULE 4 (FEATURES 31, 32, 33, 34, 35) ── */}
+          <section style={{ marginBottom: "36px" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginBottom: "18px",
+              }}
+            >
+              <div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    marginBottom: "4px",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: "10px",
+                      fontFamily: "monospace",
+                      letterSpacing: "0.22em",
+                      color: "#60a5fa",
+                      textTransform: "uppercase",
+                      fontWeight: 700,
+                    }}
+                  >
+                    ✦ MODULE 4 • CASTING CALL &amp; PRODUCTION PUBLISHER
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "10px",
+                      backgroundColor: "rgba(96, 165, 250, 0.15)",
+                      color: "#93c5fd",
+                      border: "1px solid rgba(96, 165, 250, 0.3)",
+                      padding: "1px 8px",
+                      borderRadius: "999px",
+                      fontFamily: "monospace",
+                    }}
+                  >
+                    STUDIO PUBLISHING SUITE
+                  </span>
+                </div>
+                <h2
+                  className="font-cinema"
+                  style={{ fontSize: "22px", fontWeight: 700, color: "#ffffff", margin: 0 }}
+                >
+                  Production Breakdowns, Codenames, Sides Encryption &amp; Escrow
+                </h2>
+              </div>
+            </div>
+
+            {/* 5 Dedicated Standalone Feature Cards (Completely Unmerged & Well-Structured) */}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+                gap: "20px",
+              }}
+            >
+              {/* CARD 1: FEATURE 31 */}
+              <div
+                style={{
+                  backgroundColor: "#0d0d16",
+                  border: "1px solid rgba(96, 165, 250, 0.28)",
+                  borderRadius: "18px",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
+                  transition: "all 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#60a5fa";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(96, 165, 250, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background:
+                            "linear-gradient(135deg, rgba(96,165,250,0.2) 0%, rgba(96,165,250,0.05) 100%)",
+                          border: "1px solid rgba(96,165,250,0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#60a5fa",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Users size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#60a5fa",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M031 • FEATURE 31
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Multi-Role Role Breakdown
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(96,165,250,0.15)",
+                        color: "#93c5fd",
+                        border: "1px solid rgba(96,165,250,0.3)",
+                      }}
+                    >
+                      ROLE BUILDER
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    Structure Leads, Supporting, Antagonists, Day Players, and Background Extras in a single listing with age brackets, dialect demands, and billing tiers.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    5 Roles Configured
+                  </span>
+                  <button
+                    onClick={() => setIsRoleBreakdownOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    OPEN ROLE BUILDER →
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 2: FEATURE 32 */}
+              <div
+                style={{
+                  backgroundColor: "#0d0d16",
+                  border: "1px solid rgba(245, 158, 11, 0.28)",
+                  borderRadius: "18px",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
+                  transition: "all 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#f59e0b";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(245, 158, 11, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "rgba(245,158,11,0.12)",
+                          border: "1px solid rgba(245,158,11,0.35)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#f59e0b",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Lock size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#f59e0b",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M032 • FEATURE 32
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Confidential Project Codenames
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(245,158,11,0.15)",
+                        color: "#fde68a",
+                        border: "1px solid rgba(245,158,11,0.3)",
+                      }}
+                    >
+                      PROJECT ALIAS
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    Post high-profile casting calls under project alias titles (e.g., Project Falcon) with masked director identities and IT Act Section 72A NDA gating.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    Alias: Project Falcon-1857
+                  </span>
+                  <button
+                    onClick={() => setIsCodenameOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    ARM CODENAME SHIELD →
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 3: FEATURE 33 */}
+              <div
+                style={{
+                  backgroundColor: "#0d0d16",
+                  border: "1px solid rgba(236, 72, 153, 0.28)",
+                  borderRadius: "18px",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
+                  transition: "all 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#ec4899";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(236, 72, 153, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "rgba(236,72,153,0.12)",
+                          border: "1px solid rgba(236,72,153,0.35)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#ec4899",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <ShieldCheck size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#ec4899",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M033 • FEATURE 33
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Script Sides Encryption &amp; Watermark
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(236,72,153,0.15)",
+                        color: "#fbcfe8",
+                        border: "1px solid rgba(236,72,153,0.3)",
+                      }}
+                    >
+                      AES-256 VAULT
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    Distribute tamper-proof script sides with Aadhaar forensic watermarks, two-factor mobile OTP gates, and 48-hour self-destructing links.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    6 Pages • 2.8 MB • Encrypted
+                  </span>
+                  <button
+                    onClick={() => setIsScriptEncryptionOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    ENCRYPT SIDES →
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 4: FEATURE 34 */}
+              <div
+                style={{
+                  backgroundColor: "#0d0d16",
+                  border: "1px solid rgba(16, 185, 129, 0.28)",
+                  borderRadius: "18px",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
+                  transition: "all 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#10b981";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(16, 185, 129, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "rgba(16,185,129,0.12)",
+                          border: "1px solid rgba(16,185,129,0.35)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#10b981",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <MapPin size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#10b981",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M034 • FEATURE 34
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Location &amp; Shooting Schedule
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(16,185,129,0.15)",
+                        color: "#a7f3d0",
+                        border: "1px solid rgba(16,185,129,0.3)",
+                      }}
+                    >
+                      3-LEG SCHEDULE
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    Transparent 42-day shooting schedule breakdown across Mumbai, Rajasthan, and London with business flights, 5-star lodging, and night-shift allowances.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    42 Days • 3 Locations
+                  </span>
+                  <button
+                    onClick={() => setIsScheduleOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    VIEW SCHEDULE →
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 5: FEATURE 35 */}
+              <div
+                style={{
+                  backgroundColor: "#0d0d16",
+                  border: "1px solid rgba(212, 175, 97, 0.28)",
+                  borderRadius: "18px",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
+                  transition: "all 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#d4af61";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(212, 175, 97, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background:
+                            "linear-gradient(135deg, rgba(212,175,97,0.2) 0%, rgba(212,175,97,0.05) 100%)",
+                          border: "1px solid rgba(212,175,97,0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#d4af61",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <CreditCard size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#d4af61",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M035 • FEATURE 35
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Remuneration &amp; Escrow Scale
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(212,175,97,0.15)",
+                        color: "#fde68a",
+                        border: "1px solid rgba(212,175,97,0.3)",
+                      }}
+                    >
+                      ESCROW SCALE
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    Calculate professional fees against CINTAA guild minimum benchmarks with automatic Section 194J TDS deductions and RBI-backed bank escrow locking.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    188% Above Guild Min
+                  </span>
+                  <button
+                    onClick={() => setIsEscrowCalcOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    CALCULATE ESCROW →
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* Search Bar */}
           <div
             style={{
@@ -1039,6 +1761,41 @@ export default function CastingCallsPage() {
       <ArchivalTalentModal
         isOpen={isArchiveOpen}
         onClose={() => setIsArchiveOpen(false)}
+      />
+
+      {/* Feature #31: Multi-Role Role Breakdown Modal */}
+      <RoleBreakdownModal
+        isOpen={isRoleBreakdownOpen}
+        onClose={() => setIsRoleBreakdownOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #32: Confidential Project Codenames Modal */}
+      <ProjectCodenameModal
+        isOpen={isCodenameOpen}
+        onClose={() => setIsCodenameOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #33: Script Sides Encryption Modal */}
+      <ScriptSidesEncryptionModal
+        isOpen={isScriptEncryptionOpen}
+        onClose={() => setIsScriptEncryptionOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #34: Shooting Schedule Logistics Modal */}
+      <ShootingScheduleModal
+        isOpen={isScheduleOpen}
+        onClose={() => setIsScheduleOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #35: Remuneration & Escrow Scale Modal */}
+      <RemunerationEscrowModal
+        isOpen={isEscrowCalcOpen}
+        onClose={() => setIsEscrowCalcOpen(false)}
+        defaultProject={selectedPitchProject}
       />
     </>
   );
