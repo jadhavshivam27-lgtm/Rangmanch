@@ -520,7 +520,7 @@ export default function CastingCallsPage() {
                             fontWeight: 700,
                           }}
                         >
-                          MODULE M028
+                          MODULE M028 • FEATURE 28
                         </div>
                         <h3
                           className="font-cinema"
@@ -651,7 +651,7 @@ export default function CastingCallsPage() {
                             fontWeight: 700,
                           }}
                         >
-                          MODULE M029
+                          MODULE M029 • FEATURE 29
                         </div>
                         <h3
                           className="font-cinema"
@@ -782,7 +782,7 @@ export default function CastingCallsPage() {
                             fontWeight: 700,
                           }}
                         >
-                          MODULE M030
+                          MODULE M030 • FEATURE 30
                         </div>
                         <h3
                           className="font-cinema"
