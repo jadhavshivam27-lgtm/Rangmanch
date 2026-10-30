@@ -37,6 +37,16 @@ import IntimacyProtocolModal from "@/components/IntimacyProtocolModal";
 import DialectCoachModal from "@/components/DialectCoachModal";
 import StuntSafetyModal from "@/components/StuntSafetyModal";
 import StarPowerAnalyticsModal from "@/components/StarPowerAnalyticsModal";
+import ScriptVersioningModal from "@/components/ScriptVersioningModal";
+import DialogueTableReadModal from "@/components/DialogueTableReadModal";
+import CharacterArcModal from "@/components/CharacterArcModal";
+import ScriptBreakdownModal from "@/components/ScriptBreakdownModal";
+import MusicCueSheetModal from "@/components/MusicCueSheetModal";
+import VfxTrackingModal from "@/components/VfxTrackingModal";
+import ColorGradeLutModal from "@/components/ColorGradeLutModal";
+import AdrStudioModal from "@/components/AdrStudioModal";
+import CensorComplianceModal from "@/components/CensorComplianceModal";
+import ScreeningRoomModal from "@/components/ScreeningRoomModal";
 import {
   Search,
   MapPin,
@@ -76,6 +86,16 @@ import {
   Receipt,
   Coins,
   BarChart3,
+  FileCode2,
+  Headphones,
+  GitMerge,
+  Split,
+  Music2,
+  Crosshair,
+  Palette,
+  Mic2,
+  Stamp,
+  Tv2,
 } from "lucide-react";
 
 // ─── Self-contained casting data ─────────────────────────────
@@ -296,6 +316,20 @@ export default function CastingCallsPage() {
   const [isDialectCoachOpen, setIsDialectCoachOpen] = useState(false);
   const [isStuntSafetyOpen, setIsStuntSafetyOpen] = useState(false);
   const [isStarPowerOpen, setIsStarPowerOpen] = useState(false);
+
+  // Module 10 Features State (Features #62, #63, #64, #65, #66)
+  const [isScriptVersioningOpen, setIsScriptVersioningOpen] = useState(false);
+  const [isTableReadOpen, setIsTableReadOpen] = useState(false);
+  const [isCharacterArcOpen, setIsCharacterArcOpen] = useState(false);
+  const [isScriptBreakdownOpen, setIsScriptBreakdownOpen] = useState(false);
+  const [isMusicCueOpen, setIsMusicCueOpen] = useState(false);
+
+  // Module 11 Features State (Features #67, #68, #69, #70, #71)
+  const [isVfxTrackingOpen, setIsVfxTrackingOpen] = useState(false);
+  const [isColorGradeLutOpen, setIsColorGradeLutOpen] = useState(false);
+  const [isAdrStudioOpen, setIsAdrStudioOpen] = useState(false);
+  const [isCensorComplianceOpen, setIsCensorComplianceOpen] = useState(false);
+  const [isScreeningRoomOpen, setIsScreeningRoomOpen] = useState(false);
 
   const filtered = useMemo(() => {
     return CASTINGS.filter((c) => {
@@ -5371,6 +5405,1500 @@ export default function CastingCallsPage() {
             </div>
           </section>
 
+          {/* ════════════════════════════════════════════════════════════════════════
+              MODULE 10: SCRIPT & WRITING ROOM COLLABORATION SUITE (Features 62-66)
+              5 Dedicated Standalone Feature Cards (Completely Unmerged & Well-Structured)
+          ════════════════════════════════════════════════════════════════════════ */}
+          <section
+            style={{
+              marginBottom: "36px",
+              padding: "24px",
+              borderRadius: "22px",
+              background: "linear-gradient(180deg, rgba(212, 175, 97, 0.05) 0%, rgba(13, 13, 22, 0.9) 100%)",
+              border: "1px solid rgba(212, 175, 97, 0.22)",
+              boxShadow: "0 10px 40px rgba(0,0,0,0.6)",
+            }}
+          >
+            {/* Module 10 Header */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                flexWrap: "wrap",
+                gap: "12px",
+                marginBottom: "20px",
+                borderBottom: "1px solid rgba(255,255,255,0.06)",
+                paddingBottom: "16px",
+              }}
+            >
+              <div>
+                <div
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    marginBottom: "4px",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: "10px",
+                      fontFamily: "monospace",
+                      letterSpacing: "0.2em",
+                      color: "#d4af61",
+                      textTransform: "uppercase",
+                      fontWeight: 700,
+                    }}
+                  >
+                    ★ MODULE 10 • SCRIPT &amp; WRITING ROOM COLLABORATION SUITE
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "10px",
+                      backgroundColor: "rgba(212, 175, 97, 0.15)",
+                      color: "#f4e2b8",
+                      border: "1px solid rgba(212, 175, 97, 0.3)",
+                      padding: "1px 8px",
+                      borderRadius: "999px",
+                      fontFamily: "monospace",
+                    }}
+                  >
+                    SCREENPLAY INTELLIGENCE
+                  </span>
+                </div>
+                <h2
+                  className="font-cinema"
+                  style={{
+                    fontSize: "24px",
+                    fontWeight: 700,
+                    color: "#ffffff",
+                    letterSpacing: "0.02em",
+                    margin: 0,
+                  }}
+                >
+                  Writers Room &amp; Script Revision Operations
+                </h2>
+                <p style={{ fontSize: "12px", color: "#8a8a9a", margin: "4px 0 0 0" }}>
+                  Colored revision page management, AI multi-voice table reads, character tension maps, 8ths-of-a-page breakdown stripboards, and IPRS music cue sheets.
+                </p>
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  fontSize: "11px",
+                  fontFamily: "monospace",
+                  color: "#d4af61",
+                  backgroundColor: "rgba(212, 175, 97, 0.08)",
+                  padding: "6px 14px",
+                  borderRadius: "8px",
+                  border: "1px solid rgba(212, 175, 97, 0.2)",
+                }}
+              >
+                ● 5 UNMERGED STANDALONE MODULES ACTIVE
+              </div>
+            </div>
+
+            {/* 5 Dedicated Standalone Cards for Module 10 */}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+                gap: "20px",
+              }}
+            >
+              {/* CARD 1: FEATURE 62 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(212, 175, 97, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#d4af61";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(212, 175, 97, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(212,175,97,0.2) 0%, rgba(212,175,97,0.05) 100%)",
+                          border: "1px solid rgba(212,175,97,0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#d4af61",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <FileCode2 size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#d4af61",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M062 • FEATURE 62
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Script Revision &amp; Diff Ledger
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(212,175,97,0.15)",
+                        color: "#f4e2b8",
+                        border: "1px solid rgba(212,175,97,0.3)",
+                      }}
+                    >
+                      COLORED PAGES
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    Hollywood standard colored revision tracking (White, Blue, Pink, Yellow), real-time dialogue diff engine, and cast sides teleprompter push.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    Pink Draft (Locked)
+                  </span>
+                  <button
+                    onClick={() => setIsScriptVersioningOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    VIEW REVISIONS →
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 2: FEATURE 63 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(6, 182, 212, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#06b6d4";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(6, 182, 212, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(6,182,212,0.2) 0%, rgba(6,182,212,0.05) 100%)",
+                          border: "1px solid rgba(6,182,212,0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#06b6d4",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Headphones size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#06b6d4",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M063 • FEATURE 63
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          AI Dialogue Table-Read Bay
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(6,182,212,0.15)",
+                        color: "#a5f3fc",
+                        border: "1px solid rgba(6,182,212,0.3)",
+                      }}
+                    >
+                      NEURAL AUDIO
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    Automated script cast synthesis assigning distinct neural voice timbres to every character, with live waveform playback and pacing sliders.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    4 Voices Ingested
+                  </span>
+                  <button
+                    onClick={() => setIsTableReadOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    LISTEN TABLE-READ →
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 3: FEATURE 64 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(139, 92, 246, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#8b5cf6";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(139, 92, 246, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(139,92,246,0.2) 0%, rgba(139,92,246,0.05) 100%)",
+                          border: "1px solid rgba(139,92,246,0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#8b5cf6",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <GitMerge size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#8b5cf6",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M064 • FEATURE 64
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Character Relationship Arc Web
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(139,92,246,0.15)",
+                        color: "#c4b5fd",
+                        border: "1px solid rgba(139,92,246,0.3)",
+                      }}
+                    >
+                      TENSION WEB
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    Interactive character graph mapping emotional tension, loyalty shifts, betrayal indices, and screen-time matrix across the 3-act screenplay.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    3-Act Arc Traced
+                  </span>
+                  <button
+                    onClick={() => setIsCharacterArcOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    MAP CHARACTER ARC →
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 4: FEATURE 65 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(16, 185, 129, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#10b981";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(16, 185, 129, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(16,185,129,0.2) 0%, rgba(16,185,129,0.05) 100%)",
+                          border: "1px solid rgba(16,185,129,0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#10b981",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Split size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#10b981",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M065 • FEATURE 65
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Script Breakdown &amp; Stripboard
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(16,185,129,0.15)",
+                        color: "#a7f3d0",
+                        border: "1px solid rgba(16,185,129,0.3)",
+                      }}
+                    >
+                      8THS OF A PAGE
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    Automated Movie Magic scene element parsing: speaking cast, background extras, props, wardrobe, and departmental cost estimates.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    3 6/8 Pages Parsed
+                  </span>
+                  <button
+                    onClick={() => setIsScriptBreakdownOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    OPEN STRIPBOARD →
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 5: FEATURE 66 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(236, 72, 153, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#ec4899";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(236, 72, 153, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(236,72,153,0.2) 0%, rgba(236,72,153,0.05) 100%)",
+                          border: "1px solid rgba(236,72,153,0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#ec4899",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Music2 size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#ec4899",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M066 • FEATURE 66
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Music &amp; Score Cue Sheets
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(236,72,153,0.15)",
+                        color: "#fbcfe8",
+                        border: "1px solid rgba(236,72,153,0.3)",
+                      }}
+                    >
+                      IPRS CLEARANCE
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    Frame-accurate timecode cue sheets for background scores, song sync licenses, lyricist royalty splits, and CBFC censor music manifests.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    38 Cues Logged
+                  </span>
+                  <button
+                    onClick={() => setIsMusicCueOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    SYNC CUE SHEET →
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* ════════════════════════════════════════════════════════════════════════
+              MODULE 11: POST-PRODUCTION, VFX & SCREENING ROOM SUITE (Features 67-71)
+              5 Dedicated Standalone Feature Cards (Completely Unmerged & Well-Structured)
+          ════════════════════════════════════════════════════════════════════════ */}
+          <section
+            style={{
+              marginBottom: "36px",
+              padding: "24px",
+              borderRadius: "22px",
+              background: "linear-gradient(180deg, rgba(212, 175, 97, 0.05) 0%, rgba(13, 13, 22, 0.9) 100%)",
+              border: "1px solid rgba(212, 175, 97, 0.22)",
+              boxShadow: "0 10px 40px rgba(0,0,0,0.6)",
+            }}
+          >
+            {/* Module 11 Header */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                flexWrap: "wrap",
+                gap: "12px",
+                marginBottom: "20px",
+                borderBottom: "1px solid rgba(255,255,255,0.06)",
+                paddingBottom: "16px",
+              }}
+            >
+              <div>
+                <div
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    marginBottom: "4px",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: "10px",
+                      fontFamily: "monospace",
+                      letterSpacing: "0.2em",
+                      color: "#d4af61",
+                      textTransform: "uppercase",
+                      fontWeight: 700,
+                    }}
+                  >
+                    ★ MODULE 11 • POST-PRODUCTION, VFX &amp; SCREENING ROOM SUITE
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "10px",
+                      backgroundColor: "rgba(212, 175, 97, 0.15)",
+                      color: "#f4e2b8",
+                      border: "1px solid rgba(212, 175, 97, 0.3)",
+                      padding: "1px 8px",
+                      borderRadius: "999px",
+                      fontFamily: "monospace",
+                    }}
+                  >
+                    DCI &amp; FORENSIC SCREENING
+                  </span>
+                </div>
+                <h2
+                  className="font-cinema"
+                  style={{
+                    fontSize: "24px",
+                    fontWeight: 700,
+                    color: "#ffffff",
+                    letterSpacing: "0.02em",
+                    margin: 0,
+                  }}
+                >
+                  Post-Production, Color Science &amp; Executive Screening
+                </h2>
+                <p style={{ fontSize: "12px", color: "#8a8a9a", margin: "4px 0 0 0" }}>
+                  VFX on-set camera telemetry, 3D ACES LUT pipelines, ADR lip-sync dubbing bays, statutory CBFC censor cut tracking, and forensic DRM screening rooms.
+                </p>
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  fontSize: "11px",
+                  fontFamily: "monospace",
+                  color: "#d4af61",
+                  backgroundColor: "rgba(212, 175, 97, 0.08)",
+                  padding: "6px 14px",
+                  borderRadius: "8px",
+                  border: "1px solid rgba(212, 175, 97, 0.2)",
+                }}
+              >
+                ● 5 UNMERGED STANDALONE MODULES ACTIVE
+              </div>
+            </div>
+
+            {/* 5 Dedicated Standalone Cards for Module 11 */}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+                gap: "20px",
+              }}
+            >
+              {/* CARD 1: FEATURE 67 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(132, 204, 22, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#84cc16";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(132, 204, 22, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(132,204,22,0.2) 0%, rgba(132,204,22,0.05) 100%)",
+                          border: "1px solid rgba(132,204,22,0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#84cc16",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Crosshair size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#84cc16",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M067 • FEATURE 67
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          VFX Marker &amp; Matchmove
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(132,204,22,0.15)",
+                        color: "#d9f99d",
+                        border: "1px solid rgba(132,204,22,0.3)",
+                      }}
+                    >
+                      3D TRACKING
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    On-set camera matchmove telemetry, lens distortion maps, 360° HDRI chrome ball probes, and facial marker tracking datasets.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    Cooke /i Anamorphic
+                  </span>
+                  <button
+                    onClick={() => setIsVfxTrackingOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    LOG VFX DATA →
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 2: FEATURE 68 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(249, 115, 22, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#f97316";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(249, 115, 22, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(249,115,22,0.2) 0%, rgba(249,115,22,0.05) 100%)",
+                          border: "1px solid rgba(249,115,22,0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#f97316",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Palette size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#f97316",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M068 • FEATURE 68
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Color Grade LUT &amp; ACEScc
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(249,115,22,0.15)",
+                        color: "#fed7aa",
+                        border: "1px solid rgba(249,115,22,0.3)",
+                      }}
+                    >
+                      DCI-P3 GAMUT
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    Academy Color Encoding (ACES) pipeline, 65-point 3D film print emulation LUTs (Kodak 2383, Fuji Eterna), and Color Decision List (CDL) exports.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    ACEScc Log Transform
+                  </span>
+                  <button
+                    onClick={() => setIsColorGradeLutOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    CALIBRATE LUT →
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 3: FEATURE 69 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(59, 130, 246, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#3b82f6";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(59, 130, 246, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(59,130,246,0.2) 0%, rgba(59,130,246,0.05) 100%)",
+                          border: "1px solid rgba(59,130,246,0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#3b82f6",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Mic2 size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#3b82f6",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M069 • FEATURE 69
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Foley &amp; ADR Dubbing Bay
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(59,130,246,0.15)",
+                        color: "#bfdbfe",
+                        border: "1px solid rgba(59,130,246,0.3)",
+                      }}
+                    >
+                      LIP-SYNC ADR
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    Automated Dialogue Replacement studio with 3-pip audio countdown guide, elastic audio waveform match, and Pro Tools AAF session bundling.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    98.6% Sync Score
+                  </span>
+                  <button
+                    onClick={() => setIsAdrStudioOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    RECORD ADR TAKE →
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 4: FEATURE 70 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(239, 68, 68, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#ef4444";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(239, 68, 68, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(239,68,68,0.2) 0%, rgba(239,68,68,0.05) 100%)",
+                          border: "1px solid rgba(239,68,68,0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#ef4444",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Stamp size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#ef4444",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M070 • FEATURE 70
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          CBFC Censor Certification Hub
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(239,68,68,0.15)",
+                        color: "#fca5a5",
+                        border: "1px solid rgba(239,68,68,0.3)",
+                      }}
+                    >
+                      UA 16+ RATED
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    Central Board of Film Certification (CBFC) compliance: anti-smoking slate generators, audio mute tracking, and statutory Form VIII dossiers.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    Form VIII Certified
+                  </span>
+                  <button
+                    onClick={() => setIsCensorComplianceOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    AUDIT CENSOR CUTS →
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 5: FEATURE 71 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(99, 102, 241, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#6366f1";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(99, 102, 241, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(99,102,241,0.2) 0%, rgba(99,102,241,0.05) 100%)",
+                          border: "1px solid rgba(99,102,241,0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#6366f1",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Tv2 size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#6366f1",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M071 • FEATURE 71
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Executive Screening Room &amp; DRM
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(99,102,241,0.15)",
+                        color: "#c7d2fe",
+                        border: "1px solid rgba(99,102,241,0.3)",
+                      }}
+                    >
+                      FORENSIC DRM
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    Secure studio executive preview screener with dynamic viewer name/IP forensic watermarking, anti-screen capture DRM, and viewing audit logs.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    HDCP 2.2 Shielded
+                  </span>
+                  <button
+                    onClick={() => setIsScreeningRoomOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    ENTER SCREENING →
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* Search Bar */}
           <div
             style={{
@@ -5844,6 +7372,77 @@ export default function CastingCallsPage() {
         onClose={() => setIsStarPowerOpen(false)}
         defaultProject={selectedPitchProject}
       />
+
+      {/* Feature #62: Dynamic Script Versioning & Revision Ledger Modal */}
+      <ScriptVersioningModal
+        isOpen={isScriptVersioningOpen}
+        onClose={() => setIsScriptVersioningOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #63: AI Dialogue Table-Read & Multi-Voice Synthesizer Modal */}
+      <DialogueTableReadModal
+        isOpen={isTableReadOpen}
+        onClose={() => setIsTableReadOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #64: Character Relationship Web & Emotional Arc Visualizer Modal */}
+      <CharacterArcModal
+        isOpen={isCharacterArcOpen}
+        onClose={() => setIsCharacterArcOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #65: Production Script Breakdown & Stripboard Modal */}
+      <ScriptBreakdownModal
+        isOpen={isScriptBreakdownOpen}
+        onClose={() => setIsScriptBreakdownOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #66: Music & Score Cue Sheet Synchronization Modal */}
+      <MusicCueSheetModal
+        isOpen={isMusicCueOpen}
+        onClose={() => setIsMusicCueOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #67: VFX Marker Tracking & Green-Screen Pipeline Modal */}
+      <VfxTrackingModal
+        isOpen={isVfxTrackingOpen}
+        onClose={() => setIsVfxTrackingOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #68: Color Grading LUT & ACEScc Pipeline Modal */}
+      <ColorGradeLutModal
+        isOpen={isColorGradeLutOpen}
+        onClose={() => setIsColorGradeLutOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #69: Foley & ADR Dialogue Replacement Studio Modal */}
+      <AdrStudioModal
+        isOpen={isAdrStudioOpen}
+        onClose={() => setIsAdrStudioOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #70: CBFC Censor Certification & Cut Tracker Modal */}
+      <CensorComplianceModal
+        isOpen={isCensorComplianceOpen}
+        onClose={() => setIsCensorComplianceOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #71: Secure Executive Screening Room & DRM Modal */}
+      <ScreeningRoomModal
+        isOpen={isScreeningRoomOpen}
+        onClose={() => setIsScreeningRoomOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
 
     </>
   );
