@@ -47,6 +47,8 @@ import ColorGradeLutModal from "@/components/ColorGradeLutModal";
 import AdrStudioModal from "@/components/AdrStudioModal";
 import CensorComplianceModal from "@/components/CensorComplianceModal";
 import ScreeningRoomModal from "@/components/ScreeningRoomModal";
+import IcvfxStageModal from "@/components/IcvfxStageModal";
+import DitLiveGradeModal from "@/components/DitLiveGradeModal";
 import {
   Search,
   MapPin,
@@ -96,6 +98,8 @@ import {
   Mic2,
   Stamp,
   Tv2,
+  Layers,
+  SlidersHorizontal,
 } from "lucide-react";
 
 // ─── Self-contained casting data ─────────────────────────────
@@ -330,6 +334,10 @@ export default function CastingCallsPage() {
   const [isAdrStudioOpen, setIsAdrStudioOpen] = useState(false);
   const [isCensorComplianceOpen, setIsCensorComplianceOpen] = useState(false);
   const [isScreeningRoomOpen, setIsScreeningRoomOpen] = useState(false);
+
+  // Module 12 Features State (Features #72, #73)
+  const [isIcvfxStageOpen, setIsIcvfxStageOpen] = useState(false);
+  const [isDitLiveGradeOpen, setIsDitLiveGradeOpen] = useState(false);
 
   const filtered = useMemo(() => {
     return CASTINGS.filter((c) => {
@@ -6893,6 +6901,371 @@ export default function CastingCallsPage() {
                     }}
                   >
                     ENTER SCREENING →
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+                    {/* ══════════════════════════════════════════════════════════════════
+              MODULE 12: VIRTUAL PRODUCTION, ICVFX & ON-SET DIT ENGINEERING (Features 72-73)
+              2 Dedicated Standalone Feature Cards (Completely Unmerged & Well-Structured)
+          ══════════════════════════════════════════════════════════════════ */}
+          <section
+            style={{
+              marginBottom: "36px",
+              padding: "24px",
+              borderRadius: "22px",
+              background: "linear-gradient(180deg, rgba(6, 182, 212, 0.05) 0%, rgba(13, 13, 22, 0.9) 100%)",
+              border: "1px solid rgba(6, 182, 212, 0.22)",
+              boxShadow: "0 10px 40px rgba(0,0,0,0.6)",
+            }}
+          >
+            {/* Module 12 Header */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                flexWrap: "wrap",
+                gap: "12px",
+                marginBottom: "20px",
+                paddingBottom: "16px",
+                borderBottom: "1px solid rgba(255,255,255,0.06)",
+              }}
+            >
+              <div>
+                <div
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    marginBottom: "4px",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: "11px",
+                      fontFamily: "monospace",
+                      letterSpacing: "0.15em",
+                      color: "#06b6d4",
+                      textTransform: "uppercase",
+                      fontWeight: 700,
+                    }}
+                  >
+                    ★ MODULE 12 • VIRTUAL PRODUCTION & DIT SUITE
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "10px",
+                      backgroundColor: "rgba(6, 182, 212, 0.15)",
+                      color: "#a5f3fc",
+                      border: "1px solid rgba(6, 182, 212, 0.3)",
+                      padding: "1px 8px",
+                      borderRadius: "999px",
+                      fontFamily: "monospace",
+                    }}
+                  >
+                    ICVFX & ON-SET ENGINEERING
+                  </span>
+                </div>
+                <h2
+                  className="font-cinema"
+                  style={{
+                    fontSize: "24px",
+                    fontWeight: 700,
+                    color: "#ffffff",
+                    letterSpacing: "-0.01em",
+                    margin: 0,
+                  }}
+                >
+                  Virtual Production, In-Camera VFX & On-Set DIT Engineering
+                </h2>
+                <p
+                  style={{
+                    fontSize: "13px",
+                    color: "#8e8e9e",
+                    margin: "4px 0 0 0",
+                  }}
+                >
+                  High-density LED volumes with Unreal Engine nDisplay cluster genlock sync, optical camera frustum tracking, Pomfort Livegrade CDL calibration, and Silverstack checksum offload.
+                </p>
+              </div>
+              <div
+                style={{
+                  fontSize: "11px",
+                  fontFamily: "monospace",
+                  color: "#06b6d4",
+                  padding: "6px 14px",
+                  borderRadius: "8px",
+                  backgroundColor: "rgba(6, 182, 212, 0.08)",
+                  border: "1px solid rgba(6, 182, 212, 0.25)",
+                }}
+              >
+                ★ 2 UNMERGED STANDALONE MODULES ACTIVE
+              </div>
+            </div>
+
+            {/* 2 Dedicated Standalone Cards for Module 12 */}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+                gap: "20px",
+              }}
+            >
+              {/* CARD 1: FEATURE 72 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(6, 182, 212, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#06b6d4";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(6, 182, 212, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(6,182,212,0.2) 0%, rgba(6,182,212,0.05) 100%)",
+                          border: "1px solid rgba(6,182,212,0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#06b6d4",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Layers size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#06b6d4",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M072 • FEATURE 72
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          LED Wall ICVFX & Unreal Stage Sync
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(6,182,212,0.15)",
+                        color: "#a5f3fc",
+                        border: "1px solid rgba(6,182,212,0.3)",
+                      }}
+                    >
+                      NDISPLAY GENLOCK
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    High-density LED volume in-camera visual effects with Unreal Engine 5 nDisplay cluster orchestration, optical camera tracking, and real-time frustum parallax sync.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    PTP 24.00fps Locked
+                  </span>
+                  <button
+                    onClick={() => setIsIcvfxStageOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    CALIBRATE STAGE ➔
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 2: FEATURE 73 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(245, 158, 11, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#f59e0b";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(245, 158, 11, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(245,158,11,0.2) 0%, rgba(245,158,11,0.05) 100%)",
+                          border: "1px solid rgba(245,158,11,0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#f59e0b",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <SlidersHorizontal size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#f59e0b",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M073 • FEATURE 73
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          DIT Live Color Grading &amp; Video Assist Hub
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(245,158,11,0.15)",
+                        color: "#fde68a",
+                        border: "1px solid rgba(245,158,11,0.3)",
+                      }}
+                    >
+                      LIVEGRADE &amp; QTAKE
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    On-set DIT cart station with multi-cam wireless video ingest, Pomfort Livegrade ASC CDL calibration, QTAKE instant video assist, and Silverstack checksum offload verification.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    xxHash64 Verified
+                  </span>
+                  <button
+                    onClick={() => setIsDitLiveGradeOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    LAUNCH DIT CART ➔
                   </button>
                 </div>
               </div>
