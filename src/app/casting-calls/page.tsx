@@ -119,7 +119,7 @@ const CASTINGS = [
     daysLeft: 21,
     escrow: true,
     verified: true,
-    image: "/photos/real_06.jpg",
+    image: "/images/casting-calls/project_antim_prahar.jpg",
     synopsis:
       "A sweeping period drama set in 1857, following a troupe of performers who secretly aid the independence movement through their art.",
     roles: [
@@ -145,7 +145,7 @@ const CASTINGS = [
     daysLeft: 15,
     escrow: true,
     verified: true,
-    image: "/photos/real_13.jpg",
+    image: "/images/casting-calls/project_hollow_nights.jpg",
     synopsis:
       "A forensic psychologist is pulled into a labyrinthine murder conspiracy within Delhi's underground art scene. 8-episode streaming series for Prime Video.",
     roles: [
@@ -170,7 +170,7 @@ const CASTINGS = [
     daysLeft: 6,
     escrow: true,
     verified: true,
-    image: "/photos/real_15.jpg",
+    image: "/images/casting-calls/project_tata_motors.jpg",
     synopsis:
       "A modern narrative about an evolving Indian family embracing tomorrow's mobility. Seeking genuine chemistry between lead couple — no prior ad experience required.",
     roles: [
@@ -195,7 +195,7 @@ const CASTINGS = [
     daysLeft: 29,
     escrow: false,
     verified: true,
-    image: "/photos/real_05.jpg",
+    image: "/images/casting-calls/project_manto.jpg",
     synopsis:
       "An original musical exploring themes of partition, love, and displacement across three generations. Requires trained vocalists and movement artists.",
     roles: [
