@@ -27,6 +27,16 @@ import AvailabilityCalendarModal from "@/components/AvailabilityCalendarModal";
 import WhatsAppAuditionBotModal from "@/components/WhatsAppAuditionBotModal";
 import SpotlightArenaModal from "@/components/SpotlightArenaModal";
 import VoiceoverDubbingModal from "@/components/VoiceoverDubbingModal";
+import ContractGeneratorModal from "@/components/ContractGeneratorModal";
+import CallSheetModal from "@/components/CallSheetModal";
+import ExpenseReimbursementModal from "@/components/ExpenseReimbursementModal";
+import MinorWorkPermitModal from "@/components/MinorWorkPermitModal";
+import ResidualsCalculatorModal from "@/components/ResidualsCalculatorModal";
+import VirtualLookTestModal from "@/components/VirtualLookTestModal";
+import IntimacyProtocolModal from "@/components/IntimacyProtocolModal";
+import DialectCoachModal from "@/components/DialectCoachModal";
+import StuntSafetyModal from "@/components/StuntSafetyModal";
+import StarPowerAnalyticsModal from "@/components/StarPowerAnalyticsModal";
 import {
   Search,
   MapPin,
@@ -62,6 +72,10 @@ import {
   Smartphone,
   Mic,
   Flame,
+  FileSignature,
+  Receipt,
+  Coins,
+  BarChart3,
 } from "lucide-react";
 
 // ─── Self-contained casting data ─────────────────────────────
@@ -268,6 +282,20 @@ export default function CastingCallsPage() {
   const [isWhatsAppBotOpen, setIsWhatsAppBotOpen] = useState(false);
   const [isSpotlightOpen, setIsSpotlightOpen] = useState(false);
   const [isVoiceoverOpen, setIsVoiceoverOpen] = useState(false);
+
+  // Module 8 Features State (Features #52, #53, #54, #55, #56)
+  const [isContractGeneratorOpen, setIsContractGeneratorOpen] = useState(false);
+  const [isCallSheetOpen, setIsCallSheetOpen] = useState(false);
+  const [isExpenseOpen, setIsExpenseOpen] = useState(false);
+  const [isMinorPermitOpen, setIsMinorPermitOpen] = useState(false);
+  const [isResidualsOpen, setIsResidualsOpen] = useState(false);
+
+  // Module 9 Features State (Features #57, #58, #59, #60, #61)
+  const [isVirtualLookTestOpen, setIsVirtualLookTestOpen] = useState(false);
+  const [isIntimacyProtocolOpen, setIsIntimacyProtocolOpen] = useState(false);
+  const [isDialectCoachOpen, setIsDialectCoachOpen] = useState(false);
+  const [isStuntSafetyOpen, setIsStuntSafetyOpen] = useState(false);
+  const [isStarPowerOpen, setIsStarPowerOpen] = useState(false);
 
   const filtered = useMemo(() => {
     return CASTINGS.filter((c) => {
@@ -3849,6 +3877,1500 @@ export default function CastingCallsPage() {
             </div>
           </section>
 
+          {/* ════════════════════════════════════════════════════════════════════════
+              MODULE 8: GUILD LEGAL, DIGITAL CONTRACTS & ESCROW TELEMETRY (Features 52-56)
+              5 Dedicated Standalone Feature Cards (Completely Unmerged & Well-Structured)
+          ════════════════════════════════════════════════════════════════════════ */}
+          <section
+            style={{
+              marginBottom: "36px",
+              padding: "24px",
+              borderRadius: "22px",
+              background: "linear-gradient(180deg, rgba(212, 175, 97, 0.05) 0%, rgba(13, 13, 22, 0.9) 100%)",
+              border: "1px solid rgba(212, 175, 97, 0.22)",
+              boxShadow: "0 10px 40px rgba(0,0,0,0.6)",
+            }}
+          >
+            {/* Module 8 Header */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                flexWrap: "wrap",
+                gap: "12px",
+                marginBottom: "20px",
+                borderBottom: "1px solid rgba(255,255,255,0.06)",
+                paddingBottom: "16px",
+              }}
+            >
+              <div>
+                <div
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    marginBottom: "4px",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: "10px",
+                      fontFamily: "monospace",
+                      letterSpacing: "0.2em",
+                      color: "#d4af61",
+                      textTransform: "uppercase",
+                      fontWeight: 700,
+                    }}
+                  >
+                    ★ MODULE 8 • GUILD LEGAL, DIGITAL CONTRACTS &amp; ESCROW TELEMETRY
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "10px",
+                      backgroundColor: "rgba(212, 175, 97, 0.15)",
+                      color: "#f4e2b8",
+                      border: "1px solid rgba(212, 175, 97, 0.3)",
+                      padding: "1px 8px",
+                      borderRadius: "999px",
+                      fontFamily: "monospace",
+                    }}
+                  >
+                    CINTAA &amp; WICA COMPLIANCE
+                  </span>
+                </div>
+                <h2
+                  className="font-cinema"
+                  style={{
+                    fontSize: "24px",
+                    fontWeight: 700,
+                    color: "#ffffff",
+                    letterSpacing: "0.02em",
+                    margin: 0,
+                  }}
+                >
+                  Actor Legal Protection &amp; On-Set Operations Hub
+                </h2>
+                <p style={{ fontSize: "12px", color: "#8a8a9a", margin: "4px 0 0 0" }}>
+                  Standard CINTAA model contracts, digital call-sheets, daily per diem OCR payouts, minor permits, and secondary OTT streaming residuals.
+                </p>
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  fontSize: "11px",
+                  fontFamily: "monospace",
+                  color: "#d4af61",
+                  backgroundColor: "rgba(212, 175, 97, 0.08)",
+                  padding: "6px 14px",
+                  borderRadius: "8px",
+                  border: "1px solid rgba(212, 175, 97, 0.2)",
+                }}
+              >
+                ● 5 UNMERGED STANDALONE MODULES ACTIVE
+              </div>
+            </div>
+
+            {/* 5 Dedicated Standalone Cards for Module 8 */}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+                gap: "20px",
+              }}
+            >
+              {/* CARD 1: FEATURE 52 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(212, 175, 97, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#d4af61";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(212, 175, 97, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(212,175,97,0.2) 0%, rgba(212,175,97,0.05) 100%)",
+                          border: "1px solid rgba(212,175,97,0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#d4af61",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <FileSignature size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#d4af61",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M052 • FEATURE 52
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Digital Actor Contract &amp; Stamp
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(212,175,97,0.15)",
+                        color: "#f4e2b8",
+                        border: "1px solid rgba(212,175,97,0.3)",
+                      }}
+                    >
+                      CINTAA STAMP
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    Standard Cine &amp; TV Artists Association (CINTAA) performer agreements with Aadhaar OTP eSign, overtime clauses, rest turnaround, and 100% escrow lock.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    NeSL Legal Stamp
+                  </span>
+                  <button
+                    onClick={() => setIsContractGeneratorOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    GENERATE CONTRACT →
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 2: FEATURE 53 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(52, 211, 153, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#34d399";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(52, 211, 153, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(52,211,153,0.2) 0%, rgba(52,211,153,0.05) 100%)",
+                          border: "1px solid rgba(52,211,153,0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#34d399",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Clock size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#34d399",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M053 • FEATURE 53
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Daily Call-Sheet Telemetry
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(52,211,153,0.15)",
+                        color: "#a7f3d0",
+                        border: "1px solid rgba(52,211,153,0.3)",
+                      }}
+                    >
+                      CALL-TIME PUSH
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    Real-time digital daily call-sheets, actor pickup schedules, vanity van allocations, hospital emergency routes, and WhatsApp read-receipt telemetry.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    Day 14 of 42
+                  </span>
+                  <button
+                    onClick={() => setIsCallSheetOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    VIEW CALL-SHEET →
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 3: FEATURE 54 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(245, 158, 11, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#f59e0b";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(245, 158, 11, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(245,158,11,0.2) 0%, rgba(245,158,11,0.05) 100%)",
+                          border: "1px solid rgba(245,158,11,0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#f59e0b",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Receipt size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#f59e0b",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M054 • FEATURE 54
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Per Diem &amp; Conveyance OCR
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(245,158,11,0.15)",
+                        color: "#fde68a",
+                        border: "1px solid rgba(245,158,11,0.3)",
+                      }}
+                    >
+                      INSTANT UPI
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    Automated fuel, Uber/Ola cab, and daily food allowance OCR scanning with GST auto-validation and same-day UPI escrow disbursement.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    GST Tax Verified
+                  </span>
+                  <button
+                    onClick={() => setIsExpenseOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    CLAIM REIMBURSEMENT →
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 4: FEATURE 55 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(56, 189, 248, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#38bdf8";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(56, 189, 248, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(56,189,248,0.2) 0%, rgba(56,189,248,0.05) 100%)",
+                          border: "1px solid rgba(56,189,248,0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#38bdf8",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <ShieldCheck size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#38bdf8",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M055 • FEATURE 55
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Minor Work Permit &amp; Tutor
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(56,189,248,0.15)",
+                        color: "#bae6fd",
+                        border: "1px solid rgba(56,189,248,0.3)",
+                      }}
+                    >
+                      5-HR CAP
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    Statutory Child Labour Act compliance: 5-hour shift caps, on-set private tutor hours, child psychologist sign-off, and 50% juvenile trust escrow.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    Guardian NOC Verified
+                  </span>
+                  <button
+                    onClick={() => setIsMinorPermitOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    MANAGE PERMIT →
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 5: FEATURE 56 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(167, 139, 250, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#a78bfa";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(167, 139, 250, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(167,139,250,0.2) 0%, rgba(167,139,250,0.05) 100%)",
+                          border: "1px solid rgba(167,139,250,0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#a78bfa",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Coins size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#a78bfa",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M056 • FEATURE 56
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Secondary Royalties &amp; Residuals
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(167,139,250,0.15)",
+                        color: "#ddd6fe",
+                        border: "1px solid rgba(167,139,250,0.3)",
+                      }}
+                    >
+                      OTT RESIDUALS
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    Transparent SVOD stream metrics, satellite broadcast syndication splits, TDS Form 16A deductions, and quarterly actor royalty disbursements.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    18.4M Stream Hours
+                  </span>
+                  <button
+                    onClick={() => setIsResidualsOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    CALCULATE RESIDUALS →
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* ════════════════════════════════════════════════════════════════════════
+              MODULE 9: AI PRODUCTION STUDIO, LOOK-TEST & PERFORMANCE INTELLIGENCE (Features 57-61)
+              5 Dedicated Standalone Feature Cards (Completely Unmerged & Well-Structured)
+          ════════════════════════════════════════════════════════════════════════ */}
+          <section
+            style={{
+              marginBottom: "36px",
+              padding: "24px",
+              borderRadius: "22px",
+              background: "linear-gradient(180deg, rgba(212, 175, 97, 0.05) 0%, rgba(13, 13, 22, 0.9) 100%)",
+              border: "1px solid rgba(212, 175, 97, 0.22)",
+              boxShadow: "0 10px 40px rgba(0,0,0,0.6)",
+            }}
+          >
+            {/* Module 9 Header */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                flexWrap: "wrap",
+                gap: "12px",
+                marginBottom: "20px",
+                borderBottom: "1px solid rgba(255,255,255,0.06)",
+                paddingBottom: "16px",
+              }}
+            >
+              <div>
+                <div
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    marginBottom: "4px",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: "10px",
+                      fontFamily: "monospace",
+                      letterSpacing: "0.2em",
+                      color: "#d4af61",
+                      textTransform: "uppercase",
+                      fontWeight: 700,
+                    }}
+                  >
+                    ★ MODULE 9 • AI PRODUCTION STUDIO, LOOK-TEST &amp; PERFORMANCE INTELLIGENCE
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "10px",
+                      backgroundColor: "rgba(212, 175, 97, 0.15)",
+                      color: "#f4e2b8",
+                      border: "1px solid rgba(212, 175, 97, 0.3)",
+                      padding: "1px 8px",
+                      borderRadius: "999px",
+                      fontFamily: "monospace",
+                    }}
+                  >
+                    NEURAL PRE-VIZ &amp; SAFE-SET
+                  </span>
+                </div>
+                <h2
+                  className="font-cinema"
+                  style={{
+                    fontSize: "24px",
+                    fontWeight: 700,
+                    color: "#ffffff",
+                    letterSpacing: "0.02em",
+                    margin: 0,
+                  }}
+                >
+                  AI Wardrobe Pre-Viz &amp; Performance Safety Studio
+                </h2>
+                <p style={{ fontSize: "12px", color: "#8a8a9a", margin: "4px 0 0 0" }}>
+                  Virtual era look-tests, closed-set intimacy coordinator governance, real-time regional dialect coaching, stunt hazard clearing, and box office bankability intelligence.
+                </p>
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  fontSize: "11px",
+                  fontFamily: "monospace",
+                  color: "#d4af61",
+                  backgroundColor: "rgba(212, 175, 97, 0.08)",
+                  padding: "6px 14px",
+                  borderRadius: "8px",
+                  border: "1px solid rgba(212, 175, 97, 0.2)",
+                }}
+              >
+                ● 5 UNMERGED STANDALONE MODULES ACTIVE
+              </div>
+            </div>
+
+            {/* 5 Dedicated Standalone Cards for Module 9 */}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+                gap: "20px",
+              }}
+            >
+              {/* CARD 1: FEATURE 57 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(244, 63, 94, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#f43f5e";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(244, 63, 94, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(244,63,94,0.2) 0%, rgba(244,63,94,0.05) 100%)",
+                          border: "1px solid rgba(244,63,94,0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#f43f5e",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Sparkles size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#f43f5e",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M057 • FEATURE 57
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          AI Virtual Look-Test &amp; Wardrobe
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(244,63,94,0.15)",
+                        color: "#fecdd3",
+                        border: "1px solid rgba(244,63,94,0.3)",
+                      }}
+                    >
+                      ERA PRE-VIZ
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    Generative costume simulation mapping actor facial meshes to 1970s retro, Mughal period royalty, tactical police armor, and cinematographer lighting rigs.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    4K Cloth Simulation
+                  </span>
+                  <button
+                    onClick={() => setIsVirtualLookTestOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    SIMULATE LOOK →
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 2: FEATURE 58 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(251, 113, 133, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#fb7185";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(251, 113, 133, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(251,113,133,0.2) 0%, rgba(251,113,133,0.05) 100%)",
+                          border: "1px solid rgba(251,113,133,0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#fb7185",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Lock size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#fb7185",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M058 • FEATURE 58
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Intimacy Coordinator Protocols
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(251,113,133,0.15)",
+                        color: "#fecdd3",
+                        border: "1px solid rgba(251,113,133,0.3)",
+                      }}
+                    >
+                      SAFE-SET PASS
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    Closed-set governance charter, dual actor touch-point boundary agreements, modesty barriers, certified safe-word pause triggers, and whitelisted crew logs.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    CINTAA Safe-Space
+                  </span>
+                  <button
+                    onClick={() => setIsIntimacyProtocolOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    VIEW PROTOCOLS →
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 3: FEATURE 59 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(45, 212, 191, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#2dd4bf";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(45, 212, 191, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(45,212,191,0.2) 0%, rgba(45,212,191,0.05) 100%)",
+                          border: "1px solid rgba(45,212,191,0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#2dd4bf",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Mic size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#2dd4bf",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M059 • FEATURE 59
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          AI Dialogue Dialect Coach
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(45,212,191,0.15)",
+                        color: "#99f6e4",
+                        border: "1px solid rgba(45,212,191,0.3)",
+                      }}
+                    >
+                      PHONETICS AI
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    Real-time regional phonetics, vocal pitch matching, and accent authenticity scoring for Bhojpuri, Haryanvi, Hyderabadi Urdu, and Kathiawadi dialects.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    94% Native Cadence
+                  </span>
+                  <button
+                    onClick={() => setIsDialectCoachOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    COACH DIALECT →
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 4: FEATURE 60 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(251, 146, 60, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#fb923c";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(251, 146, 60, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(251,146,60,0.2) 0%, rgba(251,146,60,0.05) 100%)",
+                          border: "1px solid rgba(251,146,60,0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#fb923c",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Flame size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#fb923c",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M060 • FEATURE 60
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Stunt &amp; Action Hazard Risk
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(251,146,60,0.15)",
+                        color: "#fed7aa",
+                        border: "1px solid rgba(251,146,60,0.3)",
+                      }}
+                    >
+                      TIER 2 WIREWORK
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    Action director hazard matrices, wirework load-testing certification, stunt double guild verification, and on-set advanced trauma paramedic standby.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    ₹1 Cr Guild Insurance
+                  </span>
+                  <button
+                    onClick={() => setIsStuntSafetyOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    CLEAR STUNT →
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 5: FEATURE 61 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(232, 121, 249, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#e879f9";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(232, 121, 249, 0.28)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(232,121,249,0.2) 0%, rgba(232,121,249,0.05) 100%)",
+                          border: "1px solid rgba(232,121,249,0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#e879f9",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <TrendingUp size={22} />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "10px",
+                            fontFamily: "monospace",
+                            letterSpacing: "0.18em",
+                            color: "#e879f9",
+                            textTransform: "uppercase",
+                            fontWeight: 700,
+                          }}
+                        >
+                          MODULE M061 • FEATURE 61
+                        </div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Box Office &amp; Star-Power Intel
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(232,121,249,0.15)",
+                        color: "#f5d0fe",
+                        border: "1px solid rgba(232,121,249,0.3)",
+                      }}
+                    >
+                      BANKABILITY 88.4
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#9a9aa8",
+                      lineHeight: 1.6,
+                      margin: "0 0 18px 0",
+                    }}
+                  >
+                    Pan-India opening day pre-sales projections, Tier 1 vs Tier 2/3 demographic retention heatmaps, and genre synergy pitch decks for film investors.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    ₹16 Cr Day 1 Model
+                  </span>
+                  <button
+                    onClick={() => setIsStarPowerOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    ANALYZE BANKABILITY →
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* Search Bar */}
           <div
             style={{
@@ -4252,6 +5774,77 @@ export default function CastingCallsPage() {
         onClose={() => setIsVoiceoverOpen(false)}
         defaultProject={selectedPitchProject}
       />
+
+      {/* Feature #52: Standard Digital Actor Contract & CINTAA Stamp Modal */}
+      <ContractGeneratorModal
+        isOpen={isContractGeneratorOpen}
+        onClose={() => setIsContractGeneratorOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #53: Daily Call-Sheet & Call-Time Telemetry Modal */}
+      <CallSheetModal
+        isOpen={isCallSheetOpen}
+        onClose={() => setIsCallSheetOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #54: Per Diem & Conveyance Expense Reimbursement Modal */}
+      <ExpenseReimbursementModal
+        isOpen={isExpenseOpen}
+        onClose={() => setIsExpenseOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #55: Minor Performer Legal Guardian & Education Compliance Modal */}
+      <MinorWorkPermitModal
+        isOpen={isMinorPermitOpen}
+        onClose={() => setIsMinorPermitOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #56: Secondary Royalties & OTT Residuals Calculator Modal */}
+      <ResidualsCalculatorModal
+        isOpen={isResidualsOpen}
+        onClose={() => setIsResidualsOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #57: AI Virtual Look-Test & Period Costume Simulator Modal */}
+      <VirtualLookTestModal
+        isOpen={isVirtualLookTestOpen}
+        onClose={() => setIsVirtualLookTestOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #58: Intimacy Coordinator & Sensitive Scene Protocols Modal */}
+      <IntimacyProtocolModal
+        isOpen={isIntimacyProtocolOpen}
+        onClose={() => setIsIntimacyProtocolOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #59: AI Dialogue Dialect & Accent Coaching Studio Modal */}
+      <DialectCoachModal
+        isOpen={isDialectCoachOpen}
+        onClose={() => setIsDialectCoachOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #60: Stunt & Action Scene Hazard Risk Assessment Modal */}
+      <StuntSafetyModal
+        isOpen={isStuntSafetyOpen}
+        onClose={() => setIsStuntSafetyOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #61: Box Office & OTT Star-Power Intelligence Modal */}
+      <StarPowerAnalyticsModal
+        isOpen={isStarPowerOpen}
+        onClose={() => setIsStarPowerOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
     </>
   );
 }
