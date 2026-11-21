@@ -56,6 +56,12 @@ export const ALL_STUDIO_TOOLS: ToolItem[] = [
   { id: "t-99", name: "DIT Camera Mag Offload & Checksum Verification", module: 18, category: "Camera & DIT", actionKey: "camera_offload", badge: "FEATURE 99", keywords: "arri red codex xxhash64 mhl camera card wipe offload" },
   { id: "t-100", name: "Global Territory Sales & Revenue Waterfall Ledger", module: 18, category: "Finance", actionKey: "territory_waterfall", badge: "FEATURE 100", keywords: "cama minimum guarantee waterfall recoupment dtaa currency hedge" },
   { id: "t-101", name: "AI Screenplay Dialogue Punch-Up & Subtext Studio", module: 18, category: "Script Room", actionKey: "dialogue_punchup", badge: "FEATURE 101", keywords: "dialogue punch up subtext sentiment exposition script polish fdx" },
+  // Module 19: AI Virtual Production, Metaverse Auditions & Post-Theatrical Monetization
+  { id: "t-102", name: "NeRF & 3D Gaussian Splatting Virtual Location Scout", module: 19, category: "Virtual Production", actionKey: "nerf_scout", badge: "FEATURE 102", keywords: "nerf gaussian splatting point cloud lidar unreal engine 5 drone scout solar path" },
+  { id: "t-103", name: "AI Intimacy & Stunt Choreography Safety Blueprint", module: 19, category: "Stunt & Wellness", actionKey: "intimacy_stunt", badge: "FEATURE 103", keywords: "cintaa intimacy coordinator stunt safety wire tension pyro trauma medical closed set" },
+  { id: "t-104", name: "AI Micro-Expression & Dramatic Tension Heatmap", module: 19, category: "Affective AI", actionKey: "micro_expression", badge: "FEATURE 104", keywords: "navarasa affective computing facs micro expressions pupil dilation tension heatmap audition" },
+  { id: "t-105", name: "Dynamic OTT Bitrate & Multi-Device Color Fidelity", module: 19, category: "Post & OTT", actionKey: "ott_qc", badge: "FEATURE 105", keywords: "vmaf netflix prime video ott cellular bitrate ladder dolby vision dci-p3 tone mapping" },
+  { id: "t-106", name: "Post-Theatrical Ancillary Merchandising & IP Hub", module: 19, category: "IP & Merch", actionKey: "ancillary_merch", badge: "FEATURE 106", keywords: "merchandising bgmi gaming skins action figures likeness rights anti ai cloning royalty waterfall" },
 ];
 
 interface CommandKModalProps {
