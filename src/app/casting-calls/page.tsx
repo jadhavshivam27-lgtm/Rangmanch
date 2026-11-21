@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import PitchbookModal from "@/components/PitchbookModal";
@@ -78,6 +78,7 @@ import CryptographicEsignModal from "@/components/CryptographicEsignModal";
 import CameraMediaOffloadModal from "@/components/CameraMediaOffloadModal";
 import GlobalTerritoryWaterfallModal from "@/components/GlobalTerritoryWaterfallModal";
 import ScriptDialoguePunchUpModal from "@/components/ScriptDialoguePunchUpModal";
+import CommandKModal from "@/components/CommandKModal";
 import {
   Camera,
   Landmark,
@@ -517,6 +518,48 @@ export default function CastingCallsPage() {
   const [isGlobalTerritoryWaterfallOpen, setIsGlobalTerritoryWaterfallOpen] = useState(false);
   const [isDialoguePunchUpOpen, setIsDialoguePunchUpOpen] = useState(false);
 
+  // Spotlight Command+K Quick Launcher State
+  const [isCommandKOpen, setIsCommandKOpen] = useState(false);
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setIsCommandKOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
+  const handleSelectToolFromCommandK = (actionKey: string) => {
+    switch (actionKey) {
+      case "pitchbook": setIsPitchbookOpen(true); break;
+      case "callback": setIsCallbackOpen(true); break;
+      case "archival": setIsArchiveOpen(true); break;
+      case "breakdown": setIsRoleBreakdownOpen(true); break;
+      case "codename": setIsCodenameOpen(true); break;
+      case "sides_encryption": setIsScriptEncryptionOpen(true); break;
+      case "shooting_schedule": setIsScheduleOpen(true); break;
+      case "escrow": setIsEscrowCalcOpen(true); break;
+      case "kanban": setIsKanbanOpen(true); break;
+      case "tax_rebate": setIsTaxRebateCalcOpen(true); break;
+      case "carnet": setIsAtaCarnetLogisticsOpen(true); break;
+      case "crew_visa": setIsForeignCrewVisaOpen(true); break;
+      case "subtitle_qc": setIsSubtitleDubQcOpen(true); break;
+      case "sales_rights": setIsFilmMarketSalesOpen(true); break;
+      case "completion_guarantor": setIsCompletionGuarantorOpen(true); break;
+      case "forensic_screener": setIsForensicScreenerOpen(true); break;
+      case "film_restoration": setIsFilmRestorationOpen(true); break;
+      case "franchise_canon": setIsFranchiseCanonOpen(true); break;
+      case "crypto_esign": setIsCryptographicEsignOpen(true); break;
+      case "camera_offload": setIsCameraMediaOffloadOpen(true); break;
+      case "territory_waterfall": setIsGlobalTerritoryWaterfallOpen(true); break;
+      case "dialogue_punchup": setIsDialoguePunchUpOpen(true); break;
+      default: setActivePortalTab("director_suite"); break;
+    }
+  };
+
   const filtered = useMemo(() => {
     return CASTINGS.filter((c) => {
       const q = search.toLowerCase();
@@ -798,6 +841,40 @@ export default function CastingCallsPage() {
             </div>
 
             <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <button
+                onClick={() => setIsCommandKOpen(true)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  padding: "8px 14px",
+                  borderRadius: "10px",
+                  backgroundColor: "rgba(212, 175, 97, 0.12)",
+                  border: "1px solid rgba(212, 175, 97, 0.35)",
+                  color: "#d4af61",
+                  fontSize: "11px",
+                  fontWeight: 700,
+                  fontFamily: "monospace",
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                }}
+              >
+                <span>⚡</span>
+                <span>QUICK LAUNCHER</span>
+                <kbd
+                  style={{
+                    fontSize: "9px",
+                    padding: "2px 5px",
+                    borderRadius: "4px",
+                    backgroundColor: "rgba(0,0,0,0.6)",
+                    border: "1px solid rgba(212, 175, 97, 0.4)",
+                    color: "#fff",
+                  }}
+                >
+                  ⌘K
+                </kbd>
+              </button>
+
               <span
                 style={{
                   fontSize: "10px",
@@ -11725,8 +11802,12 @@ export default function CastingCallsPage() {
         castingCall={selectedCastingForApply}
       />
 
-
-
+      {/* Universal Command+K Spotlight Tool Launcher */}
+      <CommandKModal
+        isOpen={isCommandKOpen}
+        onClose={() => setIsCommandKOpen(false)}
+        onSelectTool={handleSelectToolFromCommandK}
+      />
     </>
   );
 }

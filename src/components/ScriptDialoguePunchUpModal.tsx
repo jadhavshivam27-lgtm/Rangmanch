@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   X,
   Sparkles,
@@ -48,6 +48,42 @@ export default function ScriptDialoguePunchUpModal({
   );
   const [subtextTensionScore, setSubtextTensionScore] = useState(94);
   const [expositionReductionScore, setExpositionReductionScore] = useState(88);
+  const [draftRestored, setDraftRestored] = useState(false);
+
+  // Auto-Save Draft to LocalStorage
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const savedOriginal = localStorage.getItem("rangmanch_draft_dialogue_original");
+        const savedPunched = localStorage.getItem("rangmanch_draft_dialogue_punched");
+        if (savedOriginal) setOriginalDraftSnippet(savedOriginal);
+        if (savedPunched) {
+          setPunchedUpSnippet(savedPunched);
+          setDraftRestored(true);
+        }
+      } catch {
+        // Ignore
+      }
+    }
+  }, []);
+
+  const handleOriginalChange = (val: string) => {
+    setOriginalDraftSnippet(val);
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.setItem("rangmanch_draft_dialogue_original", val);
+      } catch {}
+    }
+  };
+
+  const handlePunchedChange = (val: string) => {
+    setPunchedUpSnippet(val);
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.setItem("rangmanch_draft_dialogue_punched", val);
+      } catch {}
+    }
+  };
 
   // Step 3: Dialect & Cultural Idiom Nuance
   const [dialectFlavor, setDialectFlavor] = useState("Restrained Army Urdu-Hindi with bureaucratic cynicism");
@@ -490,7 +526,7 @@ export default function ScriptDialoguePunchUpModal({
                   </div>
                   <textarea
                     value={originalDraftSnippet}
-                    onChange={(e) => setOriginalDraftSnippet(e.target.value)}
+                    onChange={(e) => handleOriginalChange(e.target.value)}
                     rows={6}
                     style={{
                       width: "100%",
@@ -512,11 +548,18 @@ export default function ScriptDialoguePunchUpModal({
                     <label style={{ fontSize: "13px", color: "#81c784", fontWeight: 600 }}>
                       Punched-Up Master Draft (High Subtext)
                     </label>
-                    <span style={{ fontSize: "10px", color: "#81c784", fontWeight: 700, fontFamily: "monospace" }}>SUBTEXT: 94/100</span>
+                    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                      {draftRestored && (
+                        <span style={{ fontSize: "10px", color: "#81c784", fontWeight: 600, fontFamily: "monospace" }}>
+                          ✓ DRAFT AUTO-SAVED
+                        </span>
+                      )}
+                      <span style={{ fontSize: "10px", color: "#81c784", fontWeight: 700, fontFamily: "monospace" }}>SUBTEXT: 94/100</span>
+                    </div>
                   </div>
                   <textarea
                     value={punchedUpSnippet}
-                    onChange={(e) => setPunchedUpSnippet(e.target.value)}
+                    onChange={(e) => handlePunchedChange(e.target.value)}
                     rows={6}
                     style={{
                       width: "100%",
