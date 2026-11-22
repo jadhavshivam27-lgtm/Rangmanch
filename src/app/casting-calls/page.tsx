@@ -79,6 +79,11 @@ import CameraMediaOffloadModal from "@/components/CameraMediaOffloadModal";
 import GlobalTerritoryWaterfallModal from "@/components/GlobalTerritoryWaterfallModal";
 import ScriptDialoguePunchUpModal from "@/components/ScriptDialoguePunchUpModal";
 import CommandKModal from "@/components/CommandKModal";
+import NerfGaussianLocationScoutModal from "@/components/NerfGaussianLocationScoutModal";
+import IntimacyStuntChoreographyModal from "@/components/IntimacyStuntChoreographyModal";
+import MicroExpressionSentimentModal from "@/components/MicroExpressionSentimentModal";
+import OttColorStreamQcModal from "@/components/OttColorStreamQcModal";
+import AncillaryMerchandisingHubModal from "@/components/AncillaryMerchandisingHubModal";
 import {
   Camera,
   Landmark,
@@ -143,6 +148,9 @@ import {
   BookOpen,
   Wand2,
   HardDrive,
+  Compass,
+  Brain,
+  ShoppingBag,
 } from "lucide-react";
 
 // ─── Self-contained casting data ─────────────────────────────
@@ -370,7 +378,7 @@ const STUDIO_PROJECTS = [
 ];
 
 const PHASES = [
-  { id: "all", label: "All 74 Tools", count: 74, modules: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18] },
+  { id: "all", label: "All 79 Tools", count: 79, modules: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19] },
   { id: "pre_prod", label: "Pre-Production & Packaging", count: 8, modules: [3, 4] },
   { id: "auditions", label: "Casting & Callback Suite", count: 16, modules: [5, 6, 7] },
   { id: "legal_studio", label: "Guild Contracts & AI Studio", count: 10, modules: [8, 9] },
@@ -381,6 +389,7 @@ const PHASES = [
   { id: "international_tax", label: "International & Tax Credits", count: 6, modules: [16] },
   { id: "franchise_security", label: "Franchise Canon & Security", count: 3, modules: [17] },
   { id: "crypto_dit_waterfall", label: "Smart Legal, DIT & Waterfall", count: 4, modules: [18] },
+  { id: "virtual_prod_metaverse", label: "Virtual Production & Ancillary IP", count: 5, modules: [19] },
 ];
 
 const ROLE_GENDERS = [
@@ -518,6 +527,13 @@ export default function CastingCallsPage() {
   const [isGlobalTerritoryWaterfallOpen, setIsGlobalTerritoryWaterfallOpen] = useState(false);
   const [isDialoguePunchUpOpen, setIsDialoguePunchUpOpen] = useState(false);
 
+  // Module 19: AI Virtual Production, Metaverse Audition & Post-Theatrical Monetization (Features #102 - #106)
+  const [isNerfLocationScoutOpen, setIsNerfLocationScoutOpen] = useState(false);
+  const [isIntimacyStuntSafetyOpen, setIsIntimacyStuntSafetyOpen] = useState(false);
+  const [isMicroExpressionOpen, setIsMicroExpressionOpen] = useState(false);
+  const [isOttStreamQcOpen, setIsOttStreamQcOpen] = useState(false);
+  const [isAncillaryMerchOpen, setIsAncillaryMerchOpen] = useState(false);
+
   // Spotlight Command+K Quick Launcher State
   const [isCommandKOpen, setIsCommandKOpen] = useState(false);
 
@@ -556,6 +572,11 @@ export default function CastingCallsPage() {
       case "camera_offload": setIsCameraMediaOffloadOpen(true); break;
       case "territory_waterfall": setIsGlobalTerritoryWaterfallOpen(true); break;
       case "dialogue_punchup": setIsDialoguePunchUpOpen(true); break;
+      case "nerf_scout": setIsNerfLocationScoutOpen(true); break;
+      case "intimacy_stunt": setIsIntimacyStuntSafetyOpen(true); break;
+      case "micro_expression": setIsMicroExpressionOpen(true); break;
+      case "ott_qc": setIsOttStreamQcOpen(true); break;
+      case "ancillary_merch": setIsAncillaryMerchOpen(true); break;
       default: setActivePortalTab("director_suite"); break;
     }
   };
@@ -798,7 +819,7 @@ export default function CastingCallsPage() {
                 }}
               >
                 <span>🎬</span>
-                <span>STUDIO DIRECTOR SUITE (74 TOOLS)</span>
+                <span>STUDIO DIRECTOR SUITE (79 TOOLS)</span>
                 {activePortalTab === "director_suite" && (
                   <span
                     style={{
@@ -10990,6 +11011,663 @@ export default function CastingCallsPage() {
           </section>
 
           {/* ══════════════════════════════════════════════════════════════
+              MODULE 19: AI VIRTUAL PRODUCTION, METAVERSE AUDITION & POST-THEATRICAL MONETIZATION (Features 102-106)
+              5 Dedicated Standalone Feature Cards
+          ══════════════════════════════════════════════════════════════ */}
+          {(activePortalTab === "director_suite" || activePortalTab === "all") &&
+           isModuleVisible(19, "virtual production nerf gaussian splat intimacy stunt safety navarasa micro-expression tension heatmap ott vmaf color fidelity merchandising ancillary rights bgmi gaming") && (
+          <section
+            style={{
+              marginBottom: "36px",
+              padding: "28px",
+              borderRadius: "24px",
+              backgroundColor: "rgba(10, 10, 18, 0.7)",
+              border: "1px solid rgba(212, 175, 97, 0.22)",
+              boxShadow: "0 10px 40px rgba(0,0,0,0.6)",
+              backdropFilter: "blur(12px)",
+            }}
+          >
+            {/* Module 19 Header */}
+            <div style={{ marginBottom: "24px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  flexWrap: "wrap",
+                  gap: "12px",
+                  marginBottom: "8px",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                  <span
+                    style={{
+                      fontSize: "11px",
+                      fontFamily: "monospace",
+                      fontWeight: 700,
+                      color: "#d4af61",
+                      backgroundColor: "rgba(212, 175, 97, 0.12)",
+                      border: "1px solid rgba(212, 175, 97, 0.35)",
+                      padding: "4px 10px",
+                      borderRadius: "6px",
+                      letterSpacing: "0.1em",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    MODULE 19
+                  </span>
+                  <span style={{ fontSize: "12px", color: "#606070", fontFamily: "monospace" }}>
+                    FEATURES #102 – #106
+                  </span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                  <span
+                    style={{
+                      fontSize: "10px",
+                      color: "#4ade80",
+                      backgroundColor: "rgba(74, 222, 128, 0.12)",
+                      border: "1px solid rgba(74, 222, 128, 0.3)",
+                      padding: "3px 8px",
+                      borderRadius: "6px",
+                      fontFamily: "monospace",
+                      fontWeight: 600,
+                    }}
+                  >
+                    ● 5 SUITE TOOLS ACTIVE
+                  </span>
+                </div>
+              </div>
+              <h2
+                className="font-cinema"
+                style={{
+                  fontSize: "22px",
+                  fontWeight: 700,
+                  color: "#ffffff",
+                  letterSpacing: "-0.01em",
+                  margin: "0 0 6px 0",
+                }}
+              >
+                AI Virtual Production, Metaverse Audition &amp; Post-Theatrical Monetization
+              </h2>
+              <p
+                style={{
+                  fontSize: "13px",
+                  color: "#9ca3af",
+                  margin: 0,
+                  maxWidth: "880px",
+                  lineHeight: "1.5",
+                }}
+              >
+                NeRF &amp; 3D Gaussian Splatting location scout studios, automated CINTAA intimacy &amp; pyrotechnic stunt safety blueprints, Navarasa affective micro-expression heatmaps, dynamic Indian OTT VMAF color stream certifiers, and global ancillary IP merchandising licensing.
+              </p>
+            </div>
+
+            {/* 5 Cards for Module 19 */}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+                gap: "20px",
+              }}
+            >
+              {/* CARD 1: FEATURE 102 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(212, 175, 97, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(212, 175, 97, 0.2) 0%, rgba(212, 175, 97, 0.05) 100%)",
+                          border: "1px solid rgba(212, 175, 97, 0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#d4af61",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Compass size={22} />
+                      </div>
+                      <div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          NeRF &amp; 3D Gaussian Splatting Virtual Location Scout
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(212, 175, 97, 0.15)",
+                        color: "#f7e7c4",
+                        border: "1px solid rgba(212, 175, 97, 0.3)",
+                        whiteSpace: "nowrap",
+                        fontWeight: 700,
+                      }}
+                    >
+                      FEATURE 102
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "13px",
+                      color: "#9ca3af",
+                      lineHeight: "1.6",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    Reconstruct heritage Indian filming locations via drone photogrammetry &amp; LiDAR point clouds. Simulates real solar shadow trajectories and exports camera frustum matrices to Unreal Engine 5.4 LED stages.
+                  </p>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    60fps Volumetric Splat
+                  </span>
+                  <button
+                    onClick={() => setIsNerfLocationScoutOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    LAUNCH SCOUT STUDIO ➔
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 2: FEATURE 103 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(239, 68, 68, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(239, 68, 68, 0.05) 100%)",
+                          border: "1px solid rgba(239, 68, 68, 0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#f87171",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <HeartHandshake size={22} />
+                      </div>
+                      <div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          AI Intimacy &amp; Stunt Choreography Safety Blueprint
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(239, 68, 68, 0.15)",
+                        color: "#fca5a5",
+                        border: "1px solid rgba(239, 68, 68, 0.3)",
+                        whiteSpace: "nowrap",
+                        fontWeight: 700,
+                      }}
+                    >
+                      FEATURE 103
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "13px",
+                      color: "#9ca3af",
+                      lineHeight: "1.6",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    CINTAA-compliant touch boundary mapping, modesty garment logs, mechanical wire load tension safety factors, pyrotechnic exclusion radii, and hospital emergency trauma corridors.
+                  </p>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    CINTAA Certified
+                  </span>
+                  <button
+                    onClick={() => setIsIntimacyStuntSafetyOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                      backgroundColor: "rgba(239, 68, 68, 0.2)",
+                      borderColor: "rgba(239, 68, 68, 0.5)",
+                      color: "#fca5a5",
+                    }}
+                  >
+                    CHOREOGRAPH SAFETY ➔
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 3: FEATURE 104 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(168, 85, 247, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(168, 85, 247, 0.2) 0%, rgba(168, 85, 247, 0.05) 100%)",
+                          border: "1px solid rgba(168, 85, 247, 0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#c084fc",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Brain size={22} />
+                      </div>
+                      <div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          AI Micro-Expression &amp; Dramatic Tension Heatmap
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(168, 85, 247, 0.15)",
+                        color: "#e9d5ff",
+                        border: "1px solid rgba(168, 85, 247, 0.3)",
+                        whiteSpace: "nowrap",
+                        fontWeight: 700,
+                      }}
+                    >
+                      FEATURE 104
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "13px",
+                      color: "#9ca3af",
+                      lineHeight: "1.6",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    FACS muscle action unit classification and classical Navarasa emotional decomposition. Discovers authentic subtext through micro-saccades, pupil dilation, and vocal micro-tremors during audition takes.
+                  </p>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    Navarasa Affective AI
+                  </span>
+                  <button
+                    onClick={() => setIsMicroExpressionOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                      backgroundColor: "rgba(168, 85, 247, 0.2)",
+                      borderColor: "rgba(168, 85, 247, 0.5)",
+                      color: "#e9d5ff",
+                    }}
+                  >
+                    ANALYZE SUBTEXT ➔
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 4: FEATURE 105 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(59, 130, 246, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.05) 100%)",
+                          border: "1px solid rgba(59, 130, 246, 0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#60a5fa",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Tv size={22} />
+                      </div>
+                      <div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Dynamic OTT Bitrate &amp; Multi-Device Color Fidelity Previewer
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(59, 130, 246, 0.15)",
+                        color: "#bfdbfe",
+                        border: "1px solid rgba(59, 130, 246, 0.3)",
+                        whiteSpace: "nowrap",
+                        fontWeight: 700,
+                      }}
+                    >
+                      FEATURE 105
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "13px",
+                      color: "#9ca3af",
+                      lineHeight: "1.6",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    Predicts Netflix &amp; Prime Video VMAF perceptual quality scores across variable Indian cellular networks. Emulates budget smartphone display tone mapping to eliminate muddy shadow crush.
+                  </p>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    VMAF 94.2+ Certified
+                  </span>
+                  <button
+                    onClick={() => setIsOttStreamQcOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                      backgroundColor: "rgba(59, 130, 246, 0.2)",
+                      borderColor: "rgba(59, 130, 246, 0.5)",
+                      color: "#bfdbfe",
+                    }}
+                  >
+                    RUN STREAM QC ➔
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 5: FEATURE 106 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(212, 175, 97, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(212, 175, 97, 0.2) 0%, rgba(212, 175, 97, 0.05) 100%)",
+                          border: "1px solid rgba(212, 175, 97, 0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#d4af61",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <ShoppingBag size={22} />
+                      </div>
+                      <div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Post-Theatrical Ancillary Merchandising &amp; IP Licensing Hub
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(212, 175, 97, 0.15)",
+                        color: "#f7e7c4",
+                        border: "1px solid rgba(212, 175, 97, 0.3)",
+                        whiteSpace: "nowrap",
+                        fontWeight: 700,
+                      }}
+                    >
+                      FEATURE 106
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "13px",
+                      color: "#9ca3af",
+                      lineHeight: "1.6",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    Commercial IP syndication for BGMI video game skins, action figures, apparel, and in-flight airline rights. Includes strict anti-AI talent likeness cloning covenants and automated net royalty waterfall distribution.
+                  </p>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    Zero Likeness Exploitation
+                  </span>
+                  <button
+                    onClick={() => setIsAncillaryMerchOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    LAUNCH MERCH HUB ➔
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+          )}
+
+          {/* ══════════════════════════════════════════════════════════════
               ACTOR CASTING CALLS PORTAL SECTION
           ══════════════════════════════════════════════════════════════ */}
           <div style={{ display: activePortalTab === "castings" || activePortalTab === "all" ? "block" : "none" }}>
@@ -11792,6 +12470,41 @@ export default function CastingCallsPage() {
       <ScriptDialoguePunchUpModal
         isOpen={isDialoguePunchUpOpen}
         onClose={() => setIsDialoguePunchUpOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #102: NeRF & 3D Gaussian Splatting Virtual Location Scout Modal */}
+      <NerfGaussianLocationScoutModal
+        isOpen={isNerfLocationScoutOpen}
+        onClose={() => setIsNerfLocationScoutOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #103: Automated AI Intimacy & Stunt Choreography Safety Blueprint Modal */}
+      <IntimacyStuntChoreographyModal
+        isOpen={isIntimacyStuntSafetyOpen}
+        onClose={() => setIsIntimacyStuntSafetyOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #104: AI Micro-Expression & Dramatic Tension Heatmap Analyzer Modal */}
+      <MicroExpressionSentimentModal
+        isOpen={isMicroExpressionOpen}
+        onClose={() => setIsMicroExpressionOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #105: Dynamic OTT Bitrate & Multi-Device Color Fidelity Previewer Modal */}
+      <OttColorStreamQcModal
+        isOpen={isOttStreamQcOpen}
+        onClose={() => setIsOttStreamQcOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #106: Post-Theatrical Ancillary Merchandising & IP Licensing Hub Modal */}
+      <AncillaryMerchandisingHubModal
+        isOpen={isAncillaryMerchOpen}
+        onClose={() => setIsAncillaryMerchOpen(false)}
         defaultProject={selectedPitchProject}
       />
 
