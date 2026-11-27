@@ -84,6 +84,12 @@ import IntimacyStuntChoreographyModal from "@/components/IntimacyStuntChoreograp
 import MicroExpressionSentimentModal from "@/components/MicroExpressionSentimentModal";
 import OttColorStreamQcModal from "@/components/OttColorStreamQcModal";
 import AncillaryMerchandisingHubModal from "@/components/AncillaryMerchandisingHubModal";
+import ScreenplayCopyrightVaultModal from "@/components/ScreenplayCopyrightVaultModal";
+import DeepfakeVoiceCloneShieldModal from "@/components/DeepfakeVoiceCloneShieldModal";
+import RegionalLipSyncDubStudioModal from "@/components/RegionalLipSyncDubStudioModal";
+import DroneAerialPyroClearanceModal from "@/components/DroneAerialPyroClearanceModal";
+import MusicCueSheetIprsModal from "@/components/MusicCueSheetIprsModal";
+import BoxOfficeFootfallPredictorModal from "@/components/BoxOfficeFootfallPredictorModal";
 import {
   Camera,
   Landmark,
@@ -151,6 +157,11 @@ import {
   Compass,
   Brain,
   ShoppingBag,
+  FileCheck2,
+  Fingerprint,
+  Plane,
+  FileSpreadsheet,
+  Ticket,
 } from "lucide-react";
 
 // ─── Self-contained casting data ─────────────────────────────
@@ -378,7 +389,7 @@ const STUDIO_PROJECTS = [
 ];
 
 const PHASES = [
-  { id: "all", label: "All 79 Tools", count: 79, modules: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19] },
+  { id: "all", label: "All 85 Tools", count: 85, modules: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20] },
   { id: "pre_prod", label: "Pre-Production & Packaging", count: 8, modules: [3, 4] },
   { id: "auditions", label: "Casting & Callback Suite", count: 16, modules: [5, 6, 7] },
   { id: "legal_studio", label: "Guild Contracts & AI Studio", count: 10, modules: [8, 9] },
@@ -390,6 +401,7 @@ const PHASES = [
   { id: "franchise_security", label: "Franchise Canon & Security", count: 3, modules: [17] },
   { id: "crypto_dit_waterfall", label: "Smart Legal, DIT & Waterfall", count: 4, modules: [18] },
   { id: "virtual_prod_metaverse", label: "Virtual Production & Ancillary IP", count: 5, modules: [19] },
+  { id: "screenplay_ip_boxoffice", label: "Screenplay IP, Voice Shield & Box Office", count: 6, modules: [20] },
 ];
 
 const ROLE_GENDERS = [
@@ -534,6 +546,14 @@ export default function CastingCallsPage() {
   const [isOttStreamQcOpen, setIsOttStreamQcOpen] = useState(false);
   const [isAncillaryMerchOpen, setIsAncillaryMerchOpen] = useState(false);
 
+  // Module 20: AI Screenplay Rights, Defamation Shield & Box Office Predictor (Features #107 - #112)
+  const [isScreenplayCopyrightOpen, setIsScreenplayCopyrightOpen] = useState(false);
+  const [isDeepfakeShieldOpen, setIsDeepfakeShieldOpen] = useState(false);
+  const [isRegionalDubOpen, setIsRegionalDubOpen] = useState(false);
+  const [isDroneClearanceOpen, setIsDroneClearanceOpen] = useState(false);
+  const [isMusicCueIprsOpen, setIsMusicCueIprsOpen] = useState(false);
+  const [isBoxOfficePredictorOpen, setIsBoxOfficePredictorOpen] = useState(false);
+
   // Spotlight Command+K Quick Launcher State
   const [isCommandKOpen, setIsCommandKOpen] = useState(false);
 
@@ -577,6 +597,12 @@ export default function CastingCallsPage() {
       case "micro_expression": setIsMicroExpressionOpen(true); break;
       case "ott_qc": setIsOttStreamQcOpen(true); break;
       case "ancillary_merch": setIsAncillaryMerchOpen(true); break;
+      case "screenplay_copyright": setIsScreenplayCopyrightOpen(true); break;
+      case "deepfake_shield": setIsDeepfakeShieldOpen(true); break;
+      case "regional_dub": setIsRegionalDubOpen(true); break;
+      case "drone_clearance": setIsDroneClearanceOpen(true); break;
+      case "music_cue_iprs": setIsMusicCueIprsOpen(true); break;
+      case "boxoffice_predictor": setIsBoxOfficePredictorOpen(true); break;
       default: setActivePortalTab("director_suite"); break;
     }
   };
@@ -819,7 +845,7 @@ export default function CastingCallsPage() {
                 }}
               >
                 <span>🎬</span>
-                <span>STUDIO DIRECTOR SUITE (79 TOOLS)</span>
+                <span>STUDIO DIRECTOR SUITE (85 TOOLS)</span>
                 {activePortalTab === "director_suite" && (
                   <span
                     style={{
@@ -11668,6 +11694,769 @@ export default function CastingCallsPage() {
           )}
 
           {/* ══════════════════════════════════════════════════════════════
+              MODULE 20: AI SCREENPLAY RIGHTS, DEFAMATION SHIELD & BOX OFFICE PREDICTOR (Features 107-112)
+              6 Dedicated Standalone Feature Cards
+          ══════════════════════════════════════════════════════════════ */}
+          {(activePortalTab === "director_suite" || activePortalTab === "all") &&
+           isModuleVisible(20, "screenplay copyright swa wga plagiarism deepfake voice clone defamation section 79 regional dub lip sync viseme drone aerial dgca pyro music cue sheet iprs ppl box office footfall multiplex single screen") && (
+          <section
+            style={{
+              marginBottom: "36px",
+              padding: "28px",
+              borderRadius: "24px",
+              backgroundColor: "rgba(10, 10, 18, 0.7)",
+              border: "1px solid rgba(212, 175, 97, 0.22)",
+              boxShadow: "0 10px 40px rgba(0,0,0,0.6)",
+              backdropFilter: "blur(12px)",
+            }}
+          >
+            {/* Module 20 Header */}
+            <div style={{ marginBottom: "24px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  flexWrap: "wrap",
+                  gap: "12px",
+                  marginBottom: "8px",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                  <span
+                    style={{
+                      fontSize: "11px",
+                      fontFamily: "monospace",
+                      fontWeight: 700,
+                      color: "#d4af61",
+                      backgroundColor: "rgba(212, 175, 97, 0.12)",
+                      border: "1px solid rgba(212, 175, 97, 0.35)",
+                      padding: "4px 10px",
+                      borderRadius: "6px",
+                      letterSpacing: "0.1em",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    MODULE 20
+                  </span>
+                  <span style={{ fontSize: "12px", color: "#606070", fontFamily: "monospace" }}>
+                    FEATURES #107 – #112
+                  </span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                  <span
+                    style={{
+                      fontSize: "10px",
+                      color: "#4ade80",
+                      backgroundColor: "rgba(74, 222, 128, 0.12)",
+                      border: "1px solid rgba(74, 222, 128, 0.3)",
+                      padding: "3px 8px",
+                      borderRadius: "6px",
+                      fontFamily: "monospace",
+                      fontWeight: 600,
+                    }}
+                  >
+                    ● 6 SUITE TOOLS ACTIVE
+                  </span>
+                </div>
+              </div>
+              <h2
+                className="font-cinema"
+                style={{
+                  fontSize: "22px",
+                  fontWeight: 700,
+                  color: "#ffffff",
+                  letterSpacing: "-0.01em",
+                  margin: "0 0 6px 0",
+                }}
+              >
+                Screenplay Rights Registry, Voice Defamation Shield &amp; Theatrical Predictor
+              </h2>
+              <p
+                style={{
+                  fontSize: "13px",
+                  color: "#9ca3af",
+                  margin: 0,
+                  maxWidth: "880px",
+                  lineHeight: "1.5",
+                }}
+              >
+                WGA/SWA cryptographic screenplay timestamping, Section 79 IT Act AI deepfake &amp; voice clone takedowns, regional multilingual viseme lip-sync dubbing, DGCA on-set drone pyro radars, IPRS certified cue sheets, and nationwide box office footfall predictors.
+              </p>
+            </div>
+
+            {/* 6 Cards for Module 20 */}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+                gap: "20px",
+              }}
+            >
+              {/* CARD 1: FEATURE 107 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(212, 175, 97, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(212, 175, 97, 0.2) 0%, rgba(212, 175, 97, 0.05) 100%)",
+                          border: "1px solid rgba(212, 175, 97, 0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#d4af61",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <FileCheck2 size={22} />
+                      </div>
+                      <div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          WGA &amp; SWA Screenplay Cryptographic Timestamp Vault
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(212, 175, 97, 0.15)",
+                        color: "#f7e7c4",
+                        border: "1px solid rgba(212, 175, 97, 0.3)",
+                        whiteSpace: "nowrap",
+                        fontWeight: 700,
+                      }}
+                    >
+                      FEATURE 107
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "13px",
+                      color: "#9ca3af",
+                      lineHeight: "1.6",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    Cryptographic SHA-256 scene-by-scene hashing and SWA/WGA guild filing verification. Proves narrative originality and prior art clearance before studio pitch meetings.
+                  </p>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    SHA-256 Sealed
+                  </span>
+                  <button
+                    onClick={() => setIsScreenplayCopyrightOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    SEAL SCREENPLAY ➔
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 2: FEATURE 108 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(239, 68, 68, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(239, 68, 68, 0.05) 100%)",
+                          border: "1px solid rgba(239, 68, 68, 0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#f87171",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Fingerprint size={22} />
+                      </div>
+                      <div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          AI Deepfake &amp; Voice Clone Defamation Interceptor
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(239, 68, 68, 0.15)",
+                        color: "#fca5a5",
+                        border: "1px solid rgba(239, 68, 68, 0.3)",
+                        whiteSpace: "nowrap",
+                        fontWeight: 700,
+                      }}
+                    >
+                      FEATURE 108
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "13px",
+                      color: "#9ca3af",
+                      lineHeight: "1.6",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    Automated web crawler detecting non-consensual voice clones and deepfakes across social media. Issues Section 79 IT Act 2000 and DMCA 24-hour mandatory removal orders.
+                  </p>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    Sec 79 IT Act
+                  </span>
+                  <button
+                    onClick={() => setIsDeepfakeShieldOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                      backgroundColor: "rgba(239, 68, 68, 0.2)",
+                      borderColor: "rgba(239, 68, 68, 0.5)",
+                      color: "#fca5a5",
+                    }}
+                  >
+                    INTERCEPT CLONES ➔
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 3: FEATURE 109 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(212, 175, 97, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(212, 175, 97, 0.2) 0%, rgba(212, 175, 97, 0.05) 100%)",
+                          border: "1px solid rgba(212, 175, 97, 0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#d4af61",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Languages size={22} />
+                      </div>
+                      <div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Multilingual Regional Lip-Sync Dubbing Synthesizer
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(212, 175, 97, 0.15)",
+                        color: "#f7e7c4",
+                        border: "1px solid rgba(212, 175, 97, 0.3)",
+                        whiteSpace: "nowrap",
+                        fontWeight: 700,
+                      }}
+                    >
+                      FEATURE 109
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "13px",
+                      color: "#9ca3af",
+                      lineHeight: "1.6",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    Phoneme-to-viseme neural lip-sync re-targeting for Tamil, Telugu, Malayalam, and Kannada releases. Preserves the original actor’s resonant vocal pitch and natural micro-breaths.
+                  </p>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    97.2% Viseme Sync
+                  </span>
+                  <button
+                    onClick={() => setIsRegionalDubOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    SYNTHESIZE DUB ➔
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 4: FEATURE 110 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(249, 115, 22, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(249, 115, 22, 0.2) 0%, rgba(249, 115, 22, 0.05) 100%)",
+                          border: "1px solid rgba(249, 115, 22, 0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#f97316",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Plane size={22} />
+                      </div>
+                      <div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          On-Set Drone &amp; Aerial Pyro Clearance Radar
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(249, 115, 22, 0.15)",
+                        color: "#fed7aa",
+                        border: "1px solid rgba(249, 115, 22, 0.3)",
+                        whiteSpace: "nowrap",
+                        fontWeight: 700,
+                      }}
+                    >
+                      FEATURE 110
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "13px",
+                      color: "#9ca3af",
+                      lineHeight: "1.6",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    DGCA DigitalSky Green-Zone flight clearance and pilot UIN compliance. Simulates aerial pyrotechnic blast heights to guarantee safe vertical holding envelopes for cinema drones.
+                  </p>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    Digital Sky Cleared
+                  </span>
+                  <button
+                    onClick={() => setIsDroneClearanceOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                      backgroundColor: "rgba(249, 115, 22, 0.2)",
+                      borderColor: "rgba(249, 115, 22, 0.5)",
+                      color: "#fed7aa",
+                    }}
+                  >
+                    CHECK FLIGHT RADAR ➔
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 5: FEATURE 111 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(212, 175, 97, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(212, 175, 97, 0.2) 0%, rgba(212, 175, 97, 0.05) 100%)",
+                          border: "1px solid rgba(212, 175, 97, 0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#d4af61",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <FileSpreadsheet size={22} />
+                      </div>
+                      <div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Automated Music Cue Sheet &amp; IPRS Royalty Distribution
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(212, 175, 97, 0.15)",
+                        color: "#f7e7c4",
+                        border: "1px solid rgba(212, 175, 97, 0.3)",
+                        whiteSpace: "nowrap",
+                        fontWeight: 700,
+                      }}
+                    >
+                      FEATURE 111
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "13px",
+                      color: "#9ca3af",
+                      lineHeight: "1.6",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    Acoustic audio fingerprinting catalogs every score cue and song timecode. Automatically generates IPRS India, PPL, and ASCAP compliant XML/JSON royalty delivery manifests.
+                  </p>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    IPRS Certified
+                  </span>
+                  <button
+                    onClick={() => setIsMusicCueIprsOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    COMPILE CUE SHEET ➔
+                  </button>
+                </div>
+              </div>
+
+              {/* CARD 6: FEATURE 112 */}
+              <div
+                style={{
+                  borderRadius: "18px",
+                  backgroundColor: "rgba(18, 18, 28, 0.85)",
+                  border: "1px solid rgba(212, 175, 97, 0.28)",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
+                  transition: "all 0.25s ease",
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "14px",
+                          background: "linear-gradient(135deg, rgba(212, 175, 97, 0.2) 0%, rgba(212, 175, 97, 0.05) 100%)",
+                          border: "1px solid rgba(212, 175, 97, 0.4)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#d4af61",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Ticket size={22} />
+                      </div>
+                      <div>
+                        <h3
+                          className="font-cinema"
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 700,
+                            color: "#ffffff",
+                            margin: "2px 0 0 0",
+                          }}
+                        >
+                          Box Office Sentiment &amp; Audience Footfall Heatmap
+                        </h3>
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "9px",
+                        fontFamily: "monospace",
+                        padding: "4px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: "rgba(212, 175, 97, 0.15)",
+                        color: "#f7e7c4",
+                        border: "1px solid rgba(212, 175, 97, 0.3)",
+                        whiteSpace: "nowrap",
+                        fontWeight: 700,
+                      }}
+                    >
+                      FEATURE 112
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "13px",
+                      color: "#9ca3af",
+                      lineHeight: "1.6",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    Neural network forecasting opening day &amp; 4-day weekend collections across India multiplexes and single screens. Models advance booking velocity and distributor MG recoupment.
+                  </p>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <span style={{ fontSize: "11px", color: "#606070", fontFamily: "monospace" }}>
+                    Machine Learning Model
+                  </span>
+                  <button
+                    onClick={() => setIsBoxOfficePredictorOpen(true)}
+                    className="btn-cinema-gold"
+                    style={{
+                      height: "36px",
+                      padding: "0 18px",
+                      fontSize: "11px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    PREDICT COLLECTIONS ➔
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+          )}
+
+          {/* ══════════════════════════════════════════════════════════════
               ACTOR CASTING CALLS PORTAL SECTION
           ══════════════════════════════════════════════════════════════ */}
           <div style={{ display: activePortalTab === "castings" || activePortalTab === "all" ? "block" : "none" }}>
@@ -12505,6 +13294,48 @@ export default function CastingCallsPage() {
       <AncillaryMerchandisingHubModal
         isOpen={isAncillaryMerchOpen}
         onClose={() => setIsAncillaryMerchOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #107: WGA & SWA Screenplay Cryptographic Timestamp Vault Modal */}
+      <ScreenplayCopyrightVaultModal
+        isOpen={isScreenplayCopyrightOpen}
+        onClose={() => setIsScreenplayCopyrightOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #108: AI Deepfake & Voice Clone Defamation Interceptor Modal */}
+      <DeepfakeVoiceCloneShieldModal
+        isOpen={isDeepfakeShieldOpen}
+        onClose={() => setIsDeepfakeShieldOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #109: Multilingual Regional Lip-Sync Dubbing Synthesizer Studio Modal */}
+      <RegionalLipSyncDubStudioModal
+        isOpen={isRegionalDubOpen}
+        onClose={() => setIsRegionalDubOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #110: On-Set Drone & Aerial Pyro Clearance Radar with DGCA Compliance Modal */}
+      <DroneAerialPyroClearanceModal
+        isOpen={isDroneClearanceOpen}
+        onClose={() => setIsDroneClearanceOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #111: Automated Music Cue Sheet & IPRS Royalty Distribution Engine Modal */}
+      <MusicCueSheetIprsModal
+        isOpen={isMusicCueIprsOpen}
+        onClose={() => setIsMusicCueIprsOpen(false)}
+        defaultProject={selectedPitchProject}
+      />
+
+      {/* Feature #112: Box Office Sentiment & Audience Footfall Heatmap Predictor Modal */}
+      <BoxOfficeFootfallPredictorModal
+        isOpen={isBoxOfficePredictorOpen}
+        onClose={() => setIsBoxOfficePredictorOpen(false)}
         defaultProject={selectedPitchProject}
       />
 

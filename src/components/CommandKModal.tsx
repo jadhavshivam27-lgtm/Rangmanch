@@ -62,6 +62,13 @@ export const ALL_STUDIO_TOOLS: ToolItem[] = [
   { id: "t-104", name: "AI Micro-Expression & Dramatic Tension Heatmap", module: 19, category: "Affective AI", actionKey: "micro_expression", badge: "FEATURE 104", keywords: "navarasa affective computing facs micro expressions pupil dilation tension heatmap audition" },
   { id: "t-105", name: "Dynamic OTT Bitrate & Multi-Device Color Fidelity", module: 19, category: "Post & OTT", actionKey: "ott_qc", badge: "FEATURE 105", keywords: "vmaf netflix prime video ott cellular bitrate ladder dolby vision dci-p3 tone mapping" },
   { id: "t-106", name: "Post-Theatrical Ancillary Merchandising & IP Hub", module: 19, category: "IP & Merch", actionKey: "ancillary_merch", badge: "FEATURE 106", keywords: "merchandising bgmi gaming skins action figures likeness rights anti ai cloning royalty waterfall" },
+  // Module 20: AI Screenplay Rights, Defamation Shield & Box Office Predictor
+  { id: "t-107", name: "WGA & SWA Screenplay Cryptographic Timestamp Vault", module: 20, category: "Copyright", actionKey: "screenplay_copyright", badge: "FEATURE 107", keywords: "swa wga screenplay copyright timestamp sha-256 plagiarism proof certificate origin" },
+  { id: "t-108", name: "AI Deepfake & Voice Clone Defamation Interceptor", module: 20, category: "Legal & Anti-Fraud", actionKey: "deepfake_shield", badge: "FEATURE 108", keywords: "deepfake voice clone defamation section 79 it act dmca takedown biometric voiceprint" },
+  { id: "t-109", name: "Multilingual Regional Lip-Sync Dubbing Synthesizer", module: 20, category: "Dubbing & Audio", actionKey: "regional_dub", badge: "FEATURE 109", keywords: "dubbing lip sync tamil telugu malayalam viseme phoneme voice resonance actor timbre" },
+  { id: "t-110", name: "On-Set Drone & Aerial Pyro Clearance Radar", module: 20, category: "Drone Logistics", actionKey: "drone_clearance", badge: "FEATURE 110", keywords: "dgca drone digital sky pyro altitude buffer airspace uin clearance aerial" },
+  { id: "t-111", name: "Automated Music Cue Sheet & IPRS Royalty Engine", module: 20, category: "Music & Rights", actionKey: "music_cue_iprs", badge: "FEATURE 111", keywords: "music cue sheet iprs ppl ascap background score royalty acoustic fingerprint" },
+  { id: "t-112", name: "Box Office Sentiment & Footfall Heatmap Predictor", module: 20, category: "Theatrical Analytics", actionKey: "boxoffice_predictor", badge: "FEATURE 112", keywords: "box office footfall opening day weekend gross multiplex single screen distributor recoupment" },
 ];
 
 interface CommandKModalProps {
