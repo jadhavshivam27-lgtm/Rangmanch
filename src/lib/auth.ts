@@ -97,6 +97,11 @@ export const useAuthStore = create<AuthState>()(
         );
 
         if (account) {
+          fetch("/api/auth/sync-profile", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(account.user),
+          }).catch(() => {});
           set({ user: account.user, isLoading: false, error: null });
           return true;
         }
@@ -118,6 +123,11 @@ export const useAuthStore = create<AuthState>()(
               verified: Boolean(data.user.email_confirmed_at),
               createdAt: data.user.created_at,
             };
+            fetch("/api/auth/sync-profile", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(supaUser),
+            }).catch(() => {});
             set({ user: supaUser, isLoading: false, error: null });
             return true;
           }
@@ -161,6 +171,11 @@ export const useAuthStore = create<AuthState>()(
               verified: Boolean(data.user.email_confirmed_at),
               createdAt: data.user.created_at || new Date().toISOString(),
             };
+            fetch("/api/auth/sync-profile", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(supaUser),
+            }).catch(() => {});
             set({ user: supaUser, isLoading: false, error: null });
             return true;
           }

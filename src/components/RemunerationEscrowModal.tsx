@@ -113,7 +113,11 @@ export default function RemunerationEscrowModal({
             const verifyRes = await fetch("/api/payments/razorpay/verify", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(response),
+              body: JSON.stringify({
+                ...response,
+                amountInr: baseFee,
+                projectTitle: selectedProject,
+              }),
             });
             const verifyData = await verifyRes.json();
             if (verifyRes.ok && verifyData.verified) {

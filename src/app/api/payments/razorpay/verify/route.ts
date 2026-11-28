@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import crypto from "crypto";
+import { prisma } from "@/lib/prisma";
 
 export async function POST(req: Request) {
   try {
@@ -35,6 +36,35 @@ export async function POST(req: Request) {
         { verified: false, error: "Invalid Razorpay payment signature." },
         { status: 400 }
       );
+    }
+
+    const amountInr = Number(body.amountInr || 0);
+    const tdsInr = Math.round(amountInr * 0.1);
+    const netArtistInr = amountInr - tdsInr;
+    const projectTitle = String(body.projectTitle || "Rangmanch Escrow Bond");
+
+    // Persist locked escrow transaction to Supabase Postgres via Prisma
+    try {
+      await prisma.escrowTransaction.upsert({
+        where: { razorpayOrderId: orderId },
+        update: {
+          razorpayPaymentId: paymentId,
+          razorpaySignature: signature,
+          status: "locked",
+        },
+        create: {
+          projectTitle,
+          razorpayOrderId: orderId,
+          razorpayPaymentId: paymentId,
+          razorpaySignature: signature,
+          amountInr,
+          tdsInr,
+          netArtistInr,
+          status: "locked",
+        },
+      });
+    } catch {
+      // Non-blocking if DB connection is unavailable
     }
 
     return NextResponse.json({
