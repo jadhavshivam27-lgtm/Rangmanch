@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model UserProfile {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  role         String   @default("talent")
+  avatar       String?
+  verified     Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  kycRecords   KycVerification[]
+  escrows      EscrowTransaction[]
+}
+
+model KycVerification {
+  id              String   @id @default(cuid())
+  userId          String?
+  user            UserProfile? @relation(fields: [userId], references: [id], onDelete: SetNull)
+  provider        String   @default("cashfree")
+  docType         String   // "aadhaar" | "pan" | "passport" | "driving_license"
+  maskedNumber    String
+  verifiedName    String
+  verifiedDob     String?
+  gender          String?
+  faceMatchScore  Float?
+  refId           String?
+  certificateHash String
+  status          String   @default("verified")
+  verifiedAt      DateTime @default(now())
+}
+
+model EscrowTransaction {
+  id                 String   @id @default(cuid())
+  userId             String?
+  user               UserProfile? @relation(fields: [userId], references: [id], onDelete: SetNull)
+  projectTitle       String
+  razorpayOrderId    String   @unique
+  razorpayPaymentId  String?
+  razorpaySignature  String?
+  amountInr          Int
+  tdsInr             Int
+  netArtistInr       Int
+  currency           String   @default("INR")
+  status             String   @default("created") // "created" | "locked" | "released"
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}

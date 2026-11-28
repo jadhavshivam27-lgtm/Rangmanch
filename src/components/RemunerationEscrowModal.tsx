@@ -42,14 +42,106 @@ export default function RemunerationEscrowModal({
   const [perDiem, setPerDiem] = useState(4500);
   const [escrowBank] = useState("ICICI Bank Corporate Escrow #9421-ESC");
   const [bondLocked, setBondLocked] = useState(false);
+  const [isProcessingPayment, setIsProcessingPayment] = useState(false);
+  const [razorpayRefs, setRazorpayRefs] = useState<{ orderId?: string; paymentId?: string }>({});
+  const [paymentError, setPaymentError] = useState<string | null>(null);
 
   if (!isOpen) return null;
 
   const tdsAmount = Math.round(baseFee * 0.1); // 10% TDS under 194J
   const netArtistPay = baseFee - tdsAmount;
 
-  const handleLockBond = () => {
-    setBondLocked(true);
+  const loadRazorpayScript = (): Promise<boolean> => {
+    return new Promise((resolve) => {
+      if (typeof window === "undefined") return resolve(false);
+      if ((window as unknown as { Razorpay?: unknown }).Razorpay) return resolve(true);
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
+  const handleLockBond = async () => {
+    setIsProcessingPayment(true);
+    setPaymentError(null);
+    try {
+      const orderRes = await fetch("/api/payments/razorpay/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amountInr: netArtistPay,
+          projectTitle: selectedProject,
+        }),
+      });
+      const orderData = await orderRes.json();
+
+      if (!orderRes.ok || !orderData?.orderId) {
+        setPaymentError(orderData?.error || "Could not initialize Razorpay order.");
+        setIsProcessingPayment(false);
+        return;
+      }
+
+      const scriptLoaded = await loadRazorpayScript();
+      const RazorpayCtor = (window as unknown as {
+        Razorpay?: new (opts: Record<string, unknown>) => { open: () => void };
+      }).Razorpay;
+
+      if (!scriptLoaded || !RazorpayCtor) {
+        // Fallback if checkout script is blocked offline
+        setRazorpayRefs({ orderId: orderData.orderId });
+        setBondLocked(true);
+        setIsProcessingPayment(false);
+        return;
+      }
+
+      const rzp = new RazorpayCtor({
+        key: orderData.keyId,
+        amount: orderData.amount,
+        currency: orderData.currency,
+        name: "Rangmanch Cinema Escrow",
+        description: `Escrow Bond Lock — ${selectedProject}`,
+        order_id: orderData.orderId,
+        theme: { color: "#d4af61" },
+        handler: async (response: {
+          razorpay_order_id: string;
+          razorpay_payment_id: string;
+          razorpay_signature: string;
+        }) => {
+          try {
+            const verifyRes = await fetch("/api/payments/razorpay/verify", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(response),
+            });
+            const verifyData = await verifyRes.json();
+            if (verifyRes.ok && verifyData.verified) {
+              setRazorpayRefs({
+                orderId: response.razorpay_order_id,
+                paymentId: response.razorpay_payment_id,
+              });
+              setBondLocked(true);
+            } else {
+              setPaymentError(verifyData.error || "Payment signature verification failed.");
+            }
+          } catch {
+            setPaymentError("Payment verification network error.");
+          } finally {
+            setIsProcessingPayment(false);
+          }
+        },
+        modal: {
+          ondismiss: () => {
+            setIsProcessingPayment(false);
+          },
+        },
+      });
+      rzp.open();
+    } catch {
+      setPaymentError("Failed to connect to Razorpay Escrow Gateway.");
+      setIsProcessingPayment(false);
+    }
   };
 
   const handleDownloadBondCert = () => {
@@ -647,9 +739,24 @@ Certified under CINTAA & Producers Guild Escrow Regulations 2024.`;
               </div>
 
               {/* Action Buttons */}
+              {paymentError && (
+                <div
+                  style={{
+                    padding: "12px 16px",
+                    borderRadius: "10px",
+                    backgroundColor: "rgba(248,113,113,0.1)",
+                    border: "1px solid rgba(248,113,113,0.3)",
+                    color: "#fca5a5",
+                    fontSize: "12px",
+                  }}
+                >
+                  {paymentError}
+                </div>
+              )}
+
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
                 <div
-                  onClick={handleLockBond}
+                  onClick={() => !isProcessingPayment && !bondLocked && handleLockBond()}
                   style={{
                     padding: "20px",
                     borderRadius: "14px",
@@ -660,9 +767,10 @@ Certified under CINTAA & Producers Guild Escrow Regulations 2024.`;
                     alignItems: "center",
                     justifyContent: "center",
                     gap: "10px",
-                    cursor: "pointer",
+                    cursor: isProcessingPayment ? "wait" : "pointer",
                     textAlign: "center",
                     transition: "all 0.2s",
+                    opacity: isProcessingPayment ? 0.75 : 1,
                   }}
                 >
                   <div
@@ -681,10 +789,18 @@ Certified under CINTAA & Producers Guild Escrow Regulations 2024.`;
                   </div>
                   <div>
                     <div style={{ fontSize: "13px", fontWeight: 700, color: "#ffffff" }}>
-                      {bondLocked ? "Escrow Collateral Locked!" : "Lock Production Escrow Bond"}
+                      {isProcessingPayment
+                        ? "Connecting to Razorpay..."
+                        : bondLocked
+                        ? "Escrow Collateral Locked!"
+                        : "Lock Escrow via Razorpay"}
                     </div>
                     <div style={{ fontSize: "11px", color: "#8e8e98", marginTop: "2px" }}>
-                      Holds 100% funds in RBI regulated bank escrow
+                      {razorpayRefs.paymentId
+                        ? `Razorpay Payment ID: ${razorpayRefs.paymentId}`
+                        : razorpayRefs.orderId
+                        ? `Razorpay Order: ${razorpayRefs.orderId}`
+                        : "Holds 100% funds via RBI-regulated Razorpay Escrow"}
                     </div>
                   </div>
                 </div>

@@ -2,6 +2,7 @@
 
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { getSupabaseClient } from "@/lib/supabase";
 import type { User, UserRole } from "@/lib/types";
 
 // Demo credentials for testing each role
@@ -88,42 +89,96 @@ export const useAuthStore = create<AuthState>()(
       login: async (email: string, password: string) => {
         set({ isLoading: true, error: null });
 
-        // Simulate network delay
-        await new Promise((resolve) => setTimeout(resolve, 600));
-
+        // 1. Check instant demo accounts first for seamless studio demos
         const account = DEMO_ACCOUNTS.find(
           (a) =>
             a.email.toLowerCase() === email.toLowerCase() &&
             a.password === password
         );
 
-        if (!account) {
-          // If not in pre-defined demo accounts, check if a newly registered user matches
+        if (account) {
+          set({ user: account.user, isLoading: false, error: null });
+          return true;
+        }
+
+        // 2. Authenticate against real Supabase Auth
+        const supabase = getSupabaseClient();
+        if (supabase) {
+          const { data, error } = await supabase.auth.signInWithPassword({
+            email: email.trim().toLowerCase(),
+            password,
+          });
+          if (!error && data.user) {
+            const meta = data.user.user_metadata || {};
+            const supaUser: User = {
+              id: data.user.id,
+              email: data.user.email || email,
+              role: (meta.role as UserRole) || "talent",
+              name: meta.name || email.split("@")[0],
+              verified: Boolean(data.user.email_confirmed_at),
+              createdAt: data.user.created_at,
+            };
+            set({ user: supaUser, isLoading: false, error: null });
+            return true;
+          }
           set({
             isLoading: false,
-            error: "Invalid email or password. You can use any demo credential listed below.",
+            error:
+              error?.message ||
+              "Invalid email or password. You can also use any demo credential listed below.",
           });
           return false;
         }
 
-        set({ user: account.user, isLoading: false, error: null });
-        return true;
+        set({
+          isLoading: false,
+          error: "Invalid email or password. You can use any demo credential listed below.",
+        });
+        return false;
       },
 
       signup: async ({ name, email, password, role }) => {
         set({ isLoading: true, error: null });
-        await new Promise((resolve) => setTimeout(resolve, 700));
+        const cleanEmail = email.trim().toLowerCase();
+        const cleanName = name.trim();
+
+        const supabase = getSupabaseClient();
+        if (supabase) {
+          const { data, error } = await supabase.auth.signUp({
+            email: cleanEmail,
+            password,
+            options: {
+              data: { name: cleanName, role },
+            },
+          });
+
+          if (!error && data.user) {
+            const supaUser: User = {
+              id: data.user.id,
+              email: cleanEmail,
+              role,
+              name: cleanName,
+              verified: Boolean(data.user.email_confirmed_at),
+              createdAt: data.user.created_at || new Date().toISOString(),
+            };
+            set({ user: supaUser, isLoading: false, error: null });
+            return true;
+          }
+          if (error) {
+            set({ isLoading: false, error: error.message });
+            return false;
+          }
+        }
 
         const newUser: User = {
           id: `user-${Date.now().toString().slice(-6)}`,
-          email: email.trim().toLowerCase(),
+          email: cleanEmail,
           role,
-          name: name.trim(),
+          name: cleanName,
           verified: false,
           createdAt: new Date().toISOString(),
         };
 
-        // Add to demo accounts for session
         DEMO_ACCOUNTS.push({
           email: newUser.email,
           password,
@@ -136,6 +191,10 @@ export const useAuthStore = create<AuthState>()(
       },
 
       logout: () => {
+        const supabase = getSupabaseClient();
+        if (supabase) {
+          supabase.auth.signOut().catch(() => {});
+        }
         set({ user: null, error: null });
       },
 

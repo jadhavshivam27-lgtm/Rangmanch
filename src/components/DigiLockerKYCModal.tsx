@@ -44,6 +44,9 @@ export default function DigiLockerKYCModal({
   const [faceMatchProgress, setFaceMatchProgress] = useState(0);
   const [verifiedRecord, setVerifiedRecord] = useState<DigiLockerKYCRecord | null>(null);
   const [copied, setCopied] = useState(false);
+  const [kycRefId, setKycRefId] = useState<string>("");
+  const [kycError, setKycError] = useState<string | null>(null);
+  const [kycMode, setKycMode] = useState<string>("");
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -65,20 +68,56 @@ export default function DigiLockerKYCModal({
 
   if (!isOpen) return null;
 
-  const handleSendOtp = () => {
+  const handleSendOtp = async () => {
     setIsVerifying(true);
-    setTimeout(() => {
+    setKycError(null);
+    try {
+      const res = await fetch("/api/kyc/aadhaar/otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ aadhaarNumber }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setKycError(data.error || "Failed to send OTP.");
+        setIsVerifying(false);
+        return;
+      }
+      setKycRefId(data.ref_id || "");
+      setKycMode(data.mode || "");
       setIsVerifying(false);
       setOtpSent(true);
       setStep(2);
       setResendTimer(30);
-    }, 700);
+    } catch {
+      setKycError("Network error while dispatching Aadhaar OTP.");
+      setIsVerifying(false);
+    }
   };
 
-  const handleVerifyOtp = () => {
+  const handleVerifyOtp = async () => {
     setIsVerifying(true);
-    setTimeout(() => {
+    setKycError(null);
+    try {
+      const res = await fetch("/api/kyc/aadhaar/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          otp: otp.join(""),
+          ref_id: kycRefId,
+          docType,
+          maskedDocNumber: `XXXX-XXXX-${aadhaarNumber.replace(/\s/g, "").slice(-4)}`,
+          fallbackName: user?.name || "Priya Sharma",
+        }),
+      });
+      const data = await res.json();
       setIsVerifying(false);
+
+      if (!res.ok || !data?.record) {
+        setKycError(data?.error || "OTP verification failed.");
+        return;
+      }
+
       setStep(3);
       let progress = 0;
       const interval = setInterval(() => {
@@ -86,25 +125,16 @@ export default function DigiLockerKYCModal({
         setFaceMatchProgress(Math.min(progress, 100));
         if (progress >= 100) {
           clearInterval(interval);
-          const record: DigiLockerKYCRecord = {
-            verificationId: `DL-KYC-${Date.now().toString().slice(-6)}`,
-            documentType: docType,
-            maskedDocNumber: `XXXX-XXXX-${aadhaarNumber.replace(/\s/g, "").slice(-4)}`,
-            verifiedName: user?.name || "Priya Sharma",
-            verifiedDob: "14-Aug-1998",
-            gender: "Female",
-            faceMatchScore: 98.4,
-            status: "verified",
-            verifiedAt: new Date().toISOString(),
-            certificateHash: "sha256-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-            digiLockerDocUri: "in.gov.uidai-adhr-98218491829",
-          };
+          const record: DigiLockerKYCRecord = data.record;
           setVerifiedRecord(record);
           if (onSuccess) onSuccess(record);
           setTimeout(() => setStep(4), 400);
         }
       }, 100);
-    }, 600);
+    } catch {
+      setIsVerifying(false);
+      setKycError("Verification service unreachable.");
+    }
   };
 
   const copyCertificateHash = () => {
@@ -406,6 +436,33 @@ export default function DigiLockerKYCModal({
               </div>
 
               {/* Document Type Selector */}
+              {kycError && (
+                <div
+                  style={{
+                    padding: "10px 14px",
+                    borderRadius: "10px",
+                    backgroundColor: "rgba(248,113,113,0.1)",
+                    border: "1px solid rgba(248,113,113,0.3)",
+                    color: "#fca5a5",
+                    fontSize: "12px",
+                  }}
+                >
+                  {kycError}
+                </div>
+              )}
+              {kycMode && (
+                <div
+                  style={{
+                    fontSize: "10px",
+                    fontFamily: "monospace",
+                    color: "#34d399",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.08em",
+                  }}
+                >
+                  KYC Engine: {kycMode.replace(/_/g, " ")} {kycRefId ? `• Ref: ${kycRefId}` : ""}
+                </div>
+              )}
               <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
                 <label
                   style={{
